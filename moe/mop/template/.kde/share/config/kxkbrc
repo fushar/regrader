@@ -1,0 +1,14 @@
+[Layout]
+DisplayNames=
+EnableXkbOptions=false
+IncludeGroups=
+LayoutList=us,cz
+Model=pc104
+Options=
+ResetOldOptions=false
+ShowFlag=true
+ShowSingle=false
+StickySwitching=false
+StickySwitchingDepth=2
+SwitchMode=Global
+Use=true

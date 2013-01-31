@@ -1,0 +1,12 @@
+[Context Features]
+Finder=true
+FullTextSearch=false
+GotoInfo=false
+GotoMan=false
+IndexLookup=true
+
+[htdig]
+databaseDir=$HOME/.kde/share/apps/kdevdocumentation/search/
+htdigbin=
+htmergebin=
+htsearchbin=

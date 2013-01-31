@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html40/strict.dtd">
+
+<html><head>
+<title>MO Eval - Tasks</title>
+<link rev=made href="mailto:mj@ucw.cz">
+<link rel=stylesheet title=Default href="moe.css" type="text/css" media=all>
+</head><body>
+
+<h1>Tasks and their types</h1>
+
+<p>Moe supports the following standard types of tasks (new task types can be defined, but
+it takes some effort):
+
+<ul>
+<li><b>off-line tasks</b> &ndash; program reads input (from a file or from stdin) and then produces
+an output (to a file or to stdout). Then a <em>checker</em> (a.k.a. judge) program is run, which decides whether the output
+is correct. If there is only one correct output, the checker can be just a call to <code>diff</code>.
+In case of tasks with complicated scoring, the judge can also assign points explicitly. See comments
+in the top-level config file for the exact interface of the judge.
+<li><b>interactive tasks</b> &ndash; program needs to react interactively, usually by reading from stdin
+and sending results to stdout (sometimes the communication protocol is abstracted out as a library
+which the tested programs are linked with). In this case, the judge's stdio is cross-connected with the stdio
+of the tested program.
+<li><b>open-data tasks</b> &ndash; the contestants don't submit a program, but a set of output files instead.
+Judged similarly to the off-line tasks.
+</ul>
+
+<h2>Setting up a task</h2>
+
+<p>To define a task, you should create a directory <code>problems/</code><i>task_name</i> and populate it
+with the following files:
+
+<ul>
+<li><code>config</code> &ndash; local configuration file for the task, which overrides defaults
+set in the top-level config. Task type, list of test cases and many other things can be defined
+here. Consult comments in the top-level config for explanation.
+<li><i>test</i><code>.config</code> &ndash; each test case can have its own local overrides
+of configuration, used for example if you want to have some test cases with a different time limit.
+<li><i>test</i><code>.in</code> &ndash; input data for the particular test
+<li><i>test</i><code>.out</code> &ndash; correct output for the particular test (optional)
+</ul>
+
+</body></html>

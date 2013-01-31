@@ -1,0 +1,88 @@
+Hashing routines
+================
+
+Libucw contains two cryptographic hash algorithms: MD5 (RFC 1321) and SHA1 (RFC
+3174). A SHA1-HMAC (RFC 2104) message authentication is available.
+
+There are non-cryptographic hashes as well.
+
+<<crypto,Cryptographic ones>>:
+
+- <<md5,MD5>>
+- <<sha1,SHA1>>
+- <<sha1:sha1_hmac(),SHA1_HMAC>>
+- <<usage,Common usage>>
+
+<<checksum,Checksums>>:
+- <<crypto:adler,Adler-32>>
+
+<<nocrypto,Non-cryptographic ones>>:
+
+- <<strhash,String & block hashes>>
+- <<inthash,Integer hashes>>
+
+[[crypto]]
+Cryptographic hashes
+--------------------
+
+[[md5]]
+MD5
+~~~
+!!ucw/md5.h
+
+[[sha1]]
+SHA1
+~~~~
+!!ucw/sha1.h
+
+[[usage]]
+Common usage
+~~~~~~~~~~~~
+
+There are two ways you can use the hashing routines.
+
+- Single-shot interface. If you have an in-memory buffer of the whole
+  message you want to hash, you can use this.
+
+  char *message = "Hello world";
+  byte output[MD5_SIZE];
+  md5_hash_buffer(output, message, strlen(message));
+
+- Multi-shot interface. If you have the message scattered in many
+  buffers or you get it by parts, you do not need to concatenate the
+  parts together.
+
+  byte buffer[MAX_BUFFER];
+  uns buffer_len;
+  md5_context c;
+  md5_init(&c);
+  while(buffer_len = get_chunk(buffer, MAX_BUFFER)) {
+    md5_update(&c, buffer, buffer_len);
+  }
+  byte output[MD5_SIZE];
+  memcpy(output, md5_final(&c), MD5_SIZE);
+
+SHA1 has the same interface, so the same two ways apply.
+
+See also <<string:mem_to_hex()>>.
+
+[[checksum]]
+Checksums
+---------
+
+Their purpose is checking against random data changes, hardware
+failures and alike. They are not to be used against aimed attacks.
+
+The <<compress:adler,Adler-32 checksum>> is documented in the
+<<compression,compression capter>>.
+
+[[nocrypto]]
+Non-cryptographic hashes
+------------------------
+
+They are usually used to identify values in hash tables.
+
+All these functions expect to be moduled by the size of a hash table.
+The size should be a prime number (it gives better distribution).
+
+!!ucw/hashfunc.h

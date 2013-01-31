@@ -1,0 +1,52 @@
+[$Version]
+update_info=kfmclient_3_2.upd:kfmclient_3_2
+
+[FMSettings]
+AlwaysNewWin=false
+HomeURL=$HOME
+RenameIconDirectly=false
+ShowFileTips=true
+ShowPreviewsInFileTips=true
+UnderlineLinks=false
+
+[HTML Settings]
+AutomaticDetectionLanguage=0
+
+[KonqMainWindow Toolbar Speech Toolbar]
+IconText=IconOnly
+Index=4
+
+[KonqMainWindow Toolbar bookmarkToolBar]
+Hidden=true
+IconText=IconTextRight
+Index=3
+
+[KonqMainWindow Toolbar extraToolBar]
+IconText=IconOnly
+Index=0
+
+[KonqMainWindow Toolbar locationToolBar]
+IconText=IconOnly
+Index=2
+
+[KonqMainWindow Toolbar mainToolBar]
+Index=1
+
+[MainView Settings]
+ToggableViewsShown=konsolepart
+ViewMode=konq_treeview
+
+[ModeToolBarServices]
+konq_iconview=konq_iconview
+konq_listview=konq_treeview
+
+[SearchBar]
+CurrentEngine=google
+Mode=1
+
+[Settings]
+BgImage=kde4ever.png
+
+[Trash]
+ConfirmDelete=true
+ConfirmTrash=true

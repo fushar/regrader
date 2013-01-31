@@ -1,0 +1,19 @@
+[fileselector]
+AutoSyncEvents=0
+current filter=
+dir history=
+filter history=
+filter history len=9
+last filter=
+location=
+pathcombo history len=9
+
+[fileselector:dir]
+Separate Directories=false
+Show Preview=false
+Show hidden files=false
+Sort by=Name
+Sort case insensitively=true
+Sort directories first=true
+Sort reversed=false
+View Style=Simple

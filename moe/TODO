@@ -1,0 +1,39 @@
+Evaluator
+~~~~~~~~~
+interactive tasks: solve deadlocks?
+interactive tasks: logging of messages
+terminology: problem -> task ?
+
+Judges
+~~~~~~
+test cases for judge-shuff
+
+Environment
+~~~~~~~~~~~
+fpc: add switch -gl (runtime errors write line#), but avoid that when inside the sandbox
+
+Installer:
+- update group permissions
+- quotas
+
+New submitter:
+- contest: task status cache
+
+Various ideas:
+- scores dependent on time (like PL olympiad)
+
+TomGav
+~~~~~~
+recursive try-ln for dir input
+clean and well-defined expansion (beware of per-test re-expansion)
+configurable names of in/out files (independent of $PROBLEM)
+paranoidly check file mode/owner before running the sandbox
+
+Isolate
+~~~~~~~
+Test: ptrace self
+Test: SIGSTOP
+Test: ping-pong timing attacks
+Test: big static memory
+Examine the use of taskstats for measuring memory
+Switch license to GPL2/GPL3

@@ -1,0 +1,244 @@
+# Configuration of the UCW library and related utilities (included by cf/sherlock)
+
+######## Memory Mapped Access to Files ##########################################
+
+# Whenever you specify 0 for I/O buffer size, memory mapping is used instead.
+FBMMap {
+
+# Map this many bytes at once (needs to be a multiple of CPU page size)
+WindowSize		1M
+
+# When in need to extend a file, grow it by so many bytes (>= page size)
+ExtendSize		1M
+
+}
+
+######## Direct Streamed I/O on Files ###########################################
+
+FBDirect {
+
+# Debug: Cheat by turning off O_DIRECT
+#Cheat			1
+
+}
+
+######## Atomic Multi-Threaded I/O on Files #####################################
+
+FBAtomic {
+
+# Enable tracing
+#Trace			1
+
+}
+
+######## Parametrized I/O on Files ##############################################
+
+FBParam {
+
+Defaults {
+
+# Access type (std|direct|mmap).
+Type			std
+
+# Size of I/O buffer. Something of the order of megabytes for fast disks is recommended for direct I/O.
+BufSize			64K
+
+# Optimize for mixed forward/backward reading (standard I/O only)
+KeepBackBuf		0
+
+# Perform read-ahead (direct I/O only)
+ReadAhead		1
+
+# Maximum number of write-back requests queued (direct I/O only)
+WriteBack		1
+
+}
+
+}
+
+######## Temporary files ########################################################
+
+Tempfiles {
+
+# By default, we use the system's default temporary directory ($TMPDIR or /tmp),
+# but sometimes it is better to store the temporary files in the local tree.
+Dir			tmp
+
+# Prefix of temporary file names
+Prefix			temp-
+
+# By default, we append a random number to Prefix to get a temporary file name.
+# If Prefix points to a directory that is not writable by malicious users,
+# we can be less careful and use more consistent names of temporary files
+# formed by adding "pid(-tid)-counter" instead.
+PublicDir		0
+
+}
+
+######## Threads ################################################################
+
+Threads {
+
+# Default thread stack size
+DefaultStackSize	64K
+
+}
+
+######## Sorter #################################################################
+
+Sorter {
+
+# Trace sorting (1=basic statistics, 2=more stats, 3 and more for debugging)
+Trace			2
+
+# Trace array sorting (internal sorters)
+TraceArray		0
+
+# How much memory is the sorter allowed to use
+SortBuffer		4M
+
+# File access used by the sorter (see FBParam section for details)
+FileAccess		std 256K
+
+# Use a different file access method for small inputs (less than the specified size)
+SmallFileAccess		std 64K
+SmallInput		64M
+
+# Min-/Maximum number of bits to use in the external radix-sort (beware, we will open
+# 1+2^this files and require a stream buffer for each of them; however, while we are
+# doing that, the sort buffer is not allocated). Set both to zero to disable radix-sorting.
+MinRadixBits		2
+MaxRadixBits		4
+
+# The same for multi-way merging. The memory requirements are also the same,
+# but please keep in mind that this can create lots of SortBuffer-sized files,
+# so it is probably better to keep it disabled if you have a small SortBuffer.
+MinMultiwayBits		2
+MaxMultiwayBits		4
+
+# If we did not use radix-sorter to the full width, we still might add some more
+# bits to the width to get chunks which are even smaller than SortBuffer, because
+# it can speed up internal sorting later. However, we also want to avoid small
+# files, so we add only a little.
+AddRadixBits		2
+
+# Number of threads used for sorting (0=disable threading)
+Threads			0
+
+# Minimum size of input (in bytes) to consider multi-threaded internal sorting
+ThreadThreshold		1M
+
+# Chunks smaller than ThreadThreshold are sorted by a sequential algorithm, but
+# if they are at least of the following size, different chunks are sorted in
+# parallel. There is a slight space penalty for setting up the parallel process,
+# so better avoid setting this number too small.
+ThreadChunk		256
+
+# Internal radix-sort stops at this size and switches to QuickSort (must be >0)
+RadixThreshold		4K
+
+# Debugging switches (see the source)
+Debug			0
+
+}
+
+######## URL processing #########################################################
+
+URL {
+
+# Ignore spaces at the start/end of a URL
+IgnoreSpaces		1
+
+# Ignore underflows in relative paths (/../ from root)
+IgnoreUnderflow		1
+
+# Some URL's with many repeated components are filtered out to avoid infinite
+# URL's (e.g. http://czech.recoder.cz/win/iso/win/iso/file.html, or
+# http://a.com/?a=b&a=b&a=b, ...).
+# The URL is split to components divided by any of the specified separators.
+# Then the separators are forgotten and the components between them are
+# examined.
+ComponentSeparators	/&?
+
+# URL is filtered out if there's a sequence of components in a row with at most
+# MaxRepeatLength components and the sequence is repeated more than MinRepeatCount
+# times.  Default values are high MinRepeatCount and low MaxRepeatLength, so the
+# mechanism is disabled.
+MinRepeatCount		4
+MaxRepeatLength		4
+
+# Maximum number of occurences of a single component in the entire URL (possibly interleaved
+# by different components). The detector is disabled by default.
+MaxOccurences		4
+
+}
+
+######## Logging ################################################################
+
+Logging {
+
+# In this section, you can define various logging streams which can be referred to by other sections.
+
+# Stream {
+#	# The name of the stream
+#	Name		test-log
+#
+#	# When it should log the messages to a file, a name of the file should be specified.
+#	# Escape sequences for current date and time as described in strftime(3) can be used.
+#	FileName	log/test-%Y%m%d
+#
+#	# Instead of a file, a syslog facility can be specified. See syslog(3) for an explanation.
+#	SyslogFacility	daemon
+#
+#	# You can request that syslog includes a process ID in each message. Due to inflexibility
+#	# of the syslog protocol, all syslog streams active at a moment must agree on this setting.
+#	# (default: 0)
+#	SyslogPID	1
+#
+#	# When logging to files, timestamps with microsecond precision can be requested. (default: 0)
+#	Microseconds	1
+#
+#	# Messages logged to this stream can be restricted to a subset of severity levels.
+#	# Available levels are: debug info warn error info_r warn_r error_r fatal.
+#	# This configuration item is a bitmap with a default of "all", so we need the ":reset" operator.
+#	Levels:reset	info warn error fatal
+#
+#	# Similarly, messages can be restricted to a subset of message types. The types are
+#	# specific for each program. This configuration item is a list of type names; by default
+#	# it is empty, which is equivalent to all types being enabled.
+#	Types:reset	default foo
+#
+#	# Should the message types be logged? They usually do not carry much useful
+#	# information for the viewer of the log, so they are not included by default,
+#	# but you might want to see them when tuning the Types setting. (default: 0)
+#	ShowTypes	1
+#
+#	# If an error occurs when logging a message to this stream, the program normally
+#	# logs a special error message to the other streams and continues running. You can
+#	# however request to exit the program in such cases, so that the log files are
+#	# guaranteed to be complete. (default: 0)
+#	ErrorsFatal	1
+#
+#	# Let stderr of the program point to this file-based log_stream (default: 0)
+#	StdErrFollows	1
+#
+#	# Some events are logworthy, but they could happen too frequently and flood the log.
+#	# You can avoid the flooding by setting up a rate limiter for a specific subset of
+#	# message types. If more limiters match the type of a message, only the last one applies.
+#	Limit {
+#		# A list of message types (default: empty = all types)
+#		Types		default foo
+#
+#		# The maximum allowed sustained rate (messages/second, may be fractional)
+#		Rate		1
+#
+#		# Maximum length of a burst temporarily exceeding the rate (default: try to guess)
+#		Burst		2
+#	}
+#
+#	# The messages that have passed the filters and limiters can be forwarded to other
+#	# log streams. Logging loops are not healthy for your program :)  (a list of stream names)
+#	Substream	another-stream
+# }
+
+}

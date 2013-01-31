@@ -1,0 +1,176 @@
+Hash tables
+===========
+
+A hash table is very universal data structure. It does most of it's
+operations in O(1) average time. The library contains a header to
+generate hash tables suiting your needs.
+
+They are <<generic:,generic data structures>>.
+
+- <<mandatory,Mandatory macros>>
+- <<functions,Optional function switches>>
+- <<params,Optional parameters>>
+- <<wants,Functionality switches>>
+- <<generated,Generated functions>>
+- <<iterator,Iterator>>
+
+[[mandatory]]
+Mandatory macros
+----------------
+
+- `HASH_NODE` -- a data type where a node dwells. It is usually a
+  structure.
+- `HASH_PREFIX(x)` -- the name generating macro.
+- Key type and name. Must be one of following.
+  [[key_atomic]]
+  * `HASH_KEY_ATOMIC` -- the key (`node\->HASH_KEY_ATOMIC`) is an
+    atomic type which can be compared using `==`.
+  [[key_string]]
+  * `HASH_KEY_STRING` -- the key is a zero-terminated string,
+    allocated separately from the rest of the node.
+  [[key_endstring]]
+  * `HASH_KEY_ENDSTRING` -- a zero-terminated string which lives at
+    the end of node (it is allocated together with the node). It
+    should be declared as `char key[1]`.
+  * `HASH_KEY_MEMORY` -- the `node\->HASH_KEY_MEMORY` is to be compared
+    using memcmp() function. In this case, you need to provide
+    `HASH_KEY_SIZE` macro as well, to specify the length of the key.
+  [[key_complex]]
+  * `HASH_KEY_COMPLEX(x)` -- the key is compound of more than one
+    component. The macro should expand to `x key1, x key2, ..., x kn`.
+    Furthermore, you need to provide a `HASH_KEY_DECL` macro. It is
+    used to define function parameters. Therefore it should expand to
+    `type1 key1, type2 key2, ..., typen keyn`. And
+    <<give_hashfn,`HASH_GIVE_HASHFN`>> and <<give_eq,`HASH_GIVE_EQ`>>
+    are mandatory for this key type.
+
+[[functions]]
+Optional function switches
+--------------------------
+
+You can define any of these macros and provide corresponding functions
+to customize the behaviour. The macros are:
+
+[[give_hashfn]]
+- `HASH_GIVE_HASHFN` -- the table will use `uns
+  HASH_PREFIX(hash)(key)` to calculate hash of `key`.
+  There is a sensible default for integers and strings.
+  In the case of <<key_complex,`HASH_KEY_COMPLEX`>>, it is mandatory
+  to provide this macro and function.
+[[give_eq]]
+- `HASH_GIVE_EQ` -- tells the table to use `int HASH_PREFIX(eq)(key1,
+  key2)` function to decide if `key1` and `key2` are equal. Default
+  for atomic types is `==` and strcmp() or strcasecmp() for strings
+  (depends on <<nocase,`HASH_NOCASE`>> switch).
+  It is mandatory when you use <<key_complex,`HASH_KEY_COMPLEX`>>.
+- `HASH_GIVE_EXTRA_SIZE` -- function `int HASH_PREFIX(extra_size)(key)`
+  returns how many bytes after the node should be allocated. It
+  defaults to `0` or to length of key in case of
+  <<key_endstring,`HASH_KEY_ENDSTRING`>>.
+- `HASH_GIVE_INIT_KEY` -- function
+  `void HASH_PREFIX(init_key)(node *, key)` is used to initialize key
+  in newly created node. The default is assignment for atomic keys and
+  static strings (<<key_atomic,`HASH_KEY_ATOMIC`>>,
+  <<key_string,`HASH_KEY_STRING`>>) and strcpy() for
+  <<key_endstr,`HASH_KEY_ENDSTRING`>>.
+[[give_init_data]]
+- `HASH_GIVE_INIT_DATA` -- function `void HASH_PREFIX(init_data)(node
+  *)` is used to initialize the rest of node. Useful if you use
+  <<fun_HASH_PREFIX_OPEN_PAREN_lookup_CLOSE_PAREN_,`HASH_PREFIX(lookup())`>>
+- `HASH_GIVE_ALLOC` -- you need to provide `void
+  \*HASH_PREFIX(alloc)(uns size` and `void HASH_PREFIX(free)(void \*)`
+  to allocate and deallocate the nodes. Default uses
+  <<memory:xmalloc()>> and <<memory:xfree()>> or <<mempool:,mempool
+  routines>>, depending on <<use_pool,`HASH_USE_POOL`>> and
+  <<auto_pool,`HASH_AUTO_POOL>> switches.
+
+[[params]]
+Optional parameters
+-------------------
+
+You can customize the hash table a little more by these macros:
+
+[[nocase]]
+- `HASH_NOCASE` -- use case-insensitive comparison for strings.
+- `HASH_DEFAULT_SIZE` -- use approximately this many elements when
+  creating the hash table.
+- `HASH_CONSERVE_SPACE` -- use as little space as possible.
+- `HASH_FN_BITS` -- the hash function only provides this many
+  significants bits.
+- `HASH_ATOMIC_TYPE` -- the type of atomic key
+  (<<key_atomic,`HASH_KEY_ATOMIC`>>) is not `int`, but this type.
+[[use_pool]]
+- `HASH_USE_POOL` -- tells to use <<mempool:,mempool allocation>> to
+  allocate the nodes. You should define it to the name of mempool
+  variable to be used for this purpose.
+[[auto_pool]]
+- `HASH_AUTO_POOL` -- like above, but it creates it's own mempool.
+  Define it to the block size of the pool.
+- `HASH_ZERO_FILL` -- initialize new nodes to all zeroes.
+- `HASH_TABLE_ALLOC` -- allocate the table the same way as nodes. If
+  not provided, <<mempory:xmalloc()>> is used.
+[[table_dynamic]]
+- `HASH_TABLE_DYNAMIC` -- By default, only one global hash table is
+  used. With this macro defined, all functions gain new first
+  parameter of type `HASH_PREFIX(table) *` to allow them work with
+  multiple hash tables.
+
+[[wants]]
+Functionality switches
+----------------------
+
+Each of these macros enables some of the functionality the table has.
+
+[[want_cleanup]]
+- `HASH_WANT_CLEANUP` --
+  <<fun_HASH_PREFIX_OPEN_PAREN_cleanup_CLOSE_PAREN_,`HASH_PREFIX((cleanup()`>>
+[[want_find]]
+- `HASH_WANT_FIND` --
+  <<fun_HASH_PREFIX_OPEN_PAREN_find_CLOSE_PAREN_,`HASH_PREFIX((find()`>>
+[[want_find_next]]
+- `HASH_WANT_FIND_NEXT` --
+  <<fun_HASH_PREFIX_OPEN_PAREN_find_next_CLOSE_PAREN_,`HASH_PREFIX((find_next()`>>
+[[want_new]]
+- `HASH_WANT_NEW` --
+  <<fun_HASH_PREFIX_OPEN_PAREN_new_CLOSE_PAREN_,`HASH_PREFIX((new()`>>
+[[want_lookup]]
+- `HASH_WANT_LOOKUP` --
+  <<fun_HASH_PREFIX_OPEN_PAREN_lookup_CLOSE_PAREN_,`HASH_PREFIX((lookup()`>>
+[[want_delete]]
+- `HASH_WANT_DELETE` --
+  <<fun_HASH_PREFIX_OPEN_PAREN_delete_CLOSE_PAREN_,`HASH_PREFIX((delete()`>>
+[[want_remove]]
+- `HASH_WANT_REMOVE` --
+  <<fun_HASH_PREFIX_OPEN_PAREN_remove_CLOSE_PAREN_,`HASH_PREFIX((remove()`>>
+
+[[generated]]
+Generated functions
+-------------------
+
+These are the function that the header file generates for you. The
+strange first parameter of each function is a place where the
+`HASH_PREFIX(table) *` resides when you define
+<<table_dynamic,`HASH_TABLE_DYNAMIC`>>. If you do not, the parameter
+is empty.
+
+!!ucw/hashtable.h HASH_PREFIX
+
+[[iterator]]
+Iterator
+--------
+
+You can use the `HASH_FOR_ALL` iterator macro to run trough all the
+nodes. Lets say your `HASH_PREFIX(x)` macro is defined as
+`prefix_##x`. Then you would do something like:
+
+  HASH_FOR_ALL(prefix, node_variable)
+  {
+     do_something_with_node(node_variable);
+  }
+  HASH_END_FOR;
+
+If you use <<table_dynamic,`HASH_TABLE_DYNAMIC`>>, use
+`HASH_FOR_ALL_DYNAMIC(prefix, table, node_variable)` instead.
+
+You may not modify the table inside the block. Use `HASH_BREAK` and
+`HASH_CONTINUE` instead of `break` and `continue` statements.

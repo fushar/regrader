@@ -1,0 +1,10 @@
+[VCS Colors]
+DefaultColor=255,255,255
+FileAddedColor=204,255,153
+FileConflictColor=255,102,102
+FileModifiedColor=204,204,255
+FileNeedsCheckoutColor=255,204,255
+FileNeedsPatchColor=255,204,255
+FileStickyColor=255,204,204
+FileUnknownColor=255,255,255
+FileUpdatedColor=255,255,204

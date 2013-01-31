@@ -1,0 +1,13 @@
+[Applet_1]
+ConfigFile=menu_panelappletrc
+DesktopFile=menuapplet.desktop
+FreeSpace2=0
+WidthForHeightHint=10
+
+[General]
+Applets2=Applet_1
+CustomSize=28
+IExist=true
+Position=2
+Size=4
+XineramaScreen=-2

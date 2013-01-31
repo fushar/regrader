@@ -1,0 +1,11 @@
+# pkg-config metadata for libsh
+
+libdir=@LIBDIR@
+incdir=.
+
+Name: libsh
+Description: Functions common to the whole Sherlock project
+Version: @SHERLOCK_VERSION@
+Cflags: -I${incdir}
+Libs: -L${libdir} -lsh
+Requires: @DEPS@

@@ -1,0 +1,21 @@
+#!/usr/bin/perl
+
+@ARGV == 2 or die "Usage: mergedeps <base> <update>";
+foreach $a (@ARGV) {
+	open F, "$a" or next;
+	$t = "";
+	while (<F>) {
+		$t .= $_;
+		if (! /\\$/) {
+			($t =~ /^(.*):/) || die "Parse error at $t";
+			$rules{$1} = $t;
+			$t = "";
+		}
+	}
+	close F;
+}
+open(F,">" . $ARGV[0]) || die "Unable to write output file";
+foreach $a (sort keys %rules) {
+	print F $rules{$a};
+}
+close F;

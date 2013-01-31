@@ -1,0 +1,82 @@
+Protocol spoken by the submit server
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+(1) Server sends "+OK\n" or "+TLS\n"
+
+(2) TLS is started if requested
+
+(3) Client sends hello, server replies
+
+(4) Loop: client sends command, server replies
+
+Except for the initial "+xxx" message, all requests and replies are simple objects
+as handled by the Sherlock library. Each line starts with a single-character
+attribute name followed by the value of the attribute, the object is terminated
+by an empty line. Parentheses can delimit nested blocks.
+
+Every reply contains either a "+" or "-" attribute denoting status (OK/failed).
+The value of the attribute is a message for the user, which should not be
+interpreted in any way.
+
+Hello request:
+
+	Uusername
+
+Hello reply:
+
+	(only status)
+
+Submit request:
+
+	!SUBMIT
+	Ttask
+	Ppart			<-- optional part ID
+	Ssize
+	Xextension
+	(after the request is ACK-ed, the client sends raw data and then server sends a 2nd reply)
+
+Submit reply:
+
+	(only status)
+
+Submit reply after data:
+
+	(only status)
+
+Status request:
+
+	!STATUS
+
+Status reply:
+
+	task status objects defined below with the following added:
+	(T
+		Aallowed_extension
+	)
+
+NOP request:
+
+	!NOP
+
+NOP reply:
+
+	(only status)
+
+
+Task status objects
+~~~~~~~~~~~~~~~~~~~
+(T				<-- task
+	Tname
+	(P			<-- task part
+		Pname
+		Vid		<-- which version is current
+		(V		<-- submitted version
+			Vid
+			Tsubmit_time
+			Sstatus
+			Lfilesize
+			Hhash
+			Xextension
+		)
+	)
+)

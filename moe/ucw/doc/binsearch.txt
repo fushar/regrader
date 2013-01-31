@@ -1,0 +1,51 @@
+Binary search
+=============
+
+* <<defs,Definitions>>
+* <<examples,Examples>>
+
+!!ucw/binsearch.h
+
+[[examples]]
+Examples
+--------
+
+You can find few examples of binary search usage. Although we define only few macros, they can be used
+for several different cases, for example to find lower elements in a (non-)decreasing array or even to find 
+elements in a (non-)increasing array.
+
+  static int inc[10] = { 1, 4, 4, 5, 6, 10, 11, 20, 25, 50 };
+  static const char *str[5] = { "aaa", "abc", "bflmpsvz", "rep", "rep" };
+  static int dec[3] = { 5, 2, 1 };
+
+  // find the first equal element
+  printf("%d\n", BIN_SEARCH_EQ(inc, 10, 4));				// prints 1
+  printf("%d\n", BIN_SEARCH_EQ(inc, 10, 15));				// prints -1 (not found)
+
+  // find the first greater or equal element
+  printf("%d\n", BIN_SEARCH_GE(inc, 10, 9));				// prints 5
+  printf("%d\n", BIN_SEARCH_GE(inc, 10, 10));				// prints 5
+  printf("%d\n", BIN_SEARCH_GE(inc, 10, 4));				// prints 1
+  printf("%d\n", BIN_SEARCH_GE(inc, 10, 99));				// prints 10 (not found)
+
+  // find the last equal element (or -1 if does not exist)
+  #define CMP_LE(ary, i, x) ((ary[i]) <= (x))
+  int i = BIN_SEARCH_FIRST_GE_CMP(inc, 10, 4, CMP_LE);
+  printf("%d\n", (i && inc[i - 1] == 4) ? i - 1 : -1);			// prints 2
+
+  // find the first greater element
+  printf("%d\n", BIN_SEARCH_FIRST_GE_CMP(inc, 10, 25, CMP_LE));		// prints 9
+
+  // find the last lower or equal element (or -1 if does not exist)
+  printf("%d\n", BIN_SEARCH_FIRST_GE_CMP(inc, 10, 25, CMP_LE) - 1);	// prints 8
+
+  // find the last lower element (or -1 if does not exist)
+  printf("%d\n", BIN_SEARCH_FIRST_GE(inc, 10, 25) - 1);			// prints 7
+
+  // find the first greater or equal string
+  #define CMP_STR(ary, i, x) (strcmp((ary[i]), (x)) < 0)
+  printf("%d\n", BIN_SEARCH_GE_CMP(str, 5, "bfl", CMP_STR));            // prints 2
+
+  // find the first lower or equal element in the non-increasing array
+  #define CMP_GT(ary, i, x) ((ary[i]) > (x))
+  printf("%d\n", BIN_SEARCH_FIRST_GE_CMP(dec, 3, 4, CMP_GT));		// prints 1

@@ -1,0 +1,12 @@
+Fixed-sized alocators
+=====================
+
+You can use them for efficient allocation of large amount of small
+fixed-sized memory blocks and to free them all at once.
+If you need more features, see more complex <<mempool:,memory pools>>.
+
+* <<defs,Definitions>>
+* <<basic,Basic manipulation>>
+* <<alloc,Allocation routines>>
+
+!!ucw/eltpool.h

@@ -1,0 +1,7 @@
+Generally, functions in the UCW library are reentrant as long as you call them
+on different data. Calling on the same object is not, unless otherwise told,
+which also includes functions acting on any kind of global state.
+
+There are some exceptions:
+
+- setproctitle() is not safe, it modifies global state

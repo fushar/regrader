@@ -1,0 +1,68 @@
+/* Basic layout */
+
+BODY {
+	background-color: #e2d4a5;
+	color: #202000;
+}
+
+:link {
+	color: #0030a0;
+	text-decoration: none;
+}
+
+:visited {
+	color: #631782;
+	text-decoration: none;
+}
+
+A[href]:hover {
+	background-color: #e2c461;
+}
+
+
+H1 {
+	display: block;
+	font-size: 207.36%;
+	font-weight: bold;
+	margin: 0.67em 0 0.67em;
+	text-align: center;
+}
+
+H2 {
+	display: block;
+	font-size: 144%;
+	font-weight: bold;
+	margin: 1em 0 0.67em;
+	text-align: left;
+}
+
+/* List of modules */
+
+TABLE.modules {
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+
+TABLE.modules TR TD {
+	padding: 0.2em 0.5em;
+	border: 1px solid black;
+}
+
+TABLE.modules TR TH {
+	padding: 0.2em 0.5em;
+	border: 1px solid black;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.statedone {
+	color: green;
+}
+
+.statepart {
+	color: #dd33dd;
+}
+
+.statewip {
+	color: #dd3333;
+}

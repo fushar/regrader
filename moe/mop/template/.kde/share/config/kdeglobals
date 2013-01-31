@@ -1,0 +1,296 @@
+[$Version]
+update_info=klippershortcuts.upd:04112002,socks.upd:kde3.0/r1,kwin.upd:kde3.2Xinerama,kded.upd:kde3.0,kaccel.upd:kde3.3/r1,mouse_cursor_theme.upd:kde3.4.99
+
+[DesktopIcons]
+ActiveColor=invalid
+ActiveColor2=invalid
+ActiveEffect=togamma
+ActiveSemiTransparent=false
+ActiveValue=0.7
+Animated=true
+DefaultColor=144,128,248
+DefaultColor2=0,0,0
+DefaultEffect=none
+DefaultSemiTransparent=false
+DefaultValue=1
+DisabledColor=34,202,0
+DisabledColor2=0,0,0
+DisabledEffect=togray
+DisabledSemiTransparent=true
+DisabledValue=1
+DoublePixels=false
+Size=48
+
+[DirSelect Dialog]
+DirSelectDialog Size=400,450
+History Items=file://$HOME/t
+
+[General]
+TerminalApplication=konsole
+XftHintStyle=hintfull
+background=239,239,239
+buttonBackground=221,223,228
+buttonForeground=0,0,0
+foreground=0,0,0
+linkColor=0,0,238
+selectBackground=103,141,178
+selectForeground=255,255,255
+visitedLinkColor=82,24,139
+widgetStyle=Plastik
+windowBackground=255,255,255
+windowForeground=0,0,0
+
+[Global Shortcuts]
+Activate Window Demanding Attention=none
+Block Global Shortcuts=none
+Defaults timestamp=Feb  6 200720:30:30
+Desktop Screenshot=none
+Enable/Disable Clipboard Actions=default(Alt+Ctrl+X)
+Halt without Confirmation=none
+Kill Window=Ctrl+Shift+Escape
+Lock Session=default(Alt+Ctrl+L)
+Log Out=none
+Log Out Without Confirmation=none
+Manually Invoke Action on Current Clipboard=default(Alt+Ctrl+R)
+Mouse Emulation=Ctrl+Shift+F12
+Next Taskbar Entry=none
+Popup Launch Menu=none
+Previous Taskbar Entry=none
+Reboot without Confirmation=none
+Run Command=none
+Setup Window Shortcut=none
+Show Klipper Popup-Menu=default(Alt+Ctrl+V)
+Show Taskmanager=default(Ctrl+Escape)
+Show Window List=none
+Switch One Desktop Down=Alt+Down;Ctrl+Down
+Switch One Desktop Up=Alt+Up;Ctrl+Up
+Switch One Desktop to the Left=Alt+Left;Ctrl+Left
+Switch One Desktop to the Right=Alt+Right;Ctrl+Right
+Switch User=none
+Switch to Desktop 1=Alt+F1
+Switch to Desktop 10=Alt+F10
+Switch to Desktop 11=Alt+F11
+Switch to Desktop 12=Alt+F12
+Switch to Desktop 13=none
+Switch to Desktop 14=none
+Switch to Desktop 15=none
+Switch to Desktop 16=none
+Switch to Desktop 17=none
+Switch to Desktop 18=none
+Switch to Desktop 19=none
+Switch to Desktop 2=Alt+F2
+Switch to Desktop 20=none
+Switch to Desktop 3=Alt+F3
+Switch to Desktop 4=Alt+F4
+Switch to Desktop 5=Alt+F5
+Switch to Desktop 6=Alt+F6
+Switch to Desktop 7=Alt+F7
+Switch to Desktop 8=Alt+F8
+Switch to Desktop 9=Alt+F9
+Switch to Next Desktop=none
+Switch to Next Keyboard Layout=default(Alt+Ctrl+K)
+Switch to Previous Desktop=none
+Toggle Showing Desktop=none
+Toggle Window Raise/Lower=none
+Walk Through Desktop List=none
+Walk Through Desktop List (Reverse)=none
+Walk Through Desktops=none
+Walk Through Desktops (Reverse)=none
+Walk Through Windows=default(Alt+Tab)
+Walk Through Windows (Reverse)=default(Alt+Shift+Tab)
+Window Above Other Windows=none
+Window Below Other Windows=none
+Window Close=none
+Window Fullscreen=none
+Window Grow Horizontal=none
+Window Grow Vertical=none
+Window Lower=none
+Window Maximize=none
+Window Maximize Horizontal=none
+Window Maximize Vertical=none
+Window Minimize=none
+Window Move=none
+Window No Border=none
+Window On All Desktops=none
+Window One Desktop Down=Alt+Shift+Down;Ctrl+Shift+Down
+Window One Desktop Up=Alt+Shift+Up;Ctrl+Shift+Up
+Window One Desktop to the Left=Alt+Shift+Left;Ctrl+Shift+Left
+Window One Desktop to the Right=Alt+Shift+Right;Ctrl+Shift+Right
+Window Operations Menu=none
+Window Pack Down=none
+Window Pack Left=none
+Window Pack Right=none
+Window Pack Up=none
+Window Raise=none
+Window Resize=none
+Window Screenshot=none
+Window Shade=none
+Window Shrink Horizontal=none
+Window Shrink Vertical=none
+Window to Desktop 1=Alt+Shift+F1
+Window to Desktop 10=Alt+Shift+F10
+Window to Desktop 11=Alt+Shift+F11
+Window to Desktop 12=Alt+Shift+F12
+Window to Desktop 13=none
+Window to Desktop 14=none
+Window to Desktop 15=none
+Window to Desktop 16=none
+Window to Desktop 17=none
+Window to Desktop 18=none
+Window to Desktop 19=none
+Window to Desktop 2=Alt+Shift+F2
+Window to Desktop 20=none
+Window to Desktop 3=Alt+Shift+F3
+Window to Desktop 4=Alt+Shift+F4
+Window to Desktop 5=Alt+Shift+F5
+Window to Desktop 6=Alt+Shift+F6
+Window to Desktop 7=Alt+Shift+F7
+Window to Desktop 8=Alt+Shift+F8
+Window to Desktop 9=Alt+Shift+F9
+Window to Next Desktop=none
+Window to Previous Desktop=none
+
+[Icons]
+Theme=crystalsvg
+
+[KDE]
+ChangeCursor=true
+EffectAnimateCombo=true
+EffectFadeMenu=true
+EffectFadeTooltip=true
+EffectsEnabled=true
+OpaqueResize=true
+ShowDeleteCommand=true
+ShowIconsOnPushButtons=true
+SingleClick=true
+colorScheme=<default>
+contrast=7
+macStyle=false
+
+[KFileDialog Settings]
+Automatically select filename extension=true
+Height 1024=220
+LocationCombo Completionmode=5
+PathCombo Completionmode=5
+Recent URLs=/mo/kdevelop/doc/fpc/
+Separate Directories=false
+Show Bookmarks=false
+Show Preview=false
+Show Speedbar=true
+Show hidden files=false
+Sort by=Name
+Sort case insensitively=true
+Sort directories first=true
+Sort reversed=false
+View Style=Simple
+Width 1280=633
+
+[Keyboard]
+Gestures=false
+
+[Locale]
+Country=us
+Language=en_US
+
+[MainToolbarIcons]
+ActiveColor=169,156,255
+ActiveColor2=0,0,0
+ActiveEffect=none
+ActiveSemiTransparent=false
+ActiveValue=1
+Animated=false
+DefaultColor=144,128,248
+DefaultColor2=0,0,0
+DefaultEffect=none
+DefaultSemiTransparent=false
+DefaultValue=1
+DisabledColor=34,202,0
+DisabledColor2=0,0,0
+DisabledEffect=togray
+DisabledSemiTransparent=true
+DisabledValue=1
+DoublePixels=false
+Size=22
+
+[PanelIcons]
+ActiveColor=invalid
+ActiveColor2=invalid
+ActiveEffect=togamma
+ActiveSemiTransparent=false
+ActiveValue=0.7
+Animated=false
+DefaultColor=144,128,248
+DefaultColor2=0,0,0
+DefaultEffect=none
+DefaultSemiTransparent=false
+DefaultValue=1
+DisabledColor=34,202,0
+DisabledColor2=0,0,0
+DisabledEffect=togray
+DisabledSemiTransparent=true
+DisabledValue=1
+DoublePixels=false
+Size=32
+
+[Paths]
+Trash=$HOME/Desktop/Trash/
+
+[Shortcuts]
+Back=XF86Back
+BackwardWord=none
+Forward=XF86Forward
+ForwardWord=none
+NextCompletion=none
+PrevCompletion=none
+Up=none
+
+[SmallIcons]
+ActiveColor=169,156,255
+ActiveColor2=0,0,0
+ActiveEffect=none
+ActiveSemiTransparent=false
+ActiveValue=1
+Animated=false
+DefaultColor=144,128,248
+DefaultColor2=0,0,0
+DefaultEffect=none
+DefaultSemiTransparent=false
+DefaultValue=1
+DisabledColor=34,202,0
+DisabledColor2=0,0,0
+DisabledEffect=togray
+DisabledSemiTransparent=true
+DisabledValue=1
+DoublePixels=false
+Size=16
+
+[ToolbarIcons]
+ActiveColor=169,156,255
+ActiveColor2=0,0,0
+ActiveEffect=none
+ActiveSemiTransparent=false
+ActiveValue=1
+Animated=false
+DefaultColor=144,128,248
+DefaultColor2=0,0,0
+DefaultEffect=none
+DefaultSemiTransparent=false
+DefaultValue=1
+DisabledColor=34,202,0
+DisabledColor2=0,0,0
+DisabledEffect=togray
+DisabledSemiTransparent=true
+DisabledValue=1
+DoublePixels=false
+Size=22
+
+[WM]
+activeBackground=65,142,220
+activeBlend=107,145,184
+activeForeground=255,255,255
+activeTitleBtnBg=127,158,200
+alternateBackground=237,244,249
+inactiveBackground=157,170,186
+inactiveBlend=157,170,186
+inactiveForeground=221,221,221
+inactiveTitleBtnBg=167,181,199

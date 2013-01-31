@@ -1,0 +1,50 @@
+<!DOCTYPE Templates>
+<Templates>
+ <Template suffixes="C++ (h,H,hh,hxx,hpp,inl,tlh,c,C,cc,cpp,c++,cxx,m,mm,M)" code="if( | ){
+} else {
+}" name="ife" description="if else" />
+ <Template suffixes="C++ (h,H,hh,hxx,hpp,inl,tlh,c,C,cc,cpp,c++,cxx,m,mm,M)" code="private|" name="pr" description="private" />
+ <Template suffixes="C++ (h,H,hh,hxx,hpp,inl,tlh,c,C,cc,cpp,c++,cxx,m,mm,M)" code="while( | ){
+}" name="whileb" description="while statement" />
+ <Template suffixes="C++ (h,H,hh,hxx,hpp,inl,tlh,c,C,cc,cpp,c++,cxx,m,mm,M)" code="public|" name="pu" description="public" />
+ <Template suffixes="C++ (h,H,hh,hxx,hpp,inl,tlh,c,C,cc,cpp,c++,cxx,m,mm,M)" code="switch( | ){
+}" name="switchb" description="switch statement" />
+ <Template suffixes="C++ (h,H,hh,hxx,hpp,inl,tlh,c,C,cc,cpp,c++,cxx,m,mm,M)" code="protected|" name="pro" description="protected" />
+ <Template suffixes="C++ (h,H,hh,hxx,hpp,inl,tlh,c,C,cc,cpp,c++,cxx,m,mm,M)" code="for( |; ; ){
+}" name="forb" description="for statement" />
+ <Template suffixes="C++ (h,H,hh,hxx,hpp,inl,tlh,c,C,cc,cpp,c++,cxx,m,mm,M)" code="class | {
+public:
+};" name="classd" description="class declaration" />
+ <Template suffixes="C++ (h,H,hh,hxx,hpp,inl,tlh,c,C,cc,cpp,c++,cxx,m,mm,M)" code="struct | {
+};" name="structd" description="struct declaration" />
+ <Template suffixes="C++ (h,H,hh,hxx,hpp,inl,tlh,c,C,cc,cpp,c++,cxx,m,mm,M)" code="if( | ){
+}" name="ifb" description="if statement" />
+ <Template suffixes="Pascal (p,pp,pas,dpr)" code="if ( | ) then
+begin
+end
+else
+begin
+end;" name="ife" description="if else" />
+ <Template suffixes="Pascal (p,pp,pas,dpr)" code="while ( | ) do
+begin
+end;" name="whileb" description="while statement" />
+ <Template suffixes="Pascal (p,pp,pas,dpr)" code="private|" name="pr" description="private" />
+ <Template suffixes="Pascal (p,pp,pas,dpr)" code="public|" name="pu" description="public" />
+ <Template suffixes="Pascal (p,pp,pas,dpr)" code="case ( | ) of
+end;" name="caseb" description="case statement" />
+ <Template suffixes="Pascal (p,pp,pas,dpr)" code="protected|" name="pro" description="protected" />
+ <Template suffixes="Pascal (p,pp,pas,dpr)" code="for | :=  to  do
+begin
+end;" name="forb" description="for statement" />
+ <Template suffixes="Pascal (p,pp,pas,dpr)" code="|= class()
+public
+private
+protected
+end;" name="classd" description="class declaration" />
+ <Template suffixes="Pascal (p,pp,pas,dpr)" code="|= record
+end;" name="recordd" description="record declaration" />
+ <Template suffixes="Pascal (p,pp,pas,dpr)" code="if ( | ) then
+begin
+end;" name="ifb" description="if statement" />
+ <Template suffixes="HTML (html)" code="&lt;table>&lt;tr>&lt;td>|&lt;/td>&lt;/tr>&lt;/table>" name="tab" description="table" />
+</Templates>

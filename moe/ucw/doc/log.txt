@@ -1,0 +1,154 @@
+Logging
+=======
+
+LibUCW contains a powerful system for logging of messages. Depending on your
+needs, it can be used either as a very simple logger which writes all messages
+to stderr or to a single file, or as a multi-stream logger in which different
+messages can be directed to different streams and the streams can be combined
+in various ways.
+
+Simple logging
+--------------
+The basic logging functions are defined in <<basics:logging,lib.h>>.
+
+To log a message, call `msg(L_xxx,@fmt,@args)`, where `L_xxx` is a category of the log
+message (`L_INFO`, `L_WARN`, `L_ERR` etc.), @fmt is a format string as for printf,
+and @args are additional arguments to be substituted to the format string.
+A newline character is automatically appended; the message should not contain
+any control characters.
+
+The first argument of `msg` can be OR'ed with additional flags. Most notably, you can
+add `L_SIGHANDLER` if you wish to log a message from a signal handler (see below
+for discussion on signals and reentrancy in general).
+
+By default, all messages are logged to stderr. If you wish to use a log file,
+call `log_file(@name)`. All subsequent logging will use this file and stderr
+will be redirected there, too.
+
+Names of log files can contain strftime() escapes, which are expanded on the fly.
+This makes it easy to start a new log file every day.
+
+Example
+~~~~~~~
+	#include <ucw/lib.h>
+
+	int main(int argc, char **argv)
+	{
+	  log_init(argv[0]);
+	  log_file("/var/log/utterances");
+	  msg(L_INFO, "This program does nothing, but successfully.");
+	  return 0;
+	}
+
+Log streams
+-----------
+More generally, the logger can use multiple log streams. Each stream can be directed
+to a logging back-end (log file, syslog, ...) and equipped with a filter which
+selects a subset of the messages received. A stream can also have substreams
+attached, which are passed a copy of all log messages sent to the parent stream.
+
+Streams are identified by <<struct_log_stream,struct log_stream>> and also by
+their registration number. Messages can be directed to a stream by OR'ing the
+registration number to the first argument of msg().
+
+When a log stream receives a message, it is processed as follows:
+
+  1. If the log level of the message does not match the set of accepted
+     levels of the stream (@levels), the message is dropped.
+  2. The filter hook of the stream is consulted and if it returns a non-zero
+     value, the message is dropped.
+  3. The message is passed to all substreams of the stream.
+  4. The message is formatted according to the formatting flags (@msgfmt) of the stream.
+  5. The handler hook of the stream is called (if it exists).
+
+When no stream is explicitly selected, msg() uses the default stream, which
+has registration number 0 and which is also returned by log_default_stream().
+This stream has no explicit destination, but it can have substreams. (When
+a program starts, the default stream is connected to stderr; a call to log_file()
+establishes a file logging stream and links it as the only substream of the
+default stream.)
+
+Streams are reference-counted. When a stream is created, it gets reference count 1.
+When it is linked as a substream of another stream, its reference count is incremented.
+Closing the stream by log_close_stream(), unlinking it or closing a parent stream
+(which causes an unlink) decrements the reference count and when it drops to zero,
+the stream is removed and all its substreams unlinked.
+
+Example
+~~~~~~~
+	#include <ucw/lib.h>
+	#include <ucw/log.h>
+
+	int main(int argc, char **argv)
+	{
+	  log_init(argv[0]);
+	  struct log_stream *ls = log_new_file("/var/log/utterances", 0);
+	  msg(L_INFO | ls->regnum, "Aye captain, we have a log file");
+	  msg(L_INFO, "Alas, stderr still works");
+	  return 0;
+	}
+
+Message types
+-------------
+Messages can also have types, which can be used for further filtering inside streams.
+By default, there is only the default message type. To obtain an identifier of a new
+type (again to be OR'ed to the log level when calling <<msg()>>), use <<log_register_type()>>.
+The number of types is currently limited to 32.
+
+If you want non-default types to be visible, enable the `LSFMT_TYPE` format flag.
+
+Processes, threads and signals
+------------------------------
+When you fork a new process, it automatically inherits all currently configured log
+streams. You should however call <<log_fork()>> to update the logger's notion
+of the current PID (at least when you use PID's in your log messages). Also, if you
+plan to exec() a process after fork(), do not forget to call <<log_close_all()>>,
+so that all file descriptors used for log files (except for stderr) are closed.
+
+The <<basics:msg()>> function itself can be called from multiple threads in parallel
+and it is atomic by design. The functions for setting up the logging machinery
+are however not reentrant (they follow our general rule about functions that
+affect global state).
+
+Logging from signal handlers is problematic, as is doing almost anything in signal
+handlers, because almost all libc functions are not signal-safe. Most importantly,
+functions for converting time to a human-readable representation aren't safe.
+LibUCW therefore offers only limited logging services in such situations and
+you must use the `L_SIGHANDLER` flag to request it. Otherwise, deadlocks get
+ready to happen.
+
+Messages logged with `L_SIGHANDLER` set are written directly to stderr (which
+is usually an alias for the main log file, at least if you use <<log_file()>>)
+and they do not carry a timestamp. Logging of sighandler messages to general
+log streams or to syslog is therefore not supported.
+
+ucw/log.h
+---------
+!!ucw/log.h
+
+Limiting rate: ucw/tbf.h
+------------------------
+
+LibUCW also offers simple means of limiting the rate of log messages (or of any other
+events) by means of a so called 'Token Bucket Filter.' The idea behind this filter is
+simple: To log a message, we need a token. The available tokens are accumulated in
+a bucket which has a fixed 'filling rate' (the number of tokens arriving in the bucket
+per second, which may be a fractional number) and fixed 'maximum capacity.' The
+bucket receives the tokens continuously with the given rate and when it reaches
+the maximum capacity, the extra tokens are dropped on the floor. When a message
+has to be sent, we take a single token from the bucket and if there wasn't any,
+we drop the message.
+
+The filling rate therefore describes the maximum sustained rate of messages,
+while the bucket capacity tells the filter the maximum length of a short burst,
+which can temporarily exceed the rate.
+
+A general bucket filter is available in `ucw/tbf.h`. The usual way of using it
+to limit logging is to set up a filter hook of a stream which asks the TBF for
+every message. (Remember, though, that if your program is multithreaded, the
+filter hook can be run in multiple threads in parallel, so it has to guard the
+TBF by a lock.) The configuration interface for log streams described above
+is able to attach rate limiters to streams per user's request, so you usually
+need not take any extra care.
+
+!!ucw/tbf.h

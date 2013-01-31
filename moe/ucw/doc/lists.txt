@@ -1,0 +1,26 @@
+Linked lists
+============
+
+Ucwlib defines two basic linked list structures: single-linked lists and circular linked lists.
+Both of them support insertion of any number of nodes, removal of nodes and various searches.
+Single-linked lists are a bit simplier (they especially requires smaller nodes)
+but some operations need assymptoticaly more time.
+
+Linked lists can be used very simply. We define a structure as list's handle and
+a common header in all inserted nodes. All routines then accept and return pointers
+to this handle and node headers.
+
+Single-linked lists
+-------------------
+
+!!ucw/slists.h
+
+Circular linked lists
+---------------------
+
+!!ucw/clists.h
+
+Circular linked lists of simple items
+-------------------------------------
+
+!!ucw/simple-lists.h

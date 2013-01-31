@@ -1,0 +1,1583 @@
+[Cache /usr/share/apps/katepart/syntax/abc.xml]
+author=Andrea Primiani (primiani@dag.it)
+extension=*.abc;*.ABC
+hidden=false
+lastModified=1137690383
+license=LGPL
+mimetype=text/vnd.abc
+name=ABC
+priority=
+section=Other
+version=1.10
+
+[Cache /usr/share/apps/katepart/syntax/ada.xml]
+author=
+extension=*.adb;*.ads;*.ada;*.a
+hidden=false
+lastModified=1153556196
+license=
+mimetype=text/x-adasrc
+name=Ada
+priority=
+section=Sources
+version=1.06
+
+[Cache /usr/share/apps/katepart/syntax/ahdl.xml]
+author=Dominik Haumann (dhdev@gmx.de)
+extension=*.ahdl;*.tdf
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=text/x-ahdl
+name=AHDL
+priority=
+section=Hardware
+version=1.04
+
+[Cache /usr/share/apps/katepart/syntax/alert.xml]
+author=Dominik Haumann (dhdev@gmx.de)
+extension=
+hidden=true
+lastModified=1128956727
+license=LGPL
+mimetype=
+name=Alerts
+priority=
+section=Other
+version=1.06
+
+[Cache /usr/share/apps/katepart/syntax/ansic89.xml]
+author=Dominik Haumann (dhdev@gmx.de)
+extension=*.c;*.C;*.h
+hidden=false
+lastModified=1128956727
+license=LGPL
+mimetype=text/x-csrc;text/x-c++src;text/x-chdr
+name=ANSI C89
+priority=2
+section=Sources
+version=1.09
+
+[Cache /usr/share/apps/katepart/syntax/apache.xml]
+author=Jan Janssen (medhefgo@googlemail.com)
+extension=httpd.conf;httpd2.conf;apache.conf;apache2.conf;.ht*
+hidden=false
+lastModified=1137690383
+license=LGPL
+mimetype=
+name=Apache Configuration
+priority=
+section=Configuration
+version=1.10
+
+[Cache /usr/share/apps/katepart/syntax/asm-avr.xml]
+author=Roland Nagy
+extension=*.asm;*.ASM;*.asm-avr
+hidden=false
+lastModified=1128956727
+license=GPL
+mimetype=text/x-asm;text/x-asm-avr
+name=AVR Assembler
+priority=
+section=Assembler
+version=1.03
+
+[Cache /usr/share/apps/katepart/syntax/asm6502.xml]
+author=
+extension=*.asm
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-asm6502
+name=Asm6502
+priority=
+section=Assembler
+version=1.04
+
+[Cache /usr/share/apps/katepart/syntax/asp.xml]
+author=Antonio Salazar (savedfastcool@gmail.com)
+extension=*.asp;
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=text/x-asp-src;text/x-asp-src
+name=ASP
+priority=
+section=Markup
+version=1.02
+
+[Cache /usr/share/apps/katepart/syntax/awk.xml]
+author=
+extension=*.awk
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-awk
+name=AWK
+priority=
+section=Scripts
+version=0.90
+
+[Cache /usr/share/apps/katepart/syntax/bash.xml]
+author=Wilbert Berendsen (wilbert@kde.nl)
+extension=*.sh;*.bash;*.ebuild;*.eclass
+hidden=false
+lastModified=1142590745
+license=LGPL
+mimetype=application/x-shellscript
+name=Bash
+priority=
+section=Scripts
+version=2.05
+
+[Cache /usr/share/apps/katepart/syntax/bibtex.xml]
+author=Jeroen Wijnhout (Jeroen.Wijnhout@kdemail.net)
+extension=*.bib
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=text/x-bib
+name=BibTeX
+priority=
+section=Markup
+version=1.13
+
+[Cache /usr/share/apps/katepart/syntax/c.xml]
+author=
+extension=*.c;*.C;*.h
+hidden=false
+lastModified=1153556196
+license=
+mimetype=text/x-csrc;text/x-c++src;text/x-chdr
+name=C
+priority=5
+section=Sources
+version=1.25
+
+[Cache /usr/share/apps/katepart/syntax/cg.xml]
+author=Florian Schanda (florian.schanda@schanda.de)
+extension=*.cg
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=text/x-cgsrc
+name=Cg
+priority=
+section=Sources
+version=1.11
+
+[Cache /usr/share/apps/katepart/syntax/cgis.xml]
+author=
+extension=*.cgis
+hidden=false
+lastModified=1126340795
+license=
+mimetype=
+name=CGiS
+priority=
+section=Sources
+version=1.02
+
+[Cache /usr/share/apps/katepart/syntax/changelog.xml]
+author=Dominik Haumann (dhdev@gmx.de)
+extension=ChangeLog
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=
+name=ChangeLog
+priority=
+section=Other
+version=1.04
+
+[Cache /usr/share/apps/katepart/syntax/cisco.xml]
+author=Raphaël GRAPINET
+extension=*.cis
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=text/cisco
+name=Cisco
+priority=
+section=Configuration
+version=1.10
+
+[Cache /usr/share/apps/katepart/syntax/clipper.xml]
+author=Andrey Cherepanov (sibskull@mail.ru)
+extension=*.prg;*.PRG;*.ch
+hidden=false
+lastModified=1128956727
+license=GPL
+mimetype=text/x-clipper-src
+name=Clipper
+priority=2
+section=Sources
+version=1.05
+
+[Cache /usr/share/apps/katepart/syntax/cmake.xml]
+author=
+extension=CMakeLists.txt;*.cmake;
+hidden=false
+lastModified=1126340795
+license=
+mimetype=
+name=CMake
+priority=
+section=Other
+version=1.02
+
+[Cache /usr/share/apps/katepart/syntax/coldfusion.xml]
+author=
+extension=*.cfm;*.cfc;*.cfml;*.dbm
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-coldfusion
+name=ColdFusion
+priority=
+section=Markup
+version=1.04
+
+[Cache /usr/share/apps/katepart/syntax/commonlisp.xml]
+author=Dominik Haumann (dhdev@gmx.de)
+extension=*.lisp;*.cl;*.lsp
+hidden=false
+lastModified=1128956727
+license=LGPL
+mimetype=
+name=Common Lisp
+priority=
+section=Scripts
+version=1.02
+
+[Cache /usr/share/apps/katepart/syntax/component-pascal.xml]
+author=Werner Braun (wb@o3-software.de)
+extension=*.cp;*.bro
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-component-pascal
+name=Component-Pascal
+priority=
+section=Sources
+version=1.05
+
+[Cache /usr/share/apps/katepart/syntax/cpp.xml]
+author=
+extension=*.c++;*.cxx;*.cpp;*.cc;*.C;*.h;*.H;*.h++;*.hxx;*.hpp;*.hcc;*.moc
+hidden=false
+lastModified=1159724006
+license=
+mimetype=text/x-c++src;text/x-c++hdr;text/x-chdr
+name=C++
+priority=9
+section=Sources
+version=1.37
+
+[Cache /usr/share/apps/katepart/syntax/cs.xml]
+author=
+extension=*.cs
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-csharp-src;text/x-csharp-hde
+name=C#
+priority=
+section=Sources
+version=1.14
+
+[Cache /usr/share/apps/katepart/syntax/css-php.xml]
+author=Wilbert Berendsen (wilbert@kde.nl)
+extension=
+hidden=true
+lastModified=1175264805
+license=LGPL
+mimetype=
+name=CSS/PHP
+priority=
+section=Other
+version=1.99
+
+[Cache /usr/share/apps/katepart/syntax/css.xml]
+author=Wilbert Berendsen (wilbert@kde.nl)
+extension=*.css
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=text/css
+name=CSS
+priority=
+section=Markup
+version=1.99
+
+[Cache /usr/share/apps/katepart/syntax/cue.xml]
+author=
+extension=*.cue
+hidden=false
+lastModified=1126340795
+license=
+mimetype=application/x-cue
+name=CUE Sheet
+priority=
+section=Other
+version=0.91
+
+[Cache /usr/share/apps/katepart/syntax/d.xml]
+author=Simon J Mackenzie (project.katedxml@smackoz.fastmail.fm)
+extension=*.d;*.D
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=text/x-dsrc
+name=D
+priority=
+section=Sources
+version=1.36
+
+[Cache /usr/share/apps/katepart/syntax/debianchangelog.xml]
+author=
+extension=
+hidden=false
+lastModified=1126340795
+license=
+mimetype=
+name=Debian Changelog
+priority=
+section=Other
+version=0.62
+
+[Cache /usr/share/apps/katepart/syntax/debiancontrol.xml]
+author=
+extension=
+hidden=false
+lastModified=1126340795
+license=
+mimetype=
+name=Debian Control
+priority=
+section=Other
+version=0.82
+
+[Cache /usr/share/apps/katepart/syntax/desktop.xml]
+author=
+extension=*.desktop;*.kdelnk
+hidden=false
+lastModified=1126340795
+license=
+mimetype=application/x-desktop
+name=.desktop
+priority=
+section=Configuration
+version=1.04
+
+[Cache /usr/share/apps/katepart/syntax/diff.xml]
+author=
+extension=*.diff;*patch
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-diff
+name=Diff
+priority=
+section=Other
+version=1.02
+
+[Cache /usr/share/apps/katepart/syntax/doxygen.xml]
+author=Dominik Haumann (dhdev@gmx.de)
+extension=*.dox;*.doxygen
+hidden=false
+lastModified=1128956727
+license=LGPL
+mimetype=text/x-doxygen
+name=Doxygen
+priority=
+section=Markup
+version=1.25
+
+[Cache /usr/share/apps/katepart/syntax/e.xml]
+author=
+extension=*.e
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-e-src
+name=E Language
+priority=
+section=Sources
+version=0.21
+
+[Cache /usr/share/apps/katepart/syntax/eiffel.xml]
+author=Sebastian Vuorinen
+extension=*.e
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-eiffel-src
+name=Eiffel
+priority=
+section=Sources
+version=1.02
+
+[Cache /usr/share/apps/katepart/syntax/euphoria.xml]
+author=Irv Mullins (irvm@ellijay.com)
+extension=*.e;*.ex;*.exw;*.exu
+hidden=false
+lastModified=1128956727
+license=LGPL
+mimetype=text/x-euphoria
+name=Euphoria
+priority=
+section=Scripts
+version=2.08
+
+[Cache /usr/share/apps/katepart/syntax/ferite.xml]
+author=
+extension=*.fe;*.feh
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-ferite-src
+name=ferite
+priority=
+section=Scripts
+version=1.04
+
+[Cache /usr/share/apps/katepart/syntax/fgl-4gl.xml]
+author=Andrej Falout (andrej@falout.org)
+extension=*.4gl;*.4GL;*.err
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=text/x-4glsrc;text/x-4glerr
+name=4GL
+priority=
+section=Database
+version=1.01
+
+[Cache /usr/share/apps/katepart/syntax/fgl-per.xml]
+author=Andrej Falout (andrej@falout.org)
+extension=*.per;*.PER;*.per.err
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=text/x-4glper;text/x-4glpererr
+name=4GL-PER
+priority=
+section=Database
+version=1.01
+
+[Cache /usr/share/apps/katepart/syntax/fortran.xml]
+author=Franchin Matteo (fnch@libero.it)
+extension=*.f;*.F;*.for;*.FOR;*.f90;*.F90;*.fpp;*.FPP;*.f95;*.F95;
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=text/x-fortran-src
+name=Fortran
+priority=
+section=Sources
+version=1.11
+
+[Cache /usr/share/apps/katepart/syntax/fstab.xml]
+author=Diego Iastrubni (elcuco@kde.org)
+extension=fstab;mtab
+hidden=false
+lastModified=1126340795
+license=Public Domain
+mimetype=
+name=fstab
+priority=
+section=Configuration
+version=1.00
+
+[Cache /usr/share/apps/katepart/syntax/gdl.xml]
+author=
+extension=*.gdl;*.vcg;*.GDL;*.VCG
+hidden=false
+lastModified=1126340795
+license=
+mimetype=
+name=GDL
+priority=
+section=Scientific
+version=1.01
+
+[Cache /usr/share/apps/katepart/syntax/gettext.xml]
+author=Dominik Haumann (dhdev@gmx.de)
+extension=*.po;*.pot
+hidden=false
+lastModified=1131489530
+license=LGPL
+mimetype=application/x-gettext
+name=GNU Gettext
+priority=
+section=Markup
+version=1.03
+
+[Cache /usr/share/apps/katepart/syntax/glsl.xml]
+author=Oliver Richers (o.richers@tu-bs.de)
+extension=*.glsl;*.vert;*.frag
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=text/x-glslsrc
+name=GLSL
+priority=
+section=Sources
+version=1.02
+
+[Cache /usr/share/apps/katepart/syntax/gnuassembler.xml]
+author=John Zaitseff (J.Zaitseff@zap.org.au), Roland Pabel (roland@pabel.name)
+extension=*.s;*.S
+hidden=false
+lastModified=1128956727
+license=GPL
+mimetype=text/x-asm
+name=GNU Assembler
+priority=
+section=Assembler
+version=1.05
+
+[Cache /usr/share/apps/katepart/syntax/haskell.xml]
+author=Marcel Martin (mmar@freenet.de)
+extension=*.hs
+hidden=false
+lastModified=1126340795
+license=
+mimetype=
+name=Haskell
+priority=
+section=Sources
+version=1.04
+
+[Cache /usr/share/apps/katepart/syntax/html-php.xml]
+author=Wilbert Berendsen (wilbert@kde.nl)
+extension=*.php;*.php3;*.wml;*.phtml;*.phtm;*.inc
+hidden=false
+lastModified=1175264805
+license=LGPL
+mimetype=text/x-php4-src;text/x-php3-src;text/vnd.wap.wml;application/x-php
+name=PHP (HTML)
+priority=10
+section=Scripts
+version=1.98
+
+[Cache /usr/share/apps/katepart/syntax/html.xml]
+author=Wilbert Berendsen (wilbert@kde.nl)
+extension=*.htm;*.html;*.shtml;*.shtm
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=text/html
+name=HTML
+priority=10
+section=Markup
+version=1.98
+
+[Cache /usr/share/apps/katepart/syntax/idconsole.xml]
+author=
+extension=*.cfg
+hidden=false
+lastModified=1126340795
+license=
+mimetype=
+name=Quake Script
+priority=
+section=Scripts
+version=1.02
+
+[Cache /usr/share/apps/katepart/syntax/idl.xml]
+author=
+extension=*.idl
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-idl-src
+name=IDL
+priority=
+section=Sources
+version=1.07
+
+[Cache /usr/share/apps/katepart/syntax/ilerpg.xml]
+author=
+extension=QRPG*.*;qrpg*.*
+hidden=false
+lastModified=1148321648
+license=
+mimetype=text/x-ilerpg-src
+name=ILERPG
+priority=
+section=Sources
+version=1.05
+
+[Cache /usr/share/apps/katepart/syntax/inform.xml]
+author=Giancarlo Niccolai (giancarlo@niccolai.ws)
+extension=*.inf;*.h
+hidden=false
+lastModified=1126340795
+license=GPL
+mimetype=text/x-inform-src
+name=Inform
+priority=
+section=Sources
+version=1.23
+
+[Cache /usr/share/apps/katepart/syntax/ini.xml]
+author=Jan Janssen (medhefgo@web.de)
+extension=*.ini;*.pls
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=
+name=INI Files
+priority=
+section=Configuration
+version=1.0
+
+[Cache /usr/share/apps/katepart/syntax/java.xml]
+author=Alfredo Luiz Foltran Fialho (alfoltran@ig.com.br)
+extension=*.java
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=text/x-java
+name=Java
+priority=
+section=Sources
+version=1.15
+
+[Cache /usr/share/apps/katepart/syntax/javadoc.xml]
+author=Alfredo Luiz Foltran Fialho (alfoltran@ig.com.br)
+extension=
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=
+name=Javadoc
+priority=
+section=Markup
+version=1.03
+
+[Cache /usr/share/apps/katepart/syntax/javascript-php.xml]
+author=Anders Lund (anders@alweb.dk), Joseph Wenninger (jowenn@kde.org), Whitehawk Stormchaser (zerokode@gmx.net)
+extension=
+hidden=true
+lastModified=1175264805
+license=
+mimetype=
+name=JavaScript/PHP
+priority=
+section=Other
+version=1.10
+
+[Cache /usr/share/apps/katepart/syntax/javascript.xml]
+author=Anders Lund (anders@alweb.dk), Joseph Wenninger (jowenn@kde.org), Whitehawk Stormchaser (zerokode@gmx.net)
+extension=*.js
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-javascript
+name=JavaScript
+priority=
+section=Scripts
+version=1.10
+
+[Cache /usr/share/apps/katepart/syntax/jsp.xml]
+author=Rob Martin (rob@gamepimp.com)
+extension=*.jsp;*.JSP
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=text/html
+name=JSP
+priority=
+section=Markup
+version=1.02
+
+[Cache /usr/share/apps/katepart/syntax/katetemplate.xml]
+author=Anders Lund
+extension=*.katetemplate
+hidden=false
+lastModified=1126340054
+license=
+mimetype=
+name=Kate File Template
+priority=
+section=Markup
+version=1.00
+
+[Cache /usr/share/apps/katepart/syntax/kbasic.xml]
+author=
+extension=*.kbasic
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-kbasic-src
+name=KBasic
+priority=
+section=Sources
+version=1.02
+
+[Cache /usr/share/apps/katepart/syntax/kommander.xml]
+author=Wilbert Berendsen (wilbert@kde.nl), Andras Mantia (amantia@kde.org)
+extension=*.kmdr
+hidden=false
+lastModified=1159723782
+license=LGPL
+mimetype=application/x-shellscript
+name=Kommander
+priority=
+section=Scripts
+version=2.05
+
+[Cache /usr/share/apps/katepart/syntax/latex.xml]
+author=Jeroen Wijnhout (Jeroen.Wijnhout@kdemail.net)+Holger Danielsson (holger.danielsson@t-online.de)+Michel Ludwig (michel.ludwig@kdemail.net)
+extension=*.tex; *.ltx; *.dtx; *.sty; *.cls;
+hidden=false
+lastModified=1159724006
+license=LGPL
+mimetype=text/x-tex
+name=LaTeX
+priority=
+section=Markup
+version=1.23
+
+[Cache /usr/share/apps/katepart/syntax/ldif.xml]
+author=Andreas Hochsteger (e9625392@student.tuwien.ac.at)
+extension=*.ldif
+hidden=false
+lastModified=1126340795
+license=
+mimetype=application/directory
+name=LDIF
+priority=
+section=Database
+version=1.02
+
+[Cache /usr/share/apps/katepart/syntax/lex.xml]
+author=Jan Villat (jan.villat@net2000.ch)
+extension=*.l;*.lex;*.flex
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=
+name=Lex/Flex
+priority=
+section=Sources
+version=1.01
+
+[Cache /usr/share/apps/katepart/syntax/lilypond.xml]
+author=Andrea Primiani (primiani@dag.it)
+extension=*.ly;*.LY
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=
+name=LilyPond
+priority=
+section=Other
+version=1.01
+
+[Cache /usr/share/apps/katepart/syntax/literate-haskell.xml]
+author=Marcel Martin (mmar@freenet.de)
+extension=*.lhs
+hidden=false
+lastModified=1126340795
+license=
+mimetype=
+name=Literate Haskell
+priority=
+section=Sources
+version=1.04
+
+[Cache /usr/share/apps/katepart/syntax/logohighlightstyle.en_US.xml]
+author=
+extension=*.logo;*.lgo;*.LOGO;*.Logo
+hidden=false
+lastModified=1126340211
+license=
+mimetype=text/x-logosrc;text/x-logo;application/x-logo
+name=en_US
+priority=9
+section=Logo
+version=0.2
+
+[Cache /usr/share/apps/katepart/syntax/logtalk.xml]
+author=Paulo Moura (pmoura@logtalk.org)
+extension=*.lgt;*.config
+hidden=false
+lastModified=1148321648
+license=Artistic License 2.0
+mimetype=text/x-logtalk
+name=Logtalk
+priority=
+section=Sources
+version=1.51
+
+[Cache /usr/share/apps/katepart/syntax/lpc.xml]
+author=Andreas Klauer (Andreas.Klauer@metamorpher.de)
+extension=*.c;*.h;*.inc;*.o
+hidden=false
+lastModified=1126340795
+license=Artistic
+mimetype=
+name=LPC
+priority=
+section=Sources
+version=0.76
+
+[Cache /usr/share/apps/katepart/syntax/lua.xml]
+author=
+extension=*.lua
+hidden=false
+lastModified=1148321648
+license=
+mimetype=text/x-lua
+name=Lua
+priority=
+section=Scripts
+version=0.23
+
+[Cache /usr/share/apps/katepart/syntax/m3u.xml]
+author=Jan Janssen (medhefgo@web.de)
+extension=*.m3u
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=audio/mpegurl
+name=M3U
+priority=
+section=Other
+version=1.10
+
+[Cache /usr/share/apps/katepart/syntax/mab.xml]
+author=
+extension=*.mab;*.MAB;*.Mab
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-mab
+name=MAB-DB
+priority=
+section=Markup
+version=1.03
+
+[Cache /usr/share/apps/katepart/syntax/makefile.xml]
+author=Per Wigren (wigren@home.se)
+extension=*makefile*;*Makefile*
+hidden=false
+lastModified=1153556196
+license=
+mimetype=text/x-makefile
+name=Makefile
+priority=
+section=Other
+version=1.08
+
+[Cache /usr/share/apps/katepart/syntax/mason.xml]
+author=
+extension=*.html;
+hidden=false
+lastModified=1126340795
+license=
+mimetype=
+name=Mason
+priority=
+section=Scripts
+version=1.04
+
+[Cache /usr/share/apps/katepart/syntax/matlab.xml]
+author=
+extension=*.m;*.M
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/mfile
+name=Matlab
+priority=
+section=Scientific
+version=1.20
+
+[Cache /usr/share/apps/katepart/syntax/mediawiki.xml]
+author=
+extension=
+hidden=false
+lastModified=1126340795
+license=FDL
+mimetype=
+name=Wikimedia
+priority=
+section=Markup
+version=1.00
+
+[Cache /usr/share/apps/katepart/syntax/mips.xml]
+author=Dominik Haumann (dhdev@gmx.de)
+extension=*.s;
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=text/x-mips
+name=MIPS Assembler
+priority=-1
+section=Assembler
+version=1.03
+
+[Cache /usr/share/apps/katepart/syntax/modula-2.xml]
+author=
+extension=*.mod;*.def;*.mi;*.md
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-modula-2
+name=Modula-2
+priority=
+section=Sources
+version=1.03
+
+[Cache /usr/share/apps/katepart/syntax/mup.xml]
+author=Wilbert Berendsen (wilbert@kde.nl)
+extension=*.mup;*.not
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=text/x-mup;audio/x-mup;application/x-mup;audio/x-notes
+name=Music Publisher
+priority=
+section=Other
+version=1.06
+
+[Cache /usr/share/apps/katepart/syntax/nasm.xml]
+author=Nicola Gigante (nicola.gigante@gmail.com)
+extension=*.asm
+hidden=false
+lastModified=1137690383
+license=GPL
+mimetype=
+name=Intel x86 (NASM)
+priority=
+section=Assembler
+version=1.20
+
+[Cache /usr/share/apps/katepart/syntax/objectivec.xml]
+author=
+extension=*.m;*.h
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-objc-src;text/x-c-hdr
+name=Objective-C
+priority=
+section=Sources
+version=1.07
+
+[Cache /usr/share/apps/katepart/syntax/ocaml.xml]
+author=Glyn Webster (glyn@wave.co.nz)
+extension=*.ml;*.mli
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=
+name=Objective Caml
+priority=10
+section=Sources
+version=1.04
+
+[Cache /usr/share/apps/katepart/syntax/octave.xml]
+author=Luis Silvestre and Federico Zenith
+extension=*.octave;*.m;*.M
+hidden=false
+lastModified=1126340795
+license=GPL
+mimetype=text/octave
+name=Octave
+priority=
+section=Scientific
+version=1.01
+
+[Cache /usr/share/apps/katepart/syntax/pascal.xml]
+author=
+extension=*.pp;*.pas;*.p
+hidden=false
+lastModified=1142590745
+license=
+mimetype=text/x-pascal
+name=Pascal
+priority=
+section=Sources
+version=1.20
+
+[Cache /usr/share/apps/katepart/syntax/perl.xml]
+author=Anders Lund (anders@alweb.dk)
+extension=*.pl;*.pm
+hidden=false
+lastModified=1131489530
+license=LGPL
+mimetype=application/x-perl;text/x-perl
+name=Perl
+priority=
+section=Scripts
+version=1.20
+
+[Cache /usr/share/apps/katepart/syntax/php.xml]
+author=
+extension=
+hidden=true
+lastModified=1159724006
+license=
+mimetype=
+name=PHP/PHP
+priority=5
+section=Scripts
+version=1.27
+
+[Cache /usr/share/apps/katepart/syntax/picsrc.xml]
+author=Alain GIBAUD (alain.gibaud@univ-valenciennes.fr)
+extension=*.src;*.SRC;*.asm;*.ASM;*.pic;*.PIC
+hidden=false
+lastModified=1137690383
+license=LGPL
+mimetype=text/x-PicSrc;text/x-PicHdr
+name=PicAsm
+priority=
+section=Assembler
+version=1.07
+
+[Cache /usr/share/apps/katepart/syntax/pike.xml]
+author=Paul Pogonyshev
+extension=*.pike
+hidden=false
+lastModified=1126340795
+license=
+mimetype=application/x-pike;text/x-pike
+name=Pike
+priority=
+section=Scripts
+version=1.07
+
+[Cache /usr/share/apps/katepart/syntax/postscript.xml]
+author=
+extension=*.ps;*.ai;*.eps
+hidden=false
+lastModified=1126340795
+license=
+mimetype=application/postscript
+name=PostScript
+priority=
+section=Markup
+version=1.01
+
+[Cache /usr/share/apps/katepart/syntax/povray.xml]
+author=
+extension=*.inc;*.pov
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-povray-script;text/x-povray-include
+name=POV-Ray
+priority=2
+section=Other
+version=1.04
+
+[Cache /usr/share/apps/katepart/syntax/progress.xml]
+author=Rares Stanciulescu (rstanciu@operamail.com)
+extension=*.p;*.w;*.i;*.cls
+hidden=false
+lastModified=1148321648
+license=GPL
+mimetype=
+name=progress
+priority=
+section=Database
+version=1.09
+
+[Cache /usr/share/apps/katepart/syntax/prolog.xml]
+author=
+extension=*.prolog
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-prolog
+name=Prolog
+priority=
+section=Sources
+version=1.04
+
+[Cache /usr/share/apps/katepart/syntax/purebasic.xml]
+author=Sven Langenkamp (ace@kylixforum.de)
+extension=*.pb
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=text/x-purebasic
+name=PureBasic
+priority=
+section=Sources
+version=3.91
+
+[Cache /usr/share/apps/katepart/syntax/python-kig.xml]
+author=
+extension=*.py;*.pyw
+hidden=false
+lastModified=1126340238
+license=
+mimetype=application/x-python;text/x-python
+name=Python-Kig
+priority=
+section=Scripts
+version=1.2.1
+
+[Cache /usr/share/apps/katepart/syntax/python.xml]
+author=Per Wigren
+extension=*.py;*.pyw;SConstruct;SConscript
+hidden=false
+lastModified=1126340795
+license=
+mimetype=application/x-python;text/x-python
+name=Python
+priority=
+section=Scripts
+version=1.24
+
+[Cache /usr/share/apps/katepart/syntax/r.xml]
+author=
+extension=*.R;*.r;*.S;*.s;*.q
+hidden=false
+lastModified=1159724006
+license=GPL
+mimetype=
+name=R Script
+priority=
+section=Scripts
+version=2.00
+
+[Cache /usr/share/apps/katepart/syntax/rexx.xml]
+author=
+extension=*.rex
+hidden=false
+lastModified=1126340795
+license=
+mimetype=
+name=REXX
+priority=
+section=Scripts
+version=1.01
+
+[Cache /usr/share/apps/katepart/syntax/rhtml.xml]
+author=Richard Dale rdale@foton.es
+extension=*.rhtml
+hidden=false
+lastModified=1142590745
+license=LGPL
+mimetype=
+name=Ruby/Rails/RHTML
+priority=
+section=Markup
+version=1.00
+
+[Cache /usr/share/apps/katepart/syntax/rib.xml]
+author=David Williams <david@david-williams.info>
+extension=*.rib
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=
+name=RenderMan RIB
+priority=
+section=Other
+version=1.00
+
+[Cache /usr/share/apps/katepart/syntax/rpmspec.xml]
+author=
+extension=*.spec
+hidden=false
+lastModified=1128956727
+license=
+mimetype=
+name=RPM Spec
+priority=
+section=Other
+version=1.1
+
+[Cache /usr/share/apps/katepart/syntax/rsiidl.xml]
+author=Markus Fraenz (fraenz@linmpi.mpg.de)
+extension=*.pro
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-rsiidl-src
+name=RSI IDL
+priority=
+section=Sources
+version=1.04
+
+[Cache /usr/share/apps/katepart/syntax/ruby.xml]
+author=Stefan Lang (langstefan@gmx.at), Sebastian Vuorinen (sebastian.vuorinen@helsinki.fi)
+extension=*.rb;*.rjs;*.rxml
+hidden=false
+lastModified=1148321648
+license=LGPL
+mimetype=application/x-ruby
+name=Ruby
+priority=
+section=Scripts
+version=1.17
+
+[Cache /usr/share/apps/katepart/syntax/sather.xml]
+author=
+extension=*.sa
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-sather-src
+name=Sather
+priority=
+section=Sources
+version=1.03
+
+[Cache /usr/share/apps/katepart/syntax/scheme.xml]
+author=Dominik Haumann (dhdev@gmx.de)
+extension=*.scm;*.ss;*.scheme;*.guile
+hidden=false
+lastModified=1148321648
+license=LGPL
+mimetype=text/x-scheme
+name=Scheme
+priority=
+section=Scripts
+version=1.12
+
+[Cache /usr/share/apps/katepart/syntax/sci.xml]
+author=
+extension=*.sci;*.sce
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-sci
+name=scilab
+priority=
+section=Scientific
+version=1.03
+
+[Cache /usr/share/apps/katepart/syntax/sgml.xml]
+author=
+extension=*.sgml
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/sgml
+name=SGML
+priority=
+section=Markup
+version=1.02
+
+[Cache /usr/share/apps/katepart/syntax/sieve.xml]
+author=Petter E. Stokke
+extension=*.siv
+hidden=false
+lastModified=1126340795
+license=
+mimetype=application/sieve
+name=Sieve
+priority=5
+section=Scripts
+version=1.05
+
+[Cache /usr/share/apps/katepart/syntax/sml.xml]
+author=Christoph Cullmann (cullmann@kde.org)
+extension=*.sml;*.ml
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=
+name=SML
+priority=
+section=Sources
+version=1.06
+
+[Cache /usr/share/apps/katepart/syntax/spice.xml]
+author=Steven Robson (s.a.robson@sms.ed.ac.uk) and Anders Lund
+extension=*.sp;*.hsp
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=text/spice
+name=Spice
+priority=
+section=Hardware
+version=1.01
+
+[Cache /usr/share/apps/katepart/syntax/sql-mysql.xml]
+author=Shane Wright (me@shanewright.co.uk)
+extension=*.sql;*.SQL
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-sql
+name=SQL (MySQL)
+priority=
+section=Database
+version=1.08
+
+[Cache /usr/share/apps/katepart/syntax/sql-postgresql.xml]
+author=Shane Wright (me@shanewright.co.uk)
+extension=*.sql;*.SQL
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-sql
+name=SQL (PostgreSQL)
+priority=
+section=Database
+version=1.08
+
+[Cache /usr/share/apps/katepart/syntax/sql.xml]
+author=Yury Lebedev (yurylebedev@mail.ru)
+extension=*.sql;*.SQL
+hidden=false
+lastModified=1131489530
+license=LGPL
+mimetype=text/x-sql
+name=SQL
+priority=
+section=Database
+version=1.12
+
+[Cache /usr/share/apps/katepart/syntax/stata.xml]
+author=Edwin Leuven (e.leuven@uva.nl)
+extension=*.ado;*.do
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=
+name=Stata
+priority=
+section=Sources
+version=1.01
+
+[Cache /usr/share/apps/katepart/syntax/tcl.xml]
+author=
+extension=*.tcl;*.tk
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-tcl
+name=Tcl/Tk
+priority=
+section=Scripts
+version=1.08
+
+[Cache /usr/share/apps/katepart/syntax/tibasic.xml]
+author=
+extension=
+hidden=false
+lastModified=1126340795
+license=
+mimetype=
+name=TI Basic
+priority=
+section=Scientific
+version=1.01
+
+[Cache /usr/share/apps/katepart/syntax/txt2tags.xml]
+author=
+extension=*.t2t
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/txt2tags
+name=txt2tags
+priority=
+section=Markup
+version=1.01
+
+[Cache /usr/share/apps/katepart/syntax/uscript.xml]
+author=
+extension=*.uc
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-uscript
+name=UnrealScript
+priority=
+section=Scripts
+version=0.91
+
+[Cache /usr/share/apps/katepart/syntax/velocity.xml]
+author=John Christopher (John@animalsinneed.net)
+extension=*.vm;
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-velocity-src;text/x-vm-src
+name=Velocity
+priority=
+section=Scripts
+version=1.04
+
+[Cache /usr/share/apps/katepart/syntax/verilog.xml]
+author=Yevgen Voronenko (ysv22@drexel.edu)
+extension=*.v;*.V;*.vl
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-verilog-src
+name=Verilog
+priority=
+section=Hardware
+version=1.07
+
+[Cache /usr/share/apps/katepart/syntax/vhdl.xml]
+author=
+extension=*.vhdl;*.vhd
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-vhdl
+name=VHDL
+priority=
+section=Hardware
+version=1.04
+
+[Cache /usr/share/apps/katepart/syntax/vrml.xml]
+author=Volker Krause (volker.krause@rwth-aachen.de)
+extension=*.wrl
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=model/vrml
+name=VRML
+priority=
+section=Markup
+version=1.02
+
+[Cache /usr/share/apps/katepart/syntax/winehq.xml]
+author=
+extension=*.reg
+hidden=false
+lastModified=1126340795
+license=
+mimetype=
+name=WINE Config
+priority=
+section=Configuration
+version=1.03
+
+[Cache /usr/share/apps/katepart/syntax/xharbour.xml]
+author=Giancarlo Niccolai (giancarlo@niccolai.ws)
+extension=*.prg;*.PRG;*.ch
+hidden=false
+lastModified=1126340795
+license=GPL
+mimetype=text/x-xharbour-src
+name=xHarbour
+priority=5
+section=Sources
+version=1.04
+
+[Cache /usr/share/apps/katepart/syntax/xml.xml]
+author=Wilbert Berendsen (wilbert@kde.nl)
+extension=*.docbook;*.xml;*.rc;*.daml;*.rdf
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=text/xml;text/book;text/daml;text/rdf
+name=XML
+priority=
+section=Markup
+version=1.96
+
+[Cache /usr/share/apps/katepart/syntax/xmldebug.xml]
+author=
+extension=
+hidden=false
+lastModified=1126340795
+license=
+mimetype=
+name=XML (Debug)
+priority=
+section=Markup
+version=1.02
+
+[Cache /usr/share/apps/katepart/syntax/xslt.xml]
+author=Peter Lammich (views@gmx.de)
+extension=*.xsl;*.xslt
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=
+name=xslt
+priority=
+section=Markup
+version=1.03
+
+[Cache /usr/share/apps/katepart/syntax/yacas.xml]
+author=
+extension=*.ys
+hidden=false
+lastModified=1126340795
+license=
+mimetype=text/x-yacassrc
+name=yacas
+priority=
+section=Sources
+version=1.02
+
+[Cache /usr/share/apps/katepart/syntax/yacc.xml]
+author=Jan Villat (jan.villat@net2000.ch)
+extension=*.y
+hidden=false
+lastModified=1126340795
+license=LGPL
+mimetype=
+name=Yacc/Bison
+priority=
+section=Sources
+version=1.03
+
+[Default Item Styles - Schema kdevelop - Normal]
+Alert=ff000000,ffffcccc,1,,,,ffffcccc,-,---
+Base-N Integer=ff008080,ff00ffff,,,,,-,-,---
+Character=ffff00ff,ffff00ff,,,,,-,-,---
+Comment=ff808080,ffa0a0a4,,1,,,-,-,---
+Data Type=ff800000,ffffffff,,,,,-,-,---
+Decimal/Value=ff0000ff,ff00ffff,,,,,-,-,---
+Error=ffff0000,ffff0000,,,,1,-,-,---
+Floating Point=ff800080,ff00ffff,,,,,-,-,---
+Function=ff000080,ffffffff,,,,,-,-,---
+Keyword=ff000000,ffffffff,1,,,,-,-,---
+Normal=ff000000,ffffffff,,,,,-,-,---
+Others=ff008000,ff00ff00,,,,,-,-,---
+Region Marker=ffffffff,ffa0a0a4,,,,,ffa0a0a4,-,---
+String=ffdd0000,ffff0000,,,,,-,-,---
+
+[General]
+CachedVersion=14
+
+[Highlighting C - Schema kdevelop - Normal]
+Alerts:Alert=10,,,,,,,,,---
+Alerts:Normal Text=0,,,,,,,,,---
+C:Alert=10,,,,,,,,,---
+C:Char=6,,,,,,,,,---
+C:Comment=8,,,,,,,,,---
+C:Data Type=2,,,,,,,,,---
+C:Decimal=3,,,,,,,,,---
+C:Float=5,,,,,,,,,---
+C:Hex=4,,,,,,,,,---
+C:Keyword=1,,,,,,,,,---
+C:Normal Text=0,,,,,,,,,---
+C:Octal=4,,,,,,,,,---
+C:Prep. Lib=9,,,,,,,,,---
+C:Preprocessor=9,,,,,,,,,---
+C:Region Marker=12,,,,,,,,,---
+C:String=7,,,,,,,,,---
+C:String Char=6,,,,,,,,,---
+C:Symbol=0,,,,,,,,,---
+Doxygen:Comment=8,ff0000ff,ffffffff,,1,,,,,---
+Doxygen:Description=7,ffff0000,,,,,,,,---
+Doxygen:HTML Comment=8,,,,,,,,,---
+Doxygen:HTML Tag=1,ff000000,ffffffff,1,0,,,,,---
+Doxygen:Identifier=9,,,,,,,,,---
+Doxygen:Normal Text=0,,,,,,,,,---
+Doxygen:Tags=1,ffca60ca,ffffffff,1,0,,,,,---
+Doxygen:Types=2,,,,,,,,,---
+Doxygen:Word=1,ff0095ff,ffffffff,1,0,,,,,---

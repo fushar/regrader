@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=Emacs 21 (X11)
+GenericName=Emacs
+Comment=GNU Emacs 21 Text Editor
+Exec=/usr/bin/emacs21 -r
+TryExec=emacs21
+Terminal=false
+Type=Application
+Icon=/usr/share/emacs/21.4/etc/gnu-32x32.xpm
+Categories=Application;Utility;TextEditor;
+MimeType=text/plain

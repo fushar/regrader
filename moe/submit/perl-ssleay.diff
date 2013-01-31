@@ -1,0 +1,32 @@
+This is a fix for a longstanding bug in Net::SSLeay, which caused writes
+to broken connections to loop forever if SIGPIPE was blocked.
+
+					Martin Mares, June 2007
+
+
+--- /usr/lib/perl5/Net/SSLeay.pm.mj	2007-06-29 22:12:18.000000000 +0200
++++ /usr/lib/perl5/Net/SSLeay.pm	2007-06-29 22:17:37.000000000 +0200
+@@ -1659,9 +1659,10 @@
+ 	}
+ 	$vm = $trace>2 && $linux_debug ?
+ 	    (split ' ', `cat /proc/$$/stat`)[22] : 'vm_unknown';
+ 	warn "  written so far $wrote:$written bytes (VM=$vm)\n" if $trace>2;
+ 	
+ 	$errs .= print_errs('SSL_write');
++	$errs .= "SSL_write $$: 1 - $!\n" if $wrote < 0 && !$errs;
+ 	return (wantarray ? (undef, $errs) : undef) if $errs;
+     }
+     return wantarray ? ($written, $errs) : $written;
+--- /usr/lib/perl5/auto/Net/SSLeay/ssl_write_all.al.mj	2007-06-29 22:17:19.000000000 +0200
++++ /usr/lib/perl5/auto/Net/SSLeay/ssl_write_all.al	2007-06-29 22:17:35.000000000 +0200
+@@ -26,9 +26,10 @@
+ 	}
+ 	$vm = $trace>2 && $linux_debug ?
+ 	    (split ' ', `cat /proc/$$/stat`)[22] : 'vm_unknown';
+	warn "  written so far $wrote:$written bytes (VM=$vm)\n" if $trace>2;
+ 	
+ 	$errs .= print_errs('SSL_write');
++	$errs .= "SSL_write $$: 1 - $!\n" if $wrote < 0 && !$errs;
+ 	return (wantarray ? (undef, $errs) : undef) if $errs;
+     }
+     return wantarray ? ($written, $errs) : $written;

@@ -1,0 +1,76 @@
+Base64 and Base224 encodings
+============================
+
+These modules can be used to encode and decode data to and from
+base64 (described in RFC 3548) and base224 (not described in any
+standard, uses all non-control characters, briefly described in
+a comment at the beginning of `ucw/base224.c`).
+
+- <<base64,Base64>>
+- <<base224,Base224>>
+- <<usage,Usage>>
+- <<basecode,The basecode utility>>
+
+[[base64]]
+ucw/base64.h
+------------
+!!ucw/base64.h
+
+[[base224]]
+ucw/base224.h
+-------------
+!!ucw/base224.h
+
+[[usage]]
+Usage
+-----
+
+- You may want to encode small block of known size. Just allocate the
+  output buffer and feed the data to the function.
+
+  byte output[BASE64_ENC_LENGTH(input_size)];
+  uns output_size = base64_encode(output, input, input_size);
+
+- Decoding can be done in similar way. It is enough to have output
+  buffer of the same size as the input one.
+
+- Encoding of a stream of unknown or large size can be split into
+  chunks. The input chunk size must be multiple of `BASE64_IN_CHUNK`.
+  The output will be corresponding multiple of `BASE64_OUT_CHUNK`.
+
+  uns input_size;
+  byte input[BASE64_IN_CHUNK * 10];
+  while(input_size = read_chunk(input, BASE64_IN_CHUNK * 10)) {
+    byte output[BASE64_OUT_CHUNK * 10];
+    uns output_size = base64_encode(output, input, input_size);
+    use_chunk(output, output_size);
+  }
+
+- Decoding of a stream is done in the same way, just swap
+  `BASE64_IN_CHUNK` and `BASE64_OUT_CHUNK` (you feed the decode
+  function with `BASE64_OUT_CHUNK` multiple and get `BASE64_IN_CHUNK`
+  multiple).
+
+The base224 has similar interface, therefore you can use it the same
+way as base64.
+
+[[basecode]]
+The basecode utility
+--------------------
+You can use the encoding/decoding routines from command line, trough
+`basecode` command. You have to specify the operation by a command
+line argument and give it the data on standard input. The arguments
+are:
+
+- `-e`: Encode to base64.
+- `-d`: Decode from base64.
+- `-E`: Encode to base224.
+- `-D`: Decode from base224.
+
+Furthermore, you can provide `--prefix` argument. If you do, the
+output (when encoding) will be split to lines by default number of
+chunks and the value of prefix will be prepended to each of them.
+When decoding, it removes the prefix from the beginning of line.
+
+You can override the default number of blocks for line-splitting by
+`--blocks` argument.

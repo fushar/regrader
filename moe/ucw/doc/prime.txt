@@ -1,0 +1,7 @@
+Prime numbers
+=============
+
+The library defines some simple functions to generate prime numbers.
+They are useful for example in hash tables.
+
+!!ucw/prime.h

@@ -1,0 +1,191 @@
+Configuration files
+===================
+
+This document describes run-time configuration of libucw-based
+programs using config files. For compile-time configuration,
+see <<configure:>>.
+
+[[terminology]]
+Terminology
+-----------
+
+Configuration items of all modules are organized into sections.
+The sections form a tree structure with top-level sections corresponding
+to program modules.
+
+Each configuration item belongs to one of the following classes:
+
+  1. single value or a fixed-length array of values
+  2. variable-length array of values
+  3. subsection with several nested attributes
+  4. list of nodes, each being an instance of a subsection
+  5. bitmap of small integers (0..31) or fixed list of strings
+  6. exceptions (items with irregular syntax; however, they always
+     appear as a sequence of strings, only the semantics differ)
+
+Both fixed- and variable-length arrays consist of items of the same
+type.  The basic types supported by the configuration mechanism are:
+
+  1. 32-bit integer
+  2. 64-bit integer
+  3. floating point number
+  4. IP address
+  5. string
+  6. choice (one of a fixed list of strings)
+
+Program modules can define their own special types (such as network
+masks or attribute names) and decide how are they parsed.
+
+[[format]]
+Format of configuration files
+-----------------------------
+
+Configuration files are text files that usually set one attribute per
+line, though it is possible to split one assignment into multiple lines
+and/or assign several attributes in one line.  The basic format of an
+assignment command is
+
+  name value1 value2 ... valueN
+
+or
+
+  name=value1 value2 ... valueN
+
+The end of line means also end of a command unless it is preceded by a
+backslash.  On the other hand, a semicolon terminates the command and
+another command can start after the semicolon.  A hash starts a comment
+that lasts until the end of the line.  A value can be enclosed in
+apostrophes or quotation marks and then it can contain spaces and/or
+control characters, otherwise the first space or control character
+denotes the end of the value.  Values enclosed in quotation marks are
+interpreted as C-strings.  For example, the following are valid
+assignment commands:
+
+  Database "main db\x2b"; Directory='index/'; Weights 100 20 30 \
+    40 50 80				# a comment that is ignored
+
+Numerical values can be succeeded by a unit.  The following units are
+supported:
+
+[[units]]
+
+	d=86400		k=1000		K=1024
+	h=3600		m=1000000	M=1048576
+	%=0.01		g=1000000000	G=1073741824
+
+Attributes of a section or a list node can be set in two ways.  First,
+you can write the name of the section or list, open a bracket, and then
+set the attributes inside the section.  For example,
+
+  Section1 {
+    Attr1	value1
+    Attr2	value2
+    ListNode {		#creates a list and adds its first node
+      Attr3	value3
+      Attr4	value4
+    }
+    ListNode { Attr3=value5; Attr4=value6 }
+			#appends a new node; this is still the same syntax
+  }
+
+The second possibility is using a shorter syntax when all attributes of a
+section are set on one line in a fixed order.  The above example could
+be as well written as
+
+  Section1 {
+    Attr1	value1
+    Attr2	value2
+    ListNode	value3 value4
+    ListNode	value5 value6
+  }
+
+Of course, you cannot use the latter syntax when the attributes allow
+variable numbers of parameters.  The parser of the configuration files
+checks this possibility.
+
+If you want to set a single attribute in some section, you can also
+refer to the attribute as Section.Attribute.
+
+Lists support several operations besides adding a new node.  You just
+have to write a colon immediately after the attribute name, followed by
+the name of the operation.  The following operations are supported:
+
+[[operations]]
+
+  List:clear				# removes all nodes
+  List:append { attr1=value1; ... }	# adds a new node at the end
+  List:prepend { attr1=value1; ... }	# adds a new node at the beginning
+  List:remove { attr1=search1 }		# find a node and delete it
+  List:edit { attr1=search1 } { attr1=value1; ... }
+					# find a node and edit it
+  List:after { attr1=search1 } { ... }	# insert a node after a found node
+  List:before { attr1=search1 } { ... }	# insert a node before a found node
+  List:copy { attr1=search1 } { ... }	# duplicate a node and edit the copy
+  List:reset { attr=value1; ... }	# equivalent to :clear and :append
+
+You can specify several attributes in the search condition and the nodes
+are tested for equality in all these attributes.  In the editing
+commands, you can either open a second block with overridden attributes,
+or specify the new values using the shorter one-line syntax.
+
+The commands :clear, :append, and :prepend are also supported by var-length
+arrays.  The command :clear can also be used on string values.  The following
+operations can be used on bitmaps: :set (which is equal to :append and :prepend),
+:remove, :clear, and :all (set all bits).
+
+[[include]]
+Including other files
+---------------------
+
+To include another file, use the command
+
+  include another/file
+
+(Beware that this command has to be the last one on the line.)
+
+[[command_line]]
+Command-line parameters
+-----------------------
+
+The default configuration file (cf_def_file possibly overriden
+by environment variable cf_env_file) is read before the program is started.
+You can use a -C option to override the name of the configuration file.
+If you use this parameter several times, then all those files are loaded
+consecutively. A parameter -S can be used to execute a configuration
+command directly (after loading the default or specified configuration
+file).  Example:
+
+  bin/program -Ccf/my-config -S'module.trace=2;module.logfile:clear' ...
+
+If the program is compiled with debugging information, then one more
+parameter `--dumpconfig` is supported.  It prints all parsed configuration
+items and exits.
+
+All these switches must be used before any other parameters of the
+program.
+
+[[preprocess]]
+Preprocessing
+-------------
+
+During compilation, all configuration files are pre-processed by a simple
+C-like preprocessor, which supports `#ifdef`, `#ifndef`, `#if`,
+`#elsif`, `#else` and `#endif` directives referring to compile-time
+configuration variables (the ones detected by `configure` script, you
+can see list of them in `obj/autoconf.h`). `#if` and `#elsif` can contain
+any Perl expression where each `CONFIG_xyz` configuration variable is
+substituted to 0 or 1 depending on its value.
+
+The preprocessor also substitutes `@VARIABLE@` by the value of the variable,
+which must be defined.
+
+[[caveats]]
+Caveats
+-------
+
+Trying to access an unknown attribute causes an error, but unrecognized
+top-level sections are ignored.  The reason is that a common config file
+is used for a lot of programs which recognize only their own sections.
+
+Names of sections, attributes and choices are case-insensitive. Units are
+case-sensitive.

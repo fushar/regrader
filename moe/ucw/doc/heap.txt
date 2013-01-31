@@ -1,0 +1,40 @@
+Binary heaps
+============
+
+* <<intro,Introduction>>
+* <<macros,Macros>>
+* <<example,Example>>
+
+!!ucw/heap.h
+
+[[example]]
+Example
+-------
+
+  static uns n;
+  static int heap[4];
+
+  // Create an empty heap
+  n = 0;
+  #define MY_CMP(x, y) ((x) < (y))
+
+  // Insert 20, 10, 30
+  heap[n + 1] = 20;
+  HEAP_INSERT(int, heap, n, MY_CMP, HEAP_SWAP);
+  heap[n + 1] = 10;
+  HEAP_INSERT(int, heap, n, MY_CMP, HEAP_SWAP);
+  heap[n + 1] = 30;
+  HEAP_INSERT(int, heap, n, MY_CMP, HEAP_SWAP);
+
+  // Remove the minimum (10)
+  HEAP_DELMIN(int, heap, n, MY_CMP, HEAP_SWAP);
+
+  // Print the new minimum (20)
+  printf("%d", heap[1]);
+
+  // Increase the minimum by 20 to 40
+  heap[1] += 20;
+  HEAP_INCREASE(int, heap, n, MY_CMP, HEAP_SWAP, 1);
+
+  // Print the new minimum (30)
+  printf("%d", heap[1]);

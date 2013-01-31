@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html40/strict.dtd">
+
+<html><head>
+<title>MO Eval - Evaluation</title>
+<link rev=made href="mailto:mj@ucw.cz">
+<link rel=stylesheet title=Default href="moe.css" type="text/css" media=all>
+</head><body>
+
+<h1>Evaluating solutions</h1>
+
+<p>When the competition is over, copy all solutions submitted by the contestants
+to <code>solutions/</code><i>contestant</i><code>/</code><i>task</i>. If you use
+our submitting system, you can call <code>bin/mo-grab</code> to do this.
+
+<p>Then you can call <code>bin/ev</code> <i>contestant</i> <i>task</i> to evaluate
+a single solution. (In some cases, you can also add the name of the solution as the
+third parameter, which could be useful for comparing different author's solutions.)
+
+<p>You can also use <code>bin/mo-ev-all</code> <i>task names</i> to evaluate
+solutions of the specified tasks by all contestants.
+
+<p>The open data problems are evaluated in a different way, you need to run
+<code>bin/ev-open</code> or <code>bin/mo-ev-open-all</code> instead.
+
+<h2>Results</h2>
+
+<p>For each solution evaluated, <code>bin/ev</code> creates the directory <code>testing/</code><i>contestant</i><code>/</code><i>task</i>
+containing:
+
+<ul>
+<li>a copy of the source code of the solution
+<li>the compiled executable of the solution
+<li><code>log</code> &ndash; the log file of compilation
+<li><i>test</i><code>.in</code> &ndash; input for the particular test
+<li><i>test</i><code>.out</code> &ndash; contestant's output for the particular test
+<li><i>test</i><code>.ok</code> &ndash; correct output for the particular test (if given in the problem definition)
+<li><i>test</i><code>.log</code> &ndash; detailed log of the particular test, including output of the judge
+<li><code>points</code> &ndash; summary of points assigned for the tests. Each line corresponds to a single
+test and it contains three whitespace-separated columns: the name of the test, number of points awarded
+and a log message.
+</ul>
+
+<h2>Sandbox</h2>
+
+<p>The solutions under evaluation run in a simple sandbox which restricts time,
+memory and system calls available to the program. You can set the sandbox options
+in the top-level config file, see <code>bin/box --help</code> for a list of the
+available ones.
+
+<h2>Score table</h2>
+
+<p>The <code>bin/mo-score</code> utility can be used to generate a score table
+from all the points files in HTML. The quality of the output is not perfect,
+but it can serve as a basis for further formatting.
+
+</body></html>

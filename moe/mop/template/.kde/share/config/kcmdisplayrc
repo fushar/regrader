@@ -1,0 +1,8 @@
+[$Version]
+update_info=kcmdisplayrc.upd:kde3
+
+[DisplayEnergy]
+displayEnergySaving=false
+displayPowerOff=60
+displayStandby=0
+displaySuspend=30

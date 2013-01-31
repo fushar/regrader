@@ -1,0 +1,63 @@
+Fastbufs
+========
+
+A *fastbuf* is a stream (or file) abstraction optimized for both speed
+and flexibility.
+
+Fastbufs can represent many different kinds of objects: regular files, network
+sockets, file descriptors in general, or various memory buffers. These objects
+are handled by different fastbuf *back-ends.*
+
+Once you have a fastbuf, you can access it by fuctions similar to those of
+`stdio.h`, or you can use a variety of fastbuf *front-ends* providing various
+formatted operations.
+
+Please keep in mind that fastbufs do not allow arbitrary mixing of reads and
+writes on the same stream. If you need to mix them, you have to call @bflush()
+inbetween and remember that the file position reported by @btell() points after
+the flushed buffer, which is not necessarily the same as after the data you've
+really read.
+
+.Back-ends:
+- <<fbparam,Files (parametrized)>>
+- <<fbfile,Regular files>>
+- <<fbtemp,Temporary files>>
+- <<fblim,File fragments>>
+- <<fbmem,In-memory streams>>
+- <<fbbuf,Buffers>>
+- <<fbgrow,Growing buffers>>
+- <<fbpool,Memory pools>>
+- <<fbatomic,Atomic files>>
+
+.Front-ends:
+- <<ffbasic,Basic functions>>
+
+.Other reading:
+- <<internal,Internal structure>>
+- <<bconfig,Configuring streams>>
+
+ucw/fastbuf.h
+-------------
+
+!!ucw/fastbuf.h
+
+ucw/fb-socket.h
+---------------
+
+Fastbufs on network sockets with timeouts.
+
+!!ucw/fb-socket.h
+
+ucw/ff-unicode.h
+----------------
+
+Reading and writing of unicode characters.
+
+Invalid codes are replaced by `UNI_REPLACEMENT` when reading.
+
+!!ucw/ff-unicode.h
+
+ucw/ff-binary.h
+---------------
+
+!!ucw/ff-binary.h

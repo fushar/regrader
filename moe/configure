@@ -1,0 +1,49 @@
+#!/usr/bin/perl
+# Configure script for Moe
+# (c) 2008--2009 Martin Mares <mj@ucw.cz>
+
+use warnings;
+use strict;
+
+our $srcdir;
+BEGIN {
+	my $pkgfile = "judge/token.c";
+	if (!defined ($srcdir = $ENV{"SRCDIR"})) {
+		if (-f $pkgfile) {
+			$srcdir=".";
+		} elsif ($0 =~ m@^(.*)/configure$@ && -f "$1/$pkgfile") {
+			$srcdir=$1;
+		} else {
+			die "Don't know how to find myself. Please set SRCDIR manually.";
+		}
+	}
+}
+
+use lib "$srcdir/ucw/perl";
+use UCW::Configure;
+use UCW::Configure::Pkg;
+
+Init($srcdir, "default.cfg");
+Include "ucw/default.cfg";
+Log "### Configuring Moe ###\n\n";
+Include Get("CONFIG");
+require UCW::Configure::Paths;
+require UCW::Configure::C;
+require UCW::Configure::LibUCW;
+require UCW::Configure::Doc;
+
+if (Get("CONFIG_SUBMIT") || Get("CONFIG_MOP")) {
+	# Build libucw only if it is needed
+	Set("CONFIG_UCW_LIBS" => 1);
+}
+
+if (Get("CONFIG_SUBMIT")) {
+	# Submit server needs crypto libraries
+	if (!PkgConfig("gnutls") && !TrivConfig("libgnutls", script => "libgnutls-config") ||
+	    !TrivConfig("libgcrypt", script => "libgcrypt-config")) {
+		Fail "The libgnutls and libgcrypt libraries are required to build the submit server.";
+	}
+}
+
+Finish();
+Log "\nConfigured, run `make' to build everything.\n";

@@ -1,0 +1,35 @@
+Include cf/libucw
+
+Logging {
+
+Stream {
+	Name		logfile
+	FileName	log/test
+	StdErrFollows	1
+	Limit { Rate 100 }
+}
+
+Stream {
+	Name		logfile2
+	FileName	log/test2
+	Microseconds	1
+	Levels:reset	info warn error
+	Types:reset	default foo
+	ErrorsFatal	1
+	ShowTypes	1
+}
+
+Stream {
+	Name		syslog
+	SyslogFacility	user
+	SyslogPID	1
+}
+
+Stream {
+	Name		combined
+	Substream	logfile
+	Substream	logfile2
+	Substream	syslog
+}
+
+}

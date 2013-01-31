@@ -1,0 +1,139 @@
+#!/usr/bin/perl
+# A simple unit testing script
+# (c) 2004--2007 Martin Mares <mj@ucw.cz>
+# (c) 2007 Pavel Charvat <pchar@ucw.cz>
+
+# Tests in the test file have a syntax similar to mail headers,
+# individual test case are separated by blank lines and they can contain
+# the following fields:
+#
+#	Name:	name of the case (default: sequence number since start of file)
+#	Run:	command to run (default: command from the previous test case)
+#		This can be an arbitrary shell pipeline, sequences $0 to $9 are
+#		replaced by file names of In<N> or Out<N> files (see below).
+#	In:	lines to pass to the program as standard input
+#	Out:	lines to expect at the program's standard output
+#	In<N>:	lines to pass to the program as input file <N>
+#	Out<N>:	lines to expect from the program in output file <N>
+#		Both In<N> and Out<N> can be specified simultaneously if we
+#		are testing a program which modifies some of its input files.
+#	Exit:	expected exit code of the program (default: 0)
+
+use Getopt::Long;
+
+my $verbose = 0;
+my $rundir = ".";
+GetOptions("verbose!" => \$verbose,
+	   "rundir=s" => \$rundir)
+	or die "Usage: tester [--verbose] [--rundir=<dir>] <tests>\n";
+
+my @tests = ();
+my $tt;
+my $append_to;
+
+while (<>) {
+	/^#/ && next;
+	if (/^\s*$/) {
+		$tt = undef;
+		$append_to = undef;
+	} elsif (defined($append_to) && /^\s+(.*)$/) {
+		$$append_to .= "\n$1";
+	} elsif (my ($n,$v) = /^(\w+):\s+(.*)$/) {
+		if (!$tt) {
+			$tt = {};
+			push @tests, $tt;
+		}
+		($tt->{$n}) && die "$n already defined";
+		$tt->{$n} = $v;
+		$append_to = \($tt->{$n});
+	} else {
+		die "Test script syntax error";
+	}
+}
+
+if (! -d "$rundir/tmp") {
+	mkdir "$rundir/tmp" or die "Unable to create $rundir/tmp: $!";
+}
+
+my $i = 0;
+my $errors = 0;
+my $prev_run = undef;
+TEST: foreach $tt (@tests) {
+	$i++;
+	my $name = $tt->{'Name'} || $i;
+	print "Test $name: ";
+	$run = ($tt->{'Run'} || $prev_run) or die "Don't know what to run";
+	$prev_run = $run;
+
+	my @out_files = ();
+	my @out_checks = ();
+	my $redirs = "";
+
+	if (defined $tt->{'In'}) {
+		my $ifi = "tmp/test$i.in";
+		open X, ">$rundir/$ifi" or die "Unable to create $ifi";
+		print X $tt->{'In'}, "\n";
+		close X;
+		$redirs .= " <$ifi";
+	} else {
+		$redirs .= " </dev/null";
+	}
+	if (defined $tt->{'Out'}) {
+		my $ofi = "tmp/test$i.out";
+		unlink "$rundir/$ofi";
+		$redirs .= " >$ofi";
+		push @out_files, $ofi;
+		push @out_checks, $tt->{'Out'};
+	} else {
+		$redirs .= " >/dev/null";
+	}
+	foreach my $arg (0..9) {
+		my $f = "tmp/test$i.$arg";
+		if (defined $tt->{"Out$arg"}) {
+			unlink "$rundir/$f";
+			push @out_files, $f;
+			push @out_checks, $tt->{"Out$arg"};
+		}
+		if (defined $tt->{"In$arg"}) {
+			open X, ">$rundir/$f" or die "Unable to create $f";
+			print X $tt->{"In$arg"}, "\n";
+			close X;
+		}
+	}
+	$run =~ s/\$(\d)/tmp\/test$i.$1/g;
+	print "(running $run) " if $verbose;
+	system "cd $rundir && ( $run ) $redirs";
+	if ($? % 256) {
+		print "FAILED with status code $?\n";
+		$errors++;
+		next;
+	}
+	my $ec = $? / 256;
+	my $expect_ec = $tt->{'Exit'} || 0;
+	if ($ec != $expect_ec) {
+		print "FAILED: unexpected exit code $ec\n";
+		$errors++;
+		next;
+	}
+
+	for (my $i=0; $i<=$#out_files; $i++) {
+		my $ofi = $out_files[$i];
+		open X, "<$rundir/$ofi" or die "Unable to read $ofi";
+		my $out;
+		{
+			local $/ = undef;
+			$out = <X>;
+		}
+		close X;
+		if ($out ne $out_checks[$i] . "\n") {
+			print "FAILED (see $ofi)\n";
+			$errors++;
+			next TEST;
+		}
+	}
+
+	system "rm -f $rundir/tmp/test$i.*";
+	print "OK\n";
+}
+
+exit !!$errors;

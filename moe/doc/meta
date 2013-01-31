@@ -1,0 +1,66 @@
+Moe meta-files
+##############
+
+Grammar:
+~~~~~~~~
+
+<file> = <attribute>*
+
+<attribute> = (<single> | <nested> | <comment>)
+
+<single> = <indent> <name> ":" <value> "\n"
+
+<nested> = <open> <attribute>* <close>
+<open> = <indent> <name> "(" "\n"
+<close> = <indent> ")" "\n"
+
+<indent> = (<sp>|<tab>)*
+<name> = (A-Z | a-z | 0-9 | "-" | "_")+
+<value> = (<any-printable-UTF8-char> | 0x09)*
+
+<comment> = ("\n" | <indent> "#" <value> "\n")
+
+-- there can be multiple attributes with the same name
+-- spaces can be present only where explicitly allowed by the grammer
+
+Input to the queue manager
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+task:		name of the task
+subtask:	name of the sub-task (for open-data problems)
+source:		file name of the submitted source
+codex(...)	attributes specific to CodEx
+
+Added by the queue manager
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+queue-enter:	when did the submit enter the queue (unix timestamp; set by
+  		qman according to the original timestamp of the meta-file)
+queue-eval:	timestamp of the start of evaluation
+queue-done:	timestamp of the finish of evaluation
+
+Added by the evaluator
+~~~~~~~~~~~~~~~~~~~~~~
+test(		results of a single test
+  -- mandatory:
+  id:		the name of the test
+  points:	number of points assigned
+  status:	status code:
+			OK = passed successfully
+			CE = compile error
+			FO = forbidden operation (forbidden syscall atd.)
+			RE = runtime error (exitcode set)
+			SG = killed by signal (exitsig set)
+			TO = timeout
+			WA = wrong answer
+			PA = partial answer
+			PE = protocol error (in case of interactive tasks)
+			XX = internal error (e.g., error when calling judge)
+  message:	human-readable status message (not intended for machine parsing)
+  -- optional:
+  time:		run time in seconds (float)
+  time-wall:	run time on wall clock (float seconds)
+  mem:		used memory in bytes
+  exitcode:	program exit code
+  exitsig:	signal causing process death
+  killed:	set to 1 if the process has been killed (and therefore the
+		time and memory usage are incomplete)
+)

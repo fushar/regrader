@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html40/strict.dtd">
+
+<html><head>
+<title>MO Eval - Installation</title>
+<link rev=made href="mailto:mj@ucw.cz">
+<link rel=stylesheet title=Default href="moe.css" type="text/css" media=all>
+</head><body>
+
+<h1>The Installation of Moe</h1>
+
+<p>Moe can be installed in two possible ways:
+
+<h2>Minimal Installation</h2>
+
+<p>Just invoke <code>make</code> and edit the top-level config file to suit
+your needs, leaving <code>TEST_USER</code> commented out.
+
+<p>In this setup, everything lives in the source tree you have started with
+and you don't need any special privileges for neither installation or running
+of the evaluator.
+
+<p><em>Beware: The evaluated programs are <b>NOT</b> fully separated
+from the evaluation environment and they could interfere with it. Use it only for
+playing with the package, not for any real competition.</em>
+
+<h2>Normal Installation</h2>
+
+<p>The recommended way is to let the evaluator use two user accounts. One (let's
+call the user <code>moe</code>) runs the evaluator and keeps all secret
+files like the test data, another one (<code>mo-test</code>) runs the tested
+programs. There can be multiple test users if you want to run several evaluators
+in parallel. However, in practice the evaluation is so fast that this is seldom
+needed.
+
+<p>How to set up this installation:
+
+<ul>
+<li>Run <code>make</code> to compile all programs.
+<li>Edit <code>config</code> to suit your needs, in particular set <code>MO_ROOT</code>,
+<code>EVAL_USER</code>, <code>EVAL_GROUP</code>, <code>TEST_USER</code> and <code>TEST_USERS</code>.
+<li>Create <code>$MO_ROOT</code> (here we will assume that it's set to <code>/aux/mo</code>
+<li>Create the evaluation users:
+<pre>
+	moe:x:65000:65000:MO Evaluator:/aux/mo/eval/moe:/bin/bash
+	mo-test1:x:65001:65000:MO Tester 1:/aux/mo/eval/mo-test1:/bin/bash
+	mo-test2:x:65002:65000:MO Tester 2:/aux/mo/eval/mo-test2:/bin/bash
+</pre>
+<li>And the evaluation group:
+<pre>
+	moe:x:65000:
+</pre>
+<li>Run <code>bin/mo-install</code> as root to create the directory hierarchy under <code>$MO_ROOT</code>
+install all parts of the evaluator there and set the correct access rights.
+<li>Log in as <code>moe</code> and do everything else from there.
+<li>Later, you can reinstall parts of the hierarchy, without affecting the rest, by running:
+   <ul>
+   <li><code>mo-create-public</code> to update the public data available to contestants
+	according to the contents of the <code>public</code> directory
+   <li><code>mo-create-testusers</code> to update the home directory of the <code>mo-test</code> users.
+   </ul>
+
+</ul>
+
+<h2>Contestants' homes</h2>
+
+<p>Moe can either take care of the home directories of contestants or use
+an existing infrastructure. In the former case, you need to do the following:
+
+<ul>
+<li>Set <code>CT_UID_MIN</code> and <code>CT_UID_MAX</code> in the top-level config file.
+(The evaluator users described above should be outside this range!).
+<li>Create the contestant users inside the UID range you defined; choose names as you wish:
+<pre>
+	mo00:x:65100:65100:MO Contestant 00:/aux/mo/users/mo00/mo00:/bin/bash
+	...
+	mo99:x:65199:65199:MO Contestant 99:/aux/mo/users/mo99/mo99:/bin/bash
+</pre>
+<li>Create a group for each of these users (preferably with the same ID's):
+<pre>
+	mo00:x:65100:
+	...
+	mo99:x:65199:
+</pre>
+<li>(You can use the <code>bin/mo-create-logins</code> script to automate this
+process, including printing of leaflets with passwords, but you will probably need
+to customize the script.)
+<li>Run <code>bin/mo-create-contestants</code> as root to create the home directories.
+(The permissions are set up so that the contestants cannot see each other's directory
+even if they want. However you still need to make sure that there is no directory
+all of them can write to, like the system-wide <code>/tmp</code>. In our contest,
+the users work on their own machines and only the home directories are shared across
+the network, so this problem doesn't arise.)
+<li>If multiple contestants work on the same machine remotely, you need to set quotas
+and other limits for them. On some systems, you cannot use <code>limits.conf</code>
+for that, because <code>sshd</code> applies the limits as root, so you either
+limit root or the limits don't work at all. In such cases, modify <code>/etc/profile</code>:
+<pre>
+	if [ $UID -ge 65100 -a $UID -le 65199 ] ; then
+		ulimit -Sc 8192		# core file size
+		ulimit -SHu 32		# processes
+		ulimit -SHn 256		# max open files
+		ulimit -SHv 262144	# max virtual memory
+	fi
+</pre>
+</ul>
+
+</body></html>

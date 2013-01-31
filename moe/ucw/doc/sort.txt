@@ -1,0 +1,320 @@
+Sorting
+=======
+
+A very common need is sorting data. Therefore libUCW contains few
+routines to accomplish that task. They are much more universal than
+qsort(), since they allow you to sort structures indexed by a macro,
+sort data externally, if they do not fit into memory, merge data with
+the same keys and sort data of variable length.
+
+All routines described below are <<generic:,generic algorithms>>.
+
+- <<array-simple,Simple array sorting>>
+  * <<mandatory-simple,Mandatory macros>>
+  * <<optional-simple,Optional macros>>
+  * <<example-simple,Example>>
+- <<array,Huge array sorting>>
+  * <<mandatory-array,Mandatory macros>>
+  * <<optional-array,Optional macros>>
+- <<external,External sorting>>
+  * <<basic-external,Basic macros>>
+  * <<callback-external,Callbacks>>
+  * <<integer-external,Integer sorting>>
+  * <<hash-external,Hashing>>
+  * <<merge-external,Merging>>
+  * <<input-external,Input>>
+  * <<output-external,Output>>
+  * <<other-external,Other switches>>
+  * <<function-external,Generated function>>
+
+[[array-simple]]
+Simple array sorting
+--------------------
+
+If you want to sort some data in memory and you aren't too picky about
+setting how, you just use the routine defined in
+`sorter/array-simple.h`. It is an optimised hybrid
+quick-sort/insert-sort algorithm (quick-sort is used to split the
+input into small parts, each is then sorted by insert-sort). It is
+more than 2 times faster than stdlib's qsort(), mostly because of
+inlining.
+
+You need to define few macros and include the header. You get a
+sorting function in return. It will be called
+<<fun__GENERIC_LINK_|ASORT_PREFIX|sort|,`ASORT_PREFIX(sort)`>>.
+
+[[mandatory-simple]]
+Mandatory macros
+~~~~~~~~~~~~~~~~
+- `ASORT_PREFIX(name)` -- The identifier generating macro.
+- `ASORT_KEY_TYPE` -- Data type of a single array entry key.
+
+[[optional-simple]]
+Optional macros
+~~~~~~~~~~~~~~~
+- `ASORT_ELT(i)` -- Indexing macro. Returns the key of the
+  corresponding entry. If not provided, usual array with sequential
+  indexing is assumed.
+- `ASORT_LT(x,y)` -- Comparing macro. If not provided, compares by the
+  `<` operator.
+- `ASORT_SWAP(i,j)` -- Swap elements with indices `i` and `j`. If not
+  provided, it assumes `ASORT_ELT` is l-value and it just swaps keys.
+- `ASORT_TRESHOLD` -- Sequences of at most this amount of elements are
+  sorted by quick-sort, smaller are sorted by insert-sort. Defaults to
+  `8` (result of experimentation).
+- `ASORT_EXTRA_ARGS` -- Pass some extra arguments to the function.
+  They are visible from all the macros. Must start with a comma.
+
+!!ucw/sorter/array-simple.h ASORT_PREFIX
+
+[[example-simple]]
+Example
+~~~~~~~
+
+Let's sort an array of integers, in the usual way.
+
+  #define ASORT_PREFIX(X) intarr_##X
+  #define ASORT_TYPE int
+  #include <ucw/sorter/array-simple.h>
+
+This generates an intarr_sort(int *array, uns array_size) function that
+can be used the obvious way.
+
+A more complicated example could be sorting a structure, where items
+with odd indices are stored in one array, even in another. Each item
+could be a structure containing a string and an integer. We would like
+to sort them by the strings.
+
+  struct elem {
+    char *string;
+    int integer;
+  };
+
+  #include <string.h>	// Because of strcmp
+  #define ASORT_PREFIX(X) complicated_##X
+  #define ASORT_TYPE struct elem
+  #define ASORT_ELT(i) ((i % 2 ? even_array : odd_array)[i / 2])
+  #define ASORT_LT(x, y) (strcmp((x).string, (y).string) < 0)
+  #define ASORT_EXTRA_ARGS , struct elem *odd_array, struct elem *even_array
+  #include <ucw/sorter/sorter/array-simple.h>
+
+Now we got a complicated_sort(uns array_size, struct elem *odd_array,
+struct *even_array) function to perform our sorting.
+
+[[array]]
+Huge array sorting
+------------------
+
+This one is very similar to the simple array sorter, but it is
+optimised for huge arrays. It is used mostly by the
+<<external,external sorter>> machinery described below, but you can
+use it directly.
+
+It is in the `sorter/array.h` header.
+
+It differs in few details:
+- It supports only continuous arrays, no indexing macro can be
+  provided.
+- It is able to sort in parallel on SMP systems. It assumes all
+  callbacks you provide are thread-safe.
+- If you provide a monotone hash function (if `hash(x) < hash(y)`, then
+  `x < y`, but `x` and `y` may differ when `hash(x) == hash(y)`), it
+  will use it to gain some more speed by radix-sort.
+
+[[mandatory-array]]
+Mandatory macros
+~~~~~~~~~~~~~~~~
+
+- `ASORT_PREFIX(x)` -- The identifier generating macro.
+- `ASORT_KEY_TYPE` -- Type of elements in the array.
+
+[[optional-array]]
+Optional macros
+~~~~~~~~~~~~~~~
+
+- `ASORT_LT(x,y)` -- Comparing macro. Uses the `<` operator if not
+  provided.
+- `ASORT_HASH(x)` -- A monotone hash function (or macro). Should
+  return `uns`.
+- `ASORT_LONG_HASH(x)` -- Like `ASORT_HASH(x)`, but returns 64-bit
+  number instead of 32-bit.
+- `ASORT_TRESHOLD` -- How small should a chunk of data be to be sorted
+  by insert-sort? Defaults to `8` elements.
+- `ASORT_RADIX_BITS` -- How many bits of the hash function should be
+  used at once for radix-sort? The default is guessed from your
+  architecture.
+
+!!ucw/sorter/array.h ASORT_PREFIX
+
+[[external]]
+External sorting
+----------------
+
+If you have too much data to fit into memory, you need to employ
+external sorting. This external sorter operates on
+<<fastbuf:,fastbufs>> containing sequences of items. Each item
+consists of a key, optionally followed by data. Both the keys and data
+may be of variable length, but the keys must be represented by
+fixed-size type in memory. The length of data must be computable from
+the key. Data are just copied verbatim, unless you use the merging
+mode, in which data with the same keys get merged together.
+
+All callbacks must be thread safe.
+
+The sorter resides in the `sorter/sorter.h` header file.
+
+[[basic-external]]
+Basic macros
+~~~~~~~~~~~~
+
+You need to provide some basic macros. Some of them are optional.
+
+- `SORT_PREFIX(x)` -- Identifier generating macro. This one is
+  mandatory.
+- `SORT_KEY` -- Data structure holding the key of item in memory. The
+  representation on disk may be different. Either this one or
+  `SORT_KEY_REGULAR` must be provided.
+- `SORT_KEY_REGULAR` -- You may use this instead of `SORT_KEY`, when
+  the keys have the same representation both in memory and on disk.
+  Then the sorter uses <<fastbuf:bread()>> and <<fastbuf:bwrite()>> to
+  load and store them. It also assumes the keys are not very long.
+- `SORT_KEY_SIZE(key)` -- Returns the real size of the key. The sorter
+  can use this to save space and truncate the key to the given number
+  of bytes, when the keys have variable lengths. If the keys have
+  fixed sizes, there is no need for this macro.
+- `SORT_DATA_SIZE(key)` -- Returns the amount of data following this
+  key. If you do not provide this one, the sorter assumes there are
+  only keys and no data.
+
+[[callback-external]]
+Callbacks
+~~~~~~~~~
+
+Furthermore, you need to provide these callback functions (make sure
+they are thread safe):
+
+- `int SORT_PREFIX(compare)(SORT_KEY *a, SORT_KEY *b)` -- Comparing
+  function. It should act like strcmp(). Mandatory unless provided by
+  <<integer-external,integer sorting>>.
+- `int SORT_PREFIX(read_key)(struct fastbuf *f, SORT_KEY *k)` --
+  Should read a key from the provided <<fastbuf:,fastbuf>> @f and
+  store it into @k. Returns nonzero when ok and zero when an `EOF` was
+  met. Mandatory unless `SORT_KEY_REGULAR` is defined.
+- `void SORT_PREFIX(write_key)(struct fastbuf *f, SORT_KEY *k)` --
+  Should store key @k into @f. Mandatory unless `SORT_KEY_REGULAR` is
+  defined.
+
+[[integer-external]]
+Integer sorting
+~~~~~~~~~~~~~~~
+
+If you sort by an integer value (either computed or available from
+the key), you can use this to save yourself some functions. It also
+activates the <<hash-external,hashing>> automatically.
+
+- `SORT_INT(key)` -- This macro returns the integer to sort by. When
+  you provide it, the compare function is automatically provided for
+  you and the sorting function gets another parameter specifying the
+  range of the integers. The better the range fits, the faster the
+  sorting runs.
+- `SORT_INT64(key)` -- The same, but with 64-bit integers.
+
+[[hash-external]]
+Hashing
+~~~~~~~
+
+If you have a monotone hash function for your keys, you may speed the
+sorting up by providing it. Monotone hashing function must satisfy if
+`hash(x) < hash(y)`, then `x < y`. It should be approximately
+uniformly distributed.
+
+When you want to use it, define `SORT_HASH_BITS` and set it to the
+number of significant bits the hashing function provides. Then provide
+a callback function `uns SORT_PREFIX(hash)(SORT_KEY *key)`.
+
+[[merge-external]]
+Merging items with identical keys
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The sorter is able to merge items with the same keys (the compare
+function returns `0` for them). To use it, define `SORT_UNIFY` macro
+and provide these functions:
+
+- `void SORT_PREFIX(write_merged)(struct fastbuf \*dest, SORT_KEY
+  \*\*keys, void \*\*data, uns n, void *buf)`
+  -- This function takes @n records in memory and writes a single
+  record into the @dest <<fastbuf:,fastbuf>>. The @keys and @data are
+  just the records. The @buf parameter points to a workspace memory.
+  It is guaranteed to hold at last the sum of `SUM_UNIFY_WORKSPACE()`
+  macro over all the keys. The function is allowed to modify all its
+  parameters.
+- `void SORT_PREFIX(copy_merged)(SORT_KEY \*\*keys, struct fastbuf
+\*\*data, uns n, struct fastbuf \*dest)`
+  -- This one is similar to the above one, but the data are still in
+  the <<fastbuf:,fastbufs>> @data and no workspace is provided. This
+  is only used when `SORT_DATA_SIZE` or `SORT_UNIFY_WORKSPACE` is
+  provided.
+- `SORT_UNIFY_WORKSPACE(key)` -- Returns the amount of workspace
+  needed when merging this record. Defaults to `0`.
+
+[[input-external]]
+Specifying input
+~~~~~~~~~~~~~~~~
+
+To tell the sorter where is the input, you specify one of these
+macros:
+
+- `SORT_INPUT_FILE` -- The function takes a filename.
+- `SORT_INPUT_FB` -- The input is a seekable fastbuf stream.
+- `SORT_INPUT_PIPE` -- The input is a non-seekable fastbuf stream.
+- `SORT_INPUT_PRESORT` -- The input is a custom presorter. In this
+  case, you need to write a presorting function `int
+  SORT_PREFIX(presort)(struct fastbuf *dest, void *buf, size_t
+  bufsize)`. The function gets a buffer @buf of size @buf_size to
+  presort in and is supposed to write presorted bunch of data into the
+  @dest buffer. Should return `1` on success or `0` on `EOF` (all it
+  could was already written, no more data). In this case, you can
+  safely pass NULL as the input parameter. The function may be used to
+  generate the data on the fly. The function does not have to be
+  thread safe (it can access global variables).
+
+If you define `SORT_DELETE_INPUT` and it evaluates to true (nonzero),
+the input files are deleted as soon as possible.
+
+[[output-external]]
+Specifying output
+~~~~~~~~~~~~~~~~~
+
+You can configure the output in a similar way. Define one of macros:
+
+- `SORT_OUTPUT_FILE` -- The function takes a filename.
+- `SORT_OUTPUT_FB` -- The function should be provided with NULL and
+  the fastbuf with data is returned.
+- `SORT_THIS_FB` -- A fastbuf is provided to the function and it
+  writes into it. It can already contain some data.
+
+[[other-external]]
+Other switches
+~~~~~~~~~~~~~~
+
+You may define the `SORT_UNIQUE` macro if all keys are distinct. It is
+checked in debug mode.
+
+[[function-external]]
+The generated function
+~~~~~~~~~~~~~~~~~~~~~~
+
+A `SORT_PREFIX(sort)()` function is generated after you include the
+`sorter/sorter.h` header. It has up to three parameters:
+
+- Input. It is either a string (a filename) if you use
+  `SORT_INPUT_FILE` or a fastbuf (otherwise). It should be set to NULL
+  if you use the `SORT_INPUT_PRESORT` input.
+- Output. It is either a string (a filename) if you defined the
+  `SORT_OUTPUT_FILE` or a fastbuf. It must be NULL if you defined
+  `SORT_OUTPUT_FB`.
+- Integer range. The maximum value of integers that are used in the
+  <<integer-external,integer sorting>>. This parameter is  here only
+  if you defined `SORT_INT` or `SORT_INT64`.
+
+The function returns a fastbuf you can read the data from.

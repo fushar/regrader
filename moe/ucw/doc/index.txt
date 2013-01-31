@@ -1,0 +1,92 @@
+The UCW library
+===============
+
+The UCW library aims to provide a set general purpose tools for programming
+in the C language. It contains generic data structures (lists, trees, hash
+tables etc.), fast memory allocators optimized for various usage patterns,
+abstract I/O streams and optimized implementations of some common algorithms
+(e.g., sorting of arrays and files).
+
+Please note that this documentation is not yet complete. Many modules are
+not described, so you might need to look into the source code.
+
+You can see the index of <<def_index:,documented definitions>>.
+
+Modules
+-------
+- <<basics:,Basics>>
+- <<log:,Logging>>
+- <<fastbuf:,Fastbufs>>
+- <<basecode:,Base64 and Base224 encoding>>
+- <<hash:,Hashing routines>>
+- <<conf:,Configuration and command line parser>>
+- <<mempool:,Memory pools>>
+- <<eltpool:,Fixed-sized allocators>>
+- <<mainloop:,Mainloop>>
+- <<unaligned:,Unaligned data>>
+- <<lists:,Link lists>>
+- <<heap:,Binary heaps>>
+- <<binheap:,Binomial heaps>>
+- <<hashtable:,Hash tables>>
+- <<growbuf:,Growing buffers>>
+- <<chartype:,Single-byte characters>>
+- <<unicode:,Multi-byte characters>>
+- <<prime:,Prime numbers>>
+- <<sort:,Sorting>>
+- <<binsearch:,Binary search>>
+- <<compress:,Compression>>
+
+Other features
+--------------
+- <<configure:,Compile time configuration>>
+- <<config:,Configuration file syntax>>
+- <<docsys:,Documentation system>>
+- <<generic:,Macro-generated generics>>
+
+Yet undocumented modules
+------------------------
+- Trie
+  * `trie.h`
+- Red-black trees
+  * `redblack.h`
+- Bit manipulation
+  * `bitarray.h`
+  * `bitopts.h`
+  * `bitsig.h`
+- String manipulation
+  * `kmp.h`
+  * `kmp-search.h`
+  * `regex.h`
+  * `stkstring.h`
+  * `string.h`
+  * `str-match.h`
+  * `wildmatch.h`
+- File manipulation
+  * `asio.h`
+  * `lfs.h`
+  * `partmap.h`
+- Address manipulation
+  * `url.h`
+  * `ipaccess.h`
+- Prefetching of memory
+  * `prefetch.h`
+- Caches
+  * `qache.h`
+- Threads
+  * `semaphore.h`
+  * `threads.h`
+  * `workqueue.h`
+- Profiling support
+  * `profile.h`
+
+License
+-------
+The UCW library is copyrighted by its authors:
+
+- Pavel Charvát <mailto:pchar\@ucw.cz[]>
+- Martin Mareš <mailto:mj\@ucw.cz[]>
+- Robert Špalek <mailto:robert\@ucw.cz[]>
+- Michal Vaner <mailto:vorner\@ucw.cz[]>
+
+It can be freely distributed and used according to the terms of
+the GNU Lesser General Public License.

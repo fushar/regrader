@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html40/strict.dtd">
+
+<html><head>
+<title>MO Eval - Utilities for contestants</title>
+<link rev=made href="mailto:mj@ucw.cz">
+<link rel=stylesheet title=Default href="moe.css" type="text/css" media=all>
+</head><body>
+
+<h1>Utilities of contestants</h1>
+
+<p>Moe also offers several utilities for use by the contestants. They are by default
+installed to the <code>public</code> directory, where you also should install a subset
+of the <code>problems</code> hierarchy containing the config files and public test
+cases (e.g., the example input/output from the problem description sheet).
+
+<ul>
+<li><code>compile</code> &ndash; compile a solution with the same settings as used
+by the evaluator.
+<li><code>check</code> &ndash; compile a solution and check it on the public test cases.
+<li><code>submit</code> &ndash; submit a solution for evaluation, after <code>check</code>-ing it.
+Each successfully submitted solution replaces the previous submitted solution for the same task.
+</ul>
+
+<h2>How does it work</h2>
+
+<p>Compilation and checking use the same evaluation mechanism as used later for the
+real evaluation. However, it runs with the privileges of the contestant and is limited
+only to the publicly available test cases. The evaluation log is put to a file called
+<code>log</code> in the current directory, all other files are put to a <code>.box</code>
+subdirectory in the contestant's home.
+
+<p>Submit stores all submitted tasks to a <code>.submit</code> directory in the
+contestant's home. It's probably wise to warn the contestants that they shouldn't
+delete this directory :-)
+
+</body></html>

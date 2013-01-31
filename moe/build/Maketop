@@ -1,0 +1,94 @@
+# Top part of Makefile for the UCW Libraries
+# (c) 1997--2008 Martin Mares <mj@ucw.cz>
+
+# Set to 1 if you want verbose output
+V=0
+
+# Set to 'y' (or 'n') if you want to auto-confirm (auto-reject) all questions in build/installer
+CONFIRM=
+
+# Disable all built-in rules and variables. Speeds up make and simplifies debugging.
+MAKEFLAGS+=-rR
+
+CFLAGS=$(CLANG) $(COPT) $(CDEBUG) $(CWARNS) $(CEXTRA) -I. -I$(o) -I$(s)
+LDFLAGS=$(LOPT) $(LEXTRA)
+
+DIRS=
+PROGS=
+CONFIGS=
+CONFIG_SRC_DIR=$(CONFIG_DIR)
+TESTS=
+EXTRA_RUNDIRS=tmp log
+INSTALL_RUNDIRS=bin lib
+API_INCLUDES=
+API_LIBS=
+
+# Various files whose type does not fit into PROGS
+DATAFILES=
+
+ifdef CONFIG_DARWIN
+DYNAMIC_LIBRARIES=dylib
+SOEXT=bundle
+HOST_PREFIX=/sw
+else
+DYNAMIC_LIBRARIES=so
+SOEXT=so
+HOST_PREFIX=
+endif
+
+ifdef CONFIG_SHARED
+LS=$(DYNAMIC_LIBRARIES)
+OS=oo
+else
+LS=a
+OS=o
+endif
+
+SO_RUNDIR=lib
+
+# Whenever "make -s" (silent) is run, turn on verbose mode (paradoxical, but gives the right result)
+ifneq ($(findstring s,$(MAKEFLAGS)),)
+V=1
+endif
+
+# Define M (message) and Q (quiet command prefix) macros and also MAKESILENT passed to sub-makes
+ifeq ($(V),1)
+M=@\#
+Q=
+MAKESILENT=
+else
+M=@echo #
+Q=@
+MAKESILENT=-s
+endif
+
+# Clean needs to be a double-colon rule since we want sub-makefiles to be able
+# to define their own cleanup actions.
+dust::
+	rm -f `find . -path "*~" -or -name "\#*\#"`
+	rm -f allocs.tmp cscope.out TAGS
+
+clean:: dust
+	rm -rf `find obj/ucw -mindepth 1 -maxdepth 1 -not -name autoconf.h`
+	rm -rf `find obj -mindepth 1 -maxdepth 1 -not \( -name config.mk -o -name autoconf.h -o -name ucw \)`
+	rm -rf tests run/{bin,lib,include,.tree-stamp,doc}
+
+distclean:: clean
+	rm -rf obj run
+
+testclean::
+	rm -f `find obj -name "*.test"`
+
+docclean::
+	rm -f $(DOCS) $(patsubst %.html,%.txt,$(DOCS))
+
+# Extra default rules (appended to by submakefiles)
+extras::
+
+# Relative symlinks and other pathname manipulation macros
+empty:=
+space:=$(empty) $(empty)
+backref=$(subst $(space),/,$(patsubst %,..,$(subst /,$(space),$(1))))
+tack-on=$(if $(patsubst /%,,$(2)),$(1)/$(2),$(2))
+symlink=ln -sf $(call tack-on,$(call backref,$(2)),$(1)) $(2)/
+symlink-alias=ln -sf $(call tack-on,$(call backref,$(2)),$(1)) $(2)/$(3)

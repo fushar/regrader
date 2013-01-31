@@ -1,0 +1,29 @@
+Mainloop
+========
+
+Not every program is strictly sequential. Sometimes, an event-driven
+model is much easier to grasp. A fine example of such a program could
+be a railway server. It has a separate connection to each station
+and also to each train, so that it knows where each of them is (and
+that neither a train nor a station have got missing). So it has to wait
+for events coming from these connections and handle them appropriately.
+It also processes other events that it has itself generated -- for
+example various timers telling that a train is scheduled to depart
+from some station.
+
+The mainloop module takes care of the low-level part of event-driven
+programs: it calls the OS to monitor file activity, to interrupt
+the program at the right moment to serve a timer, and so on. The
+programmer only defines hooks that should be called to handle
+the events and calls mainloop functions to schedule them.
+
+// TODO Example?
+
+- <<conventions,Conventions>>
+- <<time,Time and timers>>
+- <<file,Activity on file descriptors>>
+- <<hooks,Loop hooks>>
+- <<process,Child processes>>
+- <<control,Control of the mainloop>>
+
+!!ucw/mainloop.h

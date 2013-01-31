@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+# A tool which builds a list of dependent libraries from the list
+# of pkg-config files.
+#
+# (c) 2007 Martin Mares <mj@ucw.cz>, placed under GNU LGPL
+#
+
+set -e
+
+shift
+SEEN=
+while [ -n "$1" ] ; do
+	case "$1" in
+		*.pc)	if [ -n "$SEEN" ] ; then echo -n ", " ; fi
+			echo -n "`basename $1 .pc`"
+			SEEN=1
+			;;
+		*)	;;
+	esac
+	shift
+done

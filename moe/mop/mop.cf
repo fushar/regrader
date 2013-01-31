@@ -1,0 +1,22 @@
+# Configuration file for the MO-P environment
+# (c) 2001--2008 Martin Mares <mj@ucw.cz>
+
+# The root of the whole contest directory hierarchy
+MO_ROOT=/mo
+
+# These values are used when creating logins for eval and contestants
+# (group id's are from the same range)
+EVAL_UID_MIN=65000
+CT_UID_MIN=65100
+
+# A file with the list of all contestants. Consists of tab-separated fields:
+# <login>	<full name>	[<machine>]
+CT_USER_LIST=cf/userlist
+
+# (optional) Use remote submitting
+REMOTE_SUBMIT=1
+REMOTE_SUBMIT_USER=mo-submit
+REMOTE_SUBMIT_GROUP=mo-submit
+
+# Include configuration of the evaluator
+. cf/eval

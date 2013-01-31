@@ -1,0 +1,26 @@
+# Per-task config
+# All variables can be overriden in test-specific <test>.config
+
+# A list of all tests
+TESTS="1 2"
+
+# Test with example input
+SAMPLE_TESTS=1
+
+# Number of points per test
+POINTS_PER_TEST=1
+
+# List of extra files needed for compilation
+EXTRAS="extras.h"
+
+# Time limit in seconds
+TIME_LIMIT=10
+
+# Memory limit in kilobytes
+MEM_LIMIT=16384
+
+# Command used to check output syntax (optional)
+SYNTAX_CHECK='grep -v -- - $TDIR/$TEST.out'
+
+# Command used to check output correctness
+OUTPUT_CHECK='diff -bBu $TDIR/$TEST.ok $TDIR/$TEST.out'

@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "Updating documentation at Jabberwock"
+make docs
+rsync -av --delete doc/. obj/isolate/isolate.1.html obj/isolate/docbook-xsl.css jabberwock.ucw.cz:/var/www/moe/

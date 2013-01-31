@@ -1,0 +1,13 @@
+[General]
+Autosetup=true
+
+[Index Settings]
+Guide to the Qt Translation Tools=false
+Qt Reference Documentation=false
+
+[Search Settings]
+Guide to the Qt Translation Tools=false
+Qt Reference Documentation=false
+
+[TOC Settings]
+Guide to the Qt Translation Tools=false

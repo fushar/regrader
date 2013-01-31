@@ -1,0 +1,6 @@
+[MainWindow]
+Height 1024=480
+Width 1280=775
+
+[MainWindow Toolbar mainToolBar]
+Hidden=true

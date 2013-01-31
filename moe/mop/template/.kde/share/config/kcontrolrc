@@ -1,0 +1,12 @@
+[General]
+InitialHeight 1024=948
+InitialWidth 1280=1272
+ShowAlternativeShortcutConfig=true
+SplitterSizes=222,1044
+
+[HTML Settings]
+AutomaticDetectionLanguage=0
+
+[Index]
+IconSize=Medium
+ViewMode=Tree

@@ -1,0 +1,12 @@
+This directory contains getopt routines from the GNU libc 2.5.
+We need this as a fallback for our reset_getopt(), because there is
+no standardized interface for such instruction.
+
+They are distributed under the GNU LGPL.
+
+All files are exact copies of the original distribution with very
+few exceptions commented with `// SHERLOCK' prefix.
+I only provided my own getopt-sh.c, getopt-sh.h and Makefile.
+
+                                        Pavel Charvat, 2007
+

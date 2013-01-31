@@ -1,0 +1,74 @@
+How to Configure Sherlock libraries
+===================================
+
+What can be configured
+----------------------
+There are two different levels of configuring/customizing program
+based on sherlock libraries:
+
+  - runtime configuration in configuration files (see <<config:>>)
+
+  - compile-time configuration of the libraries: config switches set
+    before compiling, selecting optional features.
+
+Where to build
+--------------
+If you run configure in the source directory, it prepares for compilation inside
+the source tree. In this case, an `obj` subdirectory is created to hold all generated
+files (object files, binaries, generated source files etc.) and all final files
+are linked to the `run` subdirectory. No other parts of the source tree are written into.
+
+Alternatively, you can compile in a separate object tree (which is useful when you
+want to build several different configurations from a single source tree). In order
+to do that, switch to the destination directory and issue `<source-dir>/configure ...`.
+This way, configure will create the `obj` and `run` directories locally and set up
+a Makefile which refers to the original source tree.
+
+How to configure
+----------------
+To set up compilation, possibly overriding default compile-time
+options, just run:
+
+	./configure [<option> | -<option> | <option>=<value> ...]
+
+The default values of feature options are taken from `default.cfg`.
+Compiler flags and options dependent on compiler, OS and CPU type
+are set in `ucw/perl/UCW/Configure/C.pm`. Everything can be overriden by
+options specified on the configure's command line, which have the highest
+priority.
+
+If you want to see the resulting set of options, take a look at
+`obj/config.mk`.
+
+Options specifying compiler/linker/debugger options can be also overriden
+during compilation by `make <option>=<value>`. While it's also possible
+to specify the other options in this way, it probably won't have the desired
+effect, because configure also generates C include files containing the
+options.
+
+Installation options
+--------------------
+By default, the package is compiled to be installed and it chooses a
+place where it will install. If you want to place it somewhere else,
+set the `PREFIX` option:
+
+	./configure PREFIX=/where/to/install
+
+[[local_build]]
+You can create a local compilation, which does not need to be
+installed. All paths are set relative to a `run` directory and
+programs expect to have current working directory set to it. However,
+you can move the `run` directory around your filesystem as you like.
+To compile it that way, turn on the `CONFIG_LOCAL` option (and do not
+set `PREFIX`):
+
+	./configure CONFIG_LOCAL
+
+Examples
+--------
+  - `./configure -CONFIG_SHARED` will build the libraries statically.
+  - `./configure -CONFIG_IMAGES` avoids building the image library.
+  - `./configure CONFIG_UCW_ONLY -CONFIG_UCW_UTILS` compiles only the
+    libucw library without its util programs.
+  - `./configure CONFIG_XML PREFIX=$HOME/sherlock` includes a xml
+    library and installs into your home directory.

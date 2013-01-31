@@ -1,0 +1,17 @@
+[kdevelop - Normal]
+Color Background=255,255,255
+Color Highlighted Bracket=255,255,153
+Color Highlighted Line=238,246,255
+Color Icon Bar=234,233,232
+Color Line Number=0,0,0
+Color MarkType1=0,0,255
+Color MarkType2=255,0,0
+Color MarkType3=255,255,0
+Color MarkType4=255,0,255
+Color MarkType5=160,160,164
+Color MarkType6=0,255,0
+Color MarkType7=255,255,255
+Color Selection=103,141,178
+Color Tab Marker=0,0,0
+Color Word Wrap Marker=119,122,127
+Font=Monospace,10,-1,2,50,0,0,0,0,0

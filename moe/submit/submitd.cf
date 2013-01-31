@@ -1,0 +1,96 @@
+# Configuration file for the submit server
+
+include cf/libucw
+
+SubmitD {
+
+# Log file (optional)
+LogFile			log/submitd
+
+# Port number
+Port			8888
+
+# Maximum number of connections allowed
+MaxConn			60
+
+# Time in seconds after which inactive connections are closed (0=none)
+SessionTimeout		300
+
+# Maximum size of a request
+MaxRequestSize		4K
+
+# Maximum size of an attachment (i.e., a submitted solution)
+# This is a default, which can be overriden in task definitions.
+MaxAttachSize		256K
+
+# Maximum number of versions of a single task part a contestant is allowed
+# to submit (0=unlimited)
+MaxVersions		100
+
+# Number of bits for the Diffie-Hellman key exchange
+DHBits			1024
+
+# Certificate of our internal CA which is used to validate all contestants
+CACert			certs/ca-cert.pem
+
+# The certificate (issued by our CA) and secret key for this server
+ServerCert		certs/server-cert.pem
+ServerKey		certs/server-key.pem
+
+# Keep history of all submitted files in files of a given name prefix
+# (formatted by strftime; default: no history kept)
+History			history/%H%M%S-
+
+# Rules for accepting connections (first matching rule is used)
+Access {
+	# IP address ranges matched by this rule
+	IP		127.0.0.1
+
+	# Administrator access allowed (does not do anything yet)
+	Admin		1
+
+	# Plain-text connections without any user authentication allowed
+	PlainText	0
+
+	# Maximum number of connections per IP address allowed
+	MaxConn		16
+}
+
+Access {
+	IP		195.113.18.125
+	IP		10.10.8.0/24
+	Admin		0
+	PlainText	0
+	MaxConn		2
+}
+
+# Trace TLS parameters
+TraceTLS		1
+
+# Trace command and their results
+TraceCommands		2
+
+}
+
+# Competition tasks
+
+Tasks {
+#	Task plans
+	Task { Name world; OpenData 10; MaxSize 1M; }
+
+	Task		asteroids
+	Task		cards
+	Task		lines
+
+	Extension	c cpp pas
+	OpenDataExt	out
+}
+
+# Library configuration
+
+# Need to put temporary files locally to make sure they are on the same device
+# as the submission directories, so that we can rename the files to their final
+# locations.
+Tempfiles.Dir		tmp
+Tempfiles.Prefix	temp-
+Tempfiles.PublicDir	0

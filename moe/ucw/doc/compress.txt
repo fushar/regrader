@@ -1,0 +1,17 @@
+Compression
+===========
+
+The library contains a compression routine, called LiZaRd.  It is
+modified Lempel-Ziv 77 method with slightly worse compression ratio,
+but with faster compression and decompression (compression is few times
+faster than zlib, decompression is slightly slower than memcpy()).
+
+The data format and inspiration for code comes from the LZO project
+(which couldn't be used due to licence problems). They might be
+compatible, but no-one tested that.
+
+- <<basic,Basic application>>
+- <<safe,Safe decompression>>
+- <<adler,Adler-32 checksum>>
+
+!!ucw/lizard.h

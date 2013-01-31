@@ -1,0 +1,15 @@
+Cleanups:
+o  Log messages should show both original and new size of the data. The speed
+   should be probably calculated from the former.
+o  Buffer sizing in shep-export.
+
+Improvements:
+o  When quicksorting a large input (especially in threaded case), invest more
+   time to picking a good pivot.
+o  Overlay presorter I/O with internal sorting.
+
+Users of ucw/sorter/array.h which might use radix-sorting:
+indexer/chewer.c
+indexer/lexfreq.c
+indexer/mkgraph.c
+indexer/reftexts.c

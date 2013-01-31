@@ -1,0 +1,39 @@
+Installation of libucw
+======================
+
+Prerequisities
+--------------
+To build and run, you need:
+
+  -  The GNU toolchain (gcc 4.0 or newer is required)
+  -  GNU bash 2.0 or newer
+  -  Perl (any reasonably new version; 5.6.1 works for me)
+  -  pkg-config
+  -  Linux (porting to other systems should be easy)
+  -  Libjpeg, libpng and libungif to support all image formats
+     (jpeg, png and gif). These libraries can be replaced by libgif (gif)
+     and GraphicsMagick >= 1.1 (jpeg, png, gif and possible more formats).
+     See sherlock/default.cfg for related configuration switches.
+
+Compiling
+---------
+First of all, you need to run the `configure` script to set up compile-time
+options. If you want to compile the library with the default feature set,
+just use:
+
+	./configure
+
+If you need to set anything unusual, please consult <<configure:>> for details.
+
+The defaults determined by the configure script should be correct on Linux/i386,
+on other architectures you will probably need to tweak the CPU detection section
+in `ucw/perl/UCW/Configure/C.pm` and possibly also the typedefs in `ucw/config.h`.
+
+Then run:
+
+	make
+
+It compiles the package. You need to install it (unless you specified
+a <<configure:local_build,local build>>). To do so, execute:
+
+	make install

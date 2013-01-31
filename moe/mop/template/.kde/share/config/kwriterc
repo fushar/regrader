@@ -1,0 +1,50 @@
+[General Options]
+ShowPath=false
+ShowStatusBar=false
+
+[Kate Document Defaults]
+Allow End of Line Detection=true
+Backup Config Flags=1
+Backup Prefix=
+Backup Suffix=~
+Basic Config Flags=547913760
+Encoding=
+End of Line=0
+Indentation Mode=0
+Indentation Width=2
+KTextEditor Plugin ktexteditor_docwordcompletion=false
+KTextEditor Plugin ktexteditor_insertfile=false
+KTextEditor Plugin ktexteditor_isearch=false
+KTextEditor Plugin ktexteditor_kdatatool=false
+KTextEditor Plugin ktexteditor_kttsd=false
+Maximal Loaded Blocks=16
+PageUp/PageDown Moves Cursor=false
+Search Dir Config Depth=3
+Tab Width=8
+Undo Steps=0
+Word Wrap=false
+Word Wrap Column=80
+
+[Kate Renderer Defaults]
+Schema=kwrite - Normal
+Show Indentation Lines=false
+Word Wrap Marker=false
+
+[Kate View Defaults]
+Auto Center Lines=0
+Bookmark Menu Sorting=0
+Command Line=false
+Default Mark Type=1
+Dynamic Word Wrap=true
+Dynamic Word Wrap Align Indent=80
+Dynamic Word Wrap Indicators=1
+Folding Bar=true
+Icon Bar=false
+Line Numbers=false
+Persistent Selection=false
+Scroll Bar Marks=false
+Search Config Flags=266
+Text To Search Mode=2
+
+[MainWindow]
+StatusBar=Disabled

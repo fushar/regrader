@@ -1,0 +1,51 @@
+[Desktop Icons]
+Preview=cursorthumbnail,djvuthumbnail,ldifvcardthumbnail,exrthumbnail,fontthumbnail,htmlthumbnail,imagethumbnail,svgthumbnail,textthumbnail,webarchivethumbnail
+ShowHidden=false
+
+[Desktop0]
+BackgroundMode=Flat
+Color1=0,48,130
+Color2=108,139,185
+MultiWallpaperMode=NoMulti
+Wallpaper=KDE34.png
+WallpaperMode=Scaled
+
+[FMSettings]
+NormalTextColor=255,255,255
+ShowFileTips=true
+UnderlineLinks=false
+
+[General]
+AutoLineUpIcons=true
+Enabled=true
+SetVRoot=false
+
+[KFileDialog Settings]
+Automatic Preview=true
+Autoplay sounds=true
+Recent Files=/mo/kdevelop/doc/fpc/fpctoc.html
+
+[Media]
+enabled=false
+exclude=media/hdd_mounted,media/floppy5_unmounted,media/cdrom_unmounted,media/floppy_unmounted,media/hdd_unmounted
+
+[Menubar]
+ShowMenubar=false
+
+[Mouse Buttons]
+Left=
+Middle=WindowListMenu
+Right=DesktopMenu
+WheelSwitchesWorkspace=false
+
+[ScreenSaver]
+Enabled=true
+Lock=false
+LockGrace=60000
+Saver=KRandom.desktop
+Timeout=300
+
+[Version]
+KDEVersionMajor=3
+KDEVersionMinor=5
+KDEVersionRelease=5

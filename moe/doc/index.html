@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html40/strict.dtd">
+
+<html><head>
+<title>The Moe Contest Environment</title>
+<link rev=made href="mailto:mj@ucw.cz">
+<link rel=stylesheet title=Default href="moe.css" type="text/css" media=all>
+</head><body>
+
+<h1>The Moe Contest Environment</h1>
+
+<p>The Moe Contest Environment (formerly Moe) is a system for conducting
+programming competitions similar in spirit to the
+<a href="http://www.ioinformatics.org/">International Olympiad in Informatics</a> &ndash;
+contestants solve programming tasks, submit the source code of their solutions,
+which is then automatically tested on a set of test inputs.
+
+<p>Moe is built in a modular way, making it easy to adapt it to the specifics
+of a particular contest, to other types of tasks, or other programming languages.
+
+<p>A brief description of the system and of the ideas behind it can be found in the following series
+of papers published in <a href="http://www.mii.lt/olympiads_in_informatics/">Olympiads in Informatics</a>:
+
+<ul>
+<li><a href="http://mj.ucw.cz/papers/eval.pdf">M. Mare&scaron;: Perspectives on grading systems</a>
+<li><a href="http://mj.ucw.cz/papers/eval2.pdf">M. Mare&scaron;: Moe &ndash; Design of a Modular Grading System</a>
+<li><a href="http://mj.ucw.cz/papers/fairness.pdf">M. Mare&scaron;: Fairness of Time Constraints</a>
+<li><a href="http://mj.ucw.cz/papers/isolate.pdf">B. Blackham, M. Mare&scaron;: A New Contest Sandbox</a>
+</ul>
+
+<b>News (2012-09-24):</b> A new sandbox module (<code>isolate</code>) is available.
+It has very low overhead (it uses Linux kernel containers) and it is able to cope with
+multi-threaded programs. For more details, see the "New Contest Sandbox" paper above
+or the <a href="isolate.1.html">isolate's man page</a>.
+
+<h2>Modules</h2>
+
+<table class=modules>
+<tr><th>module
+    <th>description
+    <th>status
+<tr><td>sandbox
+    <td>Runs the contestant's solution in a controlled and secure environment,
+	limiting its execution time, memory consumption and system calls.
+	We have a stable implementation (<code>box</code>) based on ptrace
+	and a new one (<code>isolate</code>) based on Linux kernel containers.
+    <td class=statedone>works
+<tr><td>judges
+    <td>A set of utilities for comparing the solution's output with the correct
+	answer at a given level of strictness.
+    <td class=statedone>works
+<tr><td>evaluator<br>(a.k.a. grader)
+    <td>This module controls the whole process of grading the solution. It runs
+	the compilers, the sandbox and the judges as described in configuration
+	files.
+    <td class=statedone>works
+<tr><td>evaluator v2
+    <td>We have decided to rewrite the evaluator from scratch in Python for greater
+	flexibility. It will however need some more time to finish.
+    <td class=statewip>in progress
+<tr><td>queue manager
+    <td>Distributes grading between a cluster of computers, each of them running
+	the evaluator.
+    <td class=statepart>works, but needs revision
+<tr><td>submitter
+    <td>Handles submitting of solutions by contestants and passing them to the
+	evaluation system. Contains a server daemon and a front-end for contestants.
+	(If your contest uses a web-based contestant interface, you probably do not
+	need this, although it can serve as a clean interface between your web services
+	and the evaluator.)
+    <td class=statepart>works, but needs revision
+</table>
+
+<h2>Download</h2>
+
+<p>Moe is still under heavy development, so the best way to obtain the latest
+version is directly from our <a href="http://git.or.cz/">Git</a> repository at git://git.ucw.cz/moe.git.
+The master branch of the repository is kept in a stable state, new development
+is done on other branches and then merged to the master. You can also <a href="http://www.ucw.cz/gitweb/?p=moe.git;a=summary">browse
+the repository online</a>.
+
+<p>We occasionally publish snapshot tarballs in our <a href="ftp://ftp.ucw.cz/pub/mj/eval/">FTP archive</a>.
+
+<h2>Documentation</h2>
+
+<p><span class="statewip">Warning:</span> Most parts of this documentation are outdated. Please consult the papers above
+to get a more up-to-date picture.
+
+<ul>
+<li><a href="anatomy.html">Anatomy of Moe</a>
+<li><a href="install.html">Installation</a>
+<li><a href="tasks.html">Tasks and their types</a>
+<li><a href="eval.html">Evaluating solutions</a>
+<li><a href="public.html">Utilities for contestants</a>
+</ul>
+
+<h2>Contests</h2>
+
+<p>Moe (or some of its modules) are used at the following contests:
+
+<ul>
+<li><a href="http://mo.mff.cuni.cz/p/index.html.en">Czech Olympiad in programming</a> since 2002
+<li><a href="http://mo.mff.cuni.cz/cpspc/">CPSPC</a> (Czech-Polish-Slovak Preparation Camp) on some years
+<li><a href="http://www.fi.muni.cz/ceoi/">CEOI 2007</a> (Central-European Olympiad in Informatics)
+<li><a href="http://www.ioinformatics.org/">IOI<a> since 2009 (used the sandbox module)
+<li><a href="http://codex2.ms.mff.cuni.cz/project/">CodEx</a> (a web-based system, originally
+	designed for evaluation of students' homeworks, but also used for several programming
+	contests)
+</ul>
+
+<h2>Languages</h2>
+
+<p>Moe is known to work with these programming languages:
+
+<ul>
+<li>Pascal (<a href="http://www.freepascal.org">Free Pascal Compiler</a>)
+<li>C and C++ (<a href="http://gcc.gnu.org/">GCC</a>)
+<li>C# (<a href="http://www.mono-project.com/">Mono</a> with some hacks)
+<li>Haskell (<a href="http://www.haskell.org/ghc/">GHC</a>)
+</ul>
+
+<p>Adding a new language should be easy, as long as the language behaves in a sane
+way (e.g., if it does not need to use a zillion threads for a trivial program
+as Java does).
+
+<h2>Portability</h2>
+
+<p>Moe is developed and tested on Linux, but all modules except the sandbox should
+happily work on any UNIX-like system providing a reasonable set of GNU
+utilities (especially bash) and Perl. This probably includes MinGW or Cygwin
+on Windows, but we have not tested that.
+
+<p>The sandbox heavily depends on the target OS. The current version works
+only on Linux with kernel version 2.6 or newer and only on the i386 and amd64
+architectures. Porting to other architectures should require only minor changes,
+porting to other systems is likely to be hard.
+
+<p>The <code>isolate</code> sandbox does not depend on CPU architecture,
+but it requires a recent Linux kernel in a configuration which might be different
+from your distribution's default.
+
+<h2>Authors</h2>
+
+<p>Moe has been written by the following people:
+
+<ul>
+<li><a href="http://mj.ucw.cz/">Martin Mare&scaron;</a>, <a href="mailto:mj@ucw.cz">mj@ucw.cz</a>
+<li>Tom&aacute;&scaron; Gaven&#269;iak (the queue manager module and parts of the new evaluator)
+<li>Bernard Blackham (parts of <code>isolate</code>)
+</ul>
+
+<p>We are also thankful to Jan K&aacute;ra and Milan Straka for their help and for
+many fine ideas.
+
+<h2>License</h2>
+
+<p>Moe can be used and distributed under the terms of the <a
+href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License version 2.</a>
+
+<h2>Feedback</h2>
+
+<p>All bug reports, suggestions and patches are welcome. Please mail them to our mailing
+list <a href="mailto:moe@ucw.cz">moe@ucw.cz</a>. You can <a href="http://www.ucw.cz/mailman/listinfo/moe">ask
+the list server</a> to subscribe to this list.
+
+</body></html>

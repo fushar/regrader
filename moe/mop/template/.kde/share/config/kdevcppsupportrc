@@ -1,0 +1,14 @@
+[Class Generator]
+Defines Case=1
+File Name Case=0
+Generate Empty Documentation=true
+Reformat Source=false
+Show Author Name=true
+Superclasss Name Case=0
+
+[General]
+ShowContextMenuExplosion=false
+SwitchShouldMatch=true
+
+[PCS]
+Version=6

@@ -1,0 +1,229 @@
+# Bottom part of Makefile for the UCW Libraries
+# (c) 1997--2008 Martin Mares <mj@ucw.cz>
+
+# The run tree
+
+DOCDIR=doc
+
+runtree: run/.tree-stamp $(addsuffix /.dir-stamp,$(addprefix $(o)/,$(DIRS)) $(addprefix run/$(DOCDIR)/,$(DOC_MODULES)))
+
+run/.tree-stamp: $(o)/config.mk
+	$(M)Creating runtree
+	$(Q)mkdir -p run $(addprefix run/, $(CONFIG_DIR) $(EXTRA_RUNDIRS) $(INSTALL_RUNDIRS))
+	$(Q)touch run/.tree-stamp
+
+# Miscellaneous targets
+
+programs: $(PROGS)
+datafiles: $(DATAFILES)
+tests: $(TESTS)
+configs: $(addprefix run/$(CONFIG_DIR)/,$(CONFIGS))
+docs: runtree $(DOCS) $(DOC_INDICES)
+
+tags:
+	etags `find . -name "*.[ch]"`
+
+# Black magic with dependencies. It would be more correct to make "depend.new"
+# a prerequisite for "depend", but "depend.new" often has the same timestamp
+# as "depend" which would confuse make a lot and either force remaking anyway
+# or (as in current versions of GNU make) erroneously skipping the remaking.
+
+-include $(o)/depend
+
+$(o)/depend: force
+	$(Q)if [ -s $(o)/depend.new ] ; then $(BUILDSYS)/mergedeps $(o)/depend $(o)/depend.new ; >$(o)/depend.new ; fi
+
+force:
+
+# Rules for directories
+
+%.dir-stamp:
+	$(Q)mkdir -p $(@D) && touch $@
+
+# Rules for configuration files
+
+run/$(CONFIG_DIR)/%: $(s)/$(CONFIG_SRC_DIR)/% $(o)/config.mk $(BUILDSYS)/genconf
+	$(M)CF $<
+	$(Q)$(BUILDSYS)/genconf $< $@ $(o)/config.mk
+
+$(o)/%.cf: $(s)/%.cf $(o)/config.mk $(BUILDSYS)/genconf
+	$(M)CF $<
+	$(Q)$(BUILDSYS)/genconf $< $@ $(o)/config.mk
+	$(Q)cp $@ run/$(CONFIG_DIR)/$(basename $(@F))
+
+# Rules for libraries
+
+%.a:
+	$(M)AR $@
+	$(Q)rm -f $@
+	$(Q)ar rcs $@ $^
+ifdef CONFIG_INSTALL_API
+	$(Q)$(call symlink-alias,$@,run/lib,$(*F)$(LIBNAME_INFIX).a)
+endif
+
+%.so:
+	$(M)LD $@
+	$(Q)$(CC) $(LSHARED) $(LDFLAGS) -o $@ $(shell PKG_CONFIG_PATH="$(PKG_CONFIG_PATH)" $(BUILDSYS)/lib-flags $^) $(LIBS)
+	$(Q)$(call symlink-alias,$@,run/$(SO_RUNDIR),$(*F)$(SONAME_INFIX).so$(SONAME_SUFFIX))
+
+# On Darwin, gcc expects shared libraries in *.dylib instead of *.so.
+# Surprisingly, when a program is run, it suffices to have *.so files.
+# We don't want to mess up the whole build system with configurable
+# suffices and we also don't want to incur an overhead on Linux, so we
+# just create symbolic links on Darwin, if requested.
+%.dylib: %.so
+	cd $(dir $<) && ln -fs $(notdir $<) $(notdir $@)
+
+$(o)/%.pc: $(s)/%.pc $(o)/%.$(LS)
+	$(M)PC $<
+	$(Q)DEPS="$(shell $(BUILDSYS)/lib-deps $^)" LIBDIR=$(@D) $(BUILDSYS)/genconf $< $@ $(o)/config.mk
+	$(Q)mkdir -p $(o)/pkgconfig
+	$(Q)$(call symlink,$@,$(o)/pkgconfig)
+
+# Rules for public API
+
+ifdef CONFIG_INSTALL_API
+
+ifdef CONFIG_LOCAL
+# Need an absolute path
+API_ROOT:=$(shell pwd)/run
+API_LIBDIR=$(API_ROOT)/lib
+API_INCDIR=$(API_ROOT)/include
+else
+API_LIBDIR=$(INSTALL_LIB_DIR)
+API_INCDIR=$(INSTALL_INCLUDE_DIR)
+endif
+INSTALL_RUNDIRS+=include lib/pkgconfig
+api: $(API_INCLUDES) $(addprefix run/lib/pkgconfig/,$(addsuffix .pc,$(API_LIBS)))
+
+$(o)/%/.include-stamp:
+	$(Q)$(BUILDSYS)/install-includes $(<D) run/include/$(IDST) $(?F)
+	$(Q)touch $@
+
+run/lib/pkgconfig/%.pc:		# RHS supplied in the sub-makefile
+	$(M)PC-API $@
+	$(Q)sed <$< >$@ "s@^libdir=.*@libdir=$(API_LIBDIR)@;s@^incdir=.*@incdir=$(API_INCDIR)@"
+
+else
+api:
+endif
+
+# Rules for compiling C
+
+$(o)/%.o: $(s)/%.c $(o)/autoconf.h
+	$(M)CC $<
+	$(Q)DEPENDENCIES_OUTPUT="$(o)/depend.new $@" $(CC) $(CFLAGS) -c -o $@ $<
+
+$(o)/%.o: %.c $(o)/autoconf.h
+	$(M)CC $<
+	$(Q)DEPENDENCIES_OUTPUT="$(o)/depend.new $@" $(CC) $(CFLAGS) -c -o $@ $<
+
+%.o: %.c $(o)/autoconf.h
+	$(M)CC $<
+	$(Q)DEPENDENCIES_OUTPUT="$(o)/depend.new $@" $(CC) $(CFLAGS) -c -o $@ $<
+
+$(o)/%.oo: $(s)/%.c $(o)/autoconf.h
+	$(M)CC-SO $<
+	$(Q)DEPENDENCIES_OUTPUT="$(o)/depend.new $@" $(CC) $(CFLAGS) $(CSHARED) -c -o $@ $<
+
+$(o)/%.oo: %.c $(o)/autoconf.h
+	$(M)CC-SO $<
+	$(Q)DEPENDENCIES_OUTPUT="$(o)/depend.new $@" $(CC) $(CFLAGS) $(CSHARED) -c -o $@ $<
+
+%.oo: %.c $(o)/autoconf.h
+	$(M)CC-SO $<
+	$(Q)DEPENDENCIES_OUTPUT="$(o)/depend.new $@" $(CC) $(CFLAGS) $(CSHARED) -c -o $@ $<
+
+$(o)/%-tt.o: $(s)/%.c $(o)/autoconf.h
+	$(M)CC-TEST $<
+	$(Q)DEPENDENCIES_OUTPUT="$(o)/depend.new $@" $(CC) $(CFLAGS) -DTEST -c -o $@ $<
+
+# Rules for testing
+
+$(o)/%-t: $(o)/%-tt.o $(TESTING_DEPS)
+	$(M)LD-TEST $@
+	$(Q)$(CC) $(LDFLAGS) -o $@ $(shell PKG_CONFIG_PATH="$(PKG_CONFIG_PATH)" $(BUILDSYS)/lib-flags $^) $(LIBS)
+
+$(o)/%.test: $(s)/%.t $(BUILDSYS)/tester
+	$(M)TEST $@
+	$(Q)$(BUILDSYS)/tester --rundir=run $(TESTERFLAGS) $< && touch $@
+
+# Rules for binaries
+
+BINDIR=bin
+
+$(o)/%: $(o)/%.o
+	$(M)LD $@
+	$(Q)$(CC) $(LDFLAGS) -o $@ $(shell PKG_CONFIG_PATH="$(PKG_CONFIG_PATH)" $(BUILDSYS)/lib-flags $^) $(LIBS)
+	$(Q)$(call symlink,$@,run/$(BINDIR))
+
+$(o)/%: $(s)/%.sh $(o)/config.mk $(BUILDSYS)/genconf
+	$(M)PP $<
+	$(Q)$(BUILDSYS)/genconf $< $@ $(o)/config.mk
+	$(Q)chmod +x $@
+	$(Q)$(call symlink,$@,run/$(BINDIR))
+
+$(o)/%: %.sh $(o)/config.mk $(BUILDSYS)/genconf
+	$(M)PP $<
+	$(Q)$(BUILDSYS)/genconf $< $@ $(o)/config.mk
+	$(Q)chmod +x $@
+	$(Q)$(call symlink,$@,run/$(BINDIR))
+
+$(o)/%: $(s)/%.pl $(o)/config.mk $(BUILDSYS)/genconf
+	$(M)PP $<
+	$(Q)$(BUILDSYS)/genconf $< $@ $(o)/config.mk
+	$(Q)chmod +x $@
+	$(Q)$(call symlink,$@,run/$(BINDIR))
+
+$(o)/%: %.pl $(o)/config.mk $(BUILDSYS)/genconf
+	$(M)PP $<
+	$(Q)$(BUILDSYS)/genconf $< $@ $(o)/config.mk
+	$(Q)chmod +x $@
+	$(Q)$(call symlink,$@,run/$(BINDIR))
+
+PERL_MODULE_DIR=UCW
+
+$(o)/%.pm: $(s)/%.pm
+	$(M)"PM $< -> run/lib/perl5/$(PERL_MODULE_DIR)/$(@F)"
+	$(Q)cp $^ $@
+	$(Q)$(call symlink,$@,run/lib/perl5/$(PERL_MODULE_DIR))
+
+$(o)/%.pm: %.pm
+	$(M)"PM $< -> run/lib/perl/$(PERL_MODULE_DIR)/$(@F)"
+	$(Q)cp $^ $@
+	$(Q)$(call symlink,$@,run/lib/perl5/$(PERL_MODULE_DIR))
+
+# Rules for data files
+
+DATADIR=lib
+
+$(DATAFILES): $(o)/%: $(s)/%
+	$(M)DATA $<
+	$(Q)cp $^ $@
+	$(Q)$(call symlink,$@,run/$(DATADIR))
+
+# Rules for documentation
+
+## $(o)/%.html: $(o)/%.txt $(BUILDSYS)/asciidoc.conf $(BUILDSYS)/asciidoc-xhtml.conf run/$(DOCDIR)/$(DOC_MODULE)/.dir-stamp
+## 	$(M)"DOC-HTML $<"
+## 	$(Q)asciidoc -e -f $(BUILDSYS)/asciidoc.conf -f $(BUILDSYS)/asciidoc-xhtml.conf -f $(HOST_PREFIX)/etc/asciidoc/asciidoc.conf -f $(HOST_PREFIX)/etc/asciidoc/xhtml11.conf $<
+## 	$(Q)$(call symlink,$@,run/$(DOCDIR)/$(DOC_MODULE))
+## 
+## # In reality, we do not depend on the .txt files, but on the corresponding .deflist's.
+## # However, the Makefile language cannot express that doc-extract generates both .txt
+## # and .deflist, so we always use the .txt's in dependencies.
+## $(patsubst %.html,%.txt,$(DOC_INDICES)): $(o)/%.txt: $(patsubst %.html,%.txt,$(DOCS)) $(BUILDSYS)/doc-defs
+## 	$(M)"DOC-DEFS $@"
+## 	$(Q)echo $@: $(DOC_HEAD) $(DOC_LIST) >> $(o)/depend.new
+## 	$(Q)$(BUILDSYS)/doc-defs $(DOC_HEAD) $@ $(DOC_LIST)
+## 
+## $(patsubst %.html,%.txt,$(DOCS)): $(o)/%.txt: $(s)/%.txt $(BUILDSYS)/doc-extract
+## 	$(M)"DOC-EXT $<"
+## 	$(Q)$(BUILDSYS)/doc-extract $< $@ $(o)/depend.new $(s) $(patsubst %.txt,%.deflist,$@)
+
+# Don't delete intermediate targets. There shouldn't be any, but due to bugs
+# in GNU Make rules with targets in not-yet-existing directories are ignored
+# when searching for implicit rules and thence targets considered intermediate.
+.SECONDARY:
+
+.PHONY: all clean distclean runtree programs api datafiles force tags configs dust install docs tests

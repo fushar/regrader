@@ -1,0 +1,123 @@
+Memory pools
+============
+
+You can use them for efficient allocation of large amount of small
+memory blocks. You can use them to allocate many blocks and free them
+all at once. They allow storing and restoring state of what is
+allocated, growing and shrinking the last block and other tricks.
+
+* <<defs,Definitions>>
+* <<basic,Basic manipulation>>
+* <<alloc,Allocation routines>>
+* <<gbuf,Growing buffers>>
+* <<store,Storing and restoring state>>
+* <<string,String operations>>
+* <<format,Formatted output>>
+* <<examples,Examples>>
+  - <<ex_trie,String trie>>
+  - <<ex_try,Action which may fail>>
+  - <<ex_stdin,Load all data from stdin>>
+
+!!ucw/mempool.h
+
+[[examples]]
+Examples
+--------
+
+You can find few examples of mempools use. But their actual use is
+limited only by your fantasy.
+
+[[ex_trie]]
+String trie
+~~~~~~~~~~~
+
+There are two advantages for a trie to use a mempool. One, it has less
+overhead than malloc (with the cost you can not free the blocks one by
+one as you allocated them). Second is freeing the whole trie, you do
+not need to walk trough it and free each node, you just
+<<mp_flush(),flush>> the whole mempool.
+
+  struct trie_node {
+    struct trie_node *subs[256];
+    bool present;
+  };
+
+  struct trie {
+    struct trie_node root;
+    struct mempool *pool;
+  };
+
+  struct trie *trie_new(void) {
+    struct mempool *pool = mn_new(4096);
+    struct trie *result = mp_alloc_zero(pool, sizeof(*result));
+    result->pool = pool;
+    return result;
+  }
+
+  void trie_insert_internal(struct trie_node *where, struct mempool *pool, const char *string) {
+    if(*string) {
+      if(!where->subs[*string])
+        where->subs[*string] = mp_alloc_zero(pool, sizeof(*where->subs[*string]));
+      trie_insert_internal(where->subs[*string], pool, string + 1);
+    } else {
+      where->present = 1;
+    }
+  }
+
+  void trie_insert(struct trie *trie, const char *string) {
+    trie_insert_internal(&trie->root, trie->pool, string);
+  }
+
+  void trie_delete(struct trie *trie) {
+    mp_delete(trie->pool);      //Free everything, including the trie structure
+  }
+
+[[ex_try]]
+Action which may fail
+~~~~~~~~~~~~~~~~~~~~~
+
+Imagine a situation where you want to load information from few files.
+Loading of each file consists of list of actions, each can allocate
+some memory and each can fail. If an action fails, the whole file is
+considered invalid, you want to ignore that file and keep loading the
+others.
+
+The problem with memory is you want to return the already allocated
+amount for the file which failed. You can use <<store,storing>> of
+mempool state.
+
+  void load_file(struct mempool *pool, const char *file) {
+    struct mempool_state state;
+    mp_save(pool, &state);              // Store the current state
+    struct file_data *data = mp_alloc_zero(pool, sizeof(*data));
+    if(!(
+        file_open(file, data, pool) &&  // Load the file
+        header_load(data, pool) &&
+        part1_load(data, pool) &&
+        part2_load(data, pool) &&
+        file_close(data) &&
+        data_link(data, pool)))         // Link the loaded data into global state
+      mp_restore(pool, &state);         // Failed -> return all used memory
+  }
+
+[[ex_stdin]]
+Load all data from stdin
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+You may want to load all data from stdin into a memory buffer. But
+there is the problem you do not know how many of them there is. You
+may use mempool and it's <<gbuf,growing buffer>> feature.
+
+This example uses libucw's own IO system, <<fastbuf:,fastbufs>>.
+
+  void *stdin_data(struct mempool *pool) {
+    struct fastbuf *fb = bopen_fd(0, NULL);     // Read from stdin
+    uns amount;
+    char *ptr = mp_start(pool, 1024);
+    while(amount = bread(fb, ptr, 1024)) {      // Read a block
+      ptr += amount;                            // Move after it
+      ptr = mp_spread(pool, ptr, 1024);         // Get space for the next block
+    }
+    bclose(fb);
+    return mp_end(pool, ptr);
+  }

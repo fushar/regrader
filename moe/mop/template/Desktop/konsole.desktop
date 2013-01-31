@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=Konsole
+GenericName=
+Comment=
+Icon=/usr/share/pixmaps/konsole.xpm
+Exec=/usr/bin/konsole
+Terminal=false
+Categories=X-Debian-XShells

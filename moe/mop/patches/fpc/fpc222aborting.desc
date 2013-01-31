@@ -1,0 +1,20 @@
+This patch against debian fpc-2.2.2-8 does the following:
+When a pascal program is compiled with -gl, then any runtime
+error (either internal, caused by caught signal, or runerror())
+dumps the stack and then kills itself by SIGABRT.
+
+This is to allow catching runtime errors in gdb.
+
+Details: We want the stack to be as small as possible when sending
+SIGABRT. That is why DumpStackAndAbort is a macro and not a function
+and why we call syscall using assembly. Another trick we do is
+to place abort calls not only in HandleErrorAddrFrame, but in 
+fpc_rangecheck, fpc_iocheck, fpc_... too. If a rangecheck fails,
+the resulting stack trace is:
+(gdb) bt
+#0  0x08058409 in fpc_rangeerror ()
+#1  0x08048115 in F (I=0) at testp.pas:13
+
+Beware, gdb is not able to decode stack if the abort is called
+in HandleErrorAddrFrame. That was another reason why fpc_*chech
+methods calls abort themselves, not relying on HandleErrorAddrFrame.

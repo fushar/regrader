@@ -1,0 +1,138 @@
+--- fpc-2.2.2/fpcsrc/rtl/inc/system.inc.ori	2009-03-16 16:28:29.000000000 +0100
++++ fpc-2.2.2/fpcsrc/rtl/inc/system.inc	2009-03-16 18:29:45.000000000 +0100
+@@ -585,27 +585,65 @@
+                              Miscellaneous
+ *****************************************************************************}
+ 
++{ MOP 2009 patch: call sigabort when -gl was used in compilation }
++const
++  DontHaltInHandleError : boolean = false;
++
++function IsCompiledWithGl : boolean;
++begin
++  { -gl modifies BackTraceStrFunc to point to lineinfo unit }
++  IsCompiledWithGl := BackTraceStrFunc <> @SysBackTraceStr;
++end;
++
++procedure InternalExit; forward;
++{ We define next method as a macro, because we do not want to
++  show it when a stack is dumped. Because of the same reason
++  we call SYSCALL_KILL ourselves in assembler code. }
++{$MACRO ON}
++{$define DumpStackAndAbort:=
++  begin
++    InternalExit;
++    asm
++      movl $20, %eax;        { SYSCALL_GETPID as first argument }
++      int $0x80;             { GETPID -> eax }
++      movl %eax, %ebx;       { PID as second argument }
++      movl $37, %eax;        { SYSCALL_KILL as first argument }
++      movl $6, %ecx;         { SIGABRT as third argument }
++      int $0x80;             { KILL }
++    end;
++  end
++}
++{ MOP 2009 patch ends }
++
+ procedure fpc_rangeerror;[public,alias:'FPC_RANGEERROR']; compilerproc;
+ begin
++  if IsCompiledWithGl then DontHaltInHandleError := true; { MOP 2009 patch }
+   HandleErrorFrame(201,get_frame);
++  DumpStackAndAbort;                                      { MOP 2009 patch }
+ end;
+ 
+ 
+ procedure fpc_divbyzero;[public,alias:'FPC_DIVBYZERO']; compilerproc;
+ begin
++  if IsCompiledWithGl then DontHaltInHandleError := true; { MOP 2009 patch }
+   HandleErrorFrame(200,get_frame);
++  DumpStackAndAbort;                                      { MOP 2009 patch }
+ end;
+ 
+ 
+ procedure fpc_overflow;[public,alias:'FPC_OVERFLOW']; compilerproc;
+ begin
++  if IsCompiledWithGl then DontHaltInHandleError := true; { MOP 2009 patch }
+   HandleErrorFrame(215,get_frame);
++  DumpStackAndAbort;                                      { MOP 2009 patch }
+ end;
+ 
+ 
+ procedure fpc_threaderror; [public,alias:'FPC_THREADERROR'];
+ begin
++  if IsCompiledWithGl then DontHaltInHandleError := true; { MOP 2009 patch }
+   HandleErrorFrame(6,get_frame);
++  DumpStackAndAbort;                                      { MOP 2009 patch }
+ end;
+ 
+ 
+@@ -619,7 +657,9 @@
+    begin
+      l:=HInOutRes^;
+      HInOutRes^:=0;
++     if IsCompiledWithGl then DontHaltInHandleError := true; { MOP 2009 patch }
+      HandleErrorFrame(l,get_frame);
++     DumpStackAndAbort;                                      { MOP 2009 patch }
+    end;
+ end;
+ 
+@@ -648,7 +688,9 @@
+     begin
+       if assigned(SafeCallErrorProc) then
+         SafeCallErrorProc(res,get_frame);
++      if IsCompiledWithGl then DontHaltInHandleError := true; { MOP 2009 patch }
+       HandleErrorFrame(229,get_frame);
++      DumpStackAndAbort;                                      { MOP 2009 patch }
+     end;
+   result:=res;
+ end;
+@@ -680,7 +722,9 @@
+   if (c <= StackBottom) then
+    begin
+      StackError:=true;
++     if IsCompiledWithGl then DontHaltInHandleError := true; { MOP 2009 patch }
+      HandleError(202);
++     DumpStackAndAbort;                                      { MOP 2009 patch }
+    end;
+ end;
+ {$IFDEF STACKCHECK}
+@@ -862,6 +906,8 @@
+   errorcode:=word(Errno);
+   erroraddr:=addr;
+   errorbase:=frame;
++  if DontHaltInHandleError then exit;           { MOP 2009 patch }
++  if IsCompiledWithGl then DumpStackAndAbort;   { MOP 2009 patch }
+ {$ifdef FPC_HAS_FEATURE_EXCEPTIONS}
+   if ExceptAddrStack <> nil then
+     raise TObject(nil) at addr,frame;
+@@ -903,6 +949,7 @@
+   errorcode:=w;
+   erroraddr:=get_caller_addr(get_frame);
+   errorbase:=get_caller_frame(get_frame);
++  if IsCompiledWithGl then DumpStackAndAbort;   { MOP 2009 patch }
+ {$ifdef FPC_HAS_FEATURE_EXITCODE}
+   if errorcode <= maxExitCode then
+     halt(errorcode)
+@@ -1148,7 +1195,9 @@
+ begin
+   If pointer(AbstractErrorProc)<>nil then
+     AbstractErrorProc();
++  if IsCompiledWithGl then DontHaltInHandleError := true; { MOP 2009 patch }
+   HandleErrorFrame(211,get_frame);
++  DumpStackAndAbort;                                      { MOP 2009 patch }
+ end;
+ 
+ 
+@@ -1156,8 +1205,11 @@
+ begin
+   if pointer(AssertErrorProc)<>nil then
+     AssertErrorProc(Msg,FName,LineNo,ErrorAddr)
+-  else
++  else begin
++    if IsCompiledWithGl then DontHaltInHandleError := true; { MOP 2009 patch }
+     HandleErrorFrame(227,get_frame);
++    DumpStackAndAbort;                                      { MOP 2009 patch }
++  end
+ end;
+ 
+ 

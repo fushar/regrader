@@ -1,0 +1,172 @@
+# Configuration file for the MO Evaluator
+# (c) 2001--2008 Martin Mares <mj@ucw.cz>
+
+# User and group used by the evaluator itself
+EVAL_USER=mo-eval
+EVAL_GROUP=mo-eval
+
+# Test user for the sandbox. You can let mo-setup create more test users
+# and then run several evaluators in parallel, each in its own sandbox.
+# For testing, you can also leave TEST_USER undefined and run the sandbox
+# with EVAL_USER privileges, but beware, this is INSECURE.
+#TEST_USER=${TEST_USER:-mo-test1}
+TEST_USERS="mo-test1 mo-test2"
+TEST_GROUP=mo-test
+
+### Programming language settings
+
+# Known source file extensions
+EXTENSIONS="c cc C cpp p pas"
+
+# Some of the extensions can be aliases for other extensions
+ALIAS_EXT_cc=cpp
+ALIAS_EXT_C=cpp
+ALIAS_EXT_p=pas
+
+## Variables which control compilation and execution
+## (see below for values for individual languages)
+
+# Command used to run the compiler
+COMP=false
+
+# Sandbox options used when compiling
+COMP_SANDBOX_OPTS='-m262144 -w60 -e -i/dev/null'
+
+# Extra per-language sandbox options used when testing
+LANG_SANDBOX_OPTS=
+
+# Translation of runtime errors: a function, which receives the exit code as an argument and
+# if it is recognized as a runtime error code, it prints its name to the standard output.
+EXIT_CODE_HOOK=
+
+# Hooks which can alter the contents of the sandbox in $BOXDIR before/after compilation/running
+PRE_COMPILE_HOOK=
+POST_COMPILE_HOOK=
+PRE_RUN_HOOK=
+POST_RUN_HOOK=
+
+# Command used to execute the compiled program, may be ./$PROGRAM (default) or an
+# interpreter with $PROGRAM as a parameter.
+TEST_EXEC_CMD=
+
+## Settings for individual languages
+
+# C
+EXT_c_COMP='/usr/bin/gcc -std=gnu99 -O2 -g -o $EXE $EXTRA_CFLAGS $SRC -lm'
+EXTRA_CFLAGS=
+
+# C++
+EXT_cpp_COMP='/usr/bin/g++ -O2 -g -o $EXE $EXTRA_CXXFLAGS $SRC -lm'
+EXTRA_CXXFLAGS=
+
+# Pascal
+EXT_pas_COMP='/usr/bin/fpc -Ci -g -O2 -Sg -o$EXE $EXTRA_PFLAGS $SRC'
+EXTRA_PFLAGS=
+EXT_pas_EXIT_CODE_HOOK=fpc-exit-code
+
+### Per-task configuration variables (default values, override in per-task config)
+
+# List of extra files needed for compilation. They are copied to the compiler
+# sandbox from the problem's directory.
+#COMP_EXTRAS="extras.h"
+
+## Tester settings (most can be overriden in per-test config):
+
+# The following variables are automatically set by the evaluator:
+# PROBLEM	name of the problem
+# HDIR		home directory of the evaluator (i.e., this file is $HDIR/cf/eval)
+# PDIR		directory containing problem data
+# SDIR		directory containing contestant's solution
+# TDIR		directory containing testing results
+# TMPDIR	directory containing temporary files
+# TEST		name of the current test
+
+# Task type:
+# offline	off-line task
+# interactive	interactive task communicating via stdio with a testing program
+# open-data	open-data task (i.e., we don't submit program, but output files)
+TASK_TYPE=file
+
+# I/O type (IO_TYPE sets defaults for IN_TYPE and OUT_TYPE)
+# file		input from $PROBLEM.in, output to $PROBLEM.out (possible even for interactive tasks)
+# stdio		input from stdin, output to stdout
+# dir 		input from all files in the directory $TEST.in; these are copied to $BOXDIR
+# 		and if they include .stdin, it will be available as program's std. input.
+# none		no input/output
+IO_TYPE=stdio
+#IN_TYPE=stdio
+#OUT_TYPE=stdio
+
+# A list of all tests
+TESTS="1 2 3 4 5 6 7 8 9 10"
+
+# A list of public tests (executed by submit and check scripts)
+SAMPLE_TESTS="0"
+
+# Number of points per test
+POINTS_PER_TEST=1
+
+# Time limit in seconds (can be fractional, but beware of noise)
+TIME_LIMIT=10
+
+# Memory limit in kilobytes
+MEM_LIMIT=16384
+
+# Stack size limit in kilobytes (0=limited only by MEM_LIMIT)
+STACK_LIMIT=0
+
+# Command used for filtering of program output (optional)
+# If turned on, program output (*.raw) is ran through this filter and the
+# checkers are applied to the output of the filter (*.out).
+# Can exit with code 1 if there is a syntax error in the output.
+#OUTPUT_FILTER='tr -d '\''\r'\'' <$TDIR/$TEST.raw >$TDIR/$TEST.out'
+
+# Command used to check output syntax (optional)
+# Returns exit code 1 if syntax is wrong, 0 if correct
+# fd1 is connect to evaluator log, feel free to log anything
+# fd2 is an optional one-line verdict
+#SYNTAX_CHECK='grep -v -- - $TDIR/$TEST.out'
+
+# Command used to check output correctness
+# Returns exit code 1 if output is incorrect, 0 if correct
+# fd1 is connect to evaluator log, feel free to log anything
+# fd2 is an optional one-line verdict
+# The checker can generate $TDIR/$TEST.pts to assign points irregularly
+OUTPUT_CHECK='diff -bBu $TDIR/$TEST.ok $TDIR/$TEST.out'
+
+# Checker for interactive tasks
+# Returns exit code 1 if test failed, 0 if passed
+# fd0 and fd1 are connected to fd1 and fd0 of the program tested
+# fd2 is an optional one-line verdict
+# The checker can generate $TDIR/$TEST.pts to assign points irregularly
+#IC_CHECK='$PDIR/checker $PDIR/$TEST.in $PDIR/$TEST.chk'
+
+# Sandbox options used when testing
+TEST_SANDBOX_OPTS='-a2 -f -m$MEM_LIMIT -k$STACK_LIMIT -t$TIME_LIMIT $LANG_SANDBOX_OPTS $BOX_EXTRAS'
+
+# Extra options to be overridden in task configuration
+BOX_EXTRAS=
+
+### Debugging and testing
+
+# DEBUG: Let `ev' run sample tests, too.
+#EV_SAMPLE=1
+
+# DEBUG: Run `pedant' on all input data. Set either to `1' or to pedant's options.
+#EV_PEDANT=1
+
+# DEBUG: Skip checks (useful when generating output files by running model solution)
+#EV_NOCHECK=1
+
+# DEBUG: Skip output filters (if you suspect they are buggy)
+#EV_NOFILTER=1
+
+### Variables overrides (most variables can be overridden for specific tests or source extensions):
+
+#EXT_pas_TIME_LIMIT=100
+#TEST_1_TIME_LIMIT=100
+#EXT_pas_TEST_1_TIME_LIMIT=100
+
+### Reserved for use by external applications
+
+#TEST_x_COMMENT="Description of the test case"

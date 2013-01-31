@@ -1,0 +1,33 @@
+LibUCW Basics
+=============
+
+Every program using LibUCW should start with `#include <ucw/lib.h>` which
+brings in the most frequently used library functions, macros and types.
+This should be done before you include any of the system headers, since
+`lib.h` defines the feature macros of the system C library.
+
+Portability
+-----------
+
+LibUCW is written in C99 with a couple of GNU extensions mixed in where needed.
+It currently requires the GNU C compiler version 4.0 or newer, but most modules
+should be very easy to adapt to a different C99 compiler. (A notable exception
+is `stkstring.h`, which is heavily tied to GNU extensions.)
+
+The library has been developed on Linux with the GNU libc and it is known to run
+on Darwin, too. The authors did not try using it on other systems, but most of
+the code is written for a generic POSIX system, so porting to any UNIX-like system
+should be a piece of cake.
+
+ucw/lib.h
+---------
+*Only partially documented.*
+
+!!ucw/lib.h
+
+ucw/config.h
+------------
+This header contains the standard set of types used by LibUCW. It is automatically
+included by `ucw/lib.h`.
+
+!!ucw/config.h

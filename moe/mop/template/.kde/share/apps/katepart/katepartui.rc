@@ -1,0 +1,129 @@
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
+<kpartgui version="40" name="KatePartView" >
+ <MenuBar>
+  <Menu noMerge="1" name="file" >
+   <text>&amp;File</text>
+   <Action group="save_merge" name="file_save" />
+   <Action group="save_merge" name="file_save_as" />
+   <Action group="revert_merge" name="file_reload" />
+   <Action group="print_merge" name="file_print" />
+   <Separator group="print_merge" />
+   <Action group="print_merge" name="file_export_html" />
+  </Menu>
+  <Menu noMerge="1" name="edit" >
+   <text>&amp;Edit</text>
+   <Action group="edit_undo_merge" name="edit_undo" />
+   <Action group="edit_undo_merge" name="edit_redo" />
+   <Separator group="edit_undo_merge" />
+   <Action group="edit_paste_merge" name="edit_cut" />
+   <Action group="edit_paste_merge" name="edit_copy" />
+   <Action group="edit_paste_merge" name="edit_copy_html" />
+   <Action group="edit_paste_merge" name="edit_paste" />
+   <Separator group="edit_paste_merge" />
+   <Action group="edit_select_merge" name="edit_select_all" />
+   <Action group="edit_select_merge" name="edit_deselect" />
+   <Action group="edit_select_merge" name="set_verticalSelect" />
+   <Separator group="edit_select_merge" />
+   <Action group="edit_select_merge" name="set_insert" />
+   <Separator group="edit_select_merge" />
+   <Action group="edit_find_merge" name="edit_find" />
+   <Action group="edit_find_merge" name="edit_find_next" />
+   <Action group="edit_find_merge" name="edit_find_prev" />
+   <Action group="edit_find_merge" name="edit_replace" />
+   <Separator group="edit_find_merge" />
+   <Action group="edit_find_merge" name="go_goto_line" />
+  </Menu>
+  <Menu noMerge="1" name="view" >
+   <text>&amp;View</text>
+   <Action group="view_operations" name="switch_to_cmd_line" />
+   <Separator group="view_operations" />
+   <Action group="view_operations" name="view_schemas" />
+   <Separator group="view_operations" />
+   <Action group="view_operations" name="view_dynamic_word_wrap" />
+   <Action group="view_operations" name="dynamic_word_wrap_indicators" />
+   <Action group="view_operations" name="view_word_wrap_marker" />
+   <Separator group="view_operations" />
+   <Action group="view_operations" name="view_border" />
+   <Action group="view_operations" name="view_line_numbers" />
+   <Action group="view_operations" name="view_scrollbar_marks" />
+   <Separator group="view_operations" />
+   <Action group="view_operations" name="view_folding_markers" />
+   <Menu group="view_operations" name="codefolding" >
+    <text>&amp;Code Folding</text>
+    <Action group="view_operations" name="folding_toplevel" />
+    <Action group="view_operations" name="folding_expandtoplevel" />
+    <Action group="view_operations" name="folding_collapselocal" />
+    <Action group="view_operations" name="folding_expandlocal" />
+   </Menu>
+   <Separator group="view_operations" />
+  </Menu>
+  <Action name="bookmarks" />
+  <Menu noMerge="1" name="tools" >
+   <text>&amp;Tools</text>
+   <Action group="tools_operations" name="tools_toggle_write_lock" />
+   <Separator group="tools_operations" />
+   <Action group="tools_operations" name="set_filetype" />
+   <Action group="tools_operations" name="set_highlight" />
+   <Action group="tools_operations" name="tools_indentation" />
+   <Action group="tools_operations" name="set_encoding" />
+   <Action group="tools_operations" name="set_eol" />
+   <Separator group="tools_operations" />
+   <Action group="tools_operations" name="tools_spelling" />
+   <Action group="tools_operations" name="tools_spelling_from_cursor" />
+   <Action group="tools_operations" name="tools_spelling_selection" />
+   <Separator group="tools_operations" />
+   <Action group="tools_operations" name="tools_indent" />
+   <Action group="tools_operations" name="tools_unindent" />
+   <Action group="tools_operations" name="tools_cleanIndent" />
+   <Action group="tools_operations" name="tools_align" />
+   <Separator group="tools_operations" />
+   <Action group="tools_operations" name="tools_comment" />
+   <Action group="tools_operations" name="tools_uncomment" />
+   <Separator group="tools_operations" />
+   <Action group="tools_operations" name="tools_uppercase" />
+   <Action group="tools_operations" name="tools_lowercase" />
+   <Action group="tools_operations" name="tools_capitalize" />
+   <Separator group="tools_operations" />
+   <Action group="tools_operations" name="tools_join_lines" />
+   <Action group="tools_operations" name="tools_apply_wordwrap" />
+  </Menu>
+  <Menu noMerge="1" name="settings" >
+   <text>&amp;Settings</text>
+   <Action group="configure_merge" name="set_confdlg" />
+  </Menu>
+ </MenuBar>
+ <Menu noMerge="0" name="ktexteditor_popup" >
+  <Action group="popup_operations" name="edit_undo" />
+  <Action group="popup_operations" name="edit_redo" />
+  <Separator group="popup_operations" />
+  <Action group="popup_operations" name="edit_cut" />
+  <Action group="popup_operations" name="edit_copy" />
+  <Action group="popup_operations" name="edit_paste" />
+  <Separator group="popup_operations" />
+  <Action group="popup_operations" name="edit_select_all" />
+  <Action group="popup_operations" name="edit_deselect" />
+  <Separator group="popup_operations" />
+  <Action group="popup_operations" name="bookmarks" />
+  <Separator group="popup_operations" />
+ </Menu>
+ <ToolBar noMerge="1" name="mainToolBar" >
+  <text>Main Toolbar</text>
+  <Action group="file_operations" name="file_save" />
+  <Action group="file_operations" name="file_save_as" />
+  <Action group="print_merge" name="file_print" />
+  <Action group="edit_operations" name="edit_undo" />
+  <Action group="edit_operations" name="edit_redo" />
+  <Action group="edit_operations" name="edit_cut" />
+  <Action group="edit_operations" name="edit_copy" />
+  <Action group="edit_operations" name="edit_paste" />
+  <Action group="find_operations" name="edit_find" />
+  <Action group="zoom_operations" name="incFontSizes" />
+  <Action group="zoom_operations" name="decFontSizes" />
+ </ToolBar>
+ <ActionProperties>
+  <Action shortcut="" name="view_folding_markers" />
+  <Action shortcut="" name="view_line_numbers" />
+  <Action shortcut="" name="view_dynamic_word_wrap" />
+  <Action shortcut="" name="switch_to_cmd_line" />
+ </ActionProperties>
+</kpartgui>

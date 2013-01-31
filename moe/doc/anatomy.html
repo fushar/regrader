@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html40/strict.dtd">
+
+<html><head>
+<title>MO Eval - Anatomy</title>
+<link rev=made href="mailto:mj@ucw.cz">
+<link rel=stylesheet title=Default href="moe.css" type="text/css" media=all>
+</head><body>
+
+<h1>The Anatomy of Moe</h1>
+
+<p>Moe lives in the following directory structure:
+
+<ul>
+<li><code>box/</code> &ndash; the sandbox module
+<li><code>build/</code> &ndash; scripts used for compilatuon
+<li><code>doc/</code> &ndash; this documentation
+<li><code>eval/</code> &ndash; the evaluator (grader)
+<li><code>examples/</code> &ndash; example problems
+<li><code>judge/</code> &ndash; judging helpers
+<li><code>maint/</code> &ndash; scripts used by Moe's maintainers
+<li><code>mop/</code> &ndash; various stuff for the MO-P contest
+<li><code>sherlock/</code> &ndash; libsherlock, used by the submit server
+<li><code>submit/</code> &ndash; the submit server
+<li><code>ucw/</code> &ndash; libucw, used by the submit server
+<li><code>utils/</code> &ndash; various utilities
+</ul>
+
+<p>When installed, it will create the following hierarchy:
+
+<ul>
+<li><code>eval</code> &ndash; all data belonging to the evaluator, inaccessible to contestants
+<li><code>public</code> &ndash; public data made available to the contestants
+<li><code>users</code> &ndash; home directories of the contestants
+</ul>
+
+</body></html>

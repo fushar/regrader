@@ -1,0 +1,34 @@
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
+<kpartgui version="7" name="KDevCustomProject" >
+ <MenuBar>
+  <Menu name="project" >
+   <Action name="repopulate_project" />
+   <Action name="addnewfiles_project" />
+  </Menu>
+  <Menu name="build" >
+   <Action name="build_build" />
+   <Action name="build_buildactivetarget" />
+   <Action name="build_compilefile" />
+   <Action name="build_target" />
+   <Action name="build_install" />
+   <Action name="build_installactivetarget" />
+   <Action name="build_make_environment" />
+   <Action name="build_clean" />
+   <Separator/>
+   <Action name="build_execute" />
+  </Menu>
+ </MenuBar>
+ <ToolBar noMerge="1" name="buildToolBar" >
+  <Action group="build_operations" name="build_build" />
+  <Action group="build_operations" name="build_buildactivetarget" />
+  <Action group="build_operations" name="build_compilefile" />
+  <Separator group="build_operations" />
+  <Action group="build_operations" name="build_install" />
+  <Action group="build_operations" name="build_execute" />
+ </ToolBar>
+ <ActionProperties>
+  <Action shortcut="F7" name="build_build" />
+  <Action shortcut="" name="build_buildactivetarget" />
+  <Action shortcut="F8" name="build_execute" />
+ </ActionProperties>
+</kpartgui>

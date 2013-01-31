@@ -1,0 +1,54 @@
+[Main Window Settings Toolbar bookmarkToolBar]
+Hidden=true
+IconText=IconTextRight
+Index=3
+
+[Main Window Settings Toolbar extraToolBar]
+IconText=IconOnly
+Index=0
+
+[Main Window Settings Toolbar locationToolBar]
+IconText=IconOnly
+Index=2
+
+[Main Window Settings Toolbar mainToolBar]
+Index=1
+
+[Profile]
+Container0_Children=Tabs1,View2
+Container0_Orientation=Vertical
+Container0_SplitterSizes=731,118
+Container0_activeChildIndex=0
+ContainerT0_Children=View3,View4
+ContainerT0_Orientation=Horizontal
+ContainerT0_SplitterSizes=631,631
+ContainerT0_activeChildIndex=0
+FullScreen=false
+Height=948
+Name=File Management
+RootItem=Container0
+Tabs1_Children=ContainerT0
+Tabs1_activeChildIndex=0
+View2_LinkedView=false
+View2_LockedLocation=false
+View2_PassiveMode=true
+View2_ServiceName=konsolepart
+View2_ServiceType=Browser/View
+View2_ToggleView=true
+View2_URL=file://$HOME
+View3_LinkedView=false
+View3_LockedLocation=false
+View3_PassiveMode=false
+View3_ServiceName=konq_iconview
+View3_ServiceType=inode/directory
+View3_ToggleView=false
+View3_URL=file://$HOME
+View4_LinkedView=false
+View4_LockedLocation=false
+View4_PassiveMode=false
+View4_ServiceName=konq_iconview
+View4_ServiceType=inode/directory
+View4_ToggleView=false
+View4_URL=file://$HOME/Desktop
+Width=1272
+XMLUIFile=konqueror.rc

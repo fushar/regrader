@@ -1,0 +1,8 @@
+Fast access to unaligned data
+=============================
+
+Sometimes it is useful to access values which are not correctly aligned.
+To avoid slow copying to aligned buffers, we define several optimized read/write
+functions for accessing such integer values.
+
+!!ucw/unaligned.h

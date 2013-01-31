@@ -1,0 +1,24 @@
+#!/bin/bash
+#
+# A preprocessor for linker arguments, which replaces references to .pc
+# files by results of the proper calls to pkg-config.
+#
+# (c) 2007 Martin Mares <mj@ucw.cz>, placed under GNU LGPL
+#
+
+set -e
+
+PC=
+while [ -n "$1" ] ; do
+	case "$1" in
+		*.pc)	PC="$PC `basename $1 .pc`"
+			;;
+		*)	echo -n " $1"
+			;;
+	esac
+	shift
+done
+if [ -n "$PC" ] ; then
+	echo -n " "
+	PKG_CONFIG_PATH="$PKG_CONFIG_PATH:obj/pkgconfig" pkg-config --libs $PC
+fi

@@ -1,0 +1,28 @@
+#!/usr/bin/perl
+# A simple script for making releases of Moe
+# (c) 2005--2012 Martin Mares <mj@ucw.cz>
+
+use strict;
+use warnings;
+require "maint/release.pm";
+
+my $r = new UCW::Release("moe");
+my $ver = $r->GetVersionFromFile("Makefile", "VERSION=(.*)");
+unshift @{$r->{"rules"}}, '^(problems|testing|solutions|maint|certs)/.*' => '-';
+push @{$r->{"directories"}}, "problems", "testing", "solutions";
+push @{$r->{"uploads"}}, {
+		"url" => "scp://atrey.karlin.mff.cuni.cz/~ftp/pub/moe/"
+	}, {
+		"url" => "scp://jabberwock.ucw.cz/~ftp/pub/moe/"
+	};
+$r->{'testmake'} = './configure mop/default.cfg && make -j4';
+$r->ParseOptions;
+$r->InitDist("maint/dist");
+$r->GenPackage;
+$r->GenFile("README");
+$r->Dispatch;
+
+if ($r->{"do_upload"}) {
+	system "maint/upload-doc";
+	die if $?;
+}

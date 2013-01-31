@@ -1,0 +1,6 @@
+[Cache /usr/share/apps/katepart/scripts/indent/script-indent-c-test.js]
+copyright=\nBased on work Copyright 2005 by Dominik Haumann\nCopyright 2005 by Joseph Wenninger\nHere will be the license text, Dominik has to choose\n The following line is not empty\n \nAn empty line ends this block
+internalName=script-indent-c-test
+lastModified=1126340794
+niceName=C style indenter
+version=0.1
