@@ -50,7 +50,7 @@
 <div class="container">
 	<div class="row">
 		<div class="site_logo">
-			<img src="files/<?php echo $left_mascot; ?>" />
+			<img src="files/<?php echo $left_logo; ?>" />
 		</div>
 		<div class="site_name">
 			<h1><?php echo $top_name; ?></h1>
@@ -58,10 +58,10 @@
 		</div>
 
 		<div class="site_logo_right">
-			<img src="files/<?php echo $right_mascot; ?>" />
+			<img src="files/<?php echo $right_logo1; ?>" />
 		</div>
 		<div class="site_logo_right">
-			<img src="files/<?php echo $right_mascot2; ?>" />
+			<img src="files/<?php echo $right_logo2; ?>" />
 		</div>
 		<div class="span12">
 			<hr />
