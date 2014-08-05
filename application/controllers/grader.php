@@ -224,10 +224,19 @@ class Grader extends CI_Controller
 	private function run_submission($submission, $problem, $language)
 	{
 		$testcases = $this->get_testcases($submission['problem_id']);
+		$checker = $this->get_checker($submission['problem_id']); // empty array if no checker
 		$overall_verdict = 2; // Accepted
 
 		$grader_path = 'moe/obj/box';
 		$submission_path = $this->setting->get('submission_path') . '/' . $submission['id'];
+		$checker_path = null;
+		$checker_exec_path = null;
+		
+		if ($checker) // Get the executable version of the checker, if exists.
+		{
+			$checker_path = $this->setting->get('checker_path') . '/' . $problem['id'];
+			$checker_exec_path = $checker_path . '/check';
+		}
 		
 		foreach ($testcases as $v)
 		{
@@ -282,14 +291,41 @@ class Grader extends CI_Controller
 				$verdict = 4; // Unknown Error; treated as Runtime Error
 			else
 			{
-				$diff_cmd = 'diff -q ' . $tc_path . '/' . $v['output'] . ' ' . $out_path . '/' . $v['output'] . ' > ' . $out_path . '/diff';
-				exec($diff_cmd, $output, $retval);
+				if ($checker) // Use the checker
+				{
+					$checker_cmd  = $grader_path . '/box';
+					$checker_cmd .= ' -w5';
+					$checker_cmd .= ' -i' . $out_path . '/' . $v['output'] ;
+					$checker_cmd .= ' -o' . $out_path . '/checker_op';
+					$checker_cmd .= ' -r' . $out_path . '/error';
+					$checker_cmd .= ' -M' . $out_path . '/result';
+					$checker_cmd .= ' -- ' . $checker_exec_path . ' '
+											. FCPATH . $tc_path . '/' . $v['input'] . ' '
+											. FCPATH . $tc_path . '/' . $v['output']
+			                				. ' 2> /dev/null';
 
-				$diff = file_get_contents($out_path . '/diff');
-				if ( ! empty($diff))
-					$verdict = 3; // Wrong Answer
+					exec($checker_cmd, $output, $retval);
+					
+					$checker_result = explode("\n", file_get_contents($out_path . '/checker_op'))[0];
 
-				unlink($out_path . '/diff');
+					if ('[OK]' === $checker_result)
+						$verdict = 2;
+					else if ('[NOT OK]' === $checker_result)
+						$verdict = 3;
+					
+					unlink($out_path . '/checker_op');
+				}
+				else
+				{
+					$diff_cmd = 'diff -q ' . $tc_path . '/' . $v['output'] . ' ' . $out_path . '/' . $v['output'] . ' > ' . $out_path . '/diff';
+					exec($diff_cmd, $output, $retval);
+
+					$diff = file_get_contents($out_path . '/diff');
+					if ( ! empty($diff))
+						$verdict = 3; // Wrong Answer
+					unlink($out_path . '/diff');
+				}
+
 			}
 
 			$run_result_time = ceil(((float)$run_result['time-wall']) * 1000);
@@ -380,6 +416,21 @@ class Grader extends CI_Controller
 	{
 		$q = $this->db->query('SELECT id, input, output FROM testcase WHERE problem_id=' . $problem_id . ' ORDER BY id');
 		return $q->result_array();
+	}
+
+	/**
+	 * Retrieves the checker of a particular problem
+	 *
+	 * This function retrieves the checker name of the problem whose ID is $problem_id.
+	 * 
+	 * @param int $problem_id The problem ID.
+	 * 
+	 * @return array The retrieved checker. Returns an empty array if no checker exists.
+	 */
+	private function get_checker($problem_id)
+	{
+		$q = $this->db->query('SELECT id, checker FROM checker WHERE problem_id=' . $problem_id);
+		return $q->row_array();
 	}
 
 	/**

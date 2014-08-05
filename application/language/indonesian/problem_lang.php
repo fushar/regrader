@@ -46,19 +46,28 @@ $lang['default_statement'] = <<<SAMPLE
 SAMPLE;
 
 $lang['add_testcase'] = 'Tambah Kasus Uji';
+$lang['add_checker'] = 'Tambah Checker';
 $lang['add_testcase_successful'] = 'Kasus uji berhasil ditambahkan.';
 $lang['delete_testcase_successful'] = 'Kasus uji berhasil dihapus.';
+$lang['add_checker_successful'] = 'Checker berhasil diunggah dan dikompilasi.';
+$lang['delete_checker_successful'] = 'Checker berhasil dihapus.';
 $lang['edit_problem_testcases'] = 'Sunting Kasus-Kasus Uji Soal';
+$lang['edit_problem_checker'] = 'Sunting Checker Soal';
 $lang['input'] = 'Masukan';
 $lang['output'] = 'Keluaran';
+$lang['checker'] = 'Checker';
 $lang['size'] = 'Ukuran';
 $lang['download_input'] = 'Unduh Berkas Masukan';
 $lang['download_output'] = 'Unduh Berkas Keluaran';
+$lang['download_checker'] = 'Unduh Berkas Checker';
 $lang['input_required'] = "'Masukan' harus diisi.";
 $lang['output_required'] = "'Keluaran' harus diisi.";
+$lang['checker_required'] = "'Checker' harus diisi.";
 $lang['input_output_must_differ'] = 'Berkas masukan dan keluaran harus berbeda.';
 $lang['input_has_been_used'] = 'Berkas masukan sudah pernah digunakan.';
 $lang['output_has_been_used'] = 'Berkas keluaran sudah pernah digunakan.';
+$lang['checker_exists'] = 'Berkas checker sudah ada. Hapus checker yang ada terlebih dahulu jika ingin menunggah checker baru.';
+$lang['checker_compile_error'] = 'Checker mendapat Compile Error pada saat kompilasi.';
 
 $lang['contest_has_ended'] = 'Kontes telah berakhir!';
 $lang['missing_source_code'] = 'Anda belum memilih berkas jawaban.';
