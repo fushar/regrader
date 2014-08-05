@@ -310,7 +310,7 @@ class Grader extends CI_Controller
 
 					if ('[OK]' === $checker_result)
 						$verdict = 2;
-					else if ('[NOT OK]' === $checker_result)
+					else
 						$verdict = 3;
 					
 					unlink($out_path . '/checker_op');
