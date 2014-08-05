@@ -70,6 +70,7 @@
 						<td class="operations-td">
 							<a href="<?php echo site_url('admin/problem/edit/' . $v['id'] . '/' . $page_offset); ?>" rel="tooltip" title="<?php echo $this->lang->line('edit'); ?>"><i class="icon-pencil"></i></a>
 							<a href="<?php echo site_url('admin/problem/editTestcases/' . $v['id'] . '/' . $page_offset); ?>" rel="tooltip" title="<?php echo $this->lang->line('testcase'); ?>"><i class="icon-file"></i></a>
+							<a href="<?php echo site_url('admin/problem/editChecker/' . $v['id'] . '/' . $page_offset); ?>" rel="tooltip" title="<?php echo $this->lang->line('checker'); ?>"><i class="icon-check"></i></a>
 							<a href="<?php echo site_url('admin/problem/delete/' . $v['id'] . '/' . $page_offset); ?>" rel="tooltip" title="<?php echo $this->lang->line('delete'); ?>" onclick="return confirm('<?php printf($this->lang->line('confirm_delete_problem'), $v['id'], $v['name']); ?>');"><i class="icon-trash"></i></td>
 						</tr>
 					<?php endforeach; ?>
