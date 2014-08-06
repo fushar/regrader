@@ -179,7 +179,7 @@ class Problem_manager extends AR_Model
 	 * 
 	 * @param int $problem_id The problem ID.
 	 *
-	 * @return aray The testcases.
+	 * @return array The testcases.
 	 */
 	public function get_testcases($problem_id)
 	{
@@ -196,7 +196,7 @@ class Problem_manager extends AR_Model
 	 * 
 	 * @param int $testcase_id The testcase ID.
 	 *
-	 * @return aray The testcase.
+	 * @return array The testcase.
 	 */
 	public function get_testcase($testcase_id)
 	{
@@ -317,12 +317,29 @@ class Problem_manager extends AR_Model
 	 * 
 	 * @param int $problem_id The problem ID.
 	 *
-	 * @return aray The checker.
+	 * @return array The checker.
 	 */
-	public function get_checker($problem_id)
+	public function get_checker_on_problem($problem_id)
 	{
 		$this->db->from('checker');
 		$this->db->where('problem_id', $problem_id);
+		$q = $this->db->get();
+		return $q->row_array();
+	}
+
+	/**
+	 * Retrieves a checker based on checker_id
+	 *
+	 * This function returns a checker which ID is $checker_id.
+	 * 
+	 * @param int $checker_id The checker ID.
+	 *
+	 * @return array The checker.
+	 */
+	public function get_checker($checker_id)
+	{
+		$this->db->from('checker');
+		$this->db->where('id', $checker_id);
 		$q = $this->db->get();
 		return $q->row_array();
 	}

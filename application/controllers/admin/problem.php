@@ -188,7 +188,7 @@ class Problem extends Admin_Controller
 		}
 		else
 		{
-			$this->ui['content']['checker'] = $this->problem_manager->get_checker($problem_id);
+			$this->ui['content']['checker'] = $this->problem_manager->get_checker_on_problem($problem_id);
 			$this->ui['content']['problem'] = $this->problem_manager->get_row($problem_id);
 			$this->ui['header']['title'] = $this->lang->line('edit_problem_checker') . ' ' . $problem_id;
 			$this->ui['header']['page'] = 'problem';
@@ -277,13 +277,13 @@ class Problem extends Admin_Controller
 	 * 
 	 * @param int $checker_id The testcase ID.
 	 */
-	public function downloadCheckerOutput($checker_id)
+	public function downloadChecker($checker_id)
 	{
 		$this->load->helper('download');
-		$testcase = $this->problem_manager->get_checker($checker_id);
-		$content = $this->problem_manager->get_checker_content($checker_id, 'output');
+		$checker = $this->problem_manager->get_checker($checker_id);
+		$content = $this->problem_manager->get_checker_content($checker_id);
 
-		force_download($testcase['output'], $content);
+		force_download($checker['checker'], $content);
 	}
 
 	/**
