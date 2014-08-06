@@ -160,6 +160,45 @@ class Problem extends Admin_Controller
 			$this->load->view('footer', $this->ui['footer']);
 		}
 	}
+ 
+ 	/**
+	 * Shows the edit checker page
+	 *
+	 * This function shows the edit checker page.
+	 * 
+	 * @param int $problem_id The problem ID.
+	 * @param int $page_offset The previous viewAll page number.
+	 */
+ 	public function editChecker($problem_id, $page_offset)
+	{
+		$this->form_validation->set_rules('hidden', 'Hidden', 'required');
+		$this->form_validation->set_rules('new_checker', $this->lang->line('checker'), 'callback__check_new_checker');
+
+		if ($this->form_validation->run())
+		{
+			$args['problem_id'] = $problem_id;
+			$args['checker'] = $_FILES['new_checker']['name'];
+
+			$error = $this->problem_manager->add_checker($args);
+			if ($error != '')
+				$this->session->set_flashdata('error', $error);
+			else
+				$this->session->set_flashdata('add_successful', true);
+			redirect('admin/problem/editChecker/' . $problem_id . '/' . $page_offset);
+		}
+		else
+		{
+			$this->ui['content']['checker'] = $this->problem_manager->get_checker($problem_id);
+			$this->ui['content']['problem'] = $this->problem_manager->get_row($problem_id);
+			$this->ui['header']['title'] = $this->lang->line('edit_problem_checker') . ' ' . $problem_id;
+			$this->ui['header']['page'] = 'problem';
+			$this->ui['content']['page_offset'] = $page_offset;
+
+			$this->load->view('admin/header', $this->ui['header']);
+			$this->load->view('admin/problem/editChecker', $this->ui['content']);
+			$this->load->view('footer', $this->ui['footer']);
+		}
+	}
 
 	/**
 	 * Deletes a testcase
@@ -178,6 +217,25 @@ class Problem extends Admin_Controller
 		else
 			$this->session->set_flashdata('delete_successful', true);
 		redirect('admin/problem/editTestcases/' . $problem_id . '/' . $page_offset);
+	}
+
+	/**
+	 * Deletes a checker
+	 *
+	 * This function deletes a checker whose ID is $checker_id and then redirects to edit checker page.
+	 * 
+	 * @param int $problem_id The problem ID.
+	 * @param int $checker_id The checker ID.
+	 * @param int $page_offset The previous viewAll page number.
+	 */
+	public function deleteChecker($problem_id, $checker_id, $page_offset)
+	{
+		$error = $this->problem_manager->delete_checker($checker_id);
+		if ($error != '')
+			$this->session->set_flashdata('error', $error);
+		else
+			$this->session->set_flashdata('delete_successful', true);
+		redirect('admin/problem/editChecker/' . $problem_id . '/' . $page_offset);
 	}
 
 	/**
@@ -213,6 +271,22 @@ class Problem extends Admin_Controller
 	}
 
 	/**
+	 * Download the checker of a problem
+	 *
+	 * This function download the checker whose ID is $checker_id.
+	 * 
+	 * @param int $checker_id The testcase ID.
+	 */
+	public function downloadCheckerOutput($checker_id)
+	{
+		$this->load->helper('download');
+		$testcase = $this->problem_manager->get_checker($checker_id);
+		$content = $this->problem_manager->get_checker_content($checker_id, 'output');
+
+		force_download($testcase['output'], $content);
+	}
+
+	/**
 	 * Checks whether an input file is supplied
 	 *
 	 * This function checks whether the user has chosen an input file to add.
@@ -241,6 +315,23 @@ class Problem extends Admin_Controller
 		if (empty($_FILES['new_output']['name']))
 		{
 			$this->form_validation->set_message('_check_new_output', $this->lang->line('output_required'));
+			return FALSE;
+		}
+		return TRUE;
+	}
+
+	/**
+	 * Checks whether an output file is supplied
+	 *
+	 * This function checks whether the user has chosen an output file to add.
+	 *
+	 * @return boolean TRUE if an output file is supplied, or FALSE otherwise.
+	 */
+	public function _check_new_checker()
+	{
+		if (empty($_FILES['new_checker']['name']))
+		{
+			$this->form_validation->set_message('_check_new_checker', $this->lang->line('checker_required'));
 			return FALSE;
 		}
 		return TRUE;
