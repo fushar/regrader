@@ -37,3 +37,5 @@ Test: ping-pong timing attacks
 Test: big static memory
 Examine the use of taskstats for measuring memory
 Switch license to GPL2/GPL3
+Options for specifying real-time scheduling
+Setting of general cgroup attributes, like CPU pinning

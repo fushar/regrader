@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <HelpOptions>
+    <Version Value="1"/>
+  </HelpOptions>
+  <Databases>
+    <RTLUnits>
+      <BaseURL Value=""/>
+    </RTLUnits>
+    <FCLUnits>
+      <BaseURL Value=""/>
+    </FCLUnits>
+  </Databases>
+</CONFIG>
