@@ -1,0 +1,26 @@
+[KFileMetaPropsPlugin]
+Height 1024=260
+Width 1280=277
+
+[KPropertiesDialog]
+Height 1024=356
+Width 1280=387
+
+[PlasmaTransientsConfig]
+History list=file:///mo/public/documentation/cppreference/en.cppreference.com/w/cpp.html,file:///mo/public/documentation/cppreference/en.cppreference.com/w/index.html,file:///mo/public/documentation/cppreference/en.cppreference.com/index.html
+HorizontalScrollValue=0
+Url=file:///mo/public/documentation/cppreference/en.cppreference.com/w/cpp.html
+VerticalScrollValue=0
+
+[PlasmaViews][1]
+panelVisibility=0
+
+[PlasmaViews][1][Sizes]
+lastsize=1280
+
+[Updates]
+performed=/usr/share/kde4/apps/plasma-desktop/updates/systray-to-notifications-widget.js,/usr/share/kde4/apps/plasma-desktop/updates/addShowActivitiesManagerPlasmoid.js
+
+[ViewIds]
+1=1
+8=2

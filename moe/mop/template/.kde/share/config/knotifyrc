@@ -1,7 +1,2 @@
-[Misc]
-LastConfiguredApp=knotify
-
-[StartProgress]
-Arts Init=false
-KNotify Init=true
-Use Arts=false
+[Phonon::AudioOutput]
+KNotify_Volume=1

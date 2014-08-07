@@ -32,6 +32,44 @@ require UCW::Configure::C;
 require UCW::Configure::LibUCW;
 require UCW::Configure::Doc;
 
+Test("KERNEL_ARCH", "Checking for kernel architecture", sub {
+	my $u = `uname -m`;
+	chomp $u;
+	if ($u =~ m{^i[3-6]86$}) {
+		return 'i386';
+	} elsif ($u eq 'x86_64') {
+		return 'amd64';
+	} else {
+		return $u;
+	}
+});
+
+Log "Selecting sandbox kernel architecture ... ";
+my $karch = Get("CONFIG_BOX_KERNEL_ARCH") // "auto";
+if ($karch eq 'i386' || $karch eq 'amd64') {
+	Log "$karch (set manually)\n";
+} elsif ($karch eq 'auto') {
+	$karch = Get('KERNEL_ARCH');
+	Set('CONFIG_BOX_KERNEL_ARCH', $karch);
+	Log "$karch\n";
+} else {
+	Fail "Unrecognized architecture $karch";
+}
+Set('CONFIG_BOX_KERNEL_AMD64') if $karch eq 'amd64';
+
+Log "Selecting sandbox user-space architecture ... ";
+my $uarch = Get("CONFIG_BOX_USER_ARCH") // "auto";
+if ($uarch eq 'i386' || $uarch eq 'amd64') {
+	Log "$uarch (set manually)\n";
+} elsif ($uarch eq 'auto') {
+	$uarch = Get('ARCH');
+	Set('CONFIG_BOX_USER_ARCH', $karch);
+	Log "$uarch\n";
+} else {
+	Fail "Unrecognized architecture $uarch";
+}
+Set('CONFIG_BOX_USER_AMD64') if $uarch eq 'amd64';
+
 if (Get("CONFIG_SUBMIT") || Get("CONFIG_MOP")) {
 	# Build libucw only if it is needed
 	Set("CONFIG_UCW_LIBS" => 1);
