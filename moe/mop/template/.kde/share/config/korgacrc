@@ -1,5 +1,6 @@
 [Alarms]
-CalendarsLastChecked=2007,6,8,12,8,31
+CalendarsLastChecked=2013,3,21,10,12,1
 
 [General]
-Autostart=false
+Autostart=true
+Enabled=true
