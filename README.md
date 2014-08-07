@@ -50,3 +50,4 @@ Mantainers
 Regrader is maintained by:
 
 - Ashar Fuadi (@fushar)
+- Pusaka Kaleb Setyabudi (@sokokaleb)
