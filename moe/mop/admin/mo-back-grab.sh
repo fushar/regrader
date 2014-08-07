@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Find all submits in the local copy of contestants' home directories
 # (as created by mo-backup) and copy them to solutions/.
 

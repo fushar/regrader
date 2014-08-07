@@ -1,0 +1,15 @@
+[Devices][/org/freedesktop/UDisks/devices/sda1]
+Icon=drive-harddisk
+LastNameSeen=system
+LastSeenMounted=false
+
+[Devices][/org/freedesktop/UDisks/devices/sda2]
+Icon=drive-harddisk
+LastNameSeen=Windows
+LastSeenMounted=false
+
+[Devices][/org/freedesktop/UDisks/devices/sda3]
+EverMounted=true
+Icon=drive-harddisk
+LastNameSeen=97.7 GiB Hard Drive
+LastSeenMounted=true

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <EditorOptions Version="9">
+    <Display EditorFontSize="-10" DisableAntialiasing="True" DoNotWarnForFont="DejaVu Sans Mono"/>
+    <KeyMapping>
+      <default>
+        <Version Value="6"/>
+      </default>
+    </KeyMapping>
+    <CodeTools CodeTemplateFileName="/home/usertest/.lazarus/lazarus.dci" CompletionLongLineHintTypeCompletionLongLineHintType="sclpExtendRightOnly"/>
+    <Mouse>
+      <Default Version="1"/>
+    </Mouse>
+    <Color Version="9"/>
+  </EditorOptions>
+</CONFIG>

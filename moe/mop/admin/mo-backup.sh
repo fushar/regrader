@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # A trivial script to back up contestants' home directories.
 
 if [ -z "$1" ] ; then
