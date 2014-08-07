@@ -1,0 +1,4 @@
+[General]
+Custom query=
+Root query=<?xml version="1.0"?><filequery queryFiles="true" queryFolders="false" limit="0" offset="0" fullTextScoring="false" fullTextScoringOrder="desc" flags=""><comparison property="http://www.semanticdesktop.org/ontologies/2007/01/19/nie#lastModified" comparator=":" sortWeight="1" sortOrder="desc" inverted="false"/></filequery>\n
+Root query limit=10

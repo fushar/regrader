@@ -56,7 +56,7 @@ EXT_c_COMP='/usr/bin/gcc -std=gnu99 -O2 -g -o $EXE $EXTRA_CFLAGS $SRC -lm'
 EXTRA_CFLAGS=
 
 # C++
-EXT_cpp_COMP='/usr/bin/g++ -O2 -g -o $EXE $EXTRA_CXXFLAGS $SRC -lm'
+EXT_cpp_COMP='/usr/bin/g++ -std=gnu++11 -O2 -g -o $EXE $EXTRA_CXXFLAGS $SRC -lm'
 EXTRA_CXXFLAGS=
 
 # Pascal

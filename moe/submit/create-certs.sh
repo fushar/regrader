@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # A script for creation of all the certificates used by submitd
 # (c) 2007 Martin Mares <mj@ucw.cz>
 

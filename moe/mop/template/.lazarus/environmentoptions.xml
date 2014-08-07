@@ -1,0 +1,281 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <EnvironmentOptions>
+    <Version Value="107" Lazarus="1.0.6"/>
+    <LazarusDirectory Value="/usr/share/lazarus/1.0.6">
+      <History Count="2">
+        <Item1 Value="/usr/share/lazarus/1.0.6/"/>
+        <Item2 Value="/usr/lib/lazarus/"/>
+      </History>
+    </LazarusDirectory>
+    <CompilerFilename Value="/usr/bin/fpc">
+      <History Count="3">
+        <Item1 Value="/usr/local/bin/fpc"/>
+        <Item2 Value="/usr/bin/fpc"/>
+        <Item3 Value="/opt/fpc/fpc"/>
+      </History>
+    </CompilerFilename>
+    <FPCSourceDirectory Value="/usr/share/fpcsrc/$(FPCVER)/">
+      <History Count="2">
+        <Item1 Value="/usr/share/fpcsrc/"/>
+        <Item2 Value="/usr/share/fpcsrc/$(FPCVER)/"/>
+      </History>
+    </FPCSourceDirectory>
+    <MakeFilename>
+      <History Count="2">
+        <Item1 Value="make"/>
+        <Item2 Value="/usr/bin/make"/>
+      </History>
+    </MakeFilename>
+    <TestBuildDirectory Value="/tmp/">
+      <History Count="2">
+        <Item1 Value="/tmp/"/>
+        <Item2 Value="/var/tmp/"/>
+      </History>
+    </TestBuildDirectory>
+    <AutoSave LastSavedProjectFile="/home/testuser/ziz/zizalky_main.lpi" OpenLastProjectAtStart="False"/>
+    <Desktop>
+      <Desktop FormIdCount="30">
+        <FormIdList a1="PseudoTerminal" a2="Watches" a3="BreakPoints" a4="Locals" a5="CallStack" a6="EvaluateModify" a7="Registers" a8="Assembler" a9="DbgOutput" a10="Inspect" a11="DbgEvents" a12="Threads" a13="DbgHistory" a14="MainIDE" a15="SourceNotebook" a16="MessagesView" a17="UnitDependencies" a18="CodeExplorerView" a19="FPDocEditor" a20="ClipBrdHistory" a21="PkgGraphExplorer" a22="ProjectInspector" a23="SearchResults" a24="AnchorEditor" a25="TabOrderEditor" a26="CodeBrowser" a27="IssueBrowser" a28="JumpHistory" a29="ComponentList" a30="ObjectInspectorDlg"/>
+      </Desktop>
+      <PseudoTerminal>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <CustomPosition Top="40" Width="320" Height="240" Left="24"/>
+        <Visible Value="True"/>
+        <Caption Value="Console"/>
+      </PseudoTerminal>
+      <Watches>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="Watches"/>
+      </Watches>
+      <BreakPoints>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="BreakPoints"/>
+      </BreakPoints>
+      <Locals>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="Locals"/>
+      </Locals>
+      <CallStack>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="CallStack"/>
+      </CallStack>
+      <EvaluateModify>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="EvaluateModify"/>
+      </EvaluateModify>
+      <Registers>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="Registers"/>
+      </Registers>
+      <Assembler>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <CustomPosition Left="297" Top="143" Width="721" Height="301"/>
+        <Caption Value="Assembler"/>
+      </Assembler>
+      <DbgOutput>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="DbgOutput"/>
+      </DbgOutput>
+      <Inspect>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="Inspect"/>
+      </Inspect>
+      <DbgEvents>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="DbgEvents"/>
+      </DbgEvents>
+      <Threads>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="Threads"/>
+      </Threads>
+      <DbgHistory>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="DbgHistory"/>
+      </DbgHistory>
+      <MainIDE>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <CustomPosition Width="1018" Height="60" Left="40" Top="72"/>
+        <WindowState Value="Normal"/>
+        <Visible Value="True"/>
+        <Caption Value="MainIDE"/>
+      </MainIDE>
+      <SourceNotebook>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <CustomPosition Left="88" Top="168" Width="970" Height="698"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="Source Editor"/>
+      </SourceNotebook>
+      <MessagesView>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <CustomPosition Left="56" Top="104" Width="750" Height="100"/>
+        <WindowState Value="Normal"/>
+        <Visible Value="True"/>
+        <Caption Value="Messages"/>
+      </MessagesView>
+      <UnitDependencies>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="Unit Dependencies"/>
+        <CustomPosition Left="8" Top="8" Width="400" Height="300"/>
+      </UnitDependencies>
+      <CodeExplorerView>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <CustomPosition Left="848" Top="125" Width="170" Height="443"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="CodeExplorerView"/>
+      </CodeExplorerView>
+      <FPDocEditor>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <CustomPosition Left="250" Top="576" Width="716" Height="120"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="FPDocEditor"/>
+      </FPDocEditor>
+      <ClipBrdHistory>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="ClipBrdHistory"/>
+      </ClipBrdHistory>
+      <PkgGraphExplorer>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="PkgGraphExplorer"/>
+      </PkgGraphExplorer>
+      <ProjectInspector>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <CustomPosition Left="8" Top="8" Width="300" Height="400"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="Project Inspector"/>
+      </ProjectInspector>
+      <SearchResults>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="SearchResults"/>
+      </SearchResults>
+      <AnchorEditor>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="AnchorEditor"/>
+      </AnchorEditor>
+      <TabOrderEditor>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="TabOrderEditor"/>
+      </TabOrderEditor>
+      <CodeBrowser>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="CodeBrowser"/>
+      </CodeBrowser>
+      <IssueBrowser>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="IssueBrowser"/>
+      </IssueBrowser>
+      <JumpHistory>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="JumpHistory"/>
+      </JumpHistory>
+      <ComponentList>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="ComponentList"/>
+      </ComponentList>
+      <ObjectInspectorDlg>
+        <WindowPlacement Value="RestoreWindowGeometry"/>
+        <CustomPosition Top="136" Width="230" Height="493" Left="72"/>
+        <WindowState Value="Normal"/>
+        <Caption Value="Object Inspector"/>
+      </ObjectInspectorDlg>
+      <Dialogs Count="7">
+        <Dialog1>
+          <Name Value="TLazFindInFilesDialog"/>
+          <Size Width="0" Height="0"/>
+        </Dialog1>
+        <Dialog2>
+          <Name Value="TLazFindReplaceDialog"/>
+          <Size Width="0" Height="0"/>
+        </Dialog2>
+        <Dialog3>
+          <Name Value="TOpenInstalledPackagesDlg"/>
+          <Size Width="0" Height="0"/>
+        </Dialog3>
+        <Dialog4>
+          <Name Value="TIDEOptionsDialog"/>
+          <Size Width="700" Height="770"/>
+        </Dialog4>
+        <Dialog5>
+          <Name Value="TViewUnitDialog"/>
+          <Size Width="450" Height="300"/>
+        </Dialog5>
+        <Dialog6>
+          <Name Value="TCodeToolsDefinesDialog"/>
+          <Size Width="485" Height="450"/>
+        </Dialog6>
+        <Dialog7>
+          <Name Value="TAddToProjectDialog"/>
+          <Size Width="500" Height="300"/>
+        </Dialog7>
+      </Dialogs>
+      <ComponentPaletteVisible Value="False"/>
+      <IDESpeedButtonsVisible Value="False"/>
+    </Desktop>
+    <FormEditor GuideLineColorLeftTop="16711680" GuideLineColorRightBottom="32768">
+      <Rubberband>
+        <SelectionColor Value="8388608"/>
+        <CreationColor Value="128"/>
+      </Rubberband>
+    </FormEditor>
+    <BackupProjectFiles AdditionalExtension="bak" MaxCounter="9"/>
+    <BackupOtherFiles AdditionalExtension="bak" MaxCounter="9"/>
+    <Debugger Class="TGDBMIDebugger" EventLogLineLimit="100">
+      <WatchesDlg ColumnNameWidth="-1" ColumnValueWidth="-1"/>
+    </Debugger>
+    <Recent>
+      <OpenFiles Max="10" Count="3">
+        <Item1 Value="/home/testuser/ziz/zizalky.pas"/>
+        <Item2 Value="/home/usertest/yyy/gamesa.pas"/>
+        <Item3 Value="/home/usertest/xxx/gamesa-main.pas"/>
+      </OpenFiles>
+      <ProjectFiles Max="5" Count="5">
+        <Item1 Value="/home/testuser/ziz/zizalky_main.lpi"/>
+        <Item2 Value="/home/usertest/yyy/gamesa_main.lpi"/>
+        <Item3 Value="/home/usertest/yyy/gamesa.lpi"/>
+        <Item4 Value="/home/usertest/xxx/gamesa.lpi"/>
+        <Item5 Value="/home/usertest/xxx/project1.lpi"/>
+      </ProjectFiles>
+      <PackageFiles Max="10"/>
+    </Recent>
+    <ExternalTools Count="0"/>
+    <DebuggerFilename Value="/usr/bin/gdb">
+      <History Count="3">
+        <Item1 Value="/usr/bin/gdb"/>
+        <Item2 Value="/usr/local/bin/gdb"/>
+        <Item3 Value="/opt/fpc/gdb"/>
+      </History>
+    </DebuggerFilename>
+    <DebuggerOptions>
+      <ShowStopMessage Value="False"/>
+    </DebuggerOptions>
+  </EnvironmentOptions>
+  <ObjectInspectorOptions ShowHints="False">
+    <Version Value="3"/>
+    <ComponentTree>
+      <Height Value="97"/>
+    </ComponentTree>
+  </ObjectInspectorOptions>
+</CONFIG>

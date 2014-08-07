@@ -462,6 +462,7 @@ sub run_checks() {
 	defined $part or $part = "";
 	my $verdict = `$root/bin/check -s "$submit_filename" $task $part 2>&1`;
 	if ($?) {
+		utf8::decode($verdict);
 		checks_failed($verdict);
 	} else {
 		checks_ok();

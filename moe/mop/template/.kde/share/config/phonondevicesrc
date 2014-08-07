@@ -1,0 +1,92 @@
+[AudioDevice_/org/kde/solid/udev/sys/devices/pci0000:00/0000:00:03.0/0000:01:00.1/sound/card1/pcmC1D3p:playback]
+cardName=HDA ATI HDMI (HDMI 0)
+deleted=false
+deviceNumber=3
+hotpluggable=false
+iconName=audio-card
+index=-3
+initialPreference=33
+isAdvanced=true
+
+[AudioDevice_/org/kde/solid/udev/sys/devices/pci0000:00/0000:00:1b.0/sound/card0/pcmC0D0c:capture]
+cardName=HDA Intel (ALC889 Analog)
+deleted=false
+deviceNumber=0
+hotpluggable=false
+iconName=audio-card
+index=-7
+initialPreference=36
+isAdvanced=false
+
+[AudioDevice_/org/kde/solid/udev/sys/devices/pci0000:00/0000:00:1b.0/sound/card0/pcmC0D0p:playback]
+cardName=HDA Intel (ALC889 Analog)
+deleted=false
+deviceNumber=0
+hotpluggable=false
+iconName=audio-card
+index=-1
+initialPreference=36
+isAdvanced=false
+
+[AudioDevice_/org/kde/solid/udev/sys/devices/pci0000:00/0000:00:1b.0/sound/card0/pcmC0D1p:playback]
+cardName=HDA Intel (ALC889 Digital)
+deleted=false
+deviceNumber=1
+hotpluggable=false
+iconName=audio-card
+index=-2
+initialPreference=35
+isAdvanced=true
+
+[AudioDevice_/org/kde/solid/udev/sys/devices/pci0000:00/0000:00:1b.0/sound/card0/pcmC0D2c:capture]
+cardName=HDA Intel (ALC889 Analog) #2
+deleted=false
+deviceNumber=2
+hotpluggable=false
+iconName=audio-card
+index=-8
+initialPreference=34
+isAdvanced=true
+
+[AudioDevice_HDA ATI HDMI, HDMI 0\nHDMI Audio Output_playback]
+cardName=HDA ATI HDMI, HDMI 0 (HDMI Audio Output)
+deleted=false
+deviceNumber=-1
+hotpluggable=false
+iconName=audio-card
+index=-4
+initialPreference=30
+isAdvanced=false
+
+[AudioDevice_HDA Intel, ALC889 Analog\nDefault Audio Device_capture]
+cardName=HDA Intel, ALC889 Analog (Default Audio Device)
+deleted=false
+deviceNumber=-1
+hotpluggable=false
+iconName=audio-card
+index=-9
+initialPreference=30
+isAdvanced=false
+
+[AudioDevice_HDA Intel, ALC889 Analog\nDefault Audio Device_playback]
+cardName=HDA Intel, ALC889 Analog (Default Audio Device)
+deleted=false
+deviceNumber=-1
+hotpluggable=false
+iconName=audio-card
+index=-5
+initialPreference=30
+isAdvanced=false
+
+[AudioDevice_HDA Intel, ALC889 Digital\nIEC958 (S/PDIF) Digital Audio Output_playback]
+cardName=HDA Intel, ALC889 Digital (IEC958 (S/PDIF) Digital Audio Output)
+deleted=false
+deviceNumber=-1
+hotpluggable=false
+iconName=audio-card
+index=-6
+initialPreference=30
+isAdvanced=true
+
+[Globals]
+nextIndex=10
