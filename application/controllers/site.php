@@ -128,6 +128,7 @@ class Site extends MY_Controller
 			$this->insert_default_rows();
 			$this->create_secret_directory('submission');
 			$this->create_secret_directory('testcase');
+			$this->create_secret_directory('checker');
 			$this->create_directory('files');
 			$this->create_sess_id();
 
@@ -338,6 +339,16 @@ class Site extends MY_Controller
 		                    KEY `problem_id` (`problem_id`)
 		                  ) ENGINE=InnoDB  DEFAULT CHARSET=utf8");
 
+		$this->db->query("DROP TABLE IF EXISTS `checker`");
+		$this->db->query("CREATE TABLE IF NOT EXISTS `checker` (
+			                `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
+		                    `problem_id` int(4) unsigned NOT NULL,
+		                    `checker` varchar(255) NOT NULL,
+		                    `checker_size` int(4) unsigned NOT NULL,
+		                    PRIMARY KEY (`id`),
+		                    KEY `problem_id` (`problem_id`)
+		                  ) ENGINE=InnoDB  DEFAULT CHARSET=utf8");
+
 		$this->db->query("DROP TABLE IF EXISTS `unread_clarification`");
 		$this->db->query("CREATE TABLE IF NOT EXISTS `unread_clarification` (
 			                `user_id` int(4) unsigned DEFAULT NULL,
@@ -402,6 +413,9 @@ class Site extends MY_Controller
 
 		$this->db->query("ALTER TABLE `testcase`
 			                ADD CONSTRAINT `testcase_ibfk_1` FOREIGN KEY (`problem_id`) REFERENCES `problem` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
+
+		$this->db->query("ALTER TABLE `checker`
+			                ADD CONSTRAINT `checker_ibfk_1` FOREIGN KEY (`problem_id`) REFERENCES `problem` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
 	
 		$this->db->query("ALTER TABLE `unread_clarification`
 			                ADD CONSTRAINT `unread_clarification_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -432,6 +446,7 @@ class Site extends MY_Controller
 		$this->db->query("INSERT INTO `setting` (`key`, `value`) VALUES ('items_per_page', '20')");
 		$this->db->query("INSERT INTO `setting` (`key`, `value`) VALUES ('submission_path', '')");
 		$this->db->query("INSERT INTO `setting` (`key`, `value`) VALUES ('testcase_path', '')");
+		$this->db->query("INSERT INTO `setting` (`key`, `value`) VALUES ('checker_path', '')");
 		$this->db->query("INSERT INTO `setting` (`key`, `value`) VALUES ('sess_id', '')");
 
 		$this->db->query("INSERT INTO `grader` (`id`, `hostname`, `last_activity`) VALUES (1, '" . php_uname('n') . "', '0000-00-00 00:00:00')");
