@@ -43,3 +43,10 @@ License
 -------
 
 Regrader is licensed under GNU GPLv3.
+
+Mantainers
+----------
+
+Regrader is maintained by:
+
+- Ashar Fuadi (@fushar)
