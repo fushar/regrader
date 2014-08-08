@@ -51,3 +51,4 @@ Regrader is maintained by:
 
 - Ashar Fuadi (@fushar)
 - Pusaka Kaleb Setyabudi (@sokokaleb)
+- Rakina Zata Amni (@rakina)
