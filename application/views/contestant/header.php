@@ -29,7 +29,7 @@
 	<div class="navbar-inner">
 		<div class="container">
 			<div class="row">
-				<div class="span12">
+				<div class="col-md-12">
 					<ul class="nav">
 						<?php if ($page == 'dashboard') : ?>
 							<li class="active">
@@ -72,7 +72,7 @@
 
 <div class="container">
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<?php if ( ! empty($left_logo)) : ?>
 			<div class="site_logo">
 				<img src="<?php echo base_url(); ?>files/<?php echo $left_logo; ?>" />
@@ -96,7 +96,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<hr />
 		</div>
 	</div>

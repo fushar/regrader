@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<table class="table table-bordered table-condensed table-scoreboard">
 				<thead>
 					<tr>

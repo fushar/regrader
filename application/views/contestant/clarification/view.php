@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<ul class="breadcrumb">
 				<li><i class="icon-envelope"></i> <?php echo $this->lang->line('clarifications'); ?></li>
 				<li><span class="divider">|</span></li>
@@ -14,7 +14,7 @@
 	</div>
 	
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<h3><?php echo $this->lang->line('general_info'); ?></h3>
 			<table class="table table-bordered table-striped">
 				<thead>

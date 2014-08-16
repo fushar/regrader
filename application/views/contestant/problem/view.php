@@ -49,7 +49,7 @@
 	</div>
 
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<ul class="breadcrumb">
 				<li><i class="icon-book"></i> <?php echo $this->lang->line('problems'); ?></li>
 				<li><span class="divider">|</span></li>
@@ -63,7 +63,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="span2">
+		<div class="col-md-12">
 			<ul class="nav nav-tabs nav-stacked problem-list">
 				<li><a href="#"><i class="icon-random"></i> <?php echo $this->lang->line('problems'); ?>:</a></li>
 				
@@ -72,7 +72,7 @@
 				<?php endforeach; ?>
 			</ul>
 		</div>	
-		<div class="span10">		
+		<div class="col-md-10">		
 			<h2 class="problem-title"><?php echo $problem['name']; ?></h2>
 			<table class="table table-bordered problem-limits">
 				<tr>

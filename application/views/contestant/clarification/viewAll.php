@@ -24,14 +24,14 @@
 					<div class="control-group<?php echo form_error('form[title]') == '' ? '' : ' error'; ?>">
 						<label class="control-label"><?php echo $this->lang->line('title'); ?>:</label>
 						<div class="controls">
-							<input name="form[title]" type="text" class="span4" maxlength="255" value="<?php echo set_value('form[title]'); ?>"/>
+							<input name="form[title]" type="text" class="col-md-4" maxlength="255" value="<?php echo set_value('form[title]'); ?>"/>
 							<span class="help-inline"><?php echo form_error('form[title]'); ?></span>
 						</div>
 					</div>
 					<div class="control-group<?php echo form_error('form[content]') == '' ? '' : ' error'; ?>">
 						<label class="control-label"><?php echo $this->lang->line('content'); ?>:</label>
 						<div class="controls">
-							<textarea name="form[content]" type="text" class="span4"><?php echo set_value('form[content]'); ?></textarea>
+							<textarea name="form[content]" type="text" class="col-md-4"><?php echo set_value('form[content]'); ?></textarea>
 							<span class="help-inline"><?php echo form_error('form[content]'); ?></span>
 						</div>
 					</div>
@@ -45,7 +45,7 @@
 	</div>
 
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<ul class="breadcrumb">
 				<li><i class="icon-envelope"></i> <?php echo $this->lang->line('clarifications'); ?></li>
 				<li><span class="divider">|</span></li>
@@ -60,7 +60,7 @@
 	</div>
 	
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<?php if ($this->session->flashdata('submit_successful')): ?>
 			<div class="alert alert-success">
 				<?php echo $this->lang->line('add_clarification_successful'); ?>

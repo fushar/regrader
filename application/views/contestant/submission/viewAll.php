@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<ul class="breadcrumb">
 				<li><i class="icon-share"></i> <?php echo $this->lang->line('submissions'); ?></li>
 				<li><span class="divider">|</span></li>
@@ -14,7 +14,7 @@
 	</div>
 	
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<?php if ($this->session->flashdata('submit_successful')): ?>
 			<div class="alert alert-success">
 				<?php echo $this->lang->line('submit_successful'); ?>
