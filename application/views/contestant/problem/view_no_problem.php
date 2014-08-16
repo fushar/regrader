@@ -2,9 +2,9 @@
 	<div class="row">
 		<div class="col-md-12">
 			<ul class="breadcrumb">
-				<li><i class="icon-book"></i> <?php echo $this->lang->line('problems'); ?></li>
+				<li><i class="glyphicon glyphicon-book"></i> <?php echo $this->lang->line('problems'); ?></li>
 				<li class="pull-right">
-					<i class="icon-time"></i> <span id="contest_clock"></span> <?php echo $this->lang->line('remaining'); ?>
+					<i class="glyphicon glyphicon-time"></i> <span id="contest_clock"></span> <?php echo $this->lang->line('remaining'); ?>
 				</li>
 			</ul>
 		</div>
@@ -12,7 +12,7 @@
 	<div class="row">
 		<div class="col-md-2">
 			<ul class="nav nav-tabs nav-stacked problem-list">
-				<li><a href="#"><i class="icon-random"></i> <?php echo $this->lang->line('problems'); ?>:</a></li>
+				<li><a href="#"><i class="glyphicon glyphicon-random"></i> <?php echo $this->lang->line('problems'); ?>:</a></li>
 			</ul>
 		</div>	
 		<div class="col-md-10">		

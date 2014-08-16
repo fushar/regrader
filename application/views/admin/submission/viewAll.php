@@ -65,15 +65,15 @@
 						<?php
 							$verdict = max(0, $v['verdict']);
 							if ($verdict == 0)
-								echo '<span class="badge badge-inverse"><i class="glyphicon glyphicon-refresh glyphicon glyphicon-white"></i> ' . $this->lang->line('verdict_abbr_0') . '</span>';
+								echo '<span class="label label-default"><i class="glyphicon glyphicon-refresh glyphicon glyphicon-white"></i> ' . $this->lang->line('verdict_abbr_0') . '</span>';
 							else if ($verdict == 2)
-								echo '<span class="badge badge-success"><i class="glyphicon glyphicon-ok glyphicon glyphicon-white"></i> ' . $this->lang->line('verdict_abbr_2') . '</span>';
+								echo '<span class="label label-success"><i class="glyphicon glyphicon-ok glyphicon glyphicon-white"></i> ' . $this->lang->line('verdict_abbr_2') . '</span>';
 							else if ($verdict == 3)
-								echo '<span class="badge badge-important"><i class="glyphicon glyphicon-remove glyphicon glyphicon-white"></i> ' . $this->lang->line('verdict_abbr_3') . '</span>';
+								echo '<span class="label label-danger"><i class="glyphicon glyphicon-remove glyphicon glyphicon-white"></i> ' . $this->lang->line('verdict_abbr_3') . '</span>';
 							else if ($verdict == 99)
-								echo '<span class="badge">' . $this->lang->line('verdict_abbr_99') . '</span>';
+								echo '<span class="label label-info">' . $this->lang->line('verdict_abbr_99') . '</span>';
 							else
-								echo '<span class="badge badge-warning"><i class="glyphicon glyphicon-warning-sign glyphicon glyphicon-white"></i> ' . $this->lang->line('verdict_abbr_' . $verdict) . '</span>';
+								echo '<span class="label label-warning"><i class="glyphicon glyphicon-warning-sign glyphicon glyphicon-white"></i> ' . $this->lang->line('verdict_abbr_' . $verdict) . '</span>';
 						?>
 						</td>
 						<td class="operations-td">

@@ -1,41 +1,45 @@
 <div class="container">
-	<div class="modal hide" id="submit">
+	<div class="modal" id="submit">
 		<form method="post">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h3><?php echo $this->lang->line('new_clarification'); ?></h3>
-			</div>
-			<div class="modal-body">
-				<div class="control-group<?php echo form_error('form[contest_id]') == '' ? '' : ' error'; ?>">
-					<label><?php echo $this->lang->line('contest'); ?>:</label>
-					<select name="form[contest_id]" class="col-md-4">
-						<?php foreach ($contests as $v) :?>
-							<option value="<?php echo $v['id']; ?>" <?php echo set_select('form[contest_id]', $v['id'], FALSE); ?>><?php echo $v['name']; ?></option>
-						<?php endforeach; ?>
-					</select>
-					<span class="help-inline"><?php echo form_error('form[contest_id]'); ?></span>
-					<?php if (empty($contests)) : ?>
-						<p class="help-block"><i><?php echo $this->lang->line('no_contest'); ?></i></p>
-					<?php endif; ?>
-				</div>
-				<div class="control-group<?php echo form_error('form[title]') == '' ? '' : ' error'; ?>">
-					<label class="control-label"><?php echo $this->lang->line('title'); ?>:</label>
-					<div class="controls">
-						<input name="form[title]" type="text" class="col-md-4" maxlength="255" value="<?php echo set_value('form[title]'); ?>"/>
-						<span class="help-inline"><?php echo form_error('form[title]'); ?></span>
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h3><?php echo $this->lang->line('new_clarification'); ?></h3>
+					</div>
+					<div class="modal-body">
+						<div class="form-group<?php echo form_error('form[contest_id]') == '' ? '' : ' error'; ?>">
+							<label><?php echo $this->lang->line('contest'); ?>:</label>
+							<select name="form[contest_id]" class="col-md-4 form-control">
+								<?php foreach ($contests as $v) :?>
+									<option value="<?php echo $v['id']; ?>" <?php echo set_select('form[contest_id]', $v['id'], FALSE); ?>><?php echo $v['name']; ?></option>
+								<?php endforeach; ?>
+							</select>
+							<span class="help-block"><?php echo form_error('form[contest_id]'); ?></span>
+							<?php if (empty($contests)) : ?>
+								<p class="help-block"><i><?php echo $this->lang->line('no_contest'); ?></i></p>
+							<?php endif; ?>
+						</div>
+						<div class="form-group<?php echo form_error('form[title]') == '' ? '' : ' error'; ?>">
+							<label class="control-label"><?php echo $this->lang->line('title'); ?>:</label>
+							<div class="controls">
+								<input name="form[title]" type="text" class="col-md-4 form-control" maxlength="255" value="<?php echo set_value('form[title]'); ?>"/>
+								<span class="help-block"><?php echo form_error('form[title]'); ?></span>
+							</div>
+						</div>
+						<div class="form-group<?php echo form_error('form[content]') == '' ? '' : ' error'; ?>">
+							<label class="control-label"><?php echo $this->lang->line('content'); ?>:</label>
+							<div class="controls">
+								<textarea name="form[content]" type="text" class="col-md-4 form-control"><?php echo set_value('form[content]'); ?></textarea>
+								<span class="help-block"><?php echo form_error('form[content]'); ?></span>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-plus glyphicon-white"></i> <?php echo $this->lang->line('broadcast'); ?></button>
+						<a href="#" class="btn btn-default" data-dismiss="modal"><?php echo $this->lang->line('cancel'); ?></a>
 					</div>
 				</div>
-				<div class="control-group<?php echo form_error('form[content]') == '' ? '' : ' error'; ?>">
-					<label class="control-label"><?php echo $this->lang->line('content'); ?>:</label>
-					<div class="controls">
-						<textarea name="form[content]" type="text" class="col-md-4"><?php echo set_value('form[content]'); ?></textarea>
-						<span class="help-inline"><?php echo form_error('form[content]'); ?></span>
-					</div>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-plus glyphicon-white"></i> <?php echo $this->lang->line('broadcast'); ?></button>
-				<a href="#" class="btn" data-dismiss="modal"><?php echo $this->lang->line('cancel'); ?></a>
 			</div>
 		</form>
 	</div>

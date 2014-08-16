@@ -63,6 +63,14 @@ ul.problem-list li.chosen a{
 	color: white;
 }
 
+ul.problem-list li.chosen:hover a{
+	color: #333333;
+}
+
+ul.problem-list li.chosen:hover{
+	background-color: white;
+}
+
 .table th {
 	background-color: #222222;
 	color: white;
@@ -242,9 +250,8 @@ table.table-scoreboard th {
 	padding: 6px;
 }
 
-
 select{
-	height: 28px;
+	height: 30px;
 	margin-right: 5px;
 }
 

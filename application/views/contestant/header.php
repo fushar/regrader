@@ -25,39 +25,36 @@
 
 <body>
 
-<div class="navbar navbar-fixed-top">
-	<div class="navbar-inner">
-		<div class="container">
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<ul class="nav">
+					<ul class="nav navbar-nav">
 						<?php if ($page == 'dashboard') : ?>
 							<li class="active">
-								<a href="#"><i class="icon-home icon-white"></i> <?php echo $this->lang->line('dashboard'); ?></a>
+								<a href="#"><i class="glyphicon glyphicon-home glyphicon-white"></i> <?php echo $this->lang->line('dashboard'); ?></a>
 							</li>
 						<?php else: ?>
 							<li<?php if ($page == 'problem') echo ' class="active"'; ?>>
-								<a href="<?php echo site_url('contestant/problem'); ?>"><i class="icon-book icon-white"></i> <?php echo $this->lang->line('problems'); ?></a>
+								<a href="<?php echo site_url('contestant/problem'); ?>"><i class="glyphicon glyphicon-book glyphicon-white"></i> <?php echo $this->lang->line('problems'); ?></a>
 							</li>
 							<li<?php if ($page == 'submission') echo ' class="active"'; ?>>
-								<a href="<?php echo site_url('contestant/submission'); ?>"><i class="icon-share icon-white"></i> <?php echo $this->lang->line('submissions'); ?></a>
+								<a href="<?php echo site_url('contestant/submission'); ?>"><i class="glyphicon glyphicon-share glyphicon-white"></i> <?php echo $this->lang->line('submissions'); ?></a>
 							</li>
 							<li<?php if ($page == 'clarification') echo ' class="active"'; ?>>
-								<a href="<?php echo site_url('contestant/clarification'); ?>"><i class="icon-envelope icon-white"></i> <?php echo $this->lang->line('clarifications'); ?><?php if ($unread_clar_cnt > 0) echo ' <span class="unread_clarifications">(' . $unread_clar_cnt . ' ' . $this->lang->line('new') . ')</span>'; ?></a>
+								<a href="<?php echo site_url('contestant/clarification'); ?>"><i class="glyphicon glyphicon-envelope glyphicon-white"></i> <?php echo $this->lang->line('clarifications'); ?><?php if ($unread_clar_cnt > 0) echo ' <span class="unread_clarifications">(' . $unread_clar_cnt . ' ' . $this->lang->line('new') . ')</span>'; ?></a>
 							</li>
 							<li<?php if ($page == 'scoreboard') echo ' class="active"'; ?>>
-								<a href="<?php echo site_url('contestant/scoreboard'); ?>"><i class="icon-list icon-white"></i> <?php echo $this->lang->line('scoreboard'); ?></a>
+								<a href="<?php echo site_url('contestant/scoreboard'); ?>"><i class="glyphicon glyphicon-list glyphicon-white"></i> <?php echo $this->lang->line('scoreboard'); ?></a>
 							</li>
 						<?php endif; ?>
 					</ul>
-					<ul class="nav pull-right">
-						<li class="divider-vertical"></li>
+					<ul class="nav navbar-nav pull-right">
 						<li>
-							<a href="#"><i class="icon-time icon-white"></i> <span id="server_clock"></span></a>
+							<a href="#"><i class="glyphicon glyphicon-time glyphicon-white"></i> <span id="server_clock"></span></a>
 						</li>
-						<li class="divider-vertical"></li>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i> <?php echo $active_user_name; ?> <b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user glyphicon-white"></i> <?php echo $active_user_name; ?> <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="<?php echo site_url('contestant/dashboard'); ?>"><?php echo $this->lang->line('dashboard'); ?></a></li>
 								<li><a href="<?php echo site_url('site/logout'); ?>"><?php echo $this->lang->line('logout'); ?></a></li>
@@ -67,7 +64,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 </div>
 
 <div class="container">

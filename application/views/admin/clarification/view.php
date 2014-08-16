@@ -2,8 +2,8 @@
 	<div class="row">
 		<div class="col-md-12">
 			<ul class="breadcrumb">
-				<li><i class="icon-envelope"></i> <?php echo $this->lang->line('clarifications'); ?></li>
-				<li><i class="icon-list-alt"></i> <?php echo $this->lang->line('clarification'); ?> <?php echo $clarification['id']; ?></li>
+				<li><i class="glyphicon glyphicon-envelope"></i> <?php echo $this->lang->line('clarifications'); ?></li>
+				<li><i class="glyphicon glyphicon-list-alt"></i> <?php echo $this->lang->line('clarification'); ?> <?php echo $clarification['id']; ?></li>
 				
 			</ul>
 		</div>
@@ -34,10 +34,10 @@
 
 				<h3><?php echo $this->lang->line('the_answer'); ?></h3>
 				
-				<div class="control-group<?php echo form_error('form[answer]') == '' ? '' : ' error'; ?>">
+				<div class="form-group<?php echo form_error('form[answer]') == '' ? '' : ' error'; ?>">
 					<div class="controls">
-						<textarea name="form[answer]" type="text" class="col-md-4"><?php echo set_value('form[answer]', @$clarification['answer']); ?></textarea>
-						<span class="help-inline"><?php echo form_error('form[answer]'); ?></span>
+						<textarea name="form[answer]" type="text" class="col-md-4 form-control"><?php echo set_value('form[answer]', @$clarification['answer']); ?></textarea>
+						<span class="help-block"><?php echo form_error('form[answer]'); ?></span>
 					</div>
 				</div>
 			<?php endif; ?>
