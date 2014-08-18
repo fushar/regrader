@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<ul class="breadcrumb">
 				<li>
 					<i class="icon-home"></i> <?php echo $this->lang->line('dashboard'); ?>
@@ -10,7 +10,7 @@
 	</div>
 	
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<h3><?php echo $this->lang->line('choose_contest'); ?></h3>	
 			<p><?php echo $this->lang->line('please_choose_contest'); ?></p>
 
@@ -20,7 +20,7 @@
 	    		</div>
     		<?php else : ?>
 				<form class="form-inline" action="" method="post">
-					<select name="form[contest_id]" class="span10">
+					<select name="form[contest_id]" class="col-md-10">
 						<?php foreach ($contests as $v) : ?>
 							<option value="<?php echo $v['id']; ?>"><?php echo $v['name']; ?></option>
 						<?php endforeach; ?>

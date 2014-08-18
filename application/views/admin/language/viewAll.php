@@ -1,18 +1,16 @@
 <div class="container">
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<ul class="breadcrumb">
-				<li><i class="icon-globe"></i> <?php echo $this->lang->line('languages'); ?></li>
-				<li><span class="divider">|</span></li>
-				<li><i class="icon-list-alt"></i> <?php echo $this->lang->line('language_list'); ?></li>
-				<li><span class="divider">|</span></li>
-				<li><i class="icon-plus"></i> <a href="<?php echo site_url('admin/language/edit/0/' . $page_offset); ?>"><?php echo $this->lang->line('add_new_language'); ?></a></li>
+				<li><i class="glyphicon glyphicon-globe"></i> <?php echo $this->lang->line('languages'); ?></li>
+				<li><i class="glyphicon glyphicon-list-alt"></i> <?php echo $this->lang->line('language_list'); ?></li>
+				<li><i class="glyphicon glyphicon-plus"></i> <a href="<?php echo site_url('admin/language/edit/0/' . $page_offset); ?>"><?php echo $this->lang->line('add_new_language'); ?></a></li>
 			</ul>
 		</div>
 	</div>
 	
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<?php if ($this->session->flashdata('add_successful')): ?>
 			<div class="alert alert-success">
 				<?php echo $this->lang->line('add_language_successful'); ?>
@@ -32,7 +30,7 @@
 			<?php endif; ?>
 
 			<?php if ($this->session->flashdata('error') != ''): ?>
-			<div class="alert alert-error">
+			<div class="alert alert-danger">
 				<?php echo $this->session->flashdata('error'); ?>
 			</div>
 			<?php endif; ?>
@@ -48,9 +46,9 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th class="id-th"><i class="icon-tag icon-white"></i></th>
-						<th><i class="icon-eye-open icon-white"></i> <?php echo $this->lang->line('name'); ?></th>
-						<th class="operations-th"><i class="icon-cog icon-white"></i></th>
+						<th class="id-th"><i class="glyphicon glyphicon-tag glyphicon-white"></i></th>
+						<th><i class="glyphicon glyphicon-eye-open glyphicon-white"></i> <?php echo $this->lang->line('name'); ?></th>
+						<th class="operations-th"><i class="glyphicon glyphicon-cog glyphicon-white"></i></th>
 					</tr>
 				</thead>
 
@@ -59,16 +57,16 @@
 					<tr>
 						<td class="id-td"><?php echo $v['id']; ?></td>
 						<td><?php echo $v['name']; ?></td>
-						<td class="operations-td"><a href="<?php echo site_url('admin/language/edit/' . $v['id'] . '/' . $page_offset); ?>" rel="tooltip" title="<?php echo $this->lang->line('edit'); ?>"><i class="icon-pencil"></i></a>
-							<a href="<?php echo site_url('admin/language/delete/' . $v['id'] . '/' . $page_offset); ?>" rel="tooltip" title="<?php echo $this->lang->line('delete'); ?>" onclick="return confirm('<?php printf($this->lang->line('confirm_delete_language'), $v['id'], $v['name']); ?>');"><i class="icon-trash"></i></td>
+						<td class="operations-td"><a href="<?php echo site_url('admin/language/edit/' . $v['id'] . '/' . $page_offset); ?>" rel="tooltip" title="<?php echo $this->lang->line('edit'); ?>"><i class="glyphicon glyphicon-pencil"></i></a>
+							<a href="<?php echo site_url('admin/language/delete/' . $v['id'] . '/' . $page_offset); ?>" rel="tooltip" title="<?php echo $this->lang->line('delete'); ?>" onclick="return confirm('<?php printf($this->lang->line('confirm_delete_language'), $v['id'], $v['name']); ?>');"><i class="glyphicon glyphicon-trash"></i></td>
 						</tr>
 					<?php endforeach; ?>
 				</tbody>
 			</table>
 			
-			<div class="pagination">
+			<ul class="pagination">
 				<?php echo $pager; ?>
-			</div>
+			</ul>
 		</div>
 	</div>
 	

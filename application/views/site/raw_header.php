@@ -18,7 +18,7 @@
 	<div class="navbar-inner">
 		<div class="container">
 			<div class="row">
-				<div class="span12">
+				<div class="col-md-12">
 					<ul class="nav">
 						<li class="active">
 							<a href="#">
@@ -63,7 +63,7 @@
 		<div class="site_logo_right">
 			<img src="files/<?php echo $right_logo2; ?>" />
 		</div>
-		<div class="span12">
+		<div class="col-md-12">
 			<hr />
 		</div>
 	</div>
