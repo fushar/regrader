@@ -14,25 +14,25 @@
 
 <body>
 
-<div class="navbar navbar-fixed-top">
-	<div class="navbar-inner">
+<div class="navbar navbar-inverse navbar-fixed-top">
+	
 		<div class="container">
 			<div class="row">
-				<div class="span12">
-					<ul class="nav">
+				<div class="col-md-12">
+					<ul class="nav navbar-nav">
 						<li class="active">
-							<a href="#"><i class="icon-hdd icon-white"></i> Installation</a>
+							<a href="#"><i class="glyphicon-hdd glyphicon-white glyphicon"></i> Installation</a>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
-	</div>
+	
 </div>
 
 <div class="container">
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<div class="site_name">
 				<h1>Regrader</h1>
 				<h3>Programming Contest System</h3>
@@ -41,7 +41,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<hr />
 		</div>
 	</div>
@@ -49,17 +49,17 @@
 
 <div class="container">
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<ul class="breadcrumb">
 				<li>
-					<i class="icon-hdd"></i> Installation
+					<i class="glyphicon glyphicon-hdd"></i> Installation
 				</li>
 			</ul>
 		</div>
 	</div>
 	
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<h3><?php echo $heading; ?></h3>	
 			<?php echo $content; ?>
 			<hr />

@@ -15,42 +15,41 @@
 
 <body>
 	
-<div class="navbar navbar-fixed-top">
-	<div class="navbar-inner">
+<div class="navbar navbar-inverse navbar-fixed-top">
+	
 		<div class="container">
 			<div class="row">
-				<div class="span12">
-					<ul class="nav">
+				<div class="col-md-12">
+					<ul class="nav navbar-nav">
 						<li class="active">
 							<a href="#">
 							<?php if ($page == 'login') : ?>
-								<i class="icon-off icon-white"></i> <?php echo $this->lang->line('login'); ?>
+								<i class="glyphicon glyphicon-off glyphicon-white"></i> <?php echo $this->lang->line('login'); ?>
 							<?php else : ?>
-								<i class="icon-list icon-white"></i> <?php echo $this->lang->line('scoreboard'); ?>
+								<i class="glyphicon glyphicon-list glyphicon-white"></i> <?php echo $this->lang->line('scoreboard'); ?>
 							<?php endif; ?>
 							</a>
 						</li>
 					</ul>
-					<ul class="nav pull-right">
-						<li class="divider-vertical"></li>
+					<ul class="nav navbar-nav pull-right">
 						<li>
-							<a href="#"><i class="icon-time icon-white"></i> <span id="server_clock"></span></a>
+							<a href="#"><i class="glyphicon glyphicon-time glyphicon-white"></i> <span id="server_clock"></span></a>
 						</li>
-						<li class="divider-vertical"></li>
+						
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i> <?php echo $this->lang->line('guest'); ?> <b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user glyphicon-white"></i> <?php echo $this->lang->line('guest'); ?> <b class="caret"></b></a>
 							
 						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
-	</div>
+	
 </div>
 
 <div class="container">
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<?php if ( ! empty($left_logo)) : ?>
 			<div class="site_logo">
 				<img src="<?php echo base_url(); ?>files/<?php echo $left_logo; ?>" />
@@ -74,7 +73,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<hr />
 		</div>
 	</div>
