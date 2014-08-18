@@ -1,7 +1,6 @@
 <script type="text/javascript">
 tinyMCE.init({
-	theme: "advanced",
-	mode: "textareas",
+	selector: "textarea",
 	width: "768",
 	height: "600",
 	relative_urls: false, 
@@ -12,66 +11,66 @@ tinyMCE.init({
 
 <div class="container">
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<ul class="breadcrumb">
-				<li><i class="icon-book"></i> <?php echo $this->lang->line('problems'); ?></li>
-				<li><span class="divider">|</span></li>
-				<li><i class="icon-list-alt"></i> <?php echo isset($problem) ? $this->lang->line('problem') . ' ' . $problem['id'] : $this->lang->line('new_problem'); ?></li>
+				<li><i class="glyphicon glyphicon-book"></i> <?php echo $this->lang->line('problems'); ?></li>
+				<li><i class="glyphicon glyphicon-list-alt"></i> <?php echo isset($problem) ? $this->lang->line('problem') . ' ' . $problem['id'] : $this->lang->line('new_problem'); ?></li>
 			</ul>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="span12">
+
+		<div class="col-md-12">
 			<h3><?php echo isset($problem) ? $this->lang->line('edit_problem') : $this->lang->line('add_problem'); ?></h3>
 			<form class="form-horizontal" action="" method="post">
-				<div class="control-group<?php echo form_error('form[name]') == '' ? '' : ' error'; ?>">
-					<label class="control-label"><?php echo $this->lang->line('name'); ?></label>
-					<div class="controls">
-						<input name="form[name]" type="text" class="span4" maxlength="50" value="<?php echo set_value('form[name]', @$problem['name']); ?>"/>
-						<span class="help-inline"><?php echo form_error('form[name]'); ?></span>
+				<div class="form-group<?php echo form_error('form[name]') == '' ? '' : ' has-error'; ?>">
+					<label class="col-sm-2 control-label"><?php echo $this->lang->line('name'); ?></label>
+					<div class="col-sm-4">
+						<input name="form[name]" type="text" class="form-control" maxlength="50" value="<?php echo set_value('form[name]', @$problem['name']); ?>"/>
+						<span class="help-block"><?php echo form_error('form[name]'); ?></span>
 					</div>
 				</div>
 
-				<div class="control-group<?php echo form_error('form[author]') == '' ? '' : ' error'; ?>">
-					<label class="control-label"><?php echo $this->lang->line('author'); ?></label>
-					<div class="controls">
-						<input name="form[author]" type="text" class="span4" maxlength="50" value="<?php echo set_value('form[author]', @$problem['author']); ?>"/>
-						<span class="help-inline"><?php echo form_error('form[author]'); ?></span>
+				<div class="form-group<?php echo form_error('form[author]') == '' ? '' : ' has-error'; ?>">
+					<label class="col-sm-2 control-label"><?php echo $this->lang->line('author'); ?></label>
+					<div class="col-sm-4">
+						<input name="form[author]" type="text" class="form-control" maxlength="50" value="<?php echo set_value('form[author]', @$problem['author']); ?>"/>
+						<span class="help-block"><?php echo form_error('form[author]'); ?></span>
 					</div>
 				</div>
 
-				<div class="control-group<?php echo form_error('form[time_limit]') == '' ? '' : ' error'; ?>">
-					<label class="control-label"><?php echo $this->lang->line('time_limit'); ?></label>
-					<div class="controls">
-						<div class="input-append">
-							<input name="form[time_limit]" type="text" class="span4" maxlength="8" value="<?php echo set_value('form[time_limit]', @$problem['time_limit']); ?>"/><span class="add-on"><?php echo $this->lang->line('second'); ?></span>
+				<div class="form-group<?php echo form_error('form[time_limit]') == '' ? '' : ' has-error'; ?>">
+					<label class="col-sm-2 control-label"><?php echo $this->lang->line('time_limit'); ?></label>
+					<div class= "col-sm-4">
+						<div class="input-group">
+							<input name="form[time_limit]" type="text" class="form-control" maxlength="8" value="<?php echo set_value('form[time_limit]', @$problem['time_limit']); ?>"/><span class="input-group-addon"><?php echo $this->lang->line('second'); ?></span>
 						</div>
-						<span class="help-inline"><?php echo form_error('form[time_limit]'); ?></span>
+						<span class="help-block"><?php echo form_error('form[time_limit]'); ?></span>
 					</div>
 				</div>
 
-				<div class="control-group<?php echo form_error('form[memory_limit]') == '' ? '' : ' error'; ?>">
-					<label class="control-label"><?php echo $this->lang->line('memory_limit'); ?></label>
-					<div class="controls">
-						<div class="input-append">
-							<input name="form[memory_limit]" type="text" class="span4" maxlength="8" value="<?php echo set_value('form[memory_limit]', @$problem['memory_limit']); ?>"/><span class="add-on">MB</span>
+				<div class="form-group<?php echo form_error('form[memory_limit]') == '' ? '' : ' has-error'; ?>">
+					<label><?php echo $this->lang->line('memory_limit'); ?></label>
+					<div class= "col-sm-4">
+						<div class="input-group">
+							<input name="form[memory_limit]" type="text" class="form-control" maxlength="8" value="<?php echo set_value('form[memory_limit]', @$problem['memory_limit']); ?>"/><span class="input-group-addon">MB</span>
 						</div>
-						<span class="help-inline"><?php echo form_error('form[memory_limit]'); ?></span>
+						<span class="help-block"><?php echo form_error('form[memory_limit]'); ?></span>
 					</div>
 				</div>
 
-				<div class="control-group<?php echo form_error('form[statement]') == '' ? '' : ' error'; ?>">
-					<label class="control-label"><?php echo $this->lang->line('statement'); ?></label>
-					<div class="controls">
-						<textarea name="form[statement]"><?php echo set_value('form[statement]', isset($problem) ? @$problem['statement'] : $this->lang->line('default_statement')); ?></textarea>
-						<span class="help-inline"><?php echo form_error('form[statement]'); ?></span>
-					</div>
+				<div class="form-group<?php echo form_error('form[statement]') == '' ? '' : ' has-error'; ?>">
+					<label><?php echo $this->lang->line('statement'); ?></label>
+					<div class= "col-sm-8">
+						<textarea  name="form[statement]"><?php echo set_value('form[statement]', isset($problem) ? @$problem['statement'] : $this->lang->line('default_statement')); ?></textarea>
+						<span class="help-block"><?php echo form_error('form[statement]'); ?></span>
+					<div>
 				</div>
 
 				<div class="form-actions">
-					<button type="submit" class="btn btn-danger"><?php echo isset($problem) ? '<i class="icon-download-alt icon-white"></i> ' . $this->lang->line('save') : '<i class="icon-plus icon-white"></i> ' . $this->lang->line('add'); ?></button>
-					<a class="btn" href="<?php echo site_url('admin/problem/viewAll/' . $page_offset); ?>"><?php echo $this->lang->line('cancel'); ?></a>
+					<button type="submit" class="btn btn-danger"><?php echo isset($problem) ? '<i class="glyphicon glyphicon-download-alt glyphicon-white"></i> ' . $this->lang->line('save') : '<i class="glyphicon glyphicon-plus glyphicon-white"></i> ' . $this->lang->line('add'); ?></button>
+					<a class="btn btn-default" href="<?php echo site_url('admin/problem/viewAll/' . $page_offset); ?>"><?php echo $this->lang->line('cancel'); ?></a>
 				</div>
 			</form>
 		</div>
