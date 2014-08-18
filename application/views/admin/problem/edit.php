@@ -51,7 +51,7 @@ tinyMCE.init({
 				</div>
 
 				<div class="form-group<?php echo form_error('form[memory_limit]') == '' ? '' : ' has-error'; ?>">
-					<label><?php echo $this->lang->line('memory_limit'); ?></label>
+					<label class="col-sm-2 control-label"><?php echo $this->lang->line('memory_limit'); ?></label>
 					<div class= "col-sm-4">
 						<div class="input-group">
 							<input name="form[memory_limit]" type="text" class="form-control" maxlength="8" value="<?php echo set_value('form[memory_limit]', @$problem['memory_limit']); ?>"/><span class="input-group-addon">MB</span>
@@ -61,7 +61,7 @@ tinyMCE.init({
 				</div>
 
 				<div class="form-group<?php echo form_error('form[statement]') == '' ? '' : ' has-error'; ?>">
-					<label><?php echo $this->lang->line('statement'); ?></label>
+					<label class="col-sm-2 control-label"><?php echo $this->lang->line('statement'); ?></label>
 					<div class= "col-sm-8">
 						<textarea  name="form[statement]"><?php echo set_value('form[statement]', isset($problem) ? @$problem['statement'] : $this->lang->line('default_statement')); ?></textarea>
 						<span class="help-block"><?php echo form_error('form[statement]'); ?></span>
