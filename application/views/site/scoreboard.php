@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<ul class="breadcrumb">
 				<li><i class="icon-list"></i> <?php echo $this->lang->line('scoreboard'); ?></li>
 				<?php if ($frozen) : ?>

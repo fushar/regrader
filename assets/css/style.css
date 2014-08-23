@@ -63,6 +63,14 @@ ul.problem-list li.chosen a{
 	color: white;
 }
 
+ul.problem-list li.chosen:hover a{
+	color: #333333;
+}
+
+ul.problem-list li.chosen:hover{
+	background-color: white;
+}
+
 .table th {
 	background-color: #222222;
 	color: white;
@@ -75,7 +83,7 @@ ul.problem-list li.chosen a{
 }
 
 .table .operations-th, .table .operations-td {
-	width: 70px;
+	width: 105px;
 	text-align: center;
 }
 
@@ -88,8 +96,17 @@ ul.problem-list li.chosen a{
 	text-align: center;
 }
 
+.table .submission-verdict-th {
+	width: 85px;
+	text-align: center;
+}
+
+.table .submission-time-th {
+	width: 155px;
+}
+
 .table .submission-language-th {
-	width: 75px;
+	width: 105px;
 }
 
 .table .submission-info-th {
@@ -98,6 +115,14 @@ ul.problem-list li.chosen a{
 
 .table .clarification-info-th {
 	width: 120px;
+}
+
+.table .clarification-time-th {
+	width: 155px;
+}
+
+.table .clarification-status-th {
+	width: 100px;
 }
 
 .table .clarification-answered-td {
@@ -115,7 +140,7 @@ ul.problem-list li.chosen a{
 }
 
 .table .problem-limits-th {
-	width: 100px;
+	width: 130px;
 }
 
 .table .problem-filesize-th {
@@ -175,11 +200,13 @@ ul.problem-list li.chosen a{
 .table .scoreboard-total-accepted-td {
 	width: 40px;
 	text-align: center;
+	vertical-align: middle;
 }
 
 .table .scoreboard-total-penalty-td {
 	width: 40px;
 	text-align: center;
+	vertical-align: middle;
 }
 
 .table .scoreboard-problem-td {
@@ -187,6 +214,7 @@ ul.problem-list li.chosen a{
 	min-width: 40px;
 	max-width: 100px;
 	text-align: center;
+	vertical-align: middle;
 }
 
 .table .scoreboard-accepted-td {
@@ -225,3 +253,31 @@ table.table-scoreboard th {
 	padding: 6px;
 }
 
+select{
+	height: 30px;
+	margin-right: 5px;
+}
+
+.btn{
+	padding: 4px 12px;
+}
+
+.form-horizontal{
+	margin: 0 15px;
+}
+
+.glyphicon{
+	padding: 0 2px;
+}
+
+.operations-td .glyphicon{
+	color: #333;
+}
+
+body{
+	padding: 20px;
+}
+
+.form-inline{
+	margin-bottom: 12px;
+}

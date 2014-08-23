@@ -1,9 +1,9 @@
 <div class="container">
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<ul class="breadcrumb">
 				<li>
-					<i class="icon-off"></i> <?php echo $this->lang->line('please_login'); ?>
+					<i class="glyphicon glyphicon-off"></i> <?php echo $this->lang->line('please_login'); ?>
 				</li>
 			</ul>
 		</div>
@@ -11,8 +11,8 @@
 
 	<?php if ($this->session->flashdata('error')) : ?>
 		<div class="row">
-			<div class="span4">
-				<div class="alert alert-error">
+			<div class="col-md-4">
+				<div class="alert alert-danger">
 					<?php echo $this->session->flashdata('error'); ?>
 			    </div>
 			</div>
@@ -20,21 +20,24 @@
 	<?php endif; ?>
 
 	<div class="row">
-		<div class="span12">
-			<form action="" method="post">
-				<div class="control-group<?php echo form_error('form[username]') ? ' error' : ''; ?>">
-					<label><?php echo $this->lang->line('username'); ?>:</label>
-					<input name="form[username]" type="text" class="span4" maxlength="30" value="<?php echo set_value('form[username]'); ?>"/>
-					<span class="help-inline"><?php echo form_error('form[username]'); ?></span>
+		<div class="col-md-12">
+			<form class="form-horizontal" action="" method="post">
+				<div class="form-group<?php echo form_error('form[username]') ? ' has-error' : ''; ?>">
+					<label class="col-sm-1 control-label"><?php echo $this->lang->line('username'); ?>:</label>
+					<div class="col-sm-4">
+						<input name="form[username]" type="text" maxlength="30" class="form-control" value="<?php echo set_value('form[username]'); ?>"/>
+						<span class="help-block"><?php echo form_error('form[username]'); ?></span>
+					</div>
 				</div>
-
-				<div class="control-group<?php echo form_error('form[password]') ? ' error' : ''; ?>">
-					<label><?php echo $this->lang->line('password'); ?>:</label>
-					<input name="form[password]" type="password" class="span4" maxlength="30"/>
-					<span class="help-inline"><?php echo form_error('form[password]'); ?></span>
+				<div class="form-group<?php echo form_error('form[password]') ? ' has-error' : ''; ?>">
+					<label class="col-sm-1 control-label"><?php echo $this->lang->line('password'); ?>:</label>
+					<div class="col-sm-4">
+						<input name="form[password]" type="password" maxlength="30" class="form-control"/>
+						<span class="help-block"><?php echo form_error('form[password]'); ?></span>
+					</div>
 				</div>
-				<div class="form-actions">
-					<button type="submit" class="btn btn-danger span3"><i class="icon-user icon-white"></i> <?php echo $this->lang->line('login'); ?></button>
+				<div class="form-actions col-sm-offset-1">
+					<button type="submit" class="btn btn-danger col-sm-3"><i class="glyphicon glyphicon-user glyphicon-white"></i> <?php echo $this->lang->line('login'); ?></button>
 				</div>
 			</form>
 		</div>
