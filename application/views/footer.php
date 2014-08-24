@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-md-12 site_footer">
 			<hr />
-			&copy; 2013 Ristek Fasilkom Universitas Indonesia. Powered by CodeIgniter, Twitter Bootstrap, and Moe Contest Environment. Licensed under GPLv3.
+			&copy; 2014 Regrader. Powered by CodeIgniter, Bootstrap, and Moe Contest Environment. Licensed under GPLv3.
 		</div>
 	</div>
 </div>
