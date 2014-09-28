@@ -1,8 +1,15 @@
 <script type="text/javascript">
 tinyMCE.init({
 	selector: "textarea",
+	plugins: [
+        "code table link image preview textcolor"
+    ],
+    toolbar1: "styleselect | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
+    toolbar2: "table link image | code preview",
+    image_advtab: true,
 	width: "768",
 	height: "600",
+    menubar: false,
 	relative_urls: false, 
     remove_script_host: false
 });
