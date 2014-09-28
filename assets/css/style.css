@@ -279,3 +279,15 @@ body{
 .form-inline{
 	margin-bottom: 12px;
 }
+
+.prettyprint ol.linenums > li{
+	list-style-type: decimal;
+}
+
+.prettyprint ol.linenums > li.L1,
+.prettyprint ol.linenums > li.L3,
+.prettyprint ol.linenums > li.L5,
+.prettyprint ol.linenums > li.L7,
+.prettyprint ol.linenums > li.L9{
+	background: #f5f5f5;
+}

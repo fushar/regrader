@@ -28,7 +28,7 @@
 			</table>
 
 			<h3><?php echo $this->lang->line('source_code'); ?></h3>
-			<pre class="prettyprint">
+			<pre class="prettyprint linenums">
 <?php echo htmlspecialchars($submission['source_code']); ?></pre>
 
 			<h3><?php echo $this->lang->line('compile_result'); ?></h3>
