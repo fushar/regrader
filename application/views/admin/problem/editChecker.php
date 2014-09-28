@@ -44,8 +44,8 @@
 							<td><?php echo $checker['checker']; ?></td>	
 							<td class="problem-filesize-td"><?php echo $checker['checker_size']; ?> B</td>	
 							<td class="operations-td">
-								<a href="<?php echo site_url('admin/problem/downloadChecker/' . $checker['id']); ?>" rel="tooltip" title="<?php echo $this->lang->line('download_checker'); ?>"><i class="icon-download"></i></a>
-								<a href="<?php echo site_url('admin/problem/deleteChecker/' . $problem['id'] . '/'. $checker['id'] . '/' . $page_offset); ?>" rel="tooltip" title="<?php echo $this->lang->line('delete'); ?>"><i class="icon-trash"></i></a>
+								<a href="<?php echo site_url('admin/problem/downloadChecker/' . $checker['id']); ?>" rel="tooltip" title="<?php echo $this->lang->line('download_checker'); ?>"><i class="glyphicon glyphicon-download"></i></a>
+								<a href="<?php echo site_url('admin/problem/deleteChecker/' . $problem['id'] . '/'. $checker['id'] . '/' . $page_offset); ?>" rel="tooltip" title="<?php echo $this->lang->line('delete'); ?>"><i class="glyphicon glyphicon-trash"></i></a>
 							</td>
 						<?php endif;?>
 					</tr>
