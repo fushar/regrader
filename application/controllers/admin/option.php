@@ -38,7 +38,6 @@ class Option extends Admin_Controller
 	 */
 	public function edit()
 	{
-		$this->form_validation->set_rules('form[time_zone]', $this->lang->line('time_zone'), 'trim|required');
 		$this->form_validation->set_rules('form[web_name]', $this->lang->line('web_name'), 'trim|required');
 		$this->form_validation->set_rules('form[top_name]', $this->lang->line('top_name'), 'trim|required');
 		$this->form_validation->set_rules('form[bottom_name]', $this->lang->line('bottom_name'), 'trim|required');

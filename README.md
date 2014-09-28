@@ -22,7 +22,7 @@ git clone git://github.com/fushar/regrader.git
 
 on your web server.
 
-#### 2. Set up database
+#### 2. Configure Regrader
 
 Create an InnoDB database in your MySQL database server. Then, open the database configuration file **application/config/database.php** and add your hostname, username, password, and database name in this part of the file:
 
@@ -33,9 +33,7 @@ $db['default']['password'] = '';
 $db['default']['database'] = '';
 ```
 
-#### 3. Set up encryption key
-
-Open the configuration file **application/config/config.php** and add a random string in this part of the file:
+Next, open the configuration file **application/config/config.php** and add a random string in this part of the file:
 
 ```php
 $config['encryption_key'] = '';
@@ -43,11 +41,13 @@ $config['encryption_key'] = '';
 
 It is advisable that the string consists of 32 random characters.
 
-#### 4. Install Regrader
+Finally, make sure your ``php.ini`` file has ``date.timezone`` option set.
+
+#### 3. Install Regrader
 
 Open Regrader in your browser, and perform the installation steps as instructed. If at any step the system cannot install at some specified directories, please add write permission on them.
 
-#### 5. Run the grader engine
+#### 4. Run the grader engine
 
 Execute `run_grader.sh` script on your host:
 
@@ -61,8 +61,6 @@ Configuring the System
 
 Open **Manage**->**Options** and configure several properties of the system.
 
-- **Time Zone**  
-Use one of the values in http://php.net/manual/en/timezones.php.
 - **Website, Top, & Bottom Names**  
 To be shown in the header.
 - **Left, Right 1, Right 2 Logo Filenames**  

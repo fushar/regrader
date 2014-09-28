@@ -436,7 +436,6 @@ class Site extends MY_Controller
 		$this->db->query("INSERT INTO `language` (`id`, `name`, `extension`, `source_name`, `exe_name`, `compile_cmd`, `run_cmd`, `limit_memory`, `limit_syscall`, `forbidden_keywords`) VALUES (3, 'C++', 'cpp', 'source.cpp', 'source', '/usr/bin/g++ -o [PATH]/source [PATH]/source.cpp -O2 -s -static -lm', '[PATH]/source', 1, 1, '')");
 		$this->db->query("INSERT INTO `language` (`id`, `name`, `extension`, `source_name`, `exe_name`, `compile_cmd`, `run_cmd`, `limit_memory`, `limit_syscall`, `forbidden_keywords`) VALUES (4, 'C', 'c', 'source.c', 'source', '/usr/bin/gcc -o [PATH]/source [PATH]/source.c -std=gnu99 -O2 -s -static -lm', '[PATH]/source', 1, 1, '')");
 	
-		$this->db->query("INSERT INTO `setting` (`key`, `value`) VALUES ('time_zone', 'Asia/Jakarta')");
 		$this->db->query("INSERT INTO `setting` (`key`, `value`) VALUES ('web_name', 'Regrader')");
 		$this->db->query("INSERT INTO `setting` (`key`, `value`) VALUES ('top_name', 'Regrader')");
 		$this->db->query("INSERT INTO `setting` (`key`, `value`) VALUES ('bottom_name', 'Programming Contest System')");
