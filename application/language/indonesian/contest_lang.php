@@ -19,6 +19,7 @@ $lang['no_freeze_time'] = 'Sama dengan waktu selesai jika tak ada sistem beku ni
 $lang['alias'] = 'Alias';
 $lang['is_active'] = 'Aktif';
 $lang['active'] = 'aktif';
+$lang['show_institution_logo'] = 'Tampilkan Logo Institusi';
 $lang['not_active'] = 'tidak aktif';
 $lang['no_category'] = 'Belum ada kategori';
 $lang['no_language'] = 'Belum ada bahasa';

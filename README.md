@@ -82,7 +82,7 @@ Regrader currently supports English and Indonesian. To change the language to In
 
 #### Institution Logos
 
-You can show institution logos beside the contestant names in the scoreboard. The scoreboard will look very nice. Just upload **X**.jpg in **Manage->Files** as the logo for institution **X**.
+You can show institution logos beside the contestant names in the scoreboard. The scoreboard will look very nice. Just upload **X**.jpg in **Manage->Files** as the logo for institution **X**. Then, tick the option **Show Institution Logos** in the corresponding contest's setting.
 
 #### Public Raw Scoreboard
 

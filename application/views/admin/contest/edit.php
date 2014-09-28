@@ -51,6 +51,17 @@
 				</div>
 
 				<div class="form-group">
+					<label class="control-label col-sm-2"><?php echo $this->lang->line('show_institution_logo'); ?></label>
+					<div class ="col-sm-4">
+						<div class="checkbox">
+						<label>
+							<input name="form[show_institution_logo]" type="checkbox" value="1" <?php echo set_checkbox('form[show_institution_logo]', '1', (bool)@$contest['show_institution_logo']); ?>/> &nbsp;
+						</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
 					<label class="control-label col-sm-2"><?php echo $this->lang->line('category'); ?></label>
 					<?php if (count($contest_members) == 1) : ?>
 						<p>(<?php echo $this->lang->line('no_category'); ?>)</p>

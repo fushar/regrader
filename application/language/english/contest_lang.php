@@ -18,6 +18,7 @@ $lang['unfreeze_time'] = 'Unfreeze Time';
 $lang['no_freeze_time'] = 'Make it equal to end time if there is no freeze.';
 $lang['alias'] = 'Alias';
 $lang['active'] = 'active';
+$lang['show_institution_logo'] = 'Show Institution Logos';
 $lang['is_active'] = 'Active';
 $lang['not_active'] = 'not active';
 $lang['no_category'] = 'No categories';

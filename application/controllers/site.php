@@ -195,6 +195,7 @@ class Site extends MY_Controller
 			                `freeze_time` datetime DEFAULT NULL,
 			                `unfreeze_time` datetime DEFAULT NULL,
 			                `enabled` tinyint(1) NOT NULL,
+			                `show_institution_logo` tinyint(1) NOT NULL,
 			                PRIMARY KEY (`id`)
 			              ) ENGINE=InnoDB  DEFAULT CHARSET=utf8");
 

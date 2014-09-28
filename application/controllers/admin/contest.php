@@ -89,6 +89,7 @@ class Contest extends Admin_Controller
 		$this->form_validation->set_rules('form[freeze_time]', $this->lang->line('freeze_time'), 'required');
 		$this->form_validation->set_rules('form[unfreeze_time]', $this->lang->line('unfreeze_time'), 'required');
 		$this->form_validation->set_rules('form[enabled]', '', '');
+		$this->form_validation->set_rules('form[show_institution_logo]', '', '');
 
 		$categories = $this->category_manager->get_rows();
 		$contest_members = array();
@@ -118,6 +119,7 @@ class Contest extends Admin_Controller
 		{
 			$form = $this->input->post('form');
 			$form['enabled'] = isset($form['enabled']) ? 1 : 0;
+			$form['show_institution_logo'] = isset($form['show_institution_logo']) ? 1 : 0;
 			
 			if ($contest_id == 0)
 			{
