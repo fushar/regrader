@@ -3,7 +3,6 @@
 $lang['edit_options'] = 'Edit Options';
 $lang['edit_options_successful'] = 'Options successfully edited.';
 
-$lang['time_zone'] = 'Time Zone';
 $lang['web_name'] = 'Website Name';
 $lang['top_name'] = 'Top Name';
 $lang['bottom_name'] = 'Bottom Name';

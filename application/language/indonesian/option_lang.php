@@ -3,7 +3,6 @@
 $lang['edit_options'] = 'Sunting Pengaturan';
 $lang['edit_options_successful'] = 'Pengaturan berhasil disunting.';
 
-$lang['time_zone'] = 'Zona Waktu';
 $lang['web_name'] = 'Nama Situs';
 $lang['top_name'] = 'Nama Atas';
 $lang['bottom_name'] = 'Nama Bawah';

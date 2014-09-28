@@ -19,7 +19,7 @@
 			
 			<form class="form-horizontal" action="" method="post">
 				<?php
-					$fields = array('time_zone', 'web_name', 'top_name', 'bottom_name', 'left_logo', 'right_logo1', 'right_logo2', 'items_per_page');
+					$fields = array('web_name', 'top_name', 'bottom_name', 'left_logo', 'right_logo1', 'right_logo2', 'items_per_page');
 					foreach ($fields as $v) : ?>
 
 					<div class="form-group<?php echo form_error('form[' . $v . ']') == '' ? '' : ' error'; ?>">
