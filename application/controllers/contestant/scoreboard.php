@@ -38,6 +38,7 @@ class Scoreboard extends Contestant_Controller
 		$this->ui['header']['title'] = $this->lang->line('scoreboard');
 		$this->ui['content']['scores'] = $res['scores'];
 		$this->ui['content']['freeze_time'] = $contest['freeze_time'];
+		$this->ui['content']['show_institution_logo'] = $contest['show_institution_logo'];
 		$this->ui['content']['problems'] = $res['problems'];
 		$this->ui['content']['frozen'] = (time() > strtotime($contest['freeze_time'])) && (time() <= strtotime($contest['unfreeze_time']));
 		

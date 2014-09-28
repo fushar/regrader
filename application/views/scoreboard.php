@@ -5,7 +5,9 @@
 				<thead>
 					<tr>
 						<th class="id-th">#</th>
-						<th class="scoreboard-institution-logo-th"></th>
+						<?php if ($show_institution_logo): ?>
+							<th class="scoreboard-institution-logo-th"></th>
+						<?php endif; ?>
 						<th class="scoreboard-name-th"><?php echo $this->lang->line('name'); ?></th>
 						<th class="scoreboard-score-th" colspan="2"><?php echo $this->lang->line('score'); ?></th>
 						<?php foreach ($problems as $v) : ?>
@@ -37,11 +39,13 @@
 							?>
 							<tr>
 							<td class="id-td"><?php echo $rank; ?></td>
-							<td>
-								<div class="scoreboard-institution-logo">
-									<img src="<?php echo isset($raw) ? '' : base_url(); ?>files/<?php echo $v['institution']; ?>.jpg" />
-								</div>
-							</td>
+							<?php if ($show_institution_logo): ?>
+								<td>
+									<div class="scoreboard-institution-logo">
+										<img src="<?php echo isset($raw) ? '' : base_url(); ?>files/<?php echo $v['institution']; ?>.jpg" />
+									</div>
+								</td>
+							<?php endif; ?>
 							<td>
 								<div class="scoreboard-name">
 									<?php echo $v['name']; ?>

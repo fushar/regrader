@@ -46,6 +46,7 @@ class Scoreboard extends MY_Controller
 		$this->ui['header']['top_name'] = $contest['name'];
 		$this->ui['content']['scores'] = $res['scores'];
 		$this->ui['content']['freeze_time'] = $contest['freeze_time'];
+		$this->ui['content']['show_institution_logo'] = $contest['show_institution_logo'];
 		$this->ui['content']['problems'] = $res['problems'];
 		$this->ui['content']['frozen'] = (time() > strtotime($contest['freeze_time'])) && (time() <= strtotime($contest['unfreeze_time']));
 		$this->ui['footer']['active_contest_end_time'] = $contest['end_time'];
@@ -82,6 +83,7 @@ class Scoreboard extends MY_Controller
 		$this->ui['content']['raw'] = true;
 		$this->ui['content']['scores'] = $res['scores'];
 		$this->ui['content']['freeze_time'] = $contest['freeze_time'];
+		$this->ui['content']['show_institution_logo'] = $contest['show_institution_logo'];
 		$this->ui['content']['problems'] = $res['problems'];
 		$this->ui['content']['frozen'] = (time() > strtotime($contest['freeze_time'])) && (time() <= strtotime($contest['unfreeze_time']));
 		$this->ui['footer']['active_contest_end_time'] = $contest['end_time'];

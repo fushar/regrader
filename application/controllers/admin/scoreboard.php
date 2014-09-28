@@ -73,6 +73,7 @@ class Scoreboard extends Admin_Controller
 				$this->ui['content']['target'] = $target;
 				$this->ui['content']['contests'] = $contests;
 				$this->ui['content']['scores'] = $res['scores'];
+				$this->ui['content']['show_institution_logo'] = $contest['show_institution_logo'];
 				$this->ui['content']['problems'] = $res['problems'];
 			}
 			
