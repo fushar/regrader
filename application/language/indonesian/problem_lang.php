@@ -31,7 +31,7 @@ $lang['default_statement'] = <<<SAMPLE
 <pre>XXX</pre>
 
 <h3>Contoh Keluaran</h3>
-<pre>XXX/pre>
+<pre>XXX</pre>
 
 <h3>Penjelasan</h3>
 <p>&lt;penjelasan&lt;</p>

@@ -42,7 +42,11 @@
 				<div class="form-group">
 					<label class="control-label col-sm-2"><?php echo $this->lang->line('is_active'); ?></label>
 					<div class ="col-sm-4">
-						<input name="form[enabled]" type="checkbox" value="1" <?php echo set_checkbox('form[enabled]', '1', (bool)@$contest['enabled']); ?>/>
+						<div class="checkbox">
+						<label>
+							<input name="form[enabled]" type="checkbox" value="1" <?php echo set_checkbox('form[enabled]', '1', (bool)@$contest['enabled']); ?>/> &nbsp;
+						</label>
+						</div>
 					</div>
 				</div>
 
@@ -51,30 +55,34 @@
 					<?php if (count($contest_members) == 1) : ?>
 						<p>(<?php echo $this->lang->line('no_category'); ?>)</p>
 					<?php endif; ?>
-					<?php foreach ($contest_members as $k => $v): if ($k == 1) continue; ?>
-						<div class = "col-sm-offset-2 col-sm-10">
-							<label class="checkbox">
-								<input name="<?php echo 'c' . $k; ?>" type="checkbox" value="1" <?php echo set_checkbox('c' . $k, '1', @$v['present']); ?>/>
-								<?php echo $v['name']; ?>
-							</label>
-						</div>
-					<?php endforeach; ?>
-					
+					<div class = "col-sm-10">
+						<?php foreach ($contest_members as $k => $v): if ($k == 1) continue; ?>
+							<div class="checkbox">
+								<label>
+									<input name="<?php echo 'c' . $k; ?>" type="checkbox" value="1" <?php echo set_checkbox('c' . $k, '1', @$v['present']); ?>/>
+									<?php echo $v['name']; ?>
+								</label>
+							</div>
+						<?php endforeach; ?>
+					</div>
 				</div>
 
 				<div class="form-group">
 					<label class="col-sm-2 control-label"><?php echo $this->lang->line('language'); ?></label>
-						<?php if (count($contest_languages) == 0) : ?>
-							<p>(<?php echo $this->lang->line('no_language'); ?>)</p>
-						<?php endif; ?>
+					<?php if (count($contest_languages) == 0) : ?>
+						<p>(<?php echo $this->lang->line('no_language'); ?>)</p>
+					<?php endif; ?>
+					<div class = "col-sm-10">
 						<?php foreach ($contest_languages as $k => $v): ?>
-							<div class = "col-sm-offset-2 col-sm-10">
-								<label class="checkbox">
+						
+							<div class="checkbox">
+								<label>
 									<input name="<?php echo 'l' . $k; ?>" type="checkbox" value="1" <?php echo set_checkbox('l' . $k, '1', @$v['present']); ?>/>
 									<?php echo $v['name']; ?>
 								</label>
 							</div>
 						<?php endforeach; ?>
+					</div>
 				</div>
 
 				<div class="form-actions col-sm-offset-2">
