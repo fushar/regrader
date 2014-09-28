@@ -306,7 +306,8 @@ class Grader extends CI_Controller
 
 					exec($checker_cmd, $output, $retval);
 					
-					$checker_result = explode("\n", file_get_contents($out_path . '/checker_op'))[0];
+					$checker_content = explode("\n", file_get_contents($out_path . '/checker_op'));
+					$checker_result = $checker_content[0];
 
 					if ('[OK]' === $checker_result)
 						$verdict = 2;
