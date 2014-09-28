@@ -20,6 +20,7 @@ class Scoreboard extends MY_Controller
 		parent::__construct();
 		$this->load->model('contest_manager');
 		$this->load->model('scoreboard_manager');
+		$this->load->language('scoreboard');
 	}
 
 	/**

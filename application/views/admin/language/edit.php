@@ -63,21 +63,29 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label"><?php echo $this->lang->line('limit_memory'); ?></label>
 					<div class="col-sm-4">
-						<input name="form[limit_memory]" type="checkbox" value="1" <?php echo set_checkbox('form[limit_memory]', '1', (bool)@$language['limit_memory']); ?>/>
+						<div class="checkbox">
+							<label>
+								<input name="form[limit_memory]" type="checkbox" value="1" <?php echo set_checkbox('form[limit_memory]', '1', (bool)@$language['limit_memory']); ?>/> &nbsp;
+							</label>
+						</div>
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label class="col-sm-2 control-label"><?php echo $this->lang->line('limit_syscall'); ?></label>
 					<div class="col-sm-4">
-						<input name="form[limit_syscall]" type="checkbox" value="1" <?php echo set_checkbox('form[limit_syscall]', '1', (bool)@$language['limit_syscall']); ?>/>
+						<div class="checkbox">
+							<label>
+								<input name="form[limit_syscall]" type="checkbox" value="1" <?php echo set_checkbox('form[limit_syscall]', '1', (bool)@$language['limit_syscall']); ?>/> &nbsp;
+							</label>
+						</div>
 					</div>
 				</div>
 
 				<div class="form-group<?php echo form_error('form[forbidden_keywords]') == '' ? '' : ' has-error'; ?>">
 					<label class="col-sm-2 control-label"><?php echo $this->lang->line('forbidden_keywords'); ?></label>
 					<div class="col-sm-4">
-						<textarea name="form[forbidden_keywords]"><?php echo set_value('form[forbidden_keywords]', @$language['forbidden_keywords']); ?></textarea>
+						<textarea class="form-control" name="form[forbidden_keywords]"><?php echo set_value('form[forbidden_keywords]', @$language['forbidden_keywords']); ?></textarea>
 						<span class="help-inline"><?php echo form_error('form[forbidden_keywords]'); ?></span>
 					</div>
 				</div>

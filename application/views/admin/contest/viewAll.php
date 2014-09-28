@@ -66,7 +66,7 @@
 						<td><?php echo $v['end_time']; ?></td>
 						<td><?php echo $v['freeze_time']; ?></td>
 						<td><?php echo $v['unfreeze_time']; ?></td>
-						<td class="contest-enabled-td"><?php echo $v['enabled'] ? '<span class="label label-success">' . $this->lang->line('active') . '</span>' : '<span class="label label-important">' . $this->lang->line('not_active') . '</span>'; ?></td>
+						<td class="contest-enabled-td"><?php echo $v['enabled'] ? '<span class="label label-success">' . $this->lang->line('active') . '</span>' : '<span class="label label-danger">' . $this->lang->line('not_active') . '</span>'; ?></td>
 						<td class="operations-td">
 							<a href="<?php echo site_url('admin/contest/edit/' . $v['id'] . '/' . $page_offset); ?>" rel="tooltip" title="<?php echo $this->lang->line('edit'); ?>"><i class="glyphicon glyphicon-pencil"></i></a>
 							<a href="<?php echo site_url('admin/contest/editProblems/' . $v['id'] .'/' . $page_offset); ?>" rel="tooltip" title="<?php echo $this->lang->line('problem'); ?>"><i class="glyphicon glyphicon-book"></i></a>

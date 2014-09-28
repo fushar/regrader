@@ -98,7 +98,7 @@
 						<td><?php echo  $v['user_id'] == 1 ? '<span class="label label-danger">Administrator</span>' : $v['user_name']; ?></td>
 						<td><?php if (isset($v['unread'])) echo '<span class="label label-info">' . $this->lang->line('new') . '</span> '; ?><?php echo $v['title']; ?></td>
 						<td><?php echo $v['clar_time']; ?></td>
-						<td class="clarification-answered-td"><?php echo $v['user_id'] != 1 ? $v['answered'] ? '<span class="label label-success">' . $this->lang->line('answered') .'</span>' : '<span class="label label-important">' . $this->lang->line('not_answered') . '</span>' : '-'; ?></td>
+						<td class="clarification-answered-td"><?php echo $v['user_id'] != 1 ? $v['answered'] ? '<span class="label label-success">' . $this->lang->line('answered') .'</span>' : '<span class="label label-danger">' . $this->lang->line('not_answered') . '</span>' : '-'; ?></td>
 						<td class="operations-td"><a href="<?php echo site_url('contestant/clarification/view/' . $v['id'] . '/' . $page_offset); ?>" rel="tooltip" title="<?php echo $this->lang->line('view'); ?>"><i class="glyphicon glyphicon-search"></i></a></td>
 						</tr>
 					<?php endforeach; ?>

@@ -4,7 +4,7 @@
 }
 
 .site_logo img {
-	height: 85px;
+	height: 120px;
 }
 
 .site_name {
@@ -21,7 +21,7 @@
 }
 
 .site_logo_right img {
-	height: 85px;
+	height: 120px;
 }
 
 .site_footer {
@@ -55,19 +55,17 @@ ul.problem-list li a {
 	color: #333333;
 }
 
-ul.problem-list li.chosen {
+ul.problem-list li.active a{
+	color: white;
 	background-color: #222222;
 }
 
-ul.problem-list li.chosen a{
+ul.problem-list li.active:hover a{
 	color: white;
+	background-color: #222222;
 }
 
-ul.problem-list li.chosen:hover a{
-	color: #333333;
-}
-
-ul.problem-list li.chosen:hover{
+ul.problem-list li.active:hover{
 	background-color: white;
 }
 
@@ -275,7 +273,7 @@ select{
 }
 
 body{
-	padding: 20px;
+	padding: 30px;
 }
 
 .form-inline{

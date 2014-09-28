@@ -11,7 +11,7 @@
 
 	<?php if ($this->session->flashdata('error')) : ?>
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-5">
 				<div class="alert alert-danger">
 					<?php echo $this->session->flashdata('error'); ?>
 			    </div>

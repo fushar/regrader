@@ -70,11 +70,11 @@
 	</div>
 	<div class="row">
 		<div class="col-md-2">
-			<ul class="nav nav-tabs nav-stacked problem-list">
+			<ul class="nav nav-pills nav-stacked problem-list">
 				<li><a href="#"><i class="glyphicon glyphicon-random"></i> <?php echo $this->lang->line('problems'); ?>:</a></li>
 				
 				<?php foreach ($problems as $v) : ?>
-					<li<?php if ($v['id'] == $problem['id']) echo ' class="chosen"'; ?>><a href="<?php echo site_url('contestant/problem/view/' . $v['id']); ?>"><i class="glyphicon glyphicon-list-alt<?php if ($v['id'] == $problem['id']) echo ' glyphicon-white'; ?>"></i> <?php echo $v['alias']; ?></a></li>
+					<li<?php if ($v['id'] == $problem['id']) echo ' class="active"'; ?>><a href="<?php echo site_url('contestant/problem/view/' . $v['id']); ?>"><i class="glyphicon glyphicon-list-alt<?php if ($v['id'] == $problem['id']) echo ' glyphicon-white'; ?>"></i> <?php echo $v['alias']; ?></a></li>
 				<?php endforeach; ?>
 			</ul>
 		</div>	
