@@ -32,6 +32,11 @@ class Dashboard extends Contestant_Controller
 		if ($this->input->post('form'))
 		{
 			$form = $this->input->post('form');
+			$contests = $this->contest_manager->get_active_contests($this->identity->get_user_category_id());
+
+			if (! isset($contests[$form['contest_id']]))
+				redirect('contestant/dashboard');
+
 			$this->identity->set_current_contest_id($form['contest_id']);
 			redirect('contestant/problem');
 		}
