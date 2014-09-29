@@ -23,9 +23,9 @@
 						<li class="active">
 							<a href="#">
 							<?php if ($page == 'login') : ?>
-								<i class="icon-off icon-white"></i> <?php echo $this->lang->line('login'); ?>
+								<i class="glyphicon glyphicon-off"></i> <?php echo $this->lang->line('login'); ?>
 							<?php else : ?>
-								<i class="icon-list icon-white"></i> <?php echo $this->lang->line('scoreboard'); ?>
+								<i class="glyphicon glyphicon-list"></i> <?php echo $this->lang->line('scoreboard'); ?>
 							<?php endif; ?>
 							</a>
 						</li>
@@ -33,11 +33,11 @@
 					<ul class="nav pull-right">
 						<li class="divider-vertical"></li>
 						<li>
-							<a href="#"><i class="icon-time icon-white"></i> <span id="server_clock"></span></a>
+							<a href="#"><i class="glyphicon glyphicon-time"></i> <span id="server_clock"></span></a>
 						</li>
 						<li class="divider-vertical"></li>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i> <?php echo $this->lang->line('guest'); ?> <b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> <?php echo $this->lang->line('guest'); ?> <b class="caret"></b></a>
 							
 						</li>
 					</ul>

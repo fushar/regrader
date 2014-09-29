@@ -15,9 +15,9 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th><i class="glyphicon glyphicon-tag glyphicon-white"></i> <?php echo $this->lang->line('alias'); ?></th>
-						<th><i class="glyphicon glyphicon-book glyphicon-white"></i> <?php echo $this->lang->line('problem'); ?></th>
-						<th class="operations-th"><i class="glyphicon glyphicon-cog glyphicon-white"></i></th>
+						<th><i class="glyphicon glyphicon-tag"></i> <?php echo $this->lang->line('alias'); ?></th>
+						<th><i class="glyphicon glyphicon-book"></i> <?php echo $this->lang->line('problem'); ?></th>
+						<th class="operations-th"><i class="glyphicon glyphicon-cog"></i></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -61,7 +61,7 @@
 
 
 				<div class="form-actions col-sm-offset-2">
-					<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-plus glyphicon-white"></i> <?php echo $this->lang->line('add'); ?></button>
+					<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-plus"></i> <?php echo $this->lang->line('add'); ?></button>
 					<a class="btn btn-default" href="<?php echo site_url('admin/contest/viewAll/' . $page_offset); ?>"><?php echo $this->lang->line('cancel'); ?></a>
 				</div>
 			</form>

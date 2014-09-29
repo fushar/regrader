@@ -33,7 +33,7 @@
 
 
 				<div class="form-actions col-sm-offset-2">
-					<button type="submit" class="btn btn-danger"><?php echo '<i class="glyphicon glyphicon-download-alt glyphicon-white"></i> ' . $this->lang->line('save'); ?></button>
+					<button type="submit" class="btn btn-danger"><?php echo '<i class="glyphicon glyphicon-download-alt"></i> ' . $this->lang->line('save'); ?></button>
 				</div>
 			</form>
 		</div>

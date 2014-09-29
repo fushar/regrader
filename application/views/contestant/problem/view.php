@@ -47,7 +47,7 @@
 							<input name="source_code" class="input-file" type="file" />
 						</div>
 						<div class="modal-footer">
-							<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-share glyphicon-white"></i> <?php echo $this->lang->line('submit'); ?></button>
+							<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-share"></i> <?php echo $this->lang->line('submit'); ?></button>
 							<a href="#" class="btn btn-default" data-dismiss="modal"><?php echo $this->lang->line('cancel'); ?></a>
 						</div>
 					</div>
@@ -74,7 +74,7 @@
 				<li><a href="#"><i class="glyphicon glyphicon-random"></i> <?php echo $this->lang->line('problems'); ?>:</a></li>
 				
 				<?php foreach ($problems as $v) : ?>
-					<li<?php if ($v['id'] == $problem['id']) echo ' class="active"'; ?>><a href="<?php echo site_url('contestant/problem/view/' . $v['id']); ?>"><i class="glyphicon glyphicon-list-alt<?php if ($v['id'] == $problem['id']) echo ' glyphicon-white'; ?>"></i> <?php echo $v['alias']; ?></a></li>
+					<li<?php if ($v['id'] == $problem['id']) echo ' class="active"'; ?>><a href="<?php echo site_url('contestant/problem/view/' . $v['id']); ?>"><i class="glyphicon glyphicon-list-alt<?php if ($v['id'] == $problem['id']) echo ''; ?>"></i> <?php echo $v['alias']; ?></a></li>
 				<?php endforeach; ?>
 			</ul>
 		</div>	

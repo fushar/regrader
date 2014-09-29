@@ -56,12 +56,12 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th class="id-th"><i class="glyphicon glyphicon-tag glyphicon-white"></i></th>
-						<th><i class="glyphicon glyphicon-eye-open glyphicon-white"></i> <?php echo $this->lang->line('username'); ?></th>
-						<th><i class="glyphicon glyphicon-eye-open glyphicon-white"></i> <?php echo $this->lang->line('name'); ?></th>
-						<th><i class="glyphicon glyphicon-briefcase glyphicon-white"></i> <?php echo $this->lang->line('institution'); ?></th>
-						<th><i class="glyphicon glyphicon-flag glyphicon-white"></i> <?php echo $this->lang->line('category'); ?></th>
-						<th class="operations-th"><i class="glyphicon glyphicon-cog glyphicon-white"></i></th>
+						<th class="id-th"><i class="glyphicon glyphicon-tag"></i></th>
+						<th><i class="glyphicon glyphicon-eye-open"></i> <?php echo $this->lang->line('username'); ?></th>
+						<th><i class="glyphicon glyphicon-eye-open"></i> <?php echo $this->lang->line('name'); ?></th>
+						<th><i class="glyphicon glyphicon-briefcase"></i> <?php echo $this->lang->line('institution'); ?></th>
+						<th><i class="glyphicon glyphicon-flag"></i> <?php echo $this->lang->line('category'); ?></th>
+						<th class="operations-th"><i class="glyphicon glyphicon-cog"></i></th>
 					</tr>
 				</thead>
 

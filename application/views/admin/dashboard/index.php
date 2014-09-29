@@ -13,7 +13,7 @@
 				<thead>
 					<tr>
 						<th class="id-th">#</th>
-						<th><i class="glyphicon glyphicon-fire glyphicon-white"></i> <?php echo $this->lang->line('active_contests'); ?></th>
+						<th><i class="glyphicon glyphicon-fire"></i> <?php echo $this->lang->line('active_contests'); ?></th>
 					</tr>
 				</head>
 				<tbody>
@@ -29,7 +29,7 @@
 				<thead>
 					<tr>
 						<th class="id-th">#</th>
-						<th><i class="glyphicon glyphicon-user glyphicon-white"></i> <?php echo $this->lang->line('active_users'); ?></th>
+						<th><i class="glyphicon glyphicon-user"></i> <?php echo $this->lang->line('active_users'); ?></th>
 					</tr>
 				</head>
 				<tbody>
@@ -47,7 +47,7 @@
 				<thead>
 					<tr>
 						<th class="id-th">#</th>
-						<th><i class="glyphicon glyphicon-refresh glyphicon-white"></i> <?php echo $this->lang->line('active_graders'); ?></th>
+						<th><i class="glyphicon glyphicon-refresh"></i> <?php echo $this->lang->line('active_graders'); ?></th>
 					</tr>
 				</head>
 				<tbody>

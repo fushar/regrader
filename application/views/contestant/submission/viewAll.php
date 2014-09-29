@@ -28,12 +28,12 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th class="id-th"><i class="glyphicon glyphicon-tag glyphicon-white"></i></th>
-						<th><i class="glyphicon glyphicon-book glyphicon-white"></i> <?php echo $this->lang->line('problem'); ?></th>
-						<th class="submission-language-th"><i class="glyphicon glyphicon-globe glyphicon-white"></i> <?php echo $this->lang->line('language'); ?></th>
-						<th class="submission-time-th"><i class="glyphicon glyphicon-time glyphicon-white"></i> <?php echo $this->lang->line('time'); ?></th>
-						<th class="submission-verdict-th"><i class="glyphicon glyphicon-briefcase glyphicon-white"></i> <?php echo $this->lang->line('verdict'); ?></th>
-						<th class="operations-th"><i class="glyphicon glyphicon-cog glyphicon-white"></i></th>
+						<th class="id-th"><i class="glyphicon glyphicon-tag"></i></th>
+						<th><i class="glyphicon glyphicon-book"></i> <?php echo $this->lang->line('problem'); ?></th>
+						<th class="submission-language-th"><i class="glyphicon glyphicon-globe"></i> <?php echo $this->lang->line('language'); ?></th>
+						<th class="submission-time-th"><i class="glyphicon glyphicon-time"></i> <?php echo $this->lang->line('time'); ?></th>
+						<th class="submission-verdict-th"><i class="glyphicon glyphicon-briefcase"></i> <?php echo $this->lang->line('verdict'); ?></th>
+						<th class="operations-th"><i class="glyphicon glyphicon-cog"></i></th>
 					</tr>
 				</thead>
 
@@ -48,15 +48,15 @@
 						<?php
 							$verdict = max(0, $v['verdict']);
 							if ($verdict == 0)
-								echo '<span class="label label-default"><i class="glyphicon glyphicon-refresh glyphicon glyphicon-white"></i> ' . $this->lang->line('verdict_abbr_0') . '</span>';
+								echo '<span class="label label-default"><i class="glyphicon glyphicon-refresh glyphicon"></i> ' . $this->lang->line('verdict_abbr_0') . '</span>';
 							else if ($verdict == 2)
-								echo '<span class="label label-success"><i class="glyphicon glyphicon-ok glyphicon glyphicon-white"></i> ' . $this->lang->line('verdict_abbr_2') . '</span>';
+								echo '<span class="label label-success"><i class="glyphicon glyphicon-ok glyphicon"></i> ' . $this->lang->line('verdict_abbr_2') . '</span>';
 							else if ($verdict == 3)
-								echo '<span class="label label-danger"><i class="glyphicon glyphicon-remove glyphicon glyphicon-white"></i> ' . $this->lang->line('verdict_abbr_3') . '</span>';
+								echo '<span class="label label-danger"><i class="glyphicon glyphicon-remove glyphicon"></i> ' . $this->lang->line('verdict_abbr_3') . '</span>';
 							else if ($verdict == 99)
 								echo '<span class="label label-info">' . $this->lang->line('verdict_abbr_99') . '</span>';
 							else
-								echo '<span class="label label-warning"><i class="glyphicon glyphicon-warning-sign glyphicon glyphicon-white"></i> ' . $this->lang->line('verdict_abbr_' . $verdict) . '</span>';
+								echo '<span class="label label-warning"><i class="glyphicon glyphicon-warning-sign glyphicon"></i> ' . $this->lang->line('verdict_abbr_' . $verdict) . '</span>';
 						?>
 						</td>
 						<td class="operations-td"><a href="<?php echo site_url('contestant/submission/view/' . $v['id'] . '/' . $page_offset); ?>" rel="tooltip" title="<?php echo $this->lang->line('view'); ?>"><i class="glyphicon glyphicon-search"></i></a></td>

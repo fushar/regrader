@@ -30,7 +30,7 @@
 				<div class="col-md-12">
 					<ul class="nav navbar-nav">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-wrench glyphicon-white"></i> <?php echo $this->lang->line('manage'); ?> <b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-wrench"></i> <?php echo $this->lang->line('manage'); ?> <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="<?php echo site_url('admin/contest'); ?>"><i class="glyphicon glyphicon-fire"></i> <?php echo $this->lang->line('contests'); ?></a></li>
 								<li><a href="<?php echo site_url('admin/problem'); ?>"><i class="glyphicon glyphicon-book"></i> <?php echo $this->lang->line('problems'); ?></a></li>
@@ -41,34 +41,34 @@
 								<li><a href="<?php echo site_url('admin/option'); ?>"><i class="glyphicon glyphicon-screenshot"></i> <?php echo $this->lang->line('options'); ?></a></li>
 							</ul>
 						</li>
-						<?php if ($page == 'contest') : ?><li class="active"><a href="<?php echo site_url('admin/contest'); ?>"><i class="glyphicon glyphicon-fire glyphicon-white"></i> <?php echo $this->lang->line('contests'); ?></a></li><?php endif; ?>
-						<?php if ($page == 'problem') : ?><li class="active"><a href="<?php echo site_url('admin/problem'); ?>"><i class="glyphicon glyphicon-book glyphicon-white"></i> <?php echo $this->lang->line('problems'); ?></a></li><?php endif; ?>
-						<?php if ($page == 'language') : ?><li class="active"><a href="<?php echo site_url('admin/language'); ?>"><i class="glyphicon glyphicon-globe glyphicon-white"></i> <?php echo $this->lang->line('languages'); ?></a></li><?php endif; ?>
-						<?php if ($page == 'category') : ?><li class="active"><a href="<?php echo site_url('admin/category'); ?>"><i class="glyphicon glyphicon-flag glyphicon-white"></i> <?php echo $this->lang->line('categories'); ?></a></li><?php endif; ?>
-						<?php if ($page == 'user') : ?><li class="active"><a href="<?php echo site_url('admin/user'); ?>"><i class="glyphicon glyphicon-user glyphicon-white"></i> <?php echo $this->lang->line('users'); ?></a></li><?php endif; ?>
-						<?php if ($page == 'file') : ?><li class="active"><a href="<?php echo site_url('admin/file'); ?>"><i class="glyphicon glyphicon-file glyphicon-white"></i> <?php echo $this->lang->line('files'); ?></a></li><?php endif; ?>
-						<?php if ($page == 'option') : ?><li class="active"><a href="<?php echo site_url('admin/option'); ?>"><i class="glyphicon glyphicon-screenshot glyphicon-white"></i> <?php echo $this->lang->line('options'); ?></a></li><?php endif; ?>
+						<?php if ($page == 'contest') : ?><li class="active"><a href="<?php echo site_url('admin/contest'); ?>"><i class="glyphicon glyphicon-fire"></i> <?php echo $this->lang->line('contests'); ?></a></li><?php endif; ?>
+						<?php if ($page == 'problem') : ?><li class="active"><a href="<?php echo site_url('admin/problem'); ?>"><i class="glyphicon glyphicon-book"></i> <?php echo $this->lang->line('problems'); ?></a></li><?php endif; ?>
+						<?php if ($page == 'language') : ?><li class="active"><a href="<?php echo site_url('admin/language'); ?>"><i class="glyphicon glyphicon-globe"></i> <?php echo $this->lang->line('languages'); ?></a></li><?php endif; ?>
+						<?php if ($page == 'category') : ?><li class="active"><a href="<?php echo site_url('admin/category'); ?>"><i class="glyphicon glyphicon-flag"></i> <?php echo $this->lang->line('categories'); ?></a></li><?php endif; ?>
+						<?php if ($page == 'user') : ?><li class="active"><a href="<?php echo site_url('admin/user'); ?>"><i class="glyphicon glyphicon-user"></i> <?php echo $this->lang->line('users'); ?></a></li><?php endif; ?>
+						<?php if ($page == 'file') : ?><li class="active"><a href="<?php echo site_url('admin/file'); ?>"><i class="glyphicon glyphicon-file"></i> <?php echo $this->lang->line('files'); ?></a></li><?php endif; ?>
+						<?php if ($page == 'option') : ?><li class="active"><a href="<?php echo site_url('admin/option'); ?>"><i class="glyphicon glyphicon-screenshot"></i> <?php echo $this->lang->line('options'); ?></a></li><?php endif; ?>
 					</ul>
 					<ul class="nav navbar-nav pull-right">
 						<li<?php if ($page == 'dashboard') echo ' class="active"'; ?>>
-							<a href="<?php echo site_url('admin/dashboard'); ?>"><i class="glyphicon glyphicon-home glyphicon-white"></i> <?php echo $this->lang->line('dashboard'); ?></a>
+							<a href="<?php echo site_url('admin/dashboard'); ?>"><i class="glyphicon glyphicon-home"></i> <?php echo $this->lang->line('dashboard'); ?></a>
 						</li>
 						<li<?php if ($page == 'submission') echo ' class="active"'; ?>>
-							<a href="<?php echo site_url('admin/submission'); ?>"><i class="glyphicon glyphicon-share glyphicon-white"></i> <?php echo $this->lang->line('submissions'); ?></a>
+							<a href="<?php echo site_url('admin/submission'); ?>"><i class="glyphicon glyphicon-share"></i> <?php echo $this->lang->line('submissions'); ?></a>
 						</li>
 						<li<?php if ($page == 'clarification') echo ' class="active"'; ?>>
-							<a href="<?php echo site_url('admin/clarification'); ?>"><i class="glyphicon glyphicon-envelope glyphicon-white"></i> <?php echo $this->lang->line('clarifications'); ?><?php if ($unread_clar_cnt > 0) echo ' <span class="unread_clarifications">(' . $unread_clar_cnt . ' ' . $this->lang->line('new') . ')</span>'; ?></a>
+							<a href="<?php echo site_url('admin/clarification'); ?>"><i class="glyphicon glyphicon-envelope"></i> <?php echo $this->lang->line('clarifications'); ?><?php if ($unread_clar_cnt > 0) echo ' <span class="unread_clarifications">(' . $unread_clar_cnt . ' ' . $this->lang->line('new') . ')</span>'; ?></a>
 						</li>
 						<li<?php if ($page == 'scoreboard') echo ' class="active"'; ?>>
-							<a href="<?php echo site_url('admin/scoreboard'); ?>"><i class="glyphicon glyphicon-list glyphicon-white"></i> <?php echo $this->lang->line('scoreboard'); ?></a>
+							<a href="<?php echo site_url('admin/scoreboard'); ?>"><i class="glyphicon glyphicon-list"></i> <?php echo $this->lang->line('scoreboard'); ?></a>
 						</li>
 						
 						<li>
-							<a href="#"><i class="glyphicon glyphicon-time glyphicon-white"></i> <span id="server_clock"></span></a>
+							<a href="#"><i class="glyphicon glyphicon-time"></i> <span id="server_clock"></span></a>
 						</li>
 						
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user glyphicon-white"></i> <?php echo $active_user_name; ?> <b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> <?php echo $active_user_name; ?> <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="<?php echo site_url('site/logout'); ?>"><?php echo $this->lang->line('logout'); ?></a></li>
 							</ul>

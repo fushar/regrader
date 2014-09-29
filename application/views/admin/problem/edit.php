@@ -76,7 +76,7 @@ tinyMCE.init({
 				</div>
 
 				<div class="form-actions">
-					<button type="submit" class="btn btn-danger"><?php echo isset($problem) ? '<i class="glyphicon glyphicon-download-alt glyphicon-white"></i> ' . $this->lang->line('save') : '<i class="glyphicon glyphicon-plus glyphicon-white"></i> ' . $this->lang->line('add'); ?></button>
+					<button type="submit" class="btn btn-danger"><?php echo isset($problem) ? '<i class="glyphicon glyphicon-download-alt"></i> ' . $this->lang->line('save') : '<i class="glyphicon glyphicon-plus"></i> ' . $this->lang->line('add'); ?></button>
 					<a class="btn btn-default" href="<?php echo site_url('admin/problem/viewAll/' . $page_offset); ?>"><?php echo $this->lang->line('cancel'); ?></a>
 				</div>
 			</form>

@@ -42,12 +42,12 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th class="id-th"><i class="glyphicon glyphicon-tag glyphicon glyphicon-white"></i></th>
-						<th><i class="glyphicon glyphicon-file glyphicon glyphicon-white"></i> <?php echo $this->lang->line('input'); ?></th>
-						<th><i class="glyphicon glyphicon-file glyphicon glyphicon-white"></i> <?php echo $this->lang->line('output'); ?></th>
-						<th><i class="glyphicon glyphicon-time glyphicon glyphicon-white"></i> <?php echo $this->lang->line('time'); ?></th>
-						<th><i class="glyphicon glyphicon-download-alt glyphicon glyphicon-white"></i> <?php echo $this->lang->line('memory'); ?></th>
-						<th><i class="glyphicon glyphicon-briefcase glyphicon glyphicon-white"></i> <?php echo $this->lang->line('verdict'); ?></th>
+						<th class="id-th"><i class="glyphicon glyphicon-tag glyphicon"></i></th>
+						<th><i class="glyphicon glyphicon-file glyphicon"></i> <?php echo $this->lang->line('input'); ?></th>
+						<th><i class="glyphicon glyphicon-file glyphicon"></i> <?php echo $this->lang->line('output'); ?></th>
+						<th><i class="glyphicon glyphicon-time glyphicon"></i> <?php echo $this->lang->line('time'); ?></th>
+						<th><i class="glyphicon glyphicon-download-alt glyphicon"></i> <?php echo $this->lang->line('memory'); ?></th>
+						<th><i class="glyphicon glyphicon-briefcase glyphicon"></i> <?php echo $this->lang->line('verdict'); ?></th>
 					</tr>
 				</thead>
 				<tbody>

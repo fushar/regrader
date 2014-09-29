@@ -21,7 +21,7 @@
 				</div>
 
 				<div class="form-actions col-sm-offset-2">
-					<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-plus glyphicon-white"></i> <?php echo $this->lang->line('add'); ?></button>
+					<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-plus"></i> <?php echo $this->lang->line('add'); ?></button>
 					<a class="btn btn-default" href="<?php echo site_url('admin/file/viewAll/'); ?>"><?php echo $this->lang->line('cancel'); ?></a>
 				</div>
 				<input name="hidden" type="hidden" value="1"/>

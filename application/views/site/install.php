@@ -21,7 +21,7 @@
 				<div class="col-md-12">
 					<ul class="nav navbar-nav">
 						<li class="active">
-							<a href="#"><i class="glyphicon-hdd glyphicon-white glyphicon"></i> Installation</a>
+							<a href="#"><i class="glyphicon-hdd glyphicon"></i> Installation</a>
 						</li>
 					</ul>
 				</div>

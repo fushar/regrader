@@ -46,13 +46,13 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th class="id-th"><i class="glyphicon glyphicon-tag glyphicon-white"></i></th>
-						<th><i class="glyphicon glyphicon-eye-open glyphicon-white"></i> <?php echo $this->lang->line('name'); ?></th>
-						<th><i class="glyphicon glyphicon-user glyphicon-white"></i> <?php echo $this->lang->line('author'); ?></th>
-						<th class="problem-limits-th"><i class="glyphicon glyphicon-file glyphicon-white"></i> <?php echo $this->lang->line('testcases'); ?></th>
-						<th class="problem-limits-th"><i class="glyphicon glyphicon-calendar glyphicon-white"></i> <?php echo $this->lang->line('time_limit'); ?></th>
-						<th class="problem-limits-th"><i class="glyphicon glyphicon-download-alt glyphicon-white"></i> <?php echo $this->lang->line('memory_limit'); ?></th>
-						<th class="operations-th"><i class="glyphicon glyphicon-cog glyphicon-white"></i></th>
+						<th class="id-th"><i class="glyphicon glyphicon-tag"></i></th>
+						<th><i class="glyphicon glyphicon-eye-open"></i> <?php echo $this->lang->line('name'); ?></th>
+						<th><i class="glyphicon glyphicon-user"></i> <?php echo $this->lang->line('author'); ?></th>
+						<th class="problem-limits-th"><i class="glyphicon glyphicon-file"></i> <?php echo $this->lang->line('testcases'); ?></th>
+						<th class="problem-limits-th"><i class="glyphicon glyphicon-calendar"></i> <?php echo $this->lang->line('time_limit'); ?></th>
+						<th class="problem-limits-th"><i class="glyphicon glyphicon-download-alt"></i> <?php echo $this->lang->line('memory_limit'); ?></th>
+						<th class="operations-th"><i class="glyphicon glyphicon-cog"></i></th>
 					</tr>
 				</thead>
 
