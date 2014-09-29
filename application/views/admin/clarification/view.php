@@ -43,7 +43,7 @@
 			<?php endif; ?>
 				<div class="form-actions">
 					<?php if ($clarification['user_id'] != 1) : ?>
-						<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-download-alt glyphicon-white"></i> <?php echo $clarification['answer'] ? $this->lang->line('save') : $this->lang->line('answer'); ?></i></button>
+						<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-download-alt"></i> <?php echo $clarification['answer'] ? $this->lang->line('save') : $this->lang->line('answer'); ?></i></button>
 					<?php endif; ?>
 					<a class="btn btn-default" href="<?php echo site_url('admin/clarification/viewAll/' . $contest_id . '/' . $user_id . '/' . $page_offset); ?>"><?php echo $this->lang->line('back'); ?></a>
 				</div>

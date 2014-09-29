@@ -46,10 +46,10 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th class="id-th"><i class="glyphicon glyphicon-tag glyphicon-white"></i></th>
-						<th><i class="glyphicon glyphicon-eye-open glyphicon-white"></i> <?php echo $this->lang->line('name'); ?></th>
-						<th class="category-membercount-th"><i class="glyphicon glyphicon-user glyphicon-white"></i> <?php echo $this->lang->line('number_of_users'); ?></th>
-						<th class="operations-th"><i class="glyphicon glyphicon-cog glyphicon-white"></i></th>
+						<th class="id-th"><i class="glyphicon glyphicon-tag"></i></th>
+						<th><i class="glyphicon glyphicon-eye-open"></i> <?php echo $this->lang->line('name'); ?></th>
+						<th class="category-membercount-th"><i class="glyphicon glyphicon-user"></i> <?php echo $this->lang->line('number_of_users'); ?></th>
+						<th class="operations-th"><i class="glyphicon glyphicon-cog"></i></th>
 					</tr>
 				</thead>
 

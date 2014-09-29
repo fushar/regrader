@@ -25,7 +25,7 @@
 							<option value="<?php echo $v['id']; ?>"><?php echo $v['name']; ?></option>
 						<?php endforeach; ?>
 					</select>
-					<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-fire glyphicon-white"></i> <?php echo $this->lang->line('compete'); ?></button>
+					<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-fire"></i> <?php echo $this->lang->line('compete'); ?></button>
 				</form>
 			<?php endif; ?>
 		</div>

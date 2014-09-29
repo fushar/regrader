@@ -46,14 +46,14 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th class="id-th"><i class="glyphicon glyphicon-tag glyphicon-white"></i></th>
-						<th><i class="glyphicon glyphicon-eye-open glyphicon-white"></i> <?php echo $this->lang->line('name'); ?></th>
-						<th><i class="glyphicon glyphicon-calendar glyphicon-white"></i> <?php echo $this->lang->line('start_time'); ?></th>
-						<th><i class="glyphicon glyphicon-calendar glyphicon-white"></i> <?php echo $this->lang->line('end_time'); ?></th>
-						<th><i class="glyphicon glyphicon-calendar glyphicon-white"></i> <?php echo $this->lang->line('freeze_time'); ?></th>
-						<th><i class="glyphicon glyphicon-calendar glyphicon-white"></i> <?php echo $this->lang->line('unfreeze_time'); ?></th>
-						<th><i class="glyphicon glyphicon-star glyphicon-white"></i> <?php echo $this->lang->line('status'); ?></th>
-						<th class="operations-th"><i class="glyphicon glyphicon-cog glyphicon-white"></i></th>
+						<th class="id-th"><i class="glyphicon glyphicon-tag"></i></th>
+						<th><i class="glyphicon glyphicon-eye-open"></i> <?php echo $this->lang->line('name'); ?></th>
+						<th><i class="glyphicon glyphicon-calendar"></i> <?php echo $this->lang->line('start_time'); ?></th>
+						<th><i class="glyphicon glyphicon-calendar"></i> <?php echo $this->lang->line('end_time'); ?></th>
+						<th><i class="glyphicon glyphicon-calendar"></i> <?php echo $this->lang->line('freeze_time'); ?></th>
+						<th><i class="glyphicon glyphicon-calendar"></i> <?php echo $this->lang->line('unfreeze_time'); ?></th>
+						<th><i class="glyphicon glyphicon-star"></i> <?php echo $this->lang->line('status'); ?></th>
+						<th class="operations-th"><i class="glyphicon glyphicon-cog"></i></th>
 					</tr>
 				</thead>
 

@@ -64,7 +64,7 @@
 				</div>
 
 				<div class="col-sm-offset-2 form-actions">
-					<button type="submit" class="btn btn-danger"><?php echo isset($user) ? '<i class="glyphicon glyphicon-download-alt glyphicon-white"></i> ' . $this->lang->line('save') : '<i class="icon-plus icon-white"></i> ' . $this->lang->line('add'); ?></button>
+					<button type="submit" class="btn btn-danger"><?php echo isset($user) ? '<i class="glyphicon glyphicon-download-alt"></i> ' . $this->lang->line('save') : '<i class="glyphicon glyphicon-plus"></i> ' . $this->lang->line('add'); ?></button>
 					<a class="btn btn-default" href="<?php echo site_url('admin/user/viewAll/' . $category_id . '/' . $page_offset); ?>"><?php echo $this->lang->line('cancel'); ?></a>
 				</div>
 			</form>

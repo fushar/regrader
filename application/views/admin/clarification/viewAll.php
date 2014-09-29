@@ -36,7 +36,7 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-plus glyphicon-white"></i> <?php echo $this->lang->line('broadcast'); ?></button>
+						<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-plus"></i> <?php echo $this->lang->line('broadcast'); ?></button>
 						<a href="#" class="btn btn-default" data-dismiss="modal"><?php echo $this->lang->line('cancel'); ?></a>
 					</div>
 				</div>
@@ -94,13 +94,13 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th class="id-th"><i class="glyphicon glyphicon-tag glyphicon-white"></i></th>
-						<th><i class="glyphicon glyphicon-fire glyphicon-white"></i> <?php echo $this->lang->line('contest'); ?></th>
-						<th><i class="glyphicon glyphicon-user glyphicon-white"></i> <?php echo $this->lang->line('by'); ?></th>
-						<th><i class="glyphicon glyphicon-eye-open glyphicon-white"></i> <?php echo $this->lang->line('title'); ?></th>
-						<th class="clarification-time-th"><i class="glyphicon glyphicon-time glyphicon-white"></i> <?php echo $this->lang->line('time'); ?></th>
-						<th class="clarification-status-th"><i class="glyphicon glyphicon-star glyphicon-white"></i> <?php echo $this->lang->line('status'); ?></th>
-						<th class="operations-th"><i class="glyphicon glyphicon-cog glyphicon-white"></i></th>
+						<th class="id-th"><i class="glyphicon glyphicon-tag"></i></th>
+						<th><i class="glyphicon glyphicon-fire"></i> <?php echo $this->lang->line('contest'); ?></th>
+						<th><i class="glyphicon glyphicon-user"></i> <?php echo $this->lang->line('by'); ?></th>
+						<th><i class="glyphicon glyphicon-eye-open"></i> <?php echo $this->lang->line('title'); ?></th>
+						<th class="clarification-time-th"><i class="glyphicon glyphicon-time"></i> <?php echo $this->lang->line('time'); ?></th>
+						<th class="clarification-status-th"><i class="glyphicon glyphicon-star"></i> <?php echo $this->lang->line('status'); ?></th>
+						<th class="operations-th"><i class="glyphicon glyphicon-cog"></i></th>
 					</tr>
 				</thead>
 

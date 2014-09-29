@@ -31,12 +31,12 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th class="id-th"><i class="glyphicon glyphicon-tag glyphicon-white"></i></th>
-						<th><i class="glyphicon glyphicon-download glyphicon-white"></i> <?php echo $this->lang->line('input'); ?></th>
-						<th class="problem-filesize-th"><i class="glyphicon glyphicon-download glyphicon-white"></i> <?php echo $this->lang->line('size'); ?></th>
-						<th><i class="glyphicon glyphicon-upload glyphicon-white"></i> <?php echo $this->lang->line('output'); ?></th>
-						<th class="problem-filesize-th"><i class="glyphicon glyphicon-upload glyphicon-white"></i> <?php echo $this->lang->line('size'); ?></th>
-						<th class="operations-th"><i class="glyphicon glyphicon-cog glyphicon-white"></i></th>
+						<th class="id-th"><i class="glyphicon glyphicon-tag"></i></th>
+						<th><i class="glyphicon glyphicon-download"></i> <?php echo $this->lang->line('input'); ?></th>
+						<th class="problem-filesize-th"><i class="glyphicon glyphicon-download"></i> <?php echo $this->lang->line('size'); ?></th>
+						<th><i class="glyphicon glyphicon-upload"></i> <?php echo $this->lang->line('output'); ?></th>
+						<th class="problem-filesize-th"><i class="glyphicon glyphicon-upload"></i> <?php echo $this->lang->line('size'); ?></th>
+						<th class="operations-th"><i class="glyphicon glyphicon-cog"></i></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -79,7 +79,7 @@
 				<input name="hidden" type="hidden" value="1" />
 
 				<div class="form-actions col-sm-offset-2">
-					<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-plus glyphicon-white"></i> <?php echo $this->lang->line('add'); ?></button>
+					<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-plus"></i> <?php echo $this->lang->line('add'); ?></button>
 					<a class="btn btn-default" href="<?php echo site_url('admin/problem/viewAll/' . $page_offset); ?>"><?php echo $this->lang->line('cancel'); ?></a>
 				</div>
 			</form>

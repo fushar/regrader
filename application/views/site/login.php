@@ -37,7 +37,7 @@
 					</div>
 				</div>
 				<div class="form-actions col-sm-offset-1">
-					<button type="submit" class="btn btn-danger col-sm-3"><i class="glyphicon glyphicon-user glyphicon-white"></i> <?php echo $this->lang->line('login'); ?></button>
+					<button type="submit" class="btn btn-danger col-sm-3"><i class="glyphicon glyphicon-user"></i> <?php echo $this->lang->line('login'); ?></button>
 				</div>
 			</form>
 		</div>
