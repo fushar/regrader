@@ -66,9 +66,9 @@
 			<form method="post" action="">
 				<input type="hidden" name="hidden" value="1"/>
 				<?php if (isset ($first)) : ?>
-					<button type="submit" class="btn btn-inverse" href="">Install</button>
+					<button type="submit" class="btn btn-default" href="">Install</button>
 				<?php else : ?>
-					<a class="btn" href="<?php echo site_url(''); ?>">Back</a>
+					<a class="btn btn-default" href="<?php echo site_url(''); ?>">Back</a>
 				<?php endif; ?>
 			</form>
 		</div>
