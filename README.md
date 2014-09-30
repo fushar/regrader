@@ -12,15 +12,9 @@ Built on top of:
 Installation Guide
 ------------------------
 
-#### 1. Clone Regrader
+#### 1. Download Regrader
 
-Clone a copy of Regrader git repository by running
-
-```bash
-git clone git://github.com/fushar/regrader.git
-```
-
-on your web server.
+Download a copy of the latest Regrader: https://github.com/fushar/regrader/archive/master.zip.
 
 #### 2. Configure Regrader
 
@@ -59,7 +53,13 @@ chmod +x run_grader.sh
 Configuring the System
 ----------------------
 
-Open **Manage**->**Options** and configure several properties of the system.
+#### 1. Configure programming languages
+
+Open **Manage**->**Languages**. There will be 4 programming languages set up by default: Pascal, Java, C++, and C. For each language you want to actually use, you have to at least edit its compile command as necessary depending where you install the compiler.
+
+#### 2. Configure additional options
+
+Open **Manage**->**Options** and configure additional properties of the system.
 
 - **Website, Top, & Bottom Names**  
 To be shown in the header.
@@ -76,15 +76,23 @@ After installation, you can log in and add users, contests, problems, etc. The i
 Miscellaneous
 -------------
 
+#### Solution checker
+
+You can set up a solution checker for your problems. This is useful for problems that can have multiple solutions. The template for a checker can be found here: https://github.com/fushar/regrader/blob/develop/examples/checker.cpp. 
+
 #### Internationalization
 
 Regrader currently supports English and Indonesian. To change the language to Indonesian, open **application/config/config.php** and change the value of **$config['language']** into **'indonesian'**.
 
-#### Institution Logos
+#### Institution logos
 
 You can show institution logos beside the contestant names in the scoreboard. The scoreboard will look very nice. Just upload **X**.jpg in **Manage->Files** as the logo for institution **X**. Then, tick the option **Show Institution Logos** in the corresponding contest's setting.
 
-#### Public Raw Scoreboard
+#### Public files
+
+You can use **Manage**->**Files** to upload public files, for example, for inserting images in problem statements.
+
+#### Public raw scoreboard
 
 Besides the usual public scoreboard, you can also generate public scoreboard that is separated from the system. This is useful for hiding the contest URL address from the public and in order to minimize traffic and external attack. 
 
@@ -93,6 +101,16 @@ Besides the usual public scoreboard, you can also generate public scoreboard tha
 - Publish both in a separate address.
 
 Of course, to achieve a semi-live scoreboard, you have to do the above steps periodically, possibly using a script.
+
+Got any weird errors?
+---------------------
+
+Here are common suggestions that should solve most possible errors:
+
+- Make sure that you have set up compile commands in programming languages you want to use.
+- Make sure that your server has execute permission on **moe/obj/box/box**.
+- Make sure that your test case output files have '\n' as the line ending.
+- Make sure that **run_grader.sh** is running.
 
 License
 -------
@@ -109,6 +127,6 @@ Mantainers
 
 Currently, Regrader is maintained by:
 
-- Ashar Fuadi (@fushar)
-- Pusaka Kaleb Setyabudi (@sokokaleb)
-- Rakina Zata Amni (@rakina)
+- Ashar Fuadi ([@fushar](https://github.com/fushar))
+- Pusaka Kaleb Setyabudi ([@sokokaleb](https://github.com/sokokaleb))
+- Rakina Zata Amni ([@rakina](https://github.com/rakina))
