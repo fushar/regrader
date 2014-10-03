@@ -34,7 +34,7 @@ $lang['default_statement'] = <<<SAMPLE
 <pre>XXX</pre>
 
 <h3>Penjelasan</h3>
-<p>&lt;penjelasan&lt;</p>
+<p>&lt;penjelasan&gt;</p>
 
 <h3>Batasan</h3>
 <ul>
