@@ -110,6 +110,7 @@ Here are common suggestions that should solve most possible errors:
 - Make sure that you have set up compile commands in programming languages you want to use.
 - Make sure that your server has execute permission on **moe/obj/box/box**.
 - Make sure that your test case output files have '\n' as the line ending.
+- Make sure that your test case files have extensions.
 - Make sure that **run_grader.sh** is running.
 
 License
