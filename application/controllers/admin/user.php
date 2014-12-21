@@ -134,7 +134,12 @@ class User extends Admin_Controller
 				$this->ui['content']['user'] = $this->user_manager->get_row($user_id);
 			}
 			$this->ui['header']['page'] = 'user';
-			$this->ui['content']['categories'] = $this->category_manager->get_rows(array('id >' => 1));
+
+			if ($this->identity->is_admin())
+				$this->ui['content']['categories'] = $this->category_manager->get_rows(array('id' => 1));
+			else
+				$this->ui['content']['categories'] = $this->category_manager->get_rows(array('id >' => 1));
+
 			$this->ui['content']['page_offset'] = $page_offset;
 			$this->ui['content']['category_id'] = $category_id;
 
