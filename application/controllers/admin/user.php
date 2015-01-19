@@ -136,7 +136,7 @@ class User extends Admin_Controller
 			$this->ui['header']['page'] = 'user';
 
 			if ($this->identity->is_admin())
-				$this->ui['content']['categories'] = $this->category_manager->get_rows(array('id' => 1));
+				$this->ui['content']['categories'] = $this->category_manager->get_rows(array('id >=' => 1));
 			else
 				$this->ui['content']['categories'] = $this->category_manager->get_rows(array('id >' => 1));
 
