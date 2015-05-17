@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+define('SEM_KEY', 85);
+
 /**
  * Controller for grader engine
  *
@@ -19,7 +21,7 @@ class Grader extends CI_Controller
 	public function __construct()
 	{
 		if (isset($_SERVER['REMOTE_ADDR']))
-			show_404();  
+			show_404(); 
 
 		parent::__construct();
 		$this->load->model('submission_manager');
@@ -28,13 +30,18 @@ class Grader extends CI_Controller
 		$this->load->language('submission');
 	}
 
+	private $grader_name;
+
 	/**
 	 * Runs the grader
 	 *
 	 * This function runs the grader. The grader will check and grade a submission every 1 second.
 	 */
-	public function run()
+	public function run($number)
 	{
+
+		$this->grader_name = php_uname('n'). '-'. $number;
+
 		set_time_limit(0);
 		
 		$this->logger->log('grader', 'Grader started.');
@@ -43,15 +50,13 @@ class Grader extends CI_Controller
 		while (TRUE)
 		{
 			sleep(1);
-
-			$this->check_in();
-			if ( ! $this->has_new_submission())
-				continue;
-
-			$submission = $this->get_new_submission();
-			$this->grade_submission($submission);
-			
-			$this->logger->log('grader', 'Waiting for new submission...');
+			$this->check_in($number);
+			if ($this->has_new_submission()){
+				$submission = $this->get_new_submission();
+				if ($submission != false) // $submission = false means this submission is given to other grader for judging
+					$this->grade_submission($submission);
+				$this->logger->log('grader', 'Waiting for new submission...');
+			}
 		}
 	}
 
@@ -62,8 +67,16 @@ class Grader extends CI_Controller
 	 * for checking whether the grader is running or not.
 	 */
 	private function check_in()
-	{
-		$q = $this->db->query('UPDATE grader SET last_activity=NOW() WHERE hostname="' . php_uname('n') . '"');
+	{	
+		$q = $this->db->query('SELECT * FROM grader WHERE hostname="'. $this->grader_name.'"');
+
+		if ($q->num_rows() <= 0)
+			$query = 'INSERT INTO grader (hostname, last_activity) VALUES("' . $this->grader_name . '", ' . 'NOW())';
+		else
+			$query = 'UPDATE grader SET last_activity=NOW() WHERE hostname="' . $this->grader_name . '"';
+		
+		//echo $query . "\n";
+		$q = $this->db->query($query);
 	}
 
 	/**
@@ -75,7 +88,7 @@ class Grader extends CI_Controller
 	 */
 	private function has_new_submission()
 	{
-		$q = $this->db->query('SELECT COUNT(id) AS cnt FROM submission WHERE verdict<=0 LIMIT 1');
+		$q = $this->db->query('SELECT COUNT(id) AS cnt FROM submission WHERE verdict<=0 AND verdict <> -85 LIMIT 1');
 		$res = $q->row_array();
 		return $res['cnt'] > 0;
 	}
@@ -84,15 +97,28 @@ class Grader extends CI_Controller
 	 * Retrieve a new submission
 	 *
 	 * This function retrieves a new submission or a regrade request.
-	 * 
+	 * UPDATE: Changed by Taha Eghtesad to cover multithreaded judging
+	 * This function should be atomic.. yet, I don't know how
+	 * UPDATE 2: Both this and has_new_submission() should be atomic in once! 
 	 * @return mixed A new submission or a regrade request, or FALSE if there is none.
 	 */
+
 	private function get_new_submission()
 	{
-		$q = $this->db->query('SELECT * FROM submission WHERE verdict<=0 ORDER BY id ASC LIMIT 1');
-		if ($q->num_rows() == 0)
-			return FALSE;
-		return $q->row_array();
+		$semRes = sem_get(SEM_KEY, 1, 0666, 0);
+		
+		if(sem_acquire($semRes)){
+			$q = $this->db->query('SELECT * FROM submission WHERE verdict<=0 AND verdict <> -85 ORDER BY id ASC LIMIT 1');
+			if ($q->num_rows() == 0)
+				$submission = false;
+			else{
+				$submission = $q->row_array();
+				$q = $this->db->query('UPDATE submission SET verdict=-85 WHERE id=' . $submission['id']);
+			}
+			// verdict = -85 means, this submission is given to a grader for judging
+			sem_release($semRes);
+			return $submission;
+		}
 	}
 
 	/**
@@ -113,6 +139,7 @@ class Grader extends CI_Controller
 		$alias = $this->get_alias($submission['contest_id'], $submission['problem_id']);
 
 		$msg  = 'Found new submission!' . "\n";
+		$msg .= '                      Grader         : ' . $this->grader_name . "\n";
 		$msg .= '                      Submission     : ' . $submission['id'] . "\n";
 		$msg .= '                      User           : ' . $user['username'] . ' (' . $user['name'] . ')' . "\n";
 		$msg .= '                      Contest        : ' . $contest['id'] . ' (' . $contest['name'] . ')' . "\n";
@@ -237,7 +264,7 @@ class Grader extends CI_Controller
 			$checker_path = $this->setting->get('checker_path') . '/' . $problem['id'];
 			$checker_exec_path = $checker_path . '/check';
 		}
-		
+
 		foreach ($testcases as $v)
 		{
 			$tc_path = $this->setting->get('testcase_path') . '/' . $submission['problem_id'];
@@ -316,17 +343,27 @@ class Grader extends CI_Controller
 					
 					unlink($out_path . '/checker_op');
 				}
-				else
-				{
-					$diff_cmd = 'diff -q ' . $tc_path . '/' . $v['output'] . ' ' . $out_path . '/' . $v['output'] . ' > ' . $out_path . '/diff';
+
+				else{
+
+					// -i --ignore-case
+					// -E --ignore-tab-expansion
+					// -Z --ignore-trailing-space
+					// -b --ignore-space-change
+					// -w --ignore-all-space
+					// -B --ignore-blank-lines
+			
+					$diff_params = '-q';
+
+					$diff_cmd = 'diff' . ' ' . $diff_params . ' ' . $tc_path . '/' . $v['output'] . ' ' . $out_path . '/' . $v['output'] . ' > ' . $out_path . '/diff';
 					exec($diff_cmd, $output, $retval);
 
 					$diff = file_get_contents($out_path . '/diff');
 					if ( ! empty($diff))
 						$verdict = 3; // Wrong Answer
+
 					unlink($out_path . '/diff');
 				}
-
 			}
 
 			$run_result_time = ceil(((float)$run_result['time-wall']) * 1000);
@@ -417,21 +454,6 @@ class Grader extends CI_Controller
 	{
 		$q = $this->db->query('SELECT id, input, output FROM testcase WHERE problem_id=' . $problem_id . ' ORDER BY id');
 		return $q->result_array();
-	}
-
-	/**
-	 * Retrieves the checker of a particular problem
-	 *
-	 * This function retrieves the checker name of the problem whose ID is $problem_id.
-	 * 
-	 * @param int $problem_id The problem ID.
-	 * 
-	 * @return array The retrieved checker. Returns an empty array if no checker exists.
-	 */
-	private function get_checker($problem_id)
-	{
-		$q = $this->db->query('SELECT id, checker FROM checker WHERE problem_id=' . $problem_id);
-		return $q->row_array();
 	}
 
 	/**

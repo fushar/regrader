@@ -190,7 +190,7 @@ class Submission_manager extends AR_Model
 
 		$res = $q->row_array();
 		$new_verdict = $res['verdict'];
-		if ($res['verdict'] == 99)
+		if ($res['verdict'] == 99 || $res['verdict'] == -85)
 			$new_verdict = 0;
 		$this->db->set('verdict', - $new_verdict);
 		$this->db->where('id', $submission_id);
