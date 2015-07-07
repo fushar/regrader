@@ -82,7 +82,6 @@ class Problem extends Admin_Controller
 		$this->form_validation->set_rules('form[author]', $this->lang->line('author'), 'trim|required');
 		$this->form_validation->set_rules('form[time_limit]', $this->lang->line('time_limit'), 'trim|required|integer|greater_than[0]');
 		$this->form_validation->set_rules('form[memory_limit]', $this->lang->line('memory_limit'), 'trim|required|integer|greater_than[0]');
-		$this->form_validation->set_rules('form[statement]', $this->lang->line('statement'), '');
 		
 		if ($this->form_validation->run())
 		{

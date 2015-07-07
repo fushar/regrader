@@ -25,7 +25,7 @@
 				<div class="form-group<?php echo form_error('form[username]') ? ' has-error' : ''; ?>">
 					<label class="col-sm-1 control-label"><?php echo $this->lang->line('username'); ?>:</label>
 					<div class="col-sm-4">
-						<input name="form[username]" type="text" maxlength="30" class="form-control" value="<?php echo set_value('form[username]'); ?>"/>
+						<input name="form[username]" type="text" maxlength="30" class="form-control" value="<?php echo set_value('form[username]'); ?>" autofocus="on"/>
 						<span class="help-block"><?php echo form_error('form[username]'); ?></span>
 					</div>
 				</div>

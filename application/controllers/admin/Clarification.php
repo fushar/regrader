@@ -48,7 +48,7 @@ class Clarification extends Admin_Controller
 	 */
 	public function viewAll($contest_id = 0, $user_id = 0, $page_offset = 1)
 	{
-		if ($this->input->post('contest_id') !== FALSE)
+		if (NULL !== $this->input->post('contest_id'))
 		{
 			$contest_id = $this->input->post('contest_id');
 			$user_id = $this->input->post('user_id');

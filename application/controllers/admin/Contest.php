@@ -88,8 +88,6 @@ class Contest extends Admin_Controller
 		$this->form_validation->set_rules('form[end_time]', $this->lang->line('end_time'), 'required');
 		$this->form_validation->set_rules('form[freeze_time]', $this->lang->line('freeze_time'), 'required');
 		$this->form_validation->set_rules('form[unfreeze_time]', $this->lang->line('unfreeze_time'), 'required');
-		$this->form_validation->set_rules('form[enabled]', '', '');
-		$this->form_validation->set_rules('form[show_institution_logo]', '', '');
 
 		$categories = $this->category_manager->get_rows();
 		$contest_members = array();
@@ -97,7 +95,6 @@ class Contest extends Admin_Controller
 		{
 			$contest_members[$k]['name'] = $v['name'];
 			$contest_members[$k]['present'] = FALSE;
-			$this->form_validation->set_rules('c' . $k, '', '');
 		}
 		$categories = $this->category_manager->get_rows(array('contest_id' => $contest_id));
 		foreach ($categories as $k => $v)
@@ -109,7 +106,6 @@ class Contest extends Admin_Controller
 		{
 			$contest_languages[$k]['name'] = $v['name'];
 			$contest_languages[$k]['present'] = FALSE;
-			$this->form_validation->set_rules('l' . $k, '', '');
 		}
 		$languages = $this->language_manager->get_rows(array('contest_id' => $contest_id));
 		foreach ($languages as $k => $v)
