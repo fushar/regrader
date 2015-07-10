@@ -1,0 +1,293 @@
+.site_logo {
+	float: left;
+	margin-left: 10px;
+}
+
+.site_logo img {
+	height: 120px;
+}
+
+.site_name {
+	float: left;
+	margin-left: 10px;
+	margin-top: 13px;
+}
+
+.site_name h3 {
+	margin-top: 0;
+}
+.site_logo_right {
+	float: right;
+}
+
+.site_logo_right img {
+	height: 120px;
+}
+
+.site_footer {
+	font-size: 8pt;
+	margin-bottom: 70px;
+}
+
+h2.problem-title {
+	text-align: center;
+}
+
+p.problem-statement {
+	text-align: justify;
+}
+
+h3 {
+	margin-top: 15px;
+	margin-bottom: 10px;
+}
+
+pre {
+	font-family: monospace;
+}
+
+.problem-limits {
+	margin: 10px auto 10px auto;
+	width: 250px;
+}
+
+ul.problem-list li a {
+	color: #333333;
+}
+
+ul.problem-list li.active a{
+	color: white;
+	background-color: #222222;
+}
+
+ul.problem-list li.active:hover a{
+	color: white;
+	background-color: #222222;
+}
+
+ul.problem-list li.active:hover{
+	background-color: white;
+}
+
+.table th {
+	background-color: #222222;
+	color: white;
+	font-weight: normal;
+}
+
+.table .id-th, .table .id-td {
+	width: 15px;
+	text-align: center;
+}
+
+.table .operations-th, .table .operations-td {
+	width: 105px;
+	text-align: center;
+}
+
+.table .contest-enabled-td {
+	text-align: center;
+}
+
+.table .submission-verdict-td {
+	width: 60px;
+	text-align: center;
+}
+
+.table .submission-verdict-th {
+	width: 85px;
+	text-align: center;
+}
+
+.table .submission-time-th {
+	width: 155px;
+}
+
+.table .submission-language-th {
+	width: 105px;
+}
+
+.table .submission-info-th {
+	width: 160px;
+}
+
+.table .clarification-info-th {
+	width: 120px;
+}
+
+.table .clarification-time-th {
+	width: 155px;
+}
+
+.table .clarification-status-th {
+	width: 100px;
+}
+
+.table .clarification-answered-td {
+	width: 75px;
+	text-align: center;
+}
+
+.table .category-membercount-td {
+	width: 120px;
+}
+
+.table .category-membercount-td {
+	width: 120px;
+	text-align: right;
+}
+
+.table .problem-limits-th {
+	width: 130px;
+}
+
+.table .problem-filesize-th {
+	width: 85px;
+}
+
+.table .problem-filesize-td {
+	width: 85px;
+	text-align: right;
+}
+
+.table .clar-unread-tr {
+	font-weight: bold;
+	font-style: oblique;
+}
+
+/* Scoreboard */
+
+.table .scoreboard-name-th {
+	min-width: 250px;
+	text-align: center;
+}
+
+.table .scoreboard-name {
+	margin-left: 3px;
+	font-size: 12pt;
+	font-weight: bold;
+}
+
+.table .scoreboard-institution-logo-th {
+	width: 38px;
+	margin: 0;
+	padding: 0;
+}
+
+.table .scoreboard-institution-logo {
+	text-align: center;
+	width: 38px;
+	margin: 0;
+}
+
+.table .scoreboard-institution {
+	margin-left: 3px;
+	font-size: 9pt;
+	font-weight: normal;
+	color: #666666;
+}
+
+.table .scoreboard-score-th {
+	text-align: center;
+}
+
+.table .scoreboard-problem-th {
+	text-align: center;
+}
+
+.table .scoreboard-total-accepted-td {
+	width: 40px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.table .scoreboard-total-penalty-td {
+	width: 40px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.table .scoreboard-problem-td {
+	padding: 0;
+	min-width: 40px;
+	max-width: 100px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.table .scoreboard-accepted-td {
+	background-color: #33FF66;
+}
+
+.table .scoreboard-not-accepted-td {
+	background-color: #FF6666;
+}
+
+.unread_clarifications {
+	color: red;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+table.table-scoreboard tbody tr:hover td {
+  background-color: white;
+}
+
+table.table-scoreboard tbody tr:hover td.scoreboard-accepted-td {
+  background-color: #33FF66;
+}
+
+table.table-scoreboard tbody tr:hover td.scoreboard-not-accepted-td {
+  background-color: #FF6666;
+}
+
+table.table-scoreboard td {
+	vertical-align: middle;
+	padding: 3px;
+}
+
+table.table-scoreboard th {
+	vertical-align: middle;
+	padding: 6px;
+}
+
+select{
+	height: 30px;
+	margin-right: 5px;
+}
+
+.btn{
+	padding: 4px 12px;
+}
+
+.form-horizontal{
+	margin: 0 15px;
+}
+
+.glyphicon{
+	padding: 0 2px;
+}
+
+.operations-td .glyphicon{
+	color: #333;
+}
+
+body{
+	padding: 30px;
+}
+
+.form-inline{
+	margin-bottom: 12px;
+}
+
+.prettyprint ol.linenums > li{
+	list-style-type: decimal;
+}
+
+.prettyprint ol.linenums > li.L1,
+.prettyprint ol.linenums > li.L3,
+.prettyprint ol.linenums > li.L5,
+.prettyprint ol.linenums > li.L7,
+.prettyprint ol.linenums > li.L9{
+	background: #f5f5f5;
+}

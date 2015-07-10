@@ -1,0 +1,11 @@
+# Secret directories for files, testcases, and submissions
+files/*
+secret-*
+
+# Sublime Text 2 project files
+*.sublime-*
+
+# Moe Contest Environment object files
+moe/obj/*
+moe/run/*
+
