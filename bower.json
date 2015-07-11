@@ -1,0 +1,15 @@
+{
+    "name": "regrader",
+
+    "dependencies": {
+        "jquery": "~2.1",
+        "bootstrap": "~3.3",
+        "ama3-anytime": "#e8adb7f3b9fb",
+        "tinymce": "~4.2",
+        "google-code-prettify": "~1.0"
+    },
+
+    "resolutions": {
+    	"jquery": "~2.1"
+    }
+}

@@ -97,8 +97,8 @@ class Submission extends Contestant_Controller
 
 		$this->ui['header']['title'] = $this->lang->line('submission') . ' ' . $submission_id;
 		$this->ui['header']['page'] = 'submission';
-		$this->ui['header']['custom_css'] = array('google-code-prettify/prettify.css');
-		$this->ui['header']['custom_js'] = array('google-code-prettify/prettify.js');
+		$this->ui['header']['custom_css'] = array('vendor/google-code-prettify/bin/prettify.min.css');
+		$this->ui['header']['custom_js'] = array('vendor/google-code-prettify/bin/prettify.min.js');
 		$this->ui['content']['page_offset'] = $page_offset;
 		$this->ui['content']['submission'] = $submission;
 		

@@ -9,3 +9,5 @@ secret-*
 moe/obj/*
 moe/run/*
 
+# Front-end dependencies
+assets/vendor/*

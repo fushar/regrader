@@ -157,8 +157,8 @@ class Contest extends Admin_Controller
 				$this->ui['content']['contest'] = $this->contest_manager->get_row($contest_id);
 			}
 			$this->ui['header']['page'] = 'contest';
-			$this->ui['header']['custom_css'] = array('css/anytime.c.css');
-			$this->ui['header']['custom_js'] = array('js/anytime.c.js', 'js/jquery-migrate-1.0.0.js');
+			$this->ui['header']['custom_css'] = array('vendor/ama3-anytime/styles/anytime.compressed.css');
+			$this->ui['header']['custom_js'] = array('vendor/ama3-anytime/anytime.js', 'vendor/ama3-anytime/jquery-migrate-1.0.0.js');
 			$this->ui['content']['page_offset'] = $page_offset;
 			
 			$this->load->view('admin/header', $this->ui['header']);
