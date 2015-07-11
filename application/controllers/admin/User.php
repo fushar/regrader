@@ -98,7 +98,7 @@ class User extends Admin_Controller
 	{
 		$this->form_validation->set_rules('form[name]', $this->lang->line('name'), 'trim|required');
 		$this->form_validation->set_rules('form[username]', $this->lang->line('username'), 'trim|required|callback_check_username[' . $user_id .']');
-		$this->form_validation->set_rules('form[password]', $this->lang->line('password'), 'required');
+		$this->form_validation->set_rules('form[password]', $this->lang->line('password'));
 		$this->form_validation->set_rules('form[institution]', $this->lang->line('institution'), 'trim|required');
 		$this->form_validation->set_rules('form[category_id]', $this->lang->line('category'), 'required');
 
