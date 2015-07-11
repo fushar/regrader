@@ -134,7 +134,7 @@ Here are common suggestions that should solve most possible errors:
 License
 -------
 
-Regrader is licensed under GNU GPLv3.
+Regrader is licensed under MIT License.
 
 Contributing
 ------------
