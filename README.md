@@ -21,10 +21,14 @@ Download a copy of the latest Regrader: https://github.com/fushar/regrader/archi
 Create an InnoDB database in your MySQL database server. Then, open the database configuration file **application/config/database.php** and add your hostname, username, password, and database name in this part of the file:
 
 ```php
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = '';
-$db['default']['password'] = '';
-$db['default']['database'] = '';
+$db['default'] = array(
+    //
+    'hostname' 		=> 'localhost',
+    'username' 		=> '',
+    'password' 		=> '',
+    'database' 		=> '',
+    //
+);
 ```
 
 Next, open the configuration file **application/config/config.php** and add a random string in this part of the file:

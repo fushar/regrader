@@ -78,7 +78,7 @@ class Identity extends CI_Model
 	 */
 	public function is_guest()
 	{
-		return ! $this->get_session_data('id');
+		return NULL !== $this->get_session_data('id') && ! $this->get_session_data('id');
 	}
 
 	/**

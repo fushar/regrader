@@ -41,9 +41,6 @@ class Option extends Admin_Controller
 		$this->form_validation->set_rules('form[web_name]', $this->lang->line('web_name'), 'trim|required');
 		$this->form_validation->set_rules('form[top_name]', $this->lang->line('top_name'), 'trim|required');
 		$this->form_validation->set_rules('form[bottom_name]', $this->lang->line('bottom_name'), 'trim|required');
-		$this->form_validation->set_rules('form[left_logo]', $this->lang->line('left_logo'), '');
-		$this->form_validation->set_rules('form[right_logo1]', $this->lang->line('right_logo1'), '');
-		$this->form_validation->set_rules('form[right_logo2]', $this->lang->line('right_logo2'), '');
 		$this->form_validation->set_rules('form[items_per_page]', $this->lang->line('items_per_page'), 'trim|required|integer|greater_than[0]');
 		
 		if ($this->form_validation->run())

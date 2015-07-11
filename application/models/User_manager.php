@@ -8,7 +8,7 @@
  * @package models
  * @author  Ashar Fuadi <fushar@gmail.com>
  */
-class User_manager extends AR_Model 
+class User_manager extends AR_Model
 {
 	/**
 	 * Constructs a new model object
