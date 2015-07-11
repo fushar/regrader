@@ -11,3 +11,6 @@ moe/run/*
 
 # Front-end dependencies
 assets/vendor/*
+
+# Composer dependencies
+vendor/*
