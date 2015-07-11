@@ -12,11 +12,20 @@ Built on top of:
 Installation Guide
 ------------------------
 
-#### 1. Download Regrader
+#### 1. Install dependencies
+
+Regrader requires these packages. Please install them.
+
+- PHP >= 5.4
+- MySQL
+- [composer](https://getcomposer.org/)
+- [bower](http://bower.io/)
+
+#### 2. Download Regrader
 
 Download a copy of the latest Regrader: https://github.com/fushar/regrader/archive/master.zip.
 
-#### 2. Configure Regrader
+#### 3. Configure Regrader
 
 Create an InnoDB database in your MySQL database server. Then, open the database configuration file **application/config/database.php** and add your hostname, username, password, and database name in this part of the file:
 
@@ -41,16 +50,21 @@ It is advisable that the string consists of 32 random characters.
 
 Finally, make sure your ``php.ini`` file has ``date.timezone`` option set.
 
-#### 3. Install Regrader
+#### 4. Install Regrader
 
-Open Regrader in your browser, and perform the installation steps as instructed. If at any step the system cannot install at some specified directories, please add write permission on them.
+Execute this command:
 
-#### 4. Run the grader engine
+```
+./build.sh
+```
+
+Then, open Regrader in your browser, and perform the installation steps as instructed. If at any step the system cannot install at some specified directories, please add write permission on them.
+
+#### 5. Run the grader engine
 
 Execute `run_grader.sh` script on your host:
 
 ```
-chmod +x run_grader.sh
 ./run_grader.sh
 ```
 

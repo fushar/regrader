@@ -122,8 +122,8 @@ class Submission extends Admin_Controller
 
 		$this->ui['header']['title'] = 'Pengumpulan ' . $submission_id;
 		$this->ui['header']['page'] = 'submission';
-		$this->ui['header']['custom_css'] = array('google-code-prettify/prettify.css');
-		$this->ui['header']['custom_js'] = array('google-code-prettify/prettify.js');
+		$this->ui['header']['custom_css'] = array('vendor/google-code-prettify/bin/prettify.min.css');
+		$this->ui['header']['custom_js'] = array('vendor/google-code-prettify/bin/prettify.min.js');
 		$this->ui['content']['submission'] = $submission;
 		
 		$judgings = $this->submission_manager->get_judgings($submission_id);

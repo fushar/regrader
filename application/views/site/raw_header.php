@@ -4,11 +4,11 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	
-	<link type="text/css" href="assets/css/bootstrap.css" rel="stylesheet"/>
+	<link type="text/css" href="assets/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
 	<link type="text/css" href="assets/css/style.css" rel="stylesheet"/>
 	<link rel="shortcut icon" href="assets/img/favicon.ico">
-	<script type="text/javascript" src="assets/js/jquery.min.js"></script>
-	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/vendor/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 	<title><?php echo $title . ' | ' . $web_name; ?></title>
 </head>
 
