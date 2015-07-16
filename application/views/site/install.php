@@ -3,12 +3,12 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	
-	<link type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet"/>
+
+	<link type="text/css" href="<?php echo base_url(); ?>assets/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
 	<link type="text/css" href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet"/>
 	<link rel="shortcut icon" href="<?php echo base_url(); ?>files/favicon.ico">
-	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
-	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 	<title>Install | Regrader</title>
 </head>
 
