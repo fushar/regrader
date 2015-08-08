@@ -15,6 +15,17 @@ Built on top of:
 - [Bootstrap](http://getbootstrap.com/)
 - [Moe Contest Environment](http://www.ucw.cz/moe/)
 
+Testimonial
+-----------
+
+*I needed a judging system for programming contest and spent days and nights on looking for one. Then I found Regrader - one of the best programming contest management systems on the internet. It's an open source project and extremely easy to install!*
+
+*What I loved about the system is its flexibility and user-friendliness. With just a few clicks you are able to make a fully custom design of your Regrader page, suiting your needs. Moreover the system itself is stable and reliable.*
+
+*Do what I did - try Regrader, you won't regret it!*
+
+\- Vasil Sarafov, Bulgaria
+
 Installation Guide
 ------------------------
 
