@@ -3,7 +3,11 @@ Regrader 2
 
 An ICPC-style programming contest system that works.
 
-(Maintainer's note: in the previous version, Regrader's dependencies were committed to the repository. In this version, we start using dependency managers. To reduce the repository size, we removed the committed dependencies from git history. Therefore, unfortunately we had to **rewrite the entire git history**. If you are developing Regrader, please rebase your work accordingly. The previous version is still hosted on [https://github.com/fushar/regrader-v1](https://github.com/fushar/regrader-v1) as a backup.)
+***
+
+> (Maintainer's note: in the previous version, Regrader's dependencies were committed to the repository. In this version, we start using dependency managers. To reduce the repository size, we removed the committed dependencies from git history. Therefore, unfortunately we had to **rewrite the entire git history**. If you are developing Regrader, please rebase your work accordingly. The previous version is still hosted on [https://github.com/fushar/regrader-v1](https://github.com/fushar/regrader-v1) as a backup.)
+
+***
 
 Built on top of:
 
@@ -81,11 +85,11 @@ Open **Manage**->**Languages**. There will be 4 programming languages set up by 
 
 Open **Manage**->**Options** and configure additional properties of the system.
 
-- **Website, Top, & Bottom Names**  
+- **Website, Top, & Bottom Names**
 To be shown in the header.
-- **Left, Right 1, Right 2 Logo Filenames**  
+- **Left, Right 1, Right 2 Logo Filenames**
 To be shown in the header. If set, the logo files must be uploaded in **Manage**->**Files**.
-- **Items per Page**  
+- **Items per Page**
 The number of rows in a table. Used in the list of users, problems, submissions, etc.
 
 Using the System
@@ -98,7 +102,7 @@ Miscellaneous
 
 #### Solution checker
 
-You can set up a solution checker for your problems. This is useful for problems that can have multiple solutions. The template for a checker can be found here: https://github.com/fushar/regrader/blob/develop/examples/checker.cpp. 
+You can set up a solution checker for your problems. This is useful for problems that can have multiple solutions. The template for a checker can be found here: https://github.com/fushar/regrader/blob/develop/examples/checker.cpp.
 
 #### Internationalization
 
@@ -114,7 +118,7 @@ You can use **Manage**->**Files** to upload public files, for example, for inser
 
 #### Public raw scoreboard
 
-Besides the usual public scoreboard, you can also generate public scoreboard that is separated from the system. This is useful for hiding the contest URL address from the public and in order to minimize traffic and external attack. 
+Besides the usual public scoreboard, you can also generate public scoreboard that is separated from the system. This is useful for hiding the contest URL address from the public and in order to minimize traffic and external attack.
 
 - Download the public raw scoreboard HTML file from the admin scoreboard menu.
 - Copy the **assets/** directory.
