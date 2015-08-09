@@ -38,7 +38,7 @@ Regrader requires these packages. Please install them.
 
 #### 2. Download Regrader
 
-Download a copy of the latest Regrader: https://github.com/fushar/regrader/releases/download/v2.0.0/regrader-v2.0.0.tar.gz
+Download a copy of the latest Regrader: https://github.com/fushar/regrader/releases/download/v2.1.0/regrader-v2.1.0.tar.gz
 
 #### 3. Configure Regrader
 
