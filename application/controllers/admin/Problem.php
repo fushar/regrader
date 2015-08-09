@@ -8,7 +8,7 @@
  * @package controllers
  * @author Ashar Fuadi <fushar@gmail.com>
  */
-class Problem extends Admin_Controller 
+class Problem extends Admin_Controller
 {
 	/**
 	 * Constructs a new controller object
@@ -37,7 +37,7 @@ class Problem extends Admin_Controller
 	 * Shows all problems
 	 *
 	 * This function shows config('items_per_page') problems, starting from $page_offset-th page.
-	 * 
+	 *
 	 * @param int $page_offset The page number to show.
 	 */
 	public function viewAll($page_offset = 1)
@@ -72,7 +72,7 @@ class Problem extends Admin_Controller
 	 * Shows the add or edit problem page
 	 *
 	 * This function shows an add problem page if $problem_id is 0, otherwise it shows an edit problem page.
-	 * 
+	 *
 	 * @param int $problem_id The problem ID.
 	 * @param int $page_offset The previous viewAll page number.
 	 */
@@ -82,7 +82,7 @@ class Problem extends Admin_Controller
 		$this->form_validation->set_rules('form[author]', $this->lang->line('author'), 'trim|required');
 		$this->form_validation->set_rules('form[time_limit]', $this->lang->line('time_limit'), 'trim|required|integer|greater_than[0]');
 		$this->form_validation->set_rules('form[memory_limit]', $this->lang->line('memory_limit'), 'trim|required|integer|greater_than[0]');
-		
+
 		if ($this->form_validation->run())
 		{
 			$form = $this->input->post('form');
@@ -97,7 +97,7 @@ class Problem extends Admin_Controller
 				$this->problem_manager->update_row($problem_id, $form);
 				$this->session->set_flashdata('edit_successful', true);
 			}
-			
+
 			redirect('admin/problem/viewAll');
 		}
 		else
@@ -110,20 +110,20 @@ class Problem extends Admin_Controller
 				$this->ui['content']['problem'] = $this->problem_manager->get_row($problem_id);
 			}
 			$this->ui['header']['page'] = 'problem';
-			$this->ui['header']['custom_js'] = array('vendors/tinymce/tinymce.min.js');
+			$this->ui['header']['custom_js'] = array('vendor/tinymce/tinymce.min.js');
 			$this->ui['content']['page_offset'] = $page_offset;
-			
+
 			$this->load->view('admin/header', $this->ui['header']);
 			$this->load->view('admin/problem/edit', $this->ui['content']);
 			$this->load->view('footer', $this->ui['footer']);
 		}
 	}
- 
+
  	/**
 	 * Shows the edit testcases page
 	 *
 	 * This function shows the edit testcases page.
-	 * 
+	 *
 	 * @param int $problem_id The problem ID.
 	 * @param int $page_offset The previous viewAll page number.
 	 */
@@ -159,12 +159,12 @@ class Problem extends Admin_Controller
 			$this->load->view('footer', $this->ui['footer']);
 		}
 	}
- 
+
  	/**
 	 * Shows the edit checker page
 	 *
 	 * This function shows the edit checker page.
-	 * 
+	 *
 	 * @param int $problem_id The problem ID.
 	 * @param int $page_offset The previous viewAll page number.
 	 */
@@ -203,7 +203,7 @@ class Problem extends Admin_Controller
 	 * Deletes a testcase
 	 *
 	 * This function deletes a testcase whose ID is $testcase_id and then redirects to edit testcases page.
-	 * 
+	 *
 	 * @param int $problem_id The problem ID.
 	 * @param int $testcase_id The testcase ID.
 	 * @param int $page_offset The previous viewAll page number.
@@ -222,7 +222,7 @@ class Problem extends Admin_Controller
 	 * Deletes a checker
 	 *
 	 * This function deletes a checker whose ID is $checker_id and then redirects to edit checker page.
-	 * 
+	 *
 	 * @param int $problem_id The problem ID.
 	 * @param int $checker_id The checker ID.
 	 * @param int $page_offset The previous viewAll page number.
@@ -241,7 +241,7 @@ class Problem extends Admin_Controller
 	 * Downloads the input of a testcase
 	 *
 	 * This function downloads the input of the testcase whose ID is $testcase_id.
-	 * 
+	 *
 	 * @param int $testcase_id The testcase ID.
 	 */
 	public function downloadTestcaseInput($testcase_id)
@@ -257,7 +257,7 @@ class Problem extends Admin_Controller
 	 * Downloads the output of a testcase
 	 *
 	 * This function downloads the output of the testcase whose ID is $testcase_id.
-	 * 
+	 *
 	 * @param int $testcase_id The testcase ID.
 	 */
 	public function downloadTestcaseOutput($testcase_id)
@@ -273,7 +273,7 @@ class Problem extends Admin_Controller
 	 * Downloads the checker of a problem
 	 *
 	 * This function downloads the checker whose ID is $checker_id.
-	 * 
+	 *
 	 * @param int $checker_id The testcase ID.
 	 */
 	public function downloadChecker($checker_id)
@@ -340,7 +340,7 @@ class Problem extends Admin_Controller
 	 * Deletes a problem
 	 *
 	 * This function deletes a problem whose ID is $problem_id and then redirects to viewAll page.
-	 * 
+	 *
 	 * @param int $problem_id The problem ID.
 	 * @param int $page_offset The previous viewAll page number.
 	 */
