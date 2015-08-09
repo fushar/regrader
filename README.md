@@ -35,12 +35,10 @@ Regrader requires these packages. Please install them.
 
 - PHP >= 5.4
 - MySQL
-- [composer](https://getcomposer.org/)
-- [bower](http://bower.io/)
 
 #### 2. Download Regrader
 
-Download a copy of the latest Regrader: https://github.com/fushar/regrader/archive/master.zip.
+Download a copy of the latest Regrader: https://github.com/fushar/regrader/releases/download/v2.0.0/regrader-v2.0.0.tar.gz
 
 #### 3. Configure Regrader
 
@@ -72,7 +70,7 @@ Finally, make sure your ``php.ini`` file has ``date.timezone`` option set.
 Execute this command:
 
 ```
-./build.sh
+./install.sh
 ```
 
 Then, open Regrader in your browser, and perform the installation steps as instructed. If at any step the system cannot install at some specified directories, please add write permission on them.
@@ -156,7 +154,24 @@ Regrader is licensed under MIT License.
 Contributing
 ------------
 
-Contributions are welcome! Just publish your contribution as pull requests and we will review them.
+Contributions are welcome! To set up Regrader for development, you need:
+
+- [composer](https://getcomposer.org/)
+- [bower](http://bower.io/)
+
+After that, fork and clone Regrader. Then, run
+
+```
+./build.sh
+```
+
+You are then ready to develop.
+
+To produce a tar.gz that is ready to deploy, run
+
+```
+./publish.sh
+```
 
 Mantainers
 ----------
