@@ -67,13 +67,7 @@ Finally, make sure your ``php.ini`` file has ``date.timezone`` option set.
 
 #### 4. Install Regrader
 
-Execute this command:
-
-```
-./install.sh
-```
-
-Then, open Regrader in your browser, and perform the installation steps as instructed. If at any step the system cannot install at some specified directories, please add write permission on them.
+Open Regrader in your browser, and perform the installation steps as instructed. If at any step the system cannot install at some specified directories, please add write permission on them.
 
 #### 5. Run the grader engine
 
