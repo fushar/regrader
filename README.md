@@ -80,11 +80,15 @@ Execute `run_grader.sh` script on your host:
 Configuring the System
 ----------------------
 
-#### 1. Configure programming languages
+#### 1. Change admin password
+
+Open **Manage**->**Users**. Edit admin user and change the password to something else.
+
+#### 2. Configure programming languages
 
 Open **Manage**->**Languages**. There will be 4 programming languages set up by default: Pascal, Java, C++, and C. For each language you want to actually use, you have to at least edit its compile command as necessary depending where you install the compiler.
 
-#### 2. Configure additional options
+#### 3. Configure additional options
 
 Open **Manage**->**Options** and configure additional properties of the system.
 
