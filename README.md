@@ -29,41 +29,51 @@ Testimonial
 Installation Guide
 ------------------------
 
-#### 1. Install dependencies
-
-Regrader requires these packages. Please install them.
-
-- PHP >= 5.4
-- MySQL
-
-#### 2. Download Regrader
+#### 1. Download Regrader
 
 Download a copy of the latest Regrader: https://github.com/fushar/regrader/releases/download/v2.1.0/regrader-v2.1.0.tar.gz
 
-#### 3. Configure Regrader
+#### 2. Install and Configure Dependencies
 
-Create an InnoDB database in your MySQL database server. Then, open the database configuration file **application/config/database.php** and add your hostname, username, password, and database name in this part of the file:
+1. Regrader requires these packages. Please install them.
 
-```php
-$db['default'] = array(
-    //
-    'hostname' 		=> 'localhost',
-    'username' 		=> '',
-    'password' 		=> '',
-    'database' 		=> '',
-    //
-);
-```
+  - PHP >= 5.4
+  - MySQL
+  - [Composer](https://getcomposer.org/download/)
+  - [Bower](http://bower.io/)
 
-Next, open the configuration file **application/config/config.php** and add a random string in this part of the file:
+  After installing Composer and Bower, run these this command to install and configure all dependencies.
 
-```php
-$config['encryption_key'] = '';
-```
+  ```bash
+  $ ./build.sh
+  ```
 
-It is advisable that the string consists of 32 random characters.
+2. Rename/copy `.env.example` to `.env`:
 
-Finally, make sure your ``php.ini`` file has ``date.timezone`` option set.
+  ```bash
+  $ cp .env.example .env
+  ```
+
+3. Create an InnoDB database in your MySQL database server.
+
+4. Configure the `.env` file.
+
+  - `DB_HOSTNAME` denotes the hostname of the MySQL database.
+  - `DB_USERNAME` and `DB_PASSWORD` denotes the credentials of MySQL user.
+  - `DB_NAME` denotes the database name that was made in (3).
+  - `DB_PREFIX` denotes the prefix for all tables that will be made.
+  - All `DB_[TABLE_NAME]_TABLE_NAME`s denote the table names that will be used by Regrader.
+  - `CPP_EXECUTABLE_PATH` denotes the path to C++ compiler (e.g., `/usr/bin/g++`).
+
+5. Next, open the configuration file **application/config/config.php** and add a random string in this part of the file:
+
+  ```php
+  $config['encryption_key'] = '';
+  ```
+
+  It is advisable that the string consists of 32 random characters.
+
+6. Finally, make sure your ``php.ini`` file has ``date.timezone`` option set.
 
 #### 4. Install Regrader
 
@@ -71,10 +81,26 @@ Open Regrader in your browser, and perform the installation steps as instructed.
 
 #### 5. Run the grader engine
 
-Execute `run_grader.sh` script on your host:
+Currently, Regrader supports multithreaded grading by running/executing several grading engine at once. To run **n** grader engine, execute `run_grader.sh` script using the following command:
 
 ```
-./run_grader.sh
+./run_grader.sh n
+```
+
+For example, run `./run_grader.sh 4` to execute four grading engine at once.
+
+By default, executing `run_grader.sh` without any arguments will execute one grading engine.
+
+Make sure that `run_grader.sh` is set as executable by using the command:
+
+```
+chmod +x run_grader.sh
+```
+
+To shutdown a specific grader, use `kill` (or similar command) via terminal. Example:
+
+```
+kill 1234 	# Kill the grader with PID 1234
 ```
 
 Configuring the System
@@ -109,7 +135,7 @@ Miscellaneous
 
 #### Solution checker
 
-You can set up a solution checker for your problems. This is useful for problems that can have multiple solutions. The template for a checker can be found here: https://github.com/fushar/regrader/blob/develop/examples/checker.cpp.
+You can set up a solution checker for your problems. Currently Regrader only supports checkers that are written in C++11. This is useful for problems that can have multiple solutions. The template for a checker can be found here: https://github.com/fushar/regrader/blob/develop/examples/checker.cpp.
 
 #### Internationalization
 
