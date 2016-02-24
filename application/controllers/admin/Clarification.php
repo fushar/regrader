@@ -84,7 +84,7 @@ class Clarification extends Admin_Controller
 			
 			$conditions['limit'] = $items_per_page;
 			$conditions['offset'] = ($page_offset-1) * $items_per_page;
-			$conditions['order_by'] = array('clarification.id' => 'DESC');
+			$conditions['order_by'] = array($_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.id' => 'DESC');
 
 			$clarifications = $this->clarification_manager->get_rows($criteria, $conditions);
 			$users = $this->user_manager->get_rows();

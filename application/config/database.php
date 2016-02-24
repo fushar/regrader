@@ -62,10 +62,10 @@ $active_record = TRUE;
 
 $db['default'] = array(
 	'dsn'			=> '',
-	'hostname' 		=> 'localhost',
-	'username' 		=> '',
-	'password' 		=> '',
-	'database' 		=> '',
+	'hostname' 		=> $_ENV['DB_HOSTNAME'],
+	'username' 		=> $_ENV['DB_USERNAME'],
+	'password' 		=> $_ENV['DB_PASSWORD'],
+	'database' 		=> $_ENV['DB_NAME'],
 	'dbdriver' 		=> 'mysqli',
 	'dbprefix' 		=> '',
 	'pconnect' 		=> TRUE,
@@ -81,24 +81,6 @@ $db['default'] = array(
 	'failover' 		=> array(),
 	'save_queries' 	=> FALSE
 );
-
-/*
-	$db['default']['hostname'] = 'localhost';
-	$db['default']['username'] = '';
-	$db['default']['password'] = '';
-	$db['default']['database'] = '';
-	$db['default']['dbdriver'] = 'mysql';
-	$db['default']['dbprefix'] = '';
-	$db['default']['pconnect'] = TRUE;
-	$db['default']['db_debug'] = TRUE;
-	$db['default']['cache_on'] = FALSE;
-	$db['default']['cachedir'] = '';
-	$db['default']['char_set'] = 'utf8';
-	$db['default']['dbcollat'] = 'utf8_general_ci';
-	$db['default']['swap_pre'] = '';
-	$db['default']['autoinit'] = TRUE;
-	$db['default']['stricton'] = FALSE;
-*/
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */

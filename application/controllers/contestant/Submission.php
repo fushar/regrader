@@ -55,7 +55,7 @@ class Submission extends Contestant_Controller
 
 		$conditions['limit'] = $items_per_page;
 		$conditions['offset'] = ($page_offset-1) * $items_per_page;
-		$conditions['order_by'] = array('submission.id' => 'DESC');
+		$conditions['order_by'] = array($_ENV['DB_SUBMISSION_TABLE_NAME'] . '.id' => 'DESC');
 
 		$submissions = $this->submission_manager->get_rows($criteria, $conditions);
 

@@ -9,6 +9,7 @@
 	<link rel="shortcut icon" href="assets/img/favicon.ico">
 	<script type="text/javascript" src="assets/vendor/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/js/clocks.js"></script>
 	<title><?php echo $title . ' | ' . $web_name; ?></title>
 </head>
 

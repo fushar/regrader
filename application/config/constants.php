@@ -36,6 +36,14 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
+/*
+|--------------------------------------------------------------------------
+| Regrader-related Constants
+|--------------------------------------------------------------------------
+*/
+
+// Key used in grading-related PHP semaphore
+define('SEM_KEY', 85);
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

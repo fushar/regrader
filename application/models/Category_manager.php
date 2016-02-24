@@ -17,7 +17,7 @@ class Category_manager extends AR_Model
 	 */
 	public function __construct()
 	{
-		parent::__construct('category');
+		parent::__construct($_ENV['DB_CATEGORY_TABLE_NAME']);
 	}
 
 	/**
@@ -32,7 +32,7 @@ class Category_manager extends AR_Model
 	public function count_users($category_id)
 	{
 		$this->db->select('COUNT(id) AS cnt');
-		$this->db->from('user');
+		$this->db->from($_ENV['DB_USER_TABLE_NAME']);
 		$this->db->where('category_id', $category_id);
 		$q = $this->db->get();
 		$res = $q->row_array();
@@ -62,8 +62,8 @@ class Category_manager extends AR_Model
 	{
 		if (isset($criteria['contest_id']))
 		{
-			$this->db->join('contest_member', 'contest_member.category_id=id');
-			$this->db->where('contest_member.contest_id', $criteria['contest_id']);
+			$this->db->join($_ENV['DB_CONTEST_MEMBER_TABLE_NAME'], $_ENV['DB_CONTEST_MEMBER_TABLE_NAME'] . '.category_id=id');
+			$this->db->where($_ENV['DB_CONTEST_MEMBER_TABLE_NAME'] . '.contest_id', $criteria['contest_id']);
 		}
 		
 		return parent::get_rows($criteria, $conditions);

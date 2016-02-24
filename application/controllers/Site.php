@@ -109,18 +109,9 @@ class Site extends MY_Controller
 			if ( ! $this->check_php_version())
 			{
 				$data['heading'] = 'Error: PHP version not supported';
-				$data['content'] = '<p>Please make sure that you have PHP 5.1 or newer.</p><p>Installation failed.</p>';
+				$data['content'] = '<p>Please make sure that you have PHP 5.4 or newer.</p><p>Installation failed.</p>';
 				$this->load->view('site/install', $data);
 				return;		
-			}
-
-			$grader_output = $this->build_grader();
-			if ( ! empty($grader_output))
-			{
-				$data['heading'] = 'Error: cannot build grader engine';
-				$data['content'] = '<p>Please make sure that the web server has the permission to write to <b>' . getcwd() . '/moe</b>.<p>Build output:</p><pre>' . html_entity_decode($grader_output) . '</pre>';
-				$this->load->view('site/install', $data);
-				return;	
 			}
 
 			$this->create_db_schema();
@@ -158,22 +149,22 @@ class Site extends MY_Controller
 
 	private function check_php_version()
 	{
-		return function_exists('version_compare') && version_compare(PHP_VERSION, '5.1', '>=');
+		return function_exists('version_compare') && version_compare(PHP_VERSION, '5.4', '>=');
 	}
 
 	private function create_db_schema()
 	{
 		$this->db->query("SET foreign_key_checks = 0");
 
-		$this->db->query("DROP TABLE IF EXISTS `category`");
-		$this->db->query("CREATE TABLE IF NOT EXISTS `category` (
+		$this->db->query("DROP TABLE IF EXISTS `" . $_ENV['DB_CATEGORY_TABLE_NAME'] . "`");
+		$this->db->query("CREATE TABLE IF NOT EXISTS `" . $_ENV['DB_CATEGORY_TABLE_NAME'] . "` (
 		                    `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
 		                    `name` varchar(50) NOT NULL,
 		                    PRIMARY KEY (`id`)
 		                  ) ENGINE=InnoDB  DEFAULT CHARSET=utf8");
 
-		$this->db->query("DROP TABLE IF EXISTS `clarification`");
-		$this->db->query("CREATE TABLE IF NOT EXISTS `clarification` (
+		$this->db->query("DROP TABLE IF EXISTS `" . $_ENV['DB_CLARIFICATION_TABLE_NAME'] . "`");
+		$this->db->query("CREATE TABLE IF NOT EXISTS `" . $_ENV['DB_CLARIFICATION_TABLE_NAME'] . "` (
 			                `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
 			                `user_id` int(4) unsigned NOT NULL,
 			                `contest_id` int(4) unsigned NOT NULL,
@@ -186,8 +177,8 @@ class Site extends MY_Controller
 			                KEY `user_id` (`user_id`)
 			              ) ENGINE=InnoDB  DEFAULT CHARSET=utf8");
 
-		$this->db->query("DROP TABLE IF EXISTS `contest`");
-		$this->db->query("CREATE TABLE IF NOT EXISTS `contest` (
+		$this->db->query("DROP TABLE IF EXISTS `" . $_ENV['DB_CONTEST_TABLE_NAME'] . "`");
+		$this->db->query("CREATE TABLE IF NOT EXISTS `" . $_ENV['DB_CONTEST_TABLE_NAME'] . "` (
 			                `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
 			                `name` varchar(50) NOT NULL,
 			                `start_time` datetime NOT NULL,
@@ -199,8 +190,8 @@ class Site extends MY_Controller
 			                PRIMARY KEY (`id`)
 			              ) ENGINE=InnoDB  DEFAULT CHARSET=utf8");
 
-		$this->db->query("DROP TABLE IF EXISTS `contest_language`");
-		$this->db->query("CREATE TABLE IF NOT EXISTS `contest_language` (
+		$this->db->query("DROP TABLE IF EXISTS `" . $_ENV['DB_CONTEST_LANGUAGE_TABLE_NAME'] . "`");
+		$this->db->query("CREATE TABLE IF NOT EXISTS `" . $_ENV['DB_CONTEST_LANGUAGE_TABLE_NAME'] . "` (
 			                `contest_id` int(4) unsigned NOT NULL,
 			                `language_id` int(4) unsigned NOT NULL,
 			                PRIMARY KEY (`contest_id`,`language_id`),
@@ -208,8 +199,8 @@ class Site extends MY_Controller
 			                KEY `language_id` (`language_id`)
 			              ) ENGINE=InnoDB DEFAULT CHARSET=utf8");
 
-		$this->db->query("DROP TABLE IF EXISTS `contest_member`");
-		$this->db->query("CREATE TABLE IF NOT EXISTS `contest_member` (
+		$this->db->query("DROP TABLE IF EXISTS `" . $_ENV['DB_CONTEST_MEMBER_TABLE_NAME'] . "`");
+		$this->db->query("CREATE TABLE IF NOT EXISTS `" . $_ENV['DB_CONTEST_MEMBER_TABLE_NAME'] . "` (
 			                `contest_id` int(4) unsigned NOT NULL,
 			                `category_id` int(4) unsigned NOT NULL,
 			                PRIMARY KEY (`contest_id`,`category_id`),
@@ -217,8 +208,8 @@ class Site extends MY_Controller
 			                KEY `contest_id` (`contest_id`)
 			              ) ENGINE=InnoDB DEFAULT CHARSET=utf8");
 
-		$this->db->query("DROP TABLE IF EXISTS `contest_problem`");
-		$this->db->query("CREATE TABLE IF NOT EXISTS `contest_problem` (
+		$this->db->query("DROP TABLE IF EXISTS `" . $_ENV['DB_CONTEST_PROBLEM_TABLE_NAME'] . "`");
+		$this->db->query("CREATE TABLE IF NOT EXISTS `" . $_ENV['DB_CONTEST_PROBLEM_TABLE_NAME'] . "` (
 			                `contest_id` int(4) unsigned NOT NULL,
 			                `problem_id` int(4) unsigned NOT NULL,
 			                `alias` varchar(50) NOT NULL,
@@ -227,16 +218,17 @@ class Site extends MY_Controller
 			                KEY `contest_id` (`contest_id`)
 			              ) ENGINE=InnoDB DEFAULT CHARSET=utf8");
 
-		$this->db->query("DROP TABLE IF EXISTS `grader`");
-		$this->db->query("CREATE TABLE IF NOT EXISTS `grader` (
+		$this->db->query("DROP TABLE IF EXISTS `" . $_ENV['DB_GRADER_TABLE_NAME'] . "`");
+		$this->db->query("CREATE TABLE IF NOT EXISTS `" . $_ENV['DB_GRADER_TABLE_NAME'] . "` (
 			                `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
 			                `hostname` varchar(50) NOT NULL,
 			                `last_activity` datetime NOT NULL,
+			                `pid` int(7) NOT NULL,
 			                PRIMARY KEY (`id`)
 			              ) ENGINE=InnoDB  DEFAULT CHARSET=utf8");
 
-		$this->db->query("DROP TABLE IF EXISTS `judging`");
-		$this->db->query("CREATE TABLE IF NOT EXISTS `judging` (
+		$this->db->query("DROP TABLE IF EXISTS `" . $_ENV['DB_JUDGING_TABLE_NAME'] . "`");
+		$this->db->query("CREATE TABLE IF NOT EXISTS `" . $_ENV['DB_JUDGING_TABLE_NAME'] . "` (
 			                `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
 			                `submission_id` int(4) unsigned NOT NULL,
 			                `testcase_id` int(4) unsigned NOT NULL,
@@ -248,8 +240,8 @@ class Site extends MY_Controller
 			                KEY `testcase_id` (`testcase_id`)
 			              ) ENGINE=InnoDB  DEFAULT CHARSET=utf8");
 
-		$this->db->query("DROP TABLE IF EXISTS `language`");
-		$this->db->query("CREATE TABLE IF NOT EXISTS `language` (
+		$this->db->query("DROP TABLE IF EXISTS `" . $_ENV['DB_LANGUAGE_TABLE_NAME'] . "`");
+		$this->db->query("CREATE TABLE IF NOT EXISTS `" . $_ENV['DB_LANGUAGE_TABLE_NAME'] . "` (
 			                `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
 			                `name` varchar(50) NOT NULL,
 			                `extension` varchar(50) NOT NULL,
@@ -263,8 +255,8 @@ class Site extends MY_Controller
 			                PRIMARY KEY (`id`)
 			              ) ENGINE=InnoDB  DEFAULT CHARSET=utf8");
 
-		$this->db->query("DROP TABLE IF EXISTS `problem`");
-		$this->db->query("CREATE TABLE IF NOT EXISTS `problem` (
+		$this->db->query("DROP TABLE IF EXISTS `" . $_ENV['DB_PROBLEM_TABLE_NAME'] . "`");
+		$this->db->query("CREATE TABLE IF NOT EXISTS `" . $_ENV['DB_PROBLEM_TABLE_NAME'] . "` (
 			                `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
 			                `name` varchar(50) NOT NULL,
 			                `author` varchar(50) NOT NULL,
@@ -274,43 +266,49 @@ class Site extends MY_Controller
 			                PRIMARY KEY (`id`)
 			              ) ENGINE=InnoDB  DEFAULT CHARSET=utf8");
 
-		$this->db->query("DROP TABLE IF EXISTS `scoreboard_admin`");
-		$this->db->query("CREATE TABLE IF NOT EXISTS `scoreboard_admin` (
+		$this->db->query("DROP TABLE IF EXISTS `" . $_ENV['DB_SCOREBOARD_ADMIN_TABLE_NAME'] . "`");
+		$this->db->query("CREATE TABLE IF NOT EXISTS `" . $_ENV['DB_SCOREBOARD_ADMIN_TABLE_NAME'] . "` (
 			                `contest_id` int(4) unsigned NOT NULL,
 			                `user_id` int(4) unsigned NOT NULL,
 			                `problem_id` int(4) unsigned NOT NULL,
 			                `submission_cnt` int(4) unsigned NOT NULL,
 			                `time_penalty` int(4) unsigned NOT NULL,
 			                `is_accepted` tinyint(1) unsigned NOT NULL,
+			                `is_first_accepted` tinyint(1) unsigned NOT NULL,
 			                PRIMARY KEY (`contest_id`,`user_id`,`problem_id`),
 			                KEY `contest_id` (`contest_id`),
 			                KEY `user_id` (`user_id`),
-			                KEY `problem_id` (`problem_id`)
+			                KEY `problem_id` (`problem_id`),
+			                KEY `contest_problem_entry` (`contest_id`, `problem_id`),
+			                KEY `first_accepted_entry` (`contest_id`, `problem_id`, `is_first_accepted`)
                           ) ENGINE=InnoDB DEFAULT CHARSET=utf8");
 
-		$this->db->query("DROP TABLE IF EXISTS `scoreboard_contestant`");
-		$this->db->query("CREATE TABLE IF NOT EXISTS `scoreboard_contestant` (
+		$this->db->query("DROP TABLE IF EXISTS `" . $_ENV['DB_SCOREBOARD_CONTESTANT_TABLE_NAME'] . "`");
+		$this->db->query("CREATE TABLE IF NOT EXISTS `" . $_ENV['DB_SCOREBOARD_CONTESTANT_TABLE_NAME'] . "` (
 			                `contest_id` int(4) unsigned NOT NULL,
 			                `user_id` int(4) unsigned NOT NULL,
 			                `problem_id` int(4) unsigned NOT NULL,
 			                `submission_cnt` int(4) unsigned NOT NULL,
 			                `time_penalty` int(4) unsigned NOT NULL,
 			                `is_accepted` tinyint(1) unsigned NOT NULL,
+			                `is_first_accepted` tinyint(1) unsigned NOT NULL,
 			                PRIMARY KEY (`contest_id`,`user_id`,`problem_id`),
 			                KEY `contest_id` (`contest_id`),
 			                KEY `user_id` (`user_id`),
-			                KEY `problem_id` (`problem_id`)
+			                KEY `problem_id` (`problem_id`),
+			                KEY `contest_problem_entry` (`contest_id`, `problem_id`),
+			                KEY `first_accepted_entry` (`contest_id`, `problem_id`, `is_first_accepted`)
                           ) ENGINE=InnoDB DEFAULT CHARSET=utf8");
 
-		$this->db->query("DROP TABLE IF EXISTS `setting`");
-		$this->db->query("CREATE TABLE IF NOT EXISTS `setting` (
+		$this->db->query("DROP TABLE IF EXISTS `" . $_ENV['DB_SETTING_TABLE_NAME'] . "`");
+		$this->db->query("CREATE TABLE IF NOT EXISTS `" . $_ENV['DB_SETTING_TABLE_NAME'] . "` (
 			                `key` varchar(50) NOT NULL,
 			                `value` varchar(50) NOT NULL,
 			                PRIMARY KEY (`key`)
                           ) ENGINE=InnoDB DEFAULT CHARSET=utf8");
 
-		$this->db->query("DROP TABLE IF EXISTS `submission`");
-		$this->db->query("CREATE TABLE IF NOT EXISTS `submission` (
+		$this->db->query("DROP TABLE IF EXISTS `" . $_ENV['DB_SUBMISSION_TABLE_NAME'] . "`");
+		$this->db->query("CREATE TABLE IF NOT EXISTS `" . $_ENV['DB_SUBMISSION_TABLE_NAME'] . "` (
 			              `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
 			              `user_id` int(4) unsigned NOT NULL,
 			              `contest_id` int(4) unsigned NOT NULL,
@@ -328,8 +326,8 @@ class Site extends MY_Controller
 			              KEY `contest_id_2` (`contest_id`,`problem_id`)
 			            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8");
 
-		$this->db->query("DROP TABLE IF EXISTS `testcase`");
-		$this->db->query("CREATE TABLE IF NOT EXISTS `testcase` (
+		$this->db->query("DROP TABLE IF EXISTS `" . $_ENV['DB_TESTCASE_TABLE_NAME'] . "`");
+		$this->db->query("CREATE TABLE IF NOT EXISTS `" . $_ENV['DB_TESTCASE_TABLE_NAME'] . "` (
 			                `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
 		                    `problem_id` int(4) unsigned NOT NULL,
 		                    `input` varchar(255) NOT NULL,
@@ -340,8 +338,8 @@ class Site extends MY_Controller
 		                    KEY `problem_id` (`problem_id`)
 		                  ) ENGINE=InnoDB  DEFAULT CHARSET=utf8");
 
-		$this->db->query("DROP TABLE IF EXISTS `checker`");
-		$this->db->query("CREATE TABLE IF NOT EXISTS `checker` (
+		$this->db->query("DROP TABLE IF EXISTS `" . $_ENV['DB_CHECKER_TABLE_NAME'] . "`");
+		$this->db->query("CREATE TABLE IF NOT EXISTS `" . $_ENV['DB_CHECKER_TABLE_NAME'] . "` (
 			                `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
 		                    `problem_id` int(4) unsigned NOT NULL,
 		                    `checker` varchar(255) NOT NULL,
@@ -350,16 +348,16 @@ class Site extends MY_Controller
 		                    KEY `problem_id` (`problem_id`)
 		                  ) ENGINE=InnoDB  DEFAULT CHARSET=utf8");
 
-		$this->db->query("DROP TABLE IF EXISTS `unread_clarification`");
-		$this->db->query("CREATE TABLE IF NOT EXISTS `unread_clarification` (
+		$this->db->query("DROP TABLE IF EXISTS `" . $_ENV['DB_UNREAD_CLARIFICATION_TABLE_NAME'] . "`");
+		$this->db->query("CREATE TABLE IF NOT EXISTS `" . $_ENV['DB_UNREAD_CLARIFICATION_TABLE_NAME'] . "` (
 			                `user_id` int(4) unsigned DEFAULT NULL,
 			                `clarification_id` int(4) unsigned NOT NULL,
 			                KEY `unread_clarification_ibfk_2` (`clarification_id`),
 			                KEY `unread_clarification_ibfk_1` (`user_id`)
 			              ) ENGINE=InnoDB DEFAULT CHARSET=utf8");
 
-		$this->db->query("DROP TABLE IF EXISTS `user`");
-		$this->db->query("CREATE TABLE IF NOT EXISTS `user` (
+		$this->db->query("DROP TABLE IF EXISTS `" . $_ENV['DB_USER_TABLE_NAME'] . "`");
+		$this->db->query("CREATE TABLE IF NOT EXISTS `" . $_ENV['DB_USER_TABLE_NAME'] . "` (
 			                `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
 			                `name` varchar(50) NOT NULL,
 			                `username` varchar(30) NOT NULL,
@@ -376,80 +374,78 @@ class Site extends MY_Controller
 
 	private function create_db_constraints()
 	{
-		$this->db->query("ALTER TABLE `clarification`
-			                ADD CONSTRAINT `clarification_ibfk_1` FOREIGN KEY (`contest_id`) REFERENCES `contest` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-			                ADD CONSTRAINT `clarification_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
+		$this->db->query("ALTER TABLE `" . $_ENV['DB_CLARIFICATION_TABLE_NAME'] . "`
+			                ADD CONSTRAINT `clarification_ibfk_1` FOREIGN KEY (`contest_id`) REFERENCES `" . $_ENV['DB_CONTEST_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+			                ADD CONSTRAINT `clarification_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `" . $_ENV['DB_USER_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
 
-		$this->db->query("ALTER TABLE `contest_language`
-			                ADD CONSTRAINT `contest_language_ibfk_1` FOREIGN KEY (`contest_id`) REFERENCES `contest` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-			                ADD CONSTRAINT `contest_language_ibfk_2` FOREIGN KEY (`language_id`) REFERENCES `language` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
+		$this->db->query("ALTER TABLE `" . $_ENV['DB_CONTEST_LANGUAGE_TABLE_NAME'] . "`
+			                ADD CONSTRAINT `contest_language_ibfk_1` FOREIGN KEY (`contest_id`) REFERENCES `" . $_ENV['DB_CONTEST_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+			                ADD CONSTRAINT `contest_language_ibfk_2` FOREIGN KEY (`language_id`) REFERENCES `" . $_ENV['DB_LANGUAGE_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
 	
-		$this->db->query("ALTER TABLE `contest_member`
-			                ADD CONSTRAINT `contest_member_ibfk_1` FOREIGN KEY (`contest_id`) REFERENCES `contest` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-			                ADD CONSTRAINT `contest_member_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
+		$this->db->query("ALTER TABLE `" . $_ENV['DB_CONTEST_MEMBER_TABLE_NAME'] . "`
+			                ADD CONSTRAINT `contest_member_ibfk_1` FOREIGN KEY (`contest_id`) REFERENCES `" . $_ENV['DB_CONTEST_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+			                ADD CONSTRAINT `contest_member_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `" . $_ENV['DB_CATEGORY_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
 	
-		$this->db->query("ALTER TABLE `contest_problem`
-			                ADD CONSTRAINT `contest_problem_ibfk_1` FOREIGN KEY (`contest_id`) REFERENCES `contest` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-			                ADD CONSTRAINT `contest_problem_ibfk_2` FOREIGN KEY (`problem_id`) REFERENCES `problem` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
+		$this->db->query("ALTER TABLE `" . $_ENV['DB_CONTEST_PROBLEM_TABLE_NAME'] . "`
+			                ADD CONSTRAINT `contest_problem_ibfk_1` FOREIGN KEY (`contest_id`) REFERENCES `" . $_ENV['DB_CONTEST_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+			                ADD CONSTRAINT `contest_problem_ibfk_2` FOREIGN KEY (`problem_id`) REFERENCES `" . $_ENV['DB_PROBLEM_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
 
-		$this->db->query("ALTER TABLE `judging`
-			                ADD CONSTRAINT `judging_ibfk_1` FOREIGN KEY (`submission_id`) REFERENCES `submission` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-			                ADD CONSTRAINT `judging_ibfk_2` FOREIGN KEY (`testcase_id`) REFERENCES `testcase` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
+		$this->db->query("ALTER TABLE `" . $_ENV['DB_JUDGING_TABLE_NAME'] . "`
+			                ADD CONSTRAINT `judging_ibfk_1` FOREIGN KEY (`submission_id`) REFERENCES `" . $_ENV['DB_SUBMISSION_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+			                ADD CONSTRAINT `judging_ibfk_2` FOREIGN KEY (`testcase_id`) REFERENCES `" . $_ENV['DB_TESTCASE_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
 	
-		$this->db->query("ALTER TABLE `scoreboard_admin`
-			                ADD CONSTRAINT `scoreboard_admin_ibfk_1` FOREIGN KEY (`contest_id`) REFERENCES `contest` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-			                ADD CONSTRAINT `scoreboard_admin_ibfk_2` FOREIGN KEY (`problem_id`) REFERENCES `problem` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-			                ADD CONSTRAINT `scoreboard_admin_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
+		$this->db->query("ALTER TABLE `" . $_ENV['DB_SCOREBOARD_ADMIN_TABLE_NAME'] . "`
+			                ADD CONSTRAINT `scoreboard_admin_ibfk_1` FOREIGN KEY (`contest_id`) REFERENCES `" . $_ENV['DB_CONTEST_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+			                ADD CONSTRAINT `scoreboard_admin_ibfk_2` FOREIGN KEY (`problem_id`) REFERENCES `" . $_ENV['DB_PROBLEM_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+			                ADD CONSTRAINT `scoreboard_admin_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `" . $_ENV['DB_USER_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
 	
-		$this->db->query("ALTER TABLE `scoreboard_contestant`
-			                ADD CONSTRAINT `scoreboard_contestant_ibfk_1` FOREIGN KEY (`contest_id`) REFERENCES `contest` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-			                ADD CONSTRAINT `scoreboard_contestant_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-			                ADD CONSTRAINT `scoreboard_contestant_ibfk_3` FOREIGN KEY (`problem_id`) REFERENCES `problem` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
+		$this->db->query("ALTER TABLE `" . $_ENV['DB_SCOREBOARD_CONTESTANT_TABLE_NAME'] . "`
+			                ADD CONSTRAINT `scoreboard_contestant_ibfk_1` FOREIGN KEY (`contest_id`) REFERENCES `" . $_ENV['DB_CONTEST_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+			                ADD CONSTRAINT `scoreboard_contestant_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `" . $_ENV['DB_USER_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+			                ADD CONSTRAINT `scoreboard_contestant_ibfk_3` FOREIGN KEY (`problem_id`) REFERENCES `" . $_ENV['DB_PROBLEM_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
 	
-		$this->db->query("ALTER TABLE `submission`
-			                ADD CONSTRAINT `submission_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-			                ADD CONSTRAINT `submission_ibfk_2` FOREIGN KEY (`problem_id`) REFERENCES `problem` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-			                ADD CONSTRAINT `submission_ibfk_3` FOREIGN KEY (`contest_id`) REFERENCES `contest` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-			                ADD CONSTRAINT `submission_ibfk_4` FOREIGN KEY (`language_id`) REFERENCES `language` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
+		$this->db->query("ALTER TABLE `" . $_ENV['DB_SUBMISSION_TABLE_NAME'] . "`
+			                ADD CONSTRAINT `submission_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `" . $_ENV['DB_USER_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+			                ADD CONSTRAINT `submission_ibfk_2` FOREIGN KEY (`problem_id`) REFERENCES `" . $_ENV['DB_PROBLEM_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+			                ADD CONSTRAINT `submission_ibfk_3` FOREIGN KEY (`contest_id`) REFERENCES `" . $_ENV['DB_CONTEST_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+			                ADD CONSTRAINT `submission_ibfk_4` FOREIGN KEY (`language_id`) REFERENCES `" . $_ENV['DB_LANGUAGE_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
 
-		$this->db->query("ALTER TABLE `testcase`
-			                ADD CONSTRAINT `testcase_ibfk_1` FOREIGN KEY (`problem_id`) REFERENCES `problem` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
+		$this->db->query("ALTER TABLE `" . $_ENV['DB_TESTCASE_TABLE_NAME'] . "`
+			                ADD CONSTRAINT `testcase_ibfk_1` FOREIGN KEY (`problem_id`) REFERENCES `" . $_ENV['DB_PROBLEM_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
 
-		$this->db->query("ALTER TABLE `checker`
-			                ADD CONSTRAINT `checker_ibfk_1` FOREIGN KEY (`problem_id`) REFERENCES `problem` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
+		$this->db->query("ALTER TABLE `" . $_ENV['DB_CHECKER_TABLE_NAME'] . "`
+			                ADD CONSTRAINT `checker_ibfk_1` FOREIGN KEY (`problem_id`) REFERENCES `" . $_ENV['DB_PROBLEM_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
 	
-		$this->db->query("ALTER TABLE `unread_clarification`
-			                ADD CONSTRAINT `unread_clarification_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-			                ADD CONSTRAINT `unread_clarification_ibfk_2` FOREIGN KEY (`clarification_id`) REFERENCES `clarification` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
+		$this->db->query("ALTER TABLE `" . $_ENV['DB_UNREAD_CLARIFICATION_TABLE_NAME'] . "`
+			                ADD CONSTRAINT `unread_clarification_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `" . $_ENV['DB_USER_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+			                ADD CONSTRAINT `unread_clarification_ibfk_2` FOREIGN KEY (`clarification_id`) REFERENCES `" . $_ENV['DB_CLARIFICATION_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
 	
-		$this->db->query("ALTER TABLE `user`
-			                ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
+		$this->db->query("ALTER TABLE `" . $_ENV['DB_USER_TABLE_NAME'] . "`
+			                ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `" . $_ENV['DB_CATEGORY_TABLE_NAME'] . "` (`id`) ON DELETE CASCADE ON UPDATE CASCADE");
 	}
 
 	private function insert_default_rows()
 	{
-		$this->db->query("INSERT INTO `category` (`id`, `name`) VALUES (1, 'Administrator')");
+		$this->db->query("INSERT INTO `" . $_ENV['DB_CATEGORY_TABLE_NAME'] . "` (`id`, `name`) VALUES (1, 'Administrator')");
 		
-		$this->db->query("INSERT INTO `user` (`id`, `name`, `username`, `password`, `institution`, `category_id`, `last_activity`) VALUES (1, 'Administrator', 'admin', MD5('admin'), '-', 1, '0000-00-00 00:00:00')");
+		$this->db->query("INSERT INTO `" . $_ENV['DB_USER_TABLE_NAME'] . "` (`id`, `name`, `username`, `password`, `institution`, `category_id`, `last_activity`) VALUES (1, 'Administrator', 'admin', MD5('admin'), '-', 1, '0000-00-00 00:00:00')");
 	
-		$this->db->query("INSERT INTO `language` (`id`, `name`, `extension`, `source_name`, `exe_name`, `compile_cmd`, `run_cmd`, `limit_memory`, `limit_syscall`, `forbidden_keywords`) VALUES (1, 'Pascal', 'pas', 'source.pas', 'source', '/usr/bin/fpc -O2 -XS -Sg [PATH]/source.pas', '[PATH]/source', 1, 1, 'uses\nUses\nuSes\nUSes\nusEs\nUsEs\nuSEs\nUSEs\nuseS\nUseS\nuSeS\nUSeS\nusES\nUsES\nuSES\nUSES')");
-		$this->db->query("INSERT INTO `language` (`id`, `name`, `extension`, `source_name`, `exe_name`, `compile_cmd`, `run_cmd`, `limit_memory`, `limit_syscall`, `forbidden_keywords`) VALUES (2, 'Java', 'java', 'Main.java', 'Main.class', '/usr/lib/jvm/jdk1.7.0_09/bin/javac [PATH]/Main.java', '/usr/lib/jvm/jdk1.7.0_09/bin/java -Xmx[MEMORY_LIMIT]M -cp [PATH] Main', 0, 0, 'java.applet\njava.awt\njava.beans\njava.lang.annotation\njava.lang.instrument\njava.lang.management\njava.lang.ref\njava.lang.net\njava.nio\njava.rmi\njava.security\njava.sql\njava.util.concurrent\njava.util.jar\njava.util.logging\njava.util.prefs\njava.util.spi\njava.util.zip\njavax\nCompiler\nInheritableThreadLocal\nPackage\nProcess\nProcessBuilder\nRuntime\nRuntimePermission\nSecurityManager\nThread\nThreadGroup\nThreadLocal\nFile\nFileDescriptor\nFileInputStream\nFileOutputStream\nFileReader\nFileWriter')");
-		$this->db->query("INSERT INTO `language` (`id`, `name`, `extension`, `source_name`, `exe_name`, `compile_cmd`, `run_cmd`, `limit_memory`, `limit_syscall`, `forbidden_keywords`) VALUES (3, 'C++', 'cpp', 'source.cpp', 'source', '/usr/bin/g++ -o [PATH]/source [PATH]/source.cpp -O2 -s -static -lm', '[PATH]/source', 1, 1, '')");
-		$this->db->query("INSERT INTO `language` (`id`, `name`, `extension`, `source_name`, `exe_name`, `compile_cmd`, `run_cmd`, `limit_memory`, `limit_syscall`, `forbidden_keywords`) VALUES (4, 'C', 'c', 'source.c', 'source', '/usr/bin/gcc -o [PATH]/source [PATH]/source.c -std=gnu99 -O2 -s -static -lm', '[PATH]/source', 1, 1, '')");
+		$this->db->query("INSERT INTO `" . $_ENV['DB_LANGUAGE_TABLE_NAME'] . "` (`id`, `name`, `extension`, `source_name`, `exe_name`, `compile_cmd`, `run_cmd`, `limit_memory`, `limit_syscall`, `forbidden_keywords`) VALUES (1, 'Pascal', 'pas', 'source.pas', 'source', '/usr/bin/fpc -O2 -XS -Sg [PATH]/source.pas', '[PATH]/source', 1, 1, 'uses\nUses\nuSes\nUSes\nusEs\nUsEs\nuSEs\nUSEs\nuseS\nUseS\nuSeS\nUSeS\nusES\nUsES\nuSES\nUSES')");
+		$this->db->query("INSERT INTO `" . $_ENV['DB_LANGUAGE_TABLE_NAME'] . "` (`id`, `name`, `extension`, `source_name`, `exe_name`, `compile_cmd`, `run_cmd`, `limit_memory`, `limit_syscall`, `forbidden_keywords`) VALUES (2, 'Java', 'java', 'Main.java', 'Main.class', '/usr/lib/jvm/jdk1.7.0_09/bin/javac [PATH]/Main.java', '/usr/lib/jvm/jdk1.7.0_09/bin/java -Xmx[MEMORY_LIMIT]M -cp [PATH] Main', 0, 0, 'java.applet\njava.awt\njava.beans\njava.lang.annotation\njava.lang.instrument\njava.lang.management\njava.lang.ref\njava.lang.net\njava.nio\njava.rmi\njava.security\njava.sql\njava.util.concurrent\njava.util.jar\njava.util.logging\njava.util.prefs\njava.util.spi\njava.util.zip\njavax\nCompiler\nInheritableThreadLocal\nPackage\nProcess\nProcessBuilder\nRuntime\nRuntimePermission\nSecurityManager\nThread\nThreadGroup\nThreadLocal\nFile\nFileDescriptor\nFileInputStream\nFileOutputStream\nFileReader\nFileWriter')");
+		$this->db->query("INSERT INTO `" . $_ENV['DB_LANGUAGE_TABLE_NAME'] . "` (`id`, `name`, `extension`, `source_name`, `exe_name`, `compile_cmd`, `run_cmd`, `limit_memory`, `limit_syscall`, `forbidden_keywords`) VALUES (3, 'C++', 'cpp', 'source.cpp', 'source', '/usr/bin/g++ -o [PATH]/source [PATH]/source.cpp -O2 -s -static -lm', '[PATH]/source', 1, 1, '')");
+		$this->db->query("INSERT INTO `" . $_ENV['DB_LANGUAGE_TABLE_NAME'] . "` (`id`, `name`, `extension`, `source_name`, `exe_name`, `compile_cmd`, `run_cmd`, `limit_memory`, `limit_syscall`, `forbidden_keywords`) VALUES (4, 'C', 'c', 'source.c', 'source', '/usr/bin/gcc -o [PATH]/source [PATH]/source.c -std=gnu99 -O2 -s -static -lm', '[PATH]/source', 1, 1, '')");
 	
-		$this->db->query("INSERT INTO `setting` (`key`, `value`) VALUES ('web_name', 'Regrader')");
-		$this->db->query("INSERT INTO `setting` (`key`, `value`) VALUES ('top_name', 'Regrader')");
-		$this->db->query("INSERT INTO `setting` (`key`, `value`) VALUES ('bottom_name', 'Programming Contest System')");
-		$this->db->query("INSERT INTO `setting` (`key`, `value`) VALUES ('left_logo', '')");
-		$this->db->query("INSERT INTO `setting` (`key`, `value`) VALUES ('right_logo1', '')");
-		$this->db->query("INSERT INTO `setting` (`key`, `value`) VALUES ('right_logo2', '')");
-		$this->db->query("INSERT INTO `setting` (`key`, `value`) VALUES ('items_per_page', '20')");
-		$this->db->query("INSERT INTO `setting` (`key`, `value`) VALUES ('submission_path', '')");
-		$this->db->query("INSERT INTO `setting` (`key`, `value`) VALUES ('testcase_path', '')");
-		$this->db->query("INSERT INTO `setting` (`key`, `value`) VALUES ('checker_path', '')");
-		$this->db->query("INSERT INTO `setting` (`key`, `value`) VALUES ('sess_id', '')");
-
-		$this->db->query("INSERT INTO `grader` (`id`, `hostname`, `last_activity`) VALUES (1, '" . php_uname('n') . "', '0000-00-00 00:00:00')");
+		$this->db->query("INSERT INTO `" . $_ENV['DB_SETTING_TABLE_NAME'] . "` (`key`, `value`) VALUES ('web_name', 'Regrader')");
+		$this->db->query("INSERT INTO `" . $_ENV['DB_SETTING_TABLE_NAME'] . "` (`key`, `value`) VALUES ('top_name', 'Regrader')");
+		$this->db->query("INSERT INTO `" . $_ENV['DB_SETTING_TABLE_NAME'] . "` (`key`, `value`) VALUES ('bottom_name', 'Programming Contest System')");
+		$this->db->query("INSERT INTO `" . $_ENV['DB_SETTING_TABLE_NAME'] . "` (`key`, `value`) VALUES ('left_logo', '')");
+		$this->db->query("INSERT INTO `" . $_ENV['DB_SETTING_TABLE_NAME'] . "` (`key`, `value`) VALUES ('right_logo1', '')");
+		$this->db->query("INSERT INTO `" . $_ENV['DB_SETTING_TABLE_NAME'] . "` (`key`, `value`) VALUES ('right_logo2', '')");
+		$this->db->query("INSERT INTO `" . $_ENV['DB_SETTING_TABLE_NAME'] . "` (`key`, `value`) VALUES ('items_per_page', '20')");
+		$this->db->query("INSERT INTO `" . $_ENV['DB_SETTING_TABLE_NAME'] . "` (`key`, `value`) VALUES ('submission_path', '')");
+		$this->db->query("INSERT INTO `" . $_ENV['DB_SETTING_TABLE_NAME'] . "` (`key`, `value`) VALUES ('testcase_path', '')");
+		$this->db->query("INSERT INTO `" . $_ENV['DB_SETTING_TABLE_NAME'] . "` (`key`, `value`) VALUES ('checker_path', '')");
+		$this->db->query("INSERT INTO `" . $_ENV['DB_SETTING_TABLE_NAME'] . "` (`key`, `value`) VALUES ('sess_id', '')");
 	}
 
 	private function create_secret_directory($name)
@@ -459,7 +455,7 @@ class Site extends MY_Controller
 		$secret_name = 'secret-' . random_string('md5');
 		mkdir($secret_name);
 		chmod($secret_name, 0777);
-		$this->db->query("UPDATE `setting` SET `value`='{$secret_name}' WHERE `key`='{$name}_path'");
+		$this->db->query("UPDATE `" . $_ENV['DB_SETTING_TABLE_NAME'] . "` SET `value`='{$secret_name}' WHERE `key`='{$name}_path'");
 	}
 
 	private function create_sess_id()
@@ -467,24 +463,13 @@ class Site extends MY_Controller
 		sleep(2);
 		$this->load->helper('string');
 		$sess_id = random_string('md5');
-		$this->db->query("UPDATE `setting` SET `value`='{$sess_id}' WHERE `key`='sess_id'");
+		$this->db->query("UPDATE `" . $_ENV['DB_SETTING_TABLE_NAME'] . "` SET `value`='{$sess_id}' WHERE `key`='sess_id'");
 	}
 
 	private function create_directory($name)
 	{
 		mkdir($name);
 		chmod($name, 0775);
-	}
-
-	private function build_grader()
-	{
-		$output1 = $output2 = array();
-		chdir('moe');
-		exec('./configure', $output1, $retval1);
-		if ($retval1 == 0)
-			exec('make', $output2, $retval2);
-		chdir('..');
-		return $retval1 == 0 && $retval2 == 0 ? '' : implode("\n", array_merge($output1, $output2));
 	}
 }
 

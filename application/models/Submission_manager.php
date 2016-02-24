@@ -17,7 +17,7 @@ class Submission_manager extends AR_Model
 	 */
 	public function __construct()
 	{
-		parent::__construct('submission');
+		parent::__construct($_ENV['DB_SUBMISSION_TABLE_NAME']);
 	}
 
 	/**
@@ -35,16 +35,18 @@ class Submission_manager extends AR_Model
 	 */
 	public function get_row($submission_id)
 	{
-		$this->db->select('submission.id AS id, user_id, submission.contest_id, submission.problem_id, language_id, submit_time, start_judge_time, end_judge_time, verdict,
-			               user.name AS user_name, contest.name AS contest_name, problem.name AS problem_name, language.name AS language_name, language.source_name AS language_source_name,
+		$this->db->select($_ENV['DB_SUBMISSION_TABLE_NAME'] . '.id AS id, user_id, ' . $_ENV['DB_SUBMISSION_TABLE_NAME'] . '.contest_id, ' . $_ENV['DB_SUBMISSION_TABLE_NAME'] . '.problem_id,
+						   language_id, submit_time, start_judge_time, end_judge_time, verdict,
+			               ' . $_ENV['DB_USER_TABLE_NAME'] . '.name AS user_name, ' . $_ENV['DB_CONTEST_TABLE_NAME'] . '.name AS contest_name, ' . $_ENV['DB_PROBLEM_TABLE_NAME'] . '.name AS problem_name,
+			               ' . $_ENV['DB_LANGUAGE_TABLE_NAME'] . '.name AS language_name, ' . $_ENV['DB_LANGUAGE_TABLE_NAME'] . '.source_name AS language_source_name,
 			               alias AS problem_alias');
-		$this->db->from('submission');
-		$this->db->join('contest', 'contest.id=contest_id');
-		$this->db->join('problem', 'problem.id=problem_id');
-		$this->db->join('user', 'user.id=user_id');
-		$this->db->join('language', 'language.id=language_id');
-		$this->db->join('contest_problem', 'contest_problem.contest_id=submission.contest_id AND contest_problem.problem_id=submission.problem_id');
-		$this->db->where('submission.id', $submission_id);
+		$this->db->from($_ENV['DB_SUBMISSION_TABLE_NAME']);
+		$this->db->join($_ENV['DB_CONTEST_TABLE_NAME'], $_ENV['DB_CONTEST_TABLE_NAME'] . '.id=contest_id');
+		$this->db->join($_ENV['DB_PROBLEM_TABLE_NAME'], $_ENV['DB_PROBLEM_TABLE_NAME'] . '.id=problem_id');
+		$this->db->join($_ENV['DB_USER_TABLE_NAME'], $_ENV['DB_USER_TABLE_NAME'] . '.id=user_id');
+		$this->db->join($_ENV['DB_LANGUAGE_TABLE_NAME'], $_ENV['DB_LANGUAGE_TABLE_NAME'] . '.id=language_id');
+		$this->db->join($_ENV['DB_CONTEST_PROBLEM_TABLE_NAME'], $_ENV['DB_CONTEST_PROBLEM_TABLE_NAME'] . '.contest_id=' . $_ENV['DB_SUBMISSION_TABLE_NAME'] . '.contest_id AND ' . $_ENV['DB_CONTEST_PROBLEM_TABLE_NAME'] . '.problem_id=' . $_ENV['DB_SUBMISSION_TABLE_NAME'] . '.problem_id');
+		$this->db->where($_ENV['DB_SUBMISSION_TABLE_NAME'] . '.id', $submission_id);
 		$this->db->limit(1);
 		$q = $this->db->get();
 		if ($q->num_rows() == 0)
@@ -76,14 +78,14 @@ class Submission_manager extends AR_Model
 	 */
 	public function get_rows($criteria = array(), $conditions = array())
 	{
-		$this->db->select('submission.id AS id, user_id, submission.contest_id, submission.problem_id, language_id, submit_time, start_judge_time, end_judge_time, verdict,
-			               user.name AS user_name, contest.name AS contest_name, problem.name AS problem_name, language.name AS language_name,
+		$this->db->select($_ENV['DB_SUBMISSION_TABLE_NAME'] . '.id AS id, user_id, ' . $_ENV['DB_SUBMISSION_TABLE_NAME'] . '.contest_id, ' . $_ENV['DB_SUBMISSION_TABLE_NAME'] . '.problem_id, language_id, submit_time, start_judge_time, end_judge_time, verdict,
+			               ' . $_ENV['DB_USER_TABLE_NAME'] . '.name AS user_name, ' . $_ENV['DB_CONTEST_TABLE_NAME'] . '.name AS contest_name, ' . $_ENV['DB_PROBLEM_TABLE_NAME'] . '.name AS problem_name, ' . $_ENV['DB_LANGUAGE_TABLE_NAME'] . '.name AS language_name,
 			               alias AS problem_alias');
-		$this->db->join('contest', 'contest.id=contest_id');
-		$this->db->join('problem', 'problem.id=problem_id');
-		$this->db->join('user', 'user.id=user_id');
-		$this->db->join('language', 'language.id=language_id');
-		$this->db->join('contest_problem', 'contest_problem.contest_id=submission.contest_id AND contest_problem.problem_id=submission.problem_id');
+		$this->db->join($_ENV['DB_CONTEST_TABLE_NAME'], $_ENV['DB_CONTEST_TABLE_NAME'] . '.id=contest_id');
+		$this->db->join($_ENV['DB_PROBLEM_TABLE_NAME'], $_ENV['DB_PROBLEM_TABLE_NAME'] . '.id=problem_id');
+		$this->db->join($_ENV['DB_USER_TABLE_NAME'], $_ENV['DB_USER_TABLE_NAME'] . '.id=user_id');
+		$this->db->join($_ENV['DB_LANGUAGE_TABLE_NAME'], $_ENV['DB_LANGUAGE_TABLE_NAME'] . '.id=language_id');
+		$this->db->join($_ENV['DB_CONTEST_PROBLEM_TABLE_NAME'], $_ENV['DB_CONTEST_PROBLEM_TABLE_NAME'] . '.contest_id=' . $_ENV['DB_SUBMISSION_TABLE_NAME'] . '.contest_id AND ' . $_ENV['DB_CONTEST_PROBLEM_TABLE_NAME'] . '.problem_id=' . $_ENV['DB_SUBMISSION_TABLE_NAME'] . '.problem_id');
 
 		return parent::get_rows($criteria, $conditions);
 	}
@@ -115,7 +117,7 @@ class Submission_manager extends AR_Model
 		// temporarily sets the verdict to 99 so that the grader will not judge this submission yet
 		$this->db->set('verdict', 99);
 		
-		$insert_id = $this->db->insert('submission');
+		$insert_id = $this->db->insert($_ENV['DB_SUBMISSION_TABLE_NAME']);
 		$submission_id = $this->db->insert_id();
 
 		$submission_path = $this->setting->get('submission_path') . '/' . $submission_id;
@@ -147,7 +149,7 @@ class Submission_manager extends AR_Model
 
 		$this->db->set('verdict', 0);
 		$this->db->where('id', $submission_id);
-		$this->db->update('submission');
+		$this->db->update($_ENV['DB_SUBMISSION_TABLE_NAME']);
 
 		return $insert_id;
 	}
@@ -164,8 +166,8 @@ class Submission_manager extends AR_Model
 	public function get_judgings($submission_id)
 	{
 		$this->db->select('testcase_id, input, output, time, memory, verdict');
-		$this->db->from('judging');
-		$this->db->join('testcase', 'testcase.id=testcase_id');
+		$this->db->from($_ENV['DB_JUDGING_TABLE_NAME']);
+		$this->db->join($_ENV['DB_TESTCASE_TABLE_NAME'], $_ENV['DB_TESTCASE_TABLE_NAME'] . '.id=testcase_id');
 		$this->db->where('submission_id', $submission_id);
 		$q = $this->db->get();
 		return $q->result_array();
@@ -181,20 +183,20 @@ class Submission_manager extends AR_Model
 	public function regrade($submission_id)
 	{
 		$this->db->where('submission_id', $submission_id);
-		$this->db->delete('judging');
+		$this->db->delete($_ENV['DB_JUDGING_TABLE_NAME']);
 		
 		$this->db->select('verdict');
-		$this->db->from('submission');
+		$this->db->from($_ENV['DB_SUBMISSION_TABLE_NAME']);
 		$this->db->where('id', $submission_id);
 		$q = $this->db->get();
 
 		$res = $q->row_array();
 		$new_verdict = $res['verdict'];
-		if ($res['verdict'] == 99)
+		if ($res['verdict'] == 99 || $res['verdict'] == -85)
 			$new_verdict = 0;
 		$this->db->set('verdict', - $new_verdict);
 		$this->db->where('id', $submission_id);
-		$this->db->update('submission');
+		$this->db->update($_ENV['DB_SUBMISSION_TABLE_NAME']);
 	}
 
 	/**
@@ -208,7 +210,7 @@ class Submission_manager extends AR_Model
 	{
 		$this->db->set('verdict', -99);
 		$this->db->where('id', $submission_id);
-		$this->db->update('submission');
+		$this->db->update($_ENV['DB_SUBMISSION_TABLE_NAME']);
 	}
 }
 

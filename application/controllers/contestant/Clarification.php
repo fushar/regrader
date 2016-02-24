@@ -78,7 +78,7 @@ class Clarification extends Contestant_Controller
 
 			$conditions['limit'] = $items_per_page;
 			$conditions['offset'] = ($page_offset-1) * $items_per_page;
-			$conditions['order_by'] = array('clarification.id' => 'DESC');
+			$conditions['order_by'] = array($_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.id' => 'DESC');
 
 			$clarifications = $this->clarification_manager->get_rows_with_admin($criteria, $conditions);
 			$unread_clars = $this->clarification_manager->get_contestant_unread($user_id, $contest_id);

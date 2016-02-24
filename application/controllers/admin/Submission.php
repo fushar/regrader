@@ -72,7 +72,7 @@ class Submission extends Admin_Controller
 
 		$conditions['limit'] = $items_per_page;
 		$conditions['offset'] = ($page_offset-1) * $items_per_page;
-		$conditions['order_by'] = array('submission.id' => 'DESC');
+		$conditions['order_by'] = array($_ENV['DB_SUBMISSION_TABLE_NAME'] . '.id' => 'DESC');
 
 		$submissions = $this->submission_manager->get_rows($criteria, $conditions);
 		$contests = $this->contest_manager->get_rows();
@@ -170,6 +170,17 @@ class Submission extends Admin_Controller
 	public function ignore($submission_id, $contest_id, $problem_id, $user_id, $page_offset)
 	{
 		$this->submission_manager->ignore($submission_id);
+		$submission = $this->submission_manager->get_row($submission_id);
+
+		$this->submission_manager->ignore($submission['id']);
+
+		$args = [
+			'contest_id' => $submission['contest_id'],
+			'problem_id' => $submission['problem_id'],
+			'user_id' => $submission['user_id']
+		];
+		$this->scoreboard_manager->recalculate_scores($args);
+
 		redirect('admin/submission/viewAll/' . $contest_id . '/' . $problem_id . '/' . $user_id . '/' . $page_offset);
 	}
 }

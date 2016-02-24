@@ -17,7 +17,7 @@ class Grader_manager extends AR_Model
 	 */
 	public function __construct()
 	{
-		parent::__construct('grader');
+		parent::__construct($_ENV['DB_GRADER_TABLE_NAME']);
 	}
 
 	/**
@@ -29,7 +29,7 @@ class Grader_manager extends AR_Model
 	 */
 	public function get_active_graders()
 	{
-		$q = $this->db->query('SELECT hostname FROM grader WHERE TIMESTAMPDIFF(SECOND, last_activity, NOW()) <= 30');
+		$q = $this->db->query('SELECT hostname, pid FROM ' . $_ENV['DB_GRADER_TABLE_NAME'] . ' WHERE TIMESTAMPDIFF(SECOND, last_activity, NOW()) <= 30');
 		return $q->result_array();
 	}
 }

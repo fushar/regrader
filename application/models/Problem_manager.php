@@ -17,7 +17,7 @@ class Problem_manager extends AR_Model
 	 */
 	public function __construct()
 	{
-		parent::__construct('problem');
+		parent::__construct($_ENV['DB_PROBLEM_TABLE_NAME']);
 	}
 
 	/**
@@ -74,14 +74,14 @@ class Problem_manager extends AR_Model
 		if (isset($criteria['contest_id']))
 		{
 			$this->db->select('id, name, author, time_limit, memory_limit, alias');
-			$this->db->join('contest_problem', 'contest_problem.problem_id=id');
-			$this->db->where('contest_problem.contest_id', $criteria['contest_id']);
+			$this->db->join($_ENV['DB_CONTEST_PROBLEM_TABLE_NAME'], $_ENV['DB_CONTEST_PROBLEM_TABLE_NAME'] . '.problem_id=id');
+			$this->db->where($_ENV['DB_CONTEST_PROBLEM_TABLE_NAME'] . '.contest_id', $criteria['contest_id']);
 		}
 		else
 		{
-			$this->db->select('problem.id AS id, name, author, time_limit, memory_limit, COUNT(testcase.id) AS tc_count');
-			$this->db->join('testcase', 'testcase.problem_id=problem.id', 'left outer');
-			$this->db->group_by('problem.id');
+			$this->db->select($_ENV['DB_PROBLEM_TABLE_NAME'] . '.id AS id, name, author, time_limit, memory_limit, COUNT(' . $_ENV['DB_TESTCASE_TABLE_NAME'] . '.id) AS tc_count');
+			$this->db->join($_ENV['DB_TESTCASE_TABLE_NAME'], $_ENV['DB_TESTCASE_TABLE_NAME'] . '.problem_id=' . $_ENV['DB_PROBLEM_TABLE_NAME'] . '.id', 'left outer');
+			$this->db->group_by($_ENV['DB_PROBLEM_TABLE_NAME'] . '.id');
 		}
 		
 		return parent::get_rows($criteria, $conditions);
@@ -105,11 +105,11 @@ class Problem_manager extends AR_Model
 		if ($args['input'] == $args['output'])
 			return $this->lang->line('input_output_must_differ');
 
-		$q = $this->db->query('SELECT * FROM testcase WHERE problem_id=' . $args['problem_id'] . ' AND (input="' . $args['input'] . '" OR output="' . $args['input'] . '")');
+		$q = $this->db->query('SELECT * FROM ' . $_ENV['DB_TESTCASE_TABLE_NAME'] . ' WHERE problem_id=' . $args['problem_id'] . ' AND (input="' . $args['input'] . '" OR output="' . $args['input'] . '")');
 		if ($q->num_rows() > 0)
 			return $this->lang->line('input_has_been_used');
 
-		$q = $this->db->query('SELECT * FROM testcase WHERE problem_id=' . $args['problem_id'] . ' AND (input="' . $args['output'] . '" OR output="' . $args['output'] . '")');
+		$q = $this->db->query('SELECT * FROM ' . $_ENV['DB_TESTCASE_TABLE_NAME'] . ' WHERE problem_id=' . $args['problem_id'] . ' AND (input="' . $args['output'] . '" OR output="' . $args['output'] . '")');
 		if ($q->num_rows() > 0)
 			return $this->lang->line('output_has_been_used');
 
@@ -143,7 +143,7 @@ class Problem_manager extends AR_Model
 		$this->db->set('input_size', filesize($testcase_path . '/' . $args['input']));
 		$this->db->set('output', $args['output']);
 		$this->db->set('output_size', filesize($testcase_path . '/' . $args['output']));
-		$this->db->insert('testcase');
+		$this->db->insert($_ENV['DB_TESTCASE_TABLE_NAME']);
 		return '';
 	}
 
@@ -156,7 +156,7 @@ class Problem_manager extends AR_Model
 	 */
 	public function delete_testcase($testcase_id)
 	{
-		$this->db->from('testcase');
+		$this->db->from($_ENV['DB_TESTCASE_TABLE_NAME']);
 		$this->db->where('id', $testcase_id);
 		$this->db->limit(1);
 		$q = $this->db->get();
@@ -165,7 +165,7 @@ class Problem_manager extends AR_Model
 		$res = $q->row_array();
 
 		$this->db->where('id', $testcase_id);
-		$this->db->delete('testcase');
+		$this->db->delete($_ENV['DB_TESTCASE_TABLE_NAME']);
 
 		$testcase_path = $this->setting->get('testcase_path') . '/' . $res['problem_id'];
 		unlink($testcase_path . '/' . $res['input']);
@@ -183,7 +183,7 @@ class Problem_manager extends AR_Model
 	 */
 	public function get_testcases($problem_id)
 	{
-		$this->db->from('testcase');
+		$this->db->from($_ENV['DB_TESTCASE_TABLE_NAME']);
 		$this->db->where('problem_id', $problem_id);
 		$q = $this->db->get();
 		return $q->result_array();
@@ -200,7 +200,7 @@ class Problem_manager extends AR_Model
 	 */
 	public function get_testcase($testcase_id)
 	{
-		$this->db->from('testcase');
+		$this->db->from($_ENV['DB_TESTCASE_TABLE_NAME']);
 		$this->db->where('id', $testcase_id);
 		$q = $this->db->get();
 		if ($q->num_rows() == 0)
@@ -223,7 +223,7 @@ class Problem_manager extends AR_Model
 	public function get_testcase_content($testcase_id, $direction)
 	{
 		$this->db->select('problem_id, ' . $direction);
-		$this->db->from('testcase');
+		$this->db->from($_ENV['DB_TESTCASE_TABLE_NAME']);
 		$this->db->where('id', $testcase_id);
 		$this->db->limit(1);
 		$q = $this->db->get();
@@ -248,7 +248,7 @@ class Problem_manager extends AR_Model
 	 */
 	public function add_checker($args)
 	{
-		$q = $this->db->query('SELECT * FROM checker WHERE problem_id=' . $args['problem_id']);
+		$q = $this->db->query('SELECT * FROM ' . $_ENV['DB_CHECKER_TABLE_NAME'] . ' WHERE problem_id=' . $args['problem_id']);
 		if ($q->num_rows() > 0)
 			return $this->lang->line('checker_exists');
 
@@ -266,7 +266,7 @@ class Problem_manager extends AR_Model
 		if ($this->upload->display_errors() != '')
 			return $this->upload->display_errors();
 
-		$compile_cmd = 'g++ -fsyntax-only -w ' . $checker_path . '/' . $args['checker'];
+		$compile_cmd = $_ENV['CPP_EXECUTABLE_PATH'] . ' -std=c++11 -fsyntax-only -w ' . $checker_path . '/' . $args['checker'] . ' 2>&1';
 		exec($compile_cmd, $output, $retval);
 
 		if (0 !== @$retval) // fail while compiling
@@ -275,13 +275,19 @@ class Problem_manager extends AR_Model
 			return $this->lang->line('checker_compile_error');
 		}
 
-		$compile_cmd = 'g++ -w -O3 -o ' . $checker_path . '/check ' . $checker_path . '/' . $args['checker'];
+		$compile_cmd = $_ENV['CPP_EXECUTABLE_PATH'] . ' -std=c++11 -w -O3 -o ' . $checker_path . '/check ' . $checker_path . '/' . $args['checker'] . ' 2>&1';
 		exec($compile_cmd, $output, $retval);
+
+		if (0 !== @$retval) // fail while compiling
+		{
+			unlink($checker_path . '/' . $args['checker']); // delete the uploaded file
+			return $this->lang->line('checker_compile_error');
+		}
 
 		$this->db->set('problem_id', $args['problem_id']);
 		$this->db->set('checker', $args['checker']);
 		$this->db->set('checker_size', filesize($checker_path . '/' . $args['checker']));
-		$this->db->insert('checker');
+		$this->db->insert($_ENV['DB_CHECKER_TABLE_NAME']);
 		return '';
 	}
 
@@ -294,7 +300,7 @@ class Problem_manager extends AR_Model
 	 */
 	public function delete_checker($checker_id)
 	{
-		$this->db->from('checker');
+		$this->db->from($_ENV['DB_CHECKER_TABLE_NAME']);
 		$this->db->where('id', $checker_id);
 		$this->db->limit(1);
 		$q = $this->db->get();
@@ -303,7 +309,7 @@ class Problem_manager extends AR_Model
 		$res = $q->row_array();
 
 		$this->db->where('id', $checker_id);
-		$this->db->delete('checker');
+		$this->db->delete($_ENV['DB_CHECKER_TABLE_NAME']);
 
 		$checker_path = $this->setting->get('checker_path') . '/' . $res['problem_id'];
 		unlink($checker_path . '/' . $res['checker']);
@@ -321,7 +327,7 @@ class Problem_manager extends AR_Model
 	 */
 	public function get_checker_on_problem($problem_id)
 	{
-		$this->db->from('checker');
+		$this->db->from($_ENV['DB_CHECKER_TABLE_NAME']);
 		$this->db->where('problem_id', $problem_id);
 		$q = $this->db->get();
 		return $q->row_array();
@@ -338,7 +344,7 @@ class Problem_manager extends AR_Model
 	 */
 	public function get_checker($checker_id)
 	{
-		$this->db->from('checker');
+		$this->db->from($_ENV['DB_CHECKER_TABLE_NAME']);
 		$this->db->where('id', $checker_id);
 		$q = $this->db->get();
 		return $q->row_array();
@@ -357,7 +363,7 @@ class Problem_manager extends AR_Model
 	public function get_checker_content($checker_id)
 	{
 		$this->db->select('problem_id, checker');
-		$this->db->from('checker');
+		$this->db->from($_ENV['DB_CHECKER_TABLE_NAME']);
 		$this->db->where('id', $checker_id);
 		$this->db->limit(1);
 		$q = $this->db->get();

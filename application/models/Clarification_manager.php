@@ -17,7 +17,7 @@ class Clarification_manager extends AR_Model
 	 */
 	public function __construct()
 	{
-		parent::__construct('clarification');
+		parent::__construct($_ENV['DB_CLARIFICATION_TABLE_NAME']);
 	}
 
 	/**
@@ -31,17 +31,17 @@ class Clarification_manager extends AR_Model
 	 */
 	public function broadcast($clarification_id, $contest_id)
 	{
-		$this->db->select('user.id AS user_id');
-		$this->db->from('user');
-		$this->db->join('contest_member', 'contest_member.category_id=user.category_id');
-		$this->db->where('contest_member.contest_id', $contest_id);
+		$this->db->select($_ENV['DB_USER_TABLE_NAME'] . '.id AS user_id');
+		$this->db->from($_ENV['DB_USER_TABLE_NAME']);
+		$this->db->join($_ENV['DB_CONTEST_MEMBER_TABLE_NAME'], $_ENV['DB_CONTEST_MEMBER_TABLE_NAME'] . '.category_id=' . $_ENV['DB_USER_TABLE_NAME'] . '.category_id');
+		$this->db->where($_ENV['DB_CONTEST_MEMBER_TABLE_NAME'] . '.contest_id', $contest_id);
 
 		$q = $this->db->get();
 		foreach ($q->result_array() as $v)
 		{
 			$this->db->set('clarification_id', $clarification_id);
 			$this->db->set('user_id', $v['user_id']);
-			$this->db->insert('unread_clarification');
+			$this->db->insert($_ENV['DB_UNREAD_CLARIFICATION_TABLE_NAME']);
 		}
 	}
 
@@ -59,7 +59,7 @@ class Clarification_manager extends AR_Model
 
 		$this->db->set('clarification_id', $clarification_id);
 		$this->db->set('user_id', $clarification['user_id']);
-		$this->db->insert('unread_clarification');
+		$this->db->insert($_ENV['DB_UNREAD_CLARIFICATION_TABLE_NAME']);
 	}
 
 	/**
@@ -75,7 +75,7 @@ class Clarification_manager extends AR_Model
 
 		$this->db->set('clarification_id', $clarification_id);
 		$this->db->set('user_id', 1);
-		$this->db->insert('unread_clarification');
+		$this->db->insert($_ENV['DB_UNREAD_CLARIFICATION_TABLE_NAME']);
 	}
 
 	/**
@@ -92,10 +92,10 @@ class Clarification_manager extends AR_Model
 	public function count_contestant_unread($user_id, $contest_id)
 	{
 		$this->db->select('COUNT(*) AS cnt');
-		$this->db->from('unread_clarification');
-		$this->db->join('clarification', 'clarification.id=clarification_id');
-		$this->db->where('unread_clarification.user_id', $user_id);
-		$this->db->where('clarification.contest_id', $contest_id);
+		$this->db->from($_ENV['DB_UNREAD_CLARIFICATION_TABLE_NAME']);
+		$this->db->join($_ENV['DB_CLARIFICATION_TABLE_NAME'], $_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.id=clarification_id');
+		$this->db->where($_ENV['DB_UNREAD_CLARIFICATION_TABLE_NAME'] . '.user_id', $user_id);
+		$this->db->where($_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.contest_id', $contest_id);
 		$q = $this->db->get();
 		$res = $q->row_array();		
 		return $res['cnt'];
@@ -111,9 +111,9 @@ class Clarification_manager extends AR_Model
 	public function count_admin_unread()
 	{
 		$this->db->select('COUNT(*) AS cnt');
-		$this->db->from('unread_clarification');
-		$this->db->join('clarification', 'clarification.id=clarification_id');
-		$this->db->where('unread_clarification.user_id', 1);
+		$this->db->from($_ENV['DB_UNREAD_CLARIFICATION_TABLE_NAME']);
+		$this->db->join($_ENV['DB_CLARIFICATION_TABLE_NAME'], $_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.id=clarification_id');
+		$this->db->where($_ENV['DB_UNREAD_CLARIFICATION_TABLE_NAME'] . '.user_id', 1);
 		$q = $this->db->get();
 		$res = $q->row_array();
 		return $res['cnt'];
@@ -132,11 +132,11 @@ class Clarification_manager extends AR_Model
 	 */
 	public function get_contestant_unread($user_id, $contest_id)
 	{
-		$this->db->select('unread_clarification.clarification_id AS id');
-		$this->db->from('unread_clarification');
-		$this->db->join('clarification', 'clarification.id=clarification_id');
-		$this->db->where('unread_clarification.user_id', $user_id);
-		$this->db->where('clarification.contest_id', $contest_id);
+		$this->db->select($_ENV['DB_UNREAD_CLARIFICATION_TABLE_NAME'] . '.clarification_id AS id');
+		$this->db->from($_ENV['DB_UNREAD_CLARIFICATION_TABLE_NAME']);
+		$this->db->join($_ENV['DB_CLARIFICATION_TABLE_NAME'], $_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.id=clarification_id');
+		$this->db->where($_ENV['DB_UNREAD_CLARIFICATION_TABLE_NAME'] . '.user_id', $user_id);
+		$this->db->where($_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.contest_id', $contest_id);
 		$q = $this->db->get();
 		return $q->result_array();
 	}
@@ -150,10 +150,10 @@ class Clarification_manager extends AR_Model
 	 */
 	public function get_admin_unread()
 	{
-		$this->db->select('unread_clarification.clarification_id AS id');
-		$this->db->from('unread_clarification');
-		$this->db->join('clarification', 'clarification.id=clarification_id');
-		$this->db->where('unread_clarification.user_id', 1);
+		$this->db->select($_ENV['DB_UNREAD_CLARIFICATION_TABLE_NAME'] . '.clarification_id AS id');
+		$this->db->from($_ENV['DB_UNREAD_CLARIFICATION_TABLE_NAME']);
+		$this->db->join($_ENV['DB_CLARIFICATION_TABLE_NAME'], $_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.id=clarification_id');
+		$this->db->where($_ENV['DB_UNREAD_CLARIFICATION_TABLE_NAME'] . '.user_id', 1);
 		$q = $this->db->get();
 		return $q->result_array();
 	}
@@ -170,7 +170,7 @@ class Clarification_manager extends AR_Model
 	{
 		$this->db->where('user_id', $user_id);
 		$this->db->where('clarification_id', $clarification_id);
-		$this->db->delete('unread_clarification');
+		$this->db->delete($_ENV['DB_UNREAD_CLARIFICATION_TABLE_NAME']);
 	}
 
 	/**
@@ -188,11 +188,11 @@ class Clarification_manager extends AR_Model
 	 */
 	public function get_row($clarification_id)
 	{
-		$this->db->select('clarification.id AS id, user_id, clarification.contest_id, clar_time, title, content, answer, user.name AS user_name, contest.name AS contest_name');
-		$this->db->from('clarification');
-		$this->db->join('contest', 'contest.id=contest_id');
-		$this->db->join('user', 'user.id=user_id', 'left outer');
-		$this->db->where('clarification.id', $clarification_id);
+		$this->db->select($_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.id AS id, user_id, ' . $_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.contest_id, clar_time, title, content, answer, ' . $_ENV['DB_USER_TABLE_NAME'] . '.name AS user_name, ' . $_ENV['DB_CONTEST_TABLE_NAME'] . '.name AS contest_name');
+		$this->db->from($_ENV['DB_CLARIFICATION_TABLE_NAME']);
+		$this->db->join($_ENV['DB_CONTEST_TABLE_NAME'], $_ENV['DB_CONTEST_TABLE_NAME'] . '.id=contest_id');
+		$this->db->join($_ENV['DB_USER_TABLE_NAME'], $_ENV['DB_USER_TABLE_NAME'] . '.id=user_id', 'left outer');
+		$this->db->where($_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.id', $clarification_id);
 		$this->db->limit(1);
 		$q = $this->db->get();
 		if ($q->num_rows() == 0)
@@ -220,15 +220,15 @@ class Clarification_manager extends AR_Model
 	 */
 	public function get_rows($criteria = array(), $conditions = array())
 	{
-		$this->db->select('clarification.id AS id, user_id, clarification.contest_id, clar_time, title, (answer IS NOT NULL) AS answered, user.name AS user_name, contest.name AS contest_name');
+		$this->db->select($_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.id AS id, user_id, ' . $_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.contest_id, clar_time, title, (answer IS NOT NULL) AS answered, ' . $_ENV['DB_USER_TABLE_NAME'] . '.name AS user_name, ' . $_ENV['DB_CONTEST_TABLE_NAME'] . '.name AS contest_name');
 		
-		$this->db->join('contest', 'contest.id=contest_id');
-		$this->db->join('user', 'user.id=user_id', 'left outer');
+		$this->db->join($_ENV['DB_CONTEST_TABLE_NAME'], $_ENV['DB_CONTEST_TABLE_NAME'] . '.id=contest_id');
+		$this->db->join($_ENV['DB_USER_TABLE_NAME'], $_ENV['DB_USER_TABLE_NAME'] . '.id=user_id', 'left outer');
 		
-		if (isset($criteria['clarification.user_id']))
+		if (isset($criteria[$_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.user_id']))
 		{
-			$this->db->where('user_id', $criteria['clarification.user_id']);
-			unset($criteria['clarification.user_id']);
+			$this->db->where('user_id', $criteria[$_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.user_id']);
+			unset($criteria[$_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.user_id']);
 		}
 
 		return parent::get_rows($criteria, $conditions);
@@ -254,14 +254,14 @@ class Clarification_manager extends AR_Model
 	 */
 	public function get_rows_with_admin($criteria = array(), $conditions = array())
 	{
-		$this->db->select('clarification.id AS id, user_id, clarification.contest_id, clar_time, title, (answer IS NOT NULL) AS answered, user.name AS user_name, contest.name AS contest_name');
-		$this->db->join('contest', 'contest.id=contest_id');
-		$this->db->join('user', 'user.id=user_id', 'left outer');
-		
-		if (isset($criteria['clarification.user_id']))
+		$this->db->select($_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.id AS id, user_id, ' . $_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.contest_id, clar_time, title, (answer IS NOT NULL) AS answered, ' . $_ENV['DB_USER_TABLE_NAME'] . '.name AS user_name, ' . $_ENV['DB_CONTEST_TABLE_NAME'] . '.name AS contest_name');
+		$this->db->join($_ENV['DB_CONTEST_TABLE_NAME'], $_ENV['DB_CONTEST_TABLE_NAME'] . '.id=contest_id');
+		$this->db->join($_ENV['DB_USER_TABLE_NAME'], $_ENV['DB_USER_TABLE_NAME'] . '.id=user_id', 'left outer');
+
+		if (isset($criteria[$_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.user_id']))
 		{
-			$this->db->where('(user_id=1 OR user_id=' . $criteria['clarification.user_id'] . ')');
-			unset($criteria['clarification.user_id']);
+			$this->db->where('(user_id=1 OR user_id=' . $criteria[$_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.user_id'] . ')');
+			unset($criteria[$_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.user_id']);
 		}
 
 		return parent::get_rows($criteria, $conditions);
@@ -282,11 +282,11 @@ class Clarification_manager extends AR_Model
 	public function count_rows($criteria = array())
 	{
 		$this->db->select('COUNT(id) AS cnt');
-		$this->db->from('clarification');
-		if (isset($criteria['clarification.user_id']))
+		$this->db->from($_ENV['DB_CLARIFICATION_TABLE_NAME']);
+		if (isset($criteria[$_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.user_id']))
 		{
-			$this->db->where('(user_id=1 OR user_id=' . $criteria['clarification.user_id'] . ')');
-			unset($criteria['clarification.user_id']);
+			$this->db->where('(user_id=1 OR user_id=' . $criteria[$_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.user_id'] . ')');
+			unset($criteria[$_ENV['DB_CLARIFICATION_TABLE_NAME'] . '.user_id']);
 		}
 		foreach ($criteria as $k => $v)
 			$this->db->where($k, $v);

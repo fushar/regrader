@@ -3,6 +3,7 @@
 $lang['active_contests'] = 'Active Contests';
 $lang['active_users'] = 'Active Users';
 $lang['active_graders'] = 'Active Graders';
+$lang['active_graders_pid'] = 'PID';
 $lang['choose_contest'] = 'Choose Contest';
 $lang['please_choose_contest'] = 'Please choose one of the available contests.';
 $lang['no_contest'] = 'No contests.';

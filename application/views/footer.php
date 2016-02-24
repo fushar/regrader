@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-md-12 site_footer">
 			<hr />
-			&copy; 2012-2015 Regrader. Powered by CodeIgniter, Bootstrap, and Moe Contest Environment. Licensed under MIT License.
+			&copy; 2012-2016 Regrader. Powered by CodeIgniter, Bootstrap, and Moe Contest Environment. Licensed under MIT License.
 		</div>
 	</div>
 </div>

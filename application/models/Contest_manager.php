@@ -17,7 +17,7 @@ class Contest_manager extends AR_Model
 	 */
 	public function __construct()
 	{
-		parent::__construct('contest');
+		parent::__construct($_ENV['DB_CONTEST_TABLE_NAME']);
 	}
 
 	/**
@@ -34,10 +34,10 @@ class Contest_manager extends AR_Model
 	public function get_active_contests($category_id)
 	{
 		$this->db->select('id, name, end_time');
-		$this->db->from('contest');
-		$this->db->join('contest_member', 'contest_member.contest_id=contest.id', 'left outer');
+		$this->db->from($_ENV['DB_CONTEST_TABLE_NAME']);
+		$this->db->join($_ENV['DB_CONTEST_MEMBER_TABLE_NAME'], $_ENV['DB_CONTEST_MEMBER_TABLE_NAME'] . '.contest_id=' . $_ENV['DB_CONTEST_TABLE_NAME'] . '.id', 'left outer');
 		if ($category_id != 0)
-			$this->db->where('contest_member.category_id', $category_id);
+			$this->db->where($_ENV['DB_CONTEST_MEMBER_TABLE_NAME'] . '.category_id', $category_id);
 		$this->db->where('start_time <=', date('Y-m-d H:i:s'));
 		$this->db->where('enabled', true);
 		$q = $this->db->get();
@@ -62,7 +62,7 @@ class Contest_manager extends AR_Model
 	 */
 	public function has_problem($contest_id, $problem_id)
 	{
-		$this->db->from('contest_problem');
+		$this->db->from($_ENV['DB_CONTEST_PROBLEM_TABLE_NAME']);
 		$this->db->where('contest_id', $contest_id);
 		$this->db->where('problem_id', $problem_id);
 		$this->db->limit(1);
@@ -81,13 +81,13 @@ class Contest_manager extends AR_Model
 	public function update_members($contest_id, $cats)
 	{
 		$this->db->where('contest_id', $contest_id);
-		$this->db->delete('contest_member');
+		$this->db->delete($_ENV['DB_CONTEST_MEMBER_TABLE_NAME']);
 
 		foreach ($cats as $k)
 		{
 			$this->db->set('contest_id', $contest_id);
 			$this->db->set('category_id', $k);
-			$this->db->insert('contest_member');
+			$this->db->insert($_ENV['DB_CONTEST_MEMBER_TABLE_NAME']);
 		}
 	}
 
@@ -102,13 +102,13 @@ class Contest_manager extends AR_Model
 	public function update_languages($contest_id, $langs)
 	{
 		$this->db->where('contest_id', $contest_id);
-		$this->db->delete('contest_language');
+		$this->db->delete($_ENV['DB_CONTEST_LANGUAGE_TABLE_NAME']);
 
 		foreach ($langs as $k)
 		{
 			$this->db->set('contest_id', $contest_id);
 			$this->db->set('language_id', $k);
-			$this->db->insert('contest_language');
+			$this->db->insert($_ENV['DB_CONTEST_LANGUAGE_TABLE_NAME']);
 		}
 	}
 
@@ -127,7 +127,7 @@ class Contest_manager extends AR_Model
 		$this->db->set('contest_id', $args['contest_id']);
 		$this->db->set('problem_id', $args['problem_id']);
 		$this->db->set('alias', $args['alias']);
-		$this->db->insert('contest_problem');
+		$this->db->insert($_ENV['DB_CONTEST_PROBLEM_TABLE_NAME']);
 	}
 
 	/**
@@ -142,7 +142,7 @@ class Contest_manager extends AR_Model
 	{
 		$this->db->where('contest_id', $contest_id);
 		$this->db->where('problem_id', $problem_id);
-		$this->db->delete('contest_problem');
+		$this->db->delete($_ENV['DB_CONTEST_PROBLEM_TABLE_NAME']);
 	}
 }
 

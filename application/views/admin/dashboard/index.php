@@ -15,7 +15,7 @@
 						<th class="id-th">#</th>
 						<th><i class="glyphicon glyphicon-fire"></i> <?php echo $this->lang->line('active_contests'); ?></th>
 					</tr>
-				</head>
+				</thead>
 				<tbody>
 					<?php $rank = 0; foreach ($active_contests as $v) : ?>
 					<tr>
@@ -31,7 +31,7 @@
 						<th class="id-th">#</th>
 						<th><i class="glyphicon glyphicon-user"></i> <?php echo $this->lang->line('active_users'); ?></th>
 					</tr>
-				</head>
+				</thead>
 				<tbody>
 					<?php $rank = 0; foreach ($active_users as $v) : ?>
 					<tr>
@@ -46,14 +46,15 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th class="id-th">#</th>
+						<th class="id-th-pid"><i class="glyphicon glyphicon-flag"></i> <?php echo $this->lang->line('active_graders_pid'); ?></th>
 						<th><i class="glyphicon glyphicon-refresh"></i> <?php echo $this->lang->line('active_graders'); ?></th>
 					</tr>
-				</head>
+				</thead>
 				<tbody>
-					<?php $rank = 0; foreach ($active_graders as $v) : ?>
+					<?php foreach ($active_graders as $v) : ?>
 					<tr>
-						<td><?php echo ++$rank; ?></td><td><?php echo $v['hostname']; ?></td>
+						<td class="id-th-pid"><?php echo $v['pid']; ?></td>
+						<td><?php echo $v['hostname']; ?></td>
 					</tr>
 					<?php endforeach; ?>
 				</tbody>

@@ -80,6 +80,11 @@ ul.problem-list li.active:hover{
 	text-align: center;
 }
 
+.table .id-th-pid {
+	width: 80px;
+	text-align: center;
+}
+
 .table .operations-th, .table .operations-td {
 	width: 105px;
 	text-align: center;
@@ -180,6 +185,10 @@ ul.problem-list li.active:hover{
 	margin: 0;
 }
 
+.table .scoreboard-institution-logo > img {
+	max-width: 100%;
+}
+
 .table .scoreboard-institution {
 	margin-left: 3px;
 	font-size: 9pt;
@@ -215,6 +224,11 @@ ul.problem-list li.active:hover{
 	vertical-align: middle;
 }
 
+.table .scoreboard-first-to-solve-td {
+	background-color: #006400;
+	color: white;
+}
+
 .table .scoreboard-accepted-td {
 	background-color: #33FF66;
 }
@@ -233,12 +247,17 @@ table.table-scoreboard tbody tr:hover td {
   background-color: white;
 }
 
+table.table-scoreboard tbody tr:hover td.scoreboard-first-to-solve-td {
+	background-color: #006400;
+	color: white;
+}
+
 table.table-scoreboard tbody tr:hover td.scoreboard-accepted-td {
-  background-color: #33FF66;
+    background-color: #33FF66;
 }
 
 table.table-scoreboard tbody tr:hover td.scoreboard-not-accepted-td {
-  background-color: #FF6666;
+    background-color: #FF6666;
 }
 
 table.table-scoreboard td {

@@ -66,7 +66,7 @@ class Identity extends CI_Model
 	{
 		$this->db->set('last_activity', date('Y-m-d H:i:s'));
 		$this->db->where('id', $this->get_session_data('id'));
-		$this->db->update('user');
+		$this->db->update($_ENV['DB_USER_TABLE_NAME']);
 	}
 
 	/**

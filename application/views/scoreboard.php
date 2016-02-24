@@ -63,7 +63,12 @@
 							foreach ($v['score'] as $w) :
 								$verdict_class = '';
 								if ($w['is_accepted'] == 1)
-									$verdict_class = ' scoreboard-accepted-td';
+								{
+									if ($w['is_first_to_solve'] == 1)
+										$verdict_class = ' scoreboard-first-to-solve-td';
+									else
+										$verdict_class = ' scoreboard-accepted-td';
+								}
 								else if ($w['submission_cnt'] > 0)
 									$verdict_class = ' scoreboard-not-accepted-td';
 								?>

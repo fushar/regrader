@@ -17,7 +17,7 @@ class User_manager extends AR_Model
 	 */
 	public function __construct()
 	{
-		parent::__construct('user');
+		parent::__construct($_ENV['DB_USER_TABLE_NAME']);
 	}
 
 	/**
@@ -40,8 +40,8 @@ class User_manager extends AR_Model
 	 */
 	public function get_rows($criteria = array(), $conditions = array())
 	{
-		$this->db->select('user.id, user.name, username, password, institution, category_id, category.name AS category_name, last_activity');
-		$this->db->join('category', 'category.id=category_id');
+		$this->db->select($_ENV['DB_USER_TABLE_NAME'] . '.id, ' . $_ENV['DB_USER_TABLE_NAME'] . '.name, username, password, institution, category_id, ' . $_ENV['DB_CATEGORY_TABLE_NAME'] . '.name AS category_name, last_activity');
+		$this->db->join($_ENV['DB_CATEGORY_TABLE_NAME'], $_ENV['DB_CATEGORY_TABLE_NAME'] . '.id=category_id');
 
 		return parent::get_rows($criteria, $conditions);
 	}
@@ -55,7 +55,7 @@ class User_manager extends AR_Model
 	 */
 	public function get_active_users()
 	{
-		$q = $this->db->query('SELECT name FROM user WHERE TIMESTAMPDIFF(SECOND, last_activity, NOW()) <= 60 * 30 AND id != 1 ORDER BY category_id, name');
+		$q = $this->db->query('SELECT name FROM ' . $_ENV['DB_USER_TABLE_NAME'] . ' WHERE TIMESTAMPDIFF(SECOND, last_activity, NOW()) <= 60 * 30 AND id != 1 ORDER BY category_id, name');
 		return $q->result_array();
 	}
 
@@ -72,7 +72,7 @@ class User_manager extends AR_Model
 	public function is_valid_new_username($user_id, $username)
 	{
 		$this->db->select('id');
-		$this->db->from('user');
+		$this->db->from($_ENV['DB_USER_TABLE_NAME']);
 		$this->db->where('username', $username);
 		$this->db->where('id !=', $user_id);
 		$q = $this->db->get();

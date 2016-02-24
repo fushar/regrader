@@ -92,6 +92,23 @@ class Problem extends Contestant_Controller
 		{
 			$this->ui['header']['page'] = 'problem';
 
+			$script = <<<'SCRIPTSTART'
+<script type="text/x-mathjax-config">
+	MathJax.Hub.Config({
+		extensions: ["tex2jax.js"],
+		jax: ["input/TeX", "output/HTML-CSS"],
+		tex2jax: {
+			inlineMath: [ ['$','$']],
+			displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+			processEscapes: true
+		},
+		"HTML-CSS": { availableFonts: ["TeX"] }
+	});
+</script>
+SCRIPTSTART;
+			$this->ui['header']['pre_custom_js_script'] = $script;
+			$this->ui['header']['custom_js'] = array('vendor/MathJax/MathJax.js');
+
 			$problem = $this->problem_manager->get_row($problem_id);
 			$problems = $this->problem_manager->get_rows(array('contest_id' => $contest_id), array('order_by' => array('alias' => 'ASC')));
 

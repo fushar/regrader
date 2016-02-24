@@ -17,7 +17,7 @@ class Language_manager extends AR_Model
 	 */
 	public function __construct()
 	{
-		parent::__construct('language');
+		parent::__construct($_ENV['DB_LANGUAGE_TABLE_NAME']);
 	}
 
 	/**
@@ -43,8 +43,8 @@ class Language_manager extends AR_Model
 	{
 		if (isset($criteria['contest_id']))
 		{
-			$this->db->join('contest_language', 'contest_language.language_id=id');
-			$this->db->where('contest_language.contest_id', $criteria['contest_id']);
+			$this->db->join($_ENV['DB_CONTEST_LANGUAGE_TABLE_NAME'], $_ENV['DB_CONTEST_LANGUAGE_TABLE_NAME'] . '.language_id=id');
+			$this->db->where($_ENV['DB_CONTEST_LANGUAGE_TABLE_NAME'] . '.contest_id', $criteria['contest_id']);
 		}
 		
 		return parent::get_rows($criteria, $conditions);

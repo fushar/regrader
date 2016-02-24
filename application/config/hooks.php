@@ -10,7 +10,15 @@
 |
 */
 
-
+$hook['pre_system'] = function () {
+	$dotenv = new Dotenv\Dotenv(FCPATH);
+	$dotenv->load();
+	foreach ($_ENV as $k => $v) {
+		if (preg_match('/TABLE_NAME$/', $k)) {
+			$_ENV[$k] = $_ENV['DB_PREFIX'].$_ENV[$k];
+		}
+	}
+};
 
 /* End of file hooks.php */
 /* Location: ./application/config/hooks.php */

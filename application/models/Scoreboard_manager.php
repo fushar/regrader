@@ -49,7 +49,12 @@ class Scoreboard_manager extends CI_Model
 		$res['is_accepted'] = 0;
 
 		// checks whether there has been an entry in the target scoreboard
-		$this->db->from('scoreboard_' . $target);
+		$table_name = '';
+		if ($target == 'admin')
+			$table_name = $_ENV['DB_SCOREBOARD_ADMIN_TABLE_NAME'];
+		else if ($target == 'contestant')
+			$table_name = $_ENV['DB_SCOREBOARD_CONTESTANT_TABLE_NAME'];
+		$this->db->from($table_name);
 		$this->db->where('contest_id', $submission['contest_id']);
 		$this->db->where('user_id', $submission['user_id']);
 		$this->db->where('problem_id', $submission['problem_id']);
@@ -87,14 +92,63 @@ class Scoreboard_manager extends CI_Model
 			$this->db->set('submission_cnt', $res['submission_cnt']);
 			$this->db->set('time_penalty', $res['time_penalty']);
 			$this->db->set('is_accepted', $res['is_accepted']);
-			$this->db->update('scoreboard_' . $target);
+			$this->db->update($table_name);
 		}
 		else
 		{
 			// else, insert it
 			foreach ($res as $k => $v)
 				$this->db->set($k, $v);
-			$this->db->insert('scoreboard_' . $target);
+			$this->db->insert($table_name);
+		}
+
+		// update first to solve flag in the scoreboard
+		if ($res['is_accepted'])
+		{
+			$is_first_to_solve = false;
+
+			$this->db->from($table_name);
+			$this->db->where('contest_id', $res['contest_id']);
+			$this->db->where('problem_id', $res['problem_id']);
+			$this->db->where('is_first_accepted', '1');
+			$q = $this->db->get();
+
+			if ($q->num_rows() >= 1)
+			{
+				// checks submit time
+				$rules = array (
+					'submission.contest_id'        => $res['contest_id'],
+					'submission.problem_id'        => $res['problem_id'],
+					'submission.submit_time < '    => $submission['submit_time'],
+					'verdict'           => '2'
+				);
+				$previous_ac_submission = $this->submission_manager->get_rows($rules);
+
+				foreach ($previous_ac_submission as $k => $v)
+				{
+					if ($submission['submit_time'] < $v['submit_time'])
+					{
+						// pass the first to solve flag
+						$this->db->where('contest_id', $v['contest_id']);
+						$this->db->where('user_id', $v['user_id']);
+						$this->db->where('problem_id', $v['problem_id']);
+						$this->db->set('is_first_accepted', '0');
+						$this->db->update($table_name);
+
+						$is_first_to_solve = true;
+					}
+				}
+			}
+			else $is_first_to_solve = true;
+
+			if ($is_first_to_solve)
+			{
+				$this->db->where('contest_id', $res['contest_id']);
+				$this->db->where('user_id', $res['user_id']);
+				$this->db->where('problem_id', $res['problem_id']);
+				$this->db->set('is_first_accepted', '1');
+				$this->db->update($table_name);
+			}
 		}
 	}
 
@@ -114,18 +168,18 @@ class Scoreboard_manager extends CI_Model
 			$this->db->where('user_id', $args['user_id']);
 		if (isset($args['problem_id']))
 			$this->db->where('problem_id', $args['problem_id']);
-		$this->db->delete('scoreboard_contestant');
+		$this->db->delete($_ENV['DB_SCOREBOARD_CONTESTANT_TABLE_NAME']);
 
 		$this->db->where('contest_id', $args['contest_id']);
 		if (isset($args['user_id']))
 			$this->db->where('user_id', $args['user_id']);
 		if (isset($args['problem_id']))
 			$this->db->where('problem_id', $args['problem_id']);
-		$this->db->delete('scoreboard_admin');
+		$this->db->delete($_ENV['DB_SCOREBOARD_ADMIN_TABLE_NAME']);
 
 		// retrieves all submissions
 		$this->db->select('id, verdict');
-		$this->db->from('submission');
+		$this->db->from($_ENV['DB_SUBMISSION_TABLE_NAME']);
 		$this->db->where('contest_id', $args['contest_id']);
 		if (isset($args['user_id']))
 			$this->db->where('user_id', $args['user_id']);
@@ -134,10 +188,10 @@ class Scoreboard_manager extends CI_Model
 		$q = $this->db->get();
 		$res = $q->result_array();
 
-		// readd the submissions
+		// read the submissions
 		foreach ($res as $v)
 			// if the submission is not ignored
-			if ($v['verdict'] != 99)
+			if (abs($v['verdict']) != 99)
 				$this->add_submission($v['id']);
 	}
 
@@ -157,23 +211,29 @@ class Scoreboard_manager extends CI_Model
 		if ($target == 'contestant' && time() > strtotime($contest['unfreeze_time']))
 			$target = 'admin';
 
-		$this->db->select('user.id, user.name, user.username, user.institution');
-		$this->db->from('user');
-		$this->db->join('contest_member', 'contest_member.category_id=user.category_id');
-		$this->db->where('contest_member.contest_id', $contest_id);
+		$table_name = '';
+		if ($target == 'contestant')
+			$table_name = $_ENV['DB_SCOREBOARD_CONTESTANT_TABLE_NAME'];
+		else if ($target == 'admin')
+			$table_name = $_ENV['DB_SCOREBOARD_ADMIN_TABLE_NAME'];
+
+		$this->db->select($_ENV['DB_USER_TABLE_NAME'] . '.id, ' . $_ENV['DB_USER_TABLE_NAME'] . '.name, ' . $_ENV['DB_USER_TABLE_NAME'] . '.username, ' . $_ENV['DB_USER_TABLE_NAME'] . '.institution');
+		$this->db->from($_ENV['DB_USER_TABLE_NAME']);
+		$this->db->join($_ENV['DB_CONTEST_MEMBER_TABLE_NAME'], $_ENV['DB_CONTEST_MEMBER_TABLE_NAME'] . '.category_id=' . $_ENV['DB_USER_TABLE_NAME'] . '.category_id');
+		$this->db->where($_ENV['DB_CONTEST_MEMBER_TABLE_NAME'] . '.contest_id', $contest_id);
 		$q = $this->db->get();
 		$users = $q->result_array();
 
-		$this->db->select('problem.id, problem.name, alias');
-		$this->db->from('problem');
-		$this->db->join('contest_problem', 'contest_problem.problem_id=problem.id');
-		$this->db->where('contest_problem.contest_id', $contest_id);
+		$this->db->select($_ENV['DB_PROBLEM_TABLE_NAME'] . '.id, ' . $_ENV['DB_PROBLEM_TABLE_NAME'] . '.name, alias');
+		$this->db->from($_ENV['DB_PROBLEM_TABLE_NAME']);
+		$this->db->join($_ENV['DB_CONTEST_PROBLEM_TABLE_NAME'], $_ENV['DB_CONTEST_PROBLEM_TABLE_NAME'] . '.problem_id=' . $_ENV['DB_PROBLEM_TABLE_NAME'] . '.id');
+		$this->db->where($_ENV['DB_CONTEST_PROBLEM_TABLE_NAME'] . '.contest_id', $contest_id);
 		$this->db->order_by('alias');
 		$q = $this->db->get();
 		$res['problems'] = $q->result_array();
 		$res['scores'] = array();
 
-		$this->db->from('scoreboard_' . $target);
+		$this->db->from($table_name);
 		$this->db->where('contest_id', $contest_id);
 		$q = $this->db->get();
 		$scores = $q->result_array();
@@ -203,6 +263,7 @@ class Scoreboard_manager extends CI_Model
 				$res['scores'][$v['user_id']]['score'][$v['problem_id']]['submission_cnt'] = $v['submission_cnt'];
 				$res['scores'][$v['user_id']]['score'][$v['problem_id']]['time_penalty'] = $v['time_penalty'];
 				$res['scores'][$v['user_id']]['score'][$v['problem_id']]['is_accepted'] = $v['is_accepted'];
+				$res['scores'][$v['user_id']]['score'][$v['problem_id']]['is_first_to_solve'] = $v['is_first_accepted'];
 
 				$res['scores'][$v['user_id']]['total_accepted'] += $v['is_accepted'];
 

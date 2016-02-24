@@ -28,9 +28,9 @@ class Setting extends CI_Model
 	{
 		parent::__construct();
 
-		if ($this->db->table_exists('setting'))
+		if ($this->db->table_exists($_ENV['DB_SETTING_TABLE_NAME']))
 		{
-			$this->db->from('setting');
+			$this->db->from($_ENV['DB_SETTING_TABLE_NAME']);
 			$q = $this->db->get();
 			foreach ($q->result_array() as $v)
 				$this->data[$v['key']] = $v['value'];
@@ -42,7 +42,7 @@ class Setting extends CI_Model
 	 *
 	 * This function returns the value of setting variable $key.
 	 *
-	 * @param $key The key.
+	 * @param string $key The key.
 	 * 
 	 * @return mixed The value of setting variable $key, of FALSE if there is no such key.
 	 */
@@ -58,15 +58,15 @@ class Setting extends CI_Model
 	 *
 	 * This function sets the value of setting variable $key to $value.
 	 *
-	 * @param $key The key.
-	 * @param $value The value.
+	 * @param string $key The key.
+	 * @param * $value The value.
 	 */
 	public function set($key, $value)
 	{
 		$this->data[$key] = $value;
 		$this->db->set('value', $value);
 		$this->db->where('key', $key);
-		$this->db->update('setting');
+		$this->db->update($_ENV['DB_SETTING_TABLE_NAME']);
 	}
 }
 

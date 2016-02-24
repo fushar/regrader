@@ -3,6 +3,7 @@
 $lang['active_contests'] = 'Kontes Sedang Aktif';
 $lang['active_users'] = 'Anggota Sedang Aktif';
 $lang['active_graders'] = 'Penguji Sedang Aktif';
+$lang['active_graders_pid'] = 'PID';
 $lang['choose_contest'] = 'Pilih Kontes';
 $lang['please_choose_contest'] = 'Silakan pilih salah satu kontes yang tersedia.';
 $lang['no_contest'] = 'Belum ada kontes.';

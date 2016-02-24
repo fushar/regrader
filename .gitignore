@@ -13,3 +13,12 @@ assets/vendor/*
 
 # Composer dependencies
 vendor/*
+
+# Idea
+.idea*
+
+# .env file
+.env
+
+# CI integration for PHPStorm
+CI_phpStorm.php
