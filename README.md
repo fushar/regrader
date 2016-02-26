@@ -53,10 +53,10 @@ $ cp .env.example .env
 And edit each entry of `.env` based on your system configuration:
 
 - `ENCRYPTION_KEY` denotes the encryption key that will be used by CodeIgniter. It is advisable that the string consists of 32 random characters.
-- `DB_HOSTNAME` denotes the hostname of the MySQL database.
-- `DB_USERNAME` and `DB_PASSWORD` denote the credentials of the MySQL user related to the database.
+- `DB_HOSTNAME` denotes the hostname of the database server.
+- `DB_USERNAME` and `DB_PASSWORD` denotes the user credentials of the database.
 - `DB_NAME` denotes the database name that will be used by Regrader.
-- `CPP_EXECUTABLE_PATH` denotes the C++ compiler path that will be used to compile checker source code (e.g., `usr/bin/g++`).
+- `CPP_CHECKER_COMPILER_PATH` denotes the C++ compiler path that will be used to compile checker source code (e.g., `/usr/bin/g++`). If you don't wish to use checker at all, leave it empty.
 
 Finally, make sure your ``php.ini`` file has ``date.timezone`` option set.
 
