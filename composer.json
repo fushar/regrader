@@ -1,6 +1,7 @@
 {
     "require": {
         "php": "~5.4",
-        "codeigniter/framework": "3.0.0"
+        "codeigniter/framework": "3.0.0",
+        "vlucas/phpdotenv": "^2.2"
     }
 }

@@ -13,3 +13,9 @@ assets/vendor/*
 
 # Composer dependencies
 vendor/*
+
+# .env file
+.env
+
+# .idea project files
+.idea
