@@ -513,7 +513,7 @@ class Grader extends CI_Controller
 	 */
 	private function get_language($language_id)
 	{
-		$q = $this->db->query('SELECT id, name, source_name, exe_name, compile_cmd, run_cmd, limit_memory, limit_syscall, forbidden_keywords FROM `' . $_ENV['DB_CONTEST_LANGUAGE_TABLE_NAME'] . '` WHERE id=' . $language_id . ' LIMIT 1');
+		$q = $this->db->query('SELECT id, name, source_name, exe_name, compile_cmd, run_cmd, limit_memory, limit_syscall, forbidden_keywords FROM `' . $_ENV['DB_LANGUAGE_TABLE_NAME'] . '` WHERE id=' . $language_id . ' LIMIT 1');
 		return $q->row_array();
 	}
 }
