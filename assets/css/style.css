@@ -180,6 +180,10 @@ ul.problem-list li.active:hover{
 	margin: 0;
 }
 
+.table .scoreboard-institution-logo > img {
+	max-width: 100%;
+}
+
 .table .scoreboard-institution {
 	margin-left: 3px;
 	font-size: 9pt;
