@@ -266,7 +266,7 @@ class Problem_manager extends AR_Model
 		if ($this->upload->display_errors() != '')
 			return $this->upload->display_errors();
 
-		$compile_cmd = 'g++ -fsyntax-only -w ' . $checker_path . '/' . $args['checker'];
+		$compile_cmd = $_ENV['CPP_CHECKER_COMPILER_PATH'] . ' -fsyntax-only -w ' . $checker_path . '/' . $args['checker'];
 		exec($compile_cmd, $output, $retval);
 
 		if (0 !== @$retval) // fail while compiling
@@ -275,7 +275,7 @@ class Problem_manager extends AR_Model
 			return $this->lang->line('checker_compile_error');
 		}
 
-		$compile_cmd = 'g++ -w -O3 -o ' . $checker_path . '/check ' . $checker_path . '/' . $args['checker'];
+		$compile_cmd = $_ENV['CPP_CHECKER_COMPILER_PATH'] . ' -w -O3 -o ' . $checker_path . '/check ' . $checker_path . '/' . $args['checker'];
 		exec($compile_cmd, $output, $retval);
 
 		$this->db->set('problem_id', $args['problem_id']);
