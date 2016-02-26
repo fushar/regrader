@@ -42,26 +42,21 @@ Download a copy of the latest Regrader: https://github.com/fushar/regrader/relea
 
 #### 3. Configure Regrader
 
-Create an InnoDB database in your MySQL database server. Then, open the database configuration file **application/config/database.php** and add your hostname, username, password, and database name in this part of the file:
+Create an InnoDB database in your MySQL database server.
 
-```php
-$db['default'] = array(
-    //
-    'hostname' 		=> 'localhost',
-    'username' 		=> '',
-    'password' 		=> '',
-    'database' 		=> '',
-    //
-);
+Then, make a copy of `.env` from `.env.example`:
+
+```bash
+$ cp .env.example .env
 ```
 
-Next, open the configuration file **application/config/config.php** and add a random string in this part of the file:
+And edit each entry of `.env` based on your system configuration:
 
-```php
-$config['encryption_key'] = '';
-```
-
-It is advisable that the string consists of 32 random characters.
+- `ENCRYPTION_KEY` denotes the encryption key that will be used by CodeIgniter. It is advisable that the string consists of 32 random characters.
+- `DB_HOSTNAME` denotes the hostname of the database server.
+- `DB_USERNAME` and `DB_PASSWORD` denotes the user credentials of the database.
+- `DB_NAME` denotes the database name that will be used by Regrader.
+- `CPP_CHECKER_COMPILER_PATH` denotes the C++ compiler path that will be used to compile checker source code (e.g., `/usr/bin/g++`). If you don't wish to use checker at all, leave it empty.
 
 Finally, make sure your ``php.ini`` file has ``date.timezone`` option set.
 
