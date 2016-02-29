@@ -64,11 +64,11 @@ class Submission extends Admin_Controller
 
 		$criteria = array();
 		if ($contest_id > 0)
-			$criteria['submission.contest_id'] = $contest_id;
+			$criteria[$_ENV['DB_SUBMISSION_TABLE_NAME'] . '.contest_id'] = $contest_id;
 		if ($problem_id > 0)
-			$criteria['submission.problem_id'] = $problem_id;
+			$criteria[$_ENV['DB_SUBMISSION_TABLE_NAME'] . '.problem_id'] = $problem_id;
 		if ($user_id > 0)
-			$criteria['submission.user_id'] = $user_id;
+			$criteria[$_ENV['DB_SUBMISSION_TABLE_NAME'] . '.user_id'] = $user_id;
 
 		$conditions['limit'] = $items_per_page;
 		$conditions['offset'] = ($page_offset-1) * $items_per_page;

@@ -57,7 +57,7 @@ class User extends Admin_Controller
 
 		$criteria = array();
 		if ($category_id > 0)
-			$criteria['user.category_id'] = $category_id;
+			$criteria[$_ENV['DB_USER_TABLE_NAME'] . '.category_id'] = $category_id;
 
 		$conditions['limit'] = $items_per_page;
 		$conditions['offset'] = ($page_offset-1) * $items_per_page;
