@@ -1,5 +1,5 @@
-Regrader 2
-==========
+Regrader 2.2.0
+==============
 
 An ICPC-style programming contest system that works.
 
@@ -38,7 +38,7 @@ Regrader requires these packages. Please install them.
 
 #### 2. Download Regrader
 
-Download a copy of the latest Regrader: https://github.com/fushar/regrader/releases/download/v2.1.0/regrader-v2.1.0.tar.gz
+Download a copy of the latest Regrader: https://github.com/fushar/regrader/releases/download/v2.2.0/regrader-v2.2.0.tar.gz
 
 #### 3. Configure Regrader
 
