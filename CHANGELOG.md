@@ -1,5 +1,11 @@
 # Change Log
 
+## [2.2.1] - 2016-03-23
+
+### Fixed
+- #70 Add missing Indonesian system language
+- #71 Add missing published files for phpdotenv support
+
 ## [2.2.0] - 2016-03-19
 
 ### Added
