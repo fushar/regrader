@@ -1,5 +1,10 @@
 # Change Log
 
+## [2.2.0] - 2016-03-19
+
+### Added
+- #63 Use phpdotenv for better env variable support
+
 ## [2.1.0] - 2015-08-09
 
 ### Added
