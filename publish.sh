@@ -13,6 +13,7 @@ cp -R assets/css assets/img assets/index.html assets/js dist/assets/
 APP=vendor/codeigniter/framework
 mkdir -p dist/$APP
 cp -R $APP/system $APP/license.txt dist/$APP/
+cp -R $APP/system/language/english $APP/system/language/indonesian
 
 # ama3-anytime
 APP=assets/vendor/ama3-anytime
