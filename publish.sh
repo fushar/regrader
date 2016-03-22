@@ -15,6 +15,13 @@ mkdir -p dist/$APP
 cp -R $APP/system $APP/license.txt dist/$APP/
 cp -R $APP/system/language/english $APP/system/language/indonesian
 
+# vlucas/phpdotenv
+APP=vendor/vlucas/phpdotenv
+mkdir -p dist/$APP
+cp -R $APP/src $APP/LICENSE.txt dist/$APP/
+cp .env.example dist/
+cp -R vendor/autoload.php vendor/composer dist/vendor/
+
 # ama3-anytime
 APP=assets/vendor/ama3-anytime
 mkdir -p dist/$APP
