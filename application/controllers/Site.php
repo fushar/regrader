@@ -274,7 +274,7 @@ class Site extends MY_Controller
 			                `submission_cnt` int(4) unsigned NOT NULL,
 			                `time_penalty` int(4) unsigned NOT NULL,
 			                `is_accepted` tinyint(1) unsigned NOT NULL,
-			                `is_first_accepted` tinyint(1) unsigned NOT NULL,
+			                `is_first_accepted` tinyint(1) unsigned NOT NULL DEFAULT '0',
 			                PRIMARY KEY (`contest_id`,`user_id`,`problem_id`),
 			                KEY `contest_id` (`contest_id`),
 			                KEY `user_id` (`user_id`),
@@ -291,7 +291,7 @@ class Site extends MY_Controller
 			                `submission_cnt` int(4) unsigned NOT NULL,
 			                `time_penalty` int(4) unsigned NOT NULL,
 			                `is_accepted` tinyint(1) unsigned NOT NULL,
-			                `is_first_accepted` tinyint(1) unsigned NOT NULL,
+			                `is_first_accepted` tinyint(1) unsigned NOT NULL DEFAULT '0',
 			                PRIMARY KEY (`contest_id`,`user_id`,`problem_id`),
 			                KEY `contest_id` (`contest_id`),
 			                KEY `user_id` (`user_id`),
@@ -315,8 +315,8 @@ class Site extends MY_Controller
 			              `problem_id` int(4) unsigned NOT NULL,
 			              `language_id` int(4) unsigned NOT NULL,
 			              `submit_time` datetime NOT NULL,
-			              `start_judge_time` datetime NOT NULL,
-			              `end_judge_time` datetime NOT NULL,
+			              `start_judge_time` datetime DEFAULT NULL,
+			              `end_judge_time` datetime DEFAULT NULL,
 			              `verdict` int(4) NOT NULL DEFAULT '-1',
 			              PRIMARY KEY (`id`),
 			              KEY `user_id` (`user_id`),
@@ -364,7 +364,7 @@ class Site extends MY_Controller
 			                `password` char(32) NOT NULL,
 			                `institution` varchar(50) NOT NULL,
 			                `category_id` int(4) unsigned NOT NULL,
-			                `last_activity` datetime NOT NULL,
+			                `last_activity` datetime DEFAULT NULL,
 			                PRIMARY KEY (`id`),
 			                KEY `category_id` (`category_id`)
 			              ) ENGINE=InnoDB  DEFAULT CHARSET=utf8");
@@ -428,7 +428,7 @@ class Site extends MY_Controller
 	{
 		$this->db->query("INSERT INTO `" . $_ENV['DB_CATEGORY_TABLE_NAME'] . "` (`id`, `name`) VALUES (1, 'Administrator')");
 		
-		$this->db->query("INSERT INTO `" . $_ENV['DB_USER_TABLE_NAME'] . "` (`id`, `name`, `username`, `password`, `institution`, `category_id`, `last_activity`) VALUES (1, 'Administrator', 'admin', MD5('admin'), '-', 1, '0000-00-00 00:00:00')");
+		$this->db->query("INSERT INTO `" . $_ENV['DB_USER_TABLE_NAME'] . "` (`id`, `name`, `username`, `password`, `institution`, `category_id`) VALUES (1, 'Administrator', 'admin', MD5('admin'), '-', 1)");
 	
 		$this->db->query("INSERT INTO `" . $_ENV['DB_LANGUAGE_TABLE_NAME'] . "` (`id`, `name`, `extension`, `source_name`, `exe_name`, `compile_cmd`, `run_cmd`, `limit_memory`, `limit_syscall`, `forbidden_keywords`) VALUES (1, 'Pascal', 'pas', 'source.pas', 'source', '/usr/bin/fpc -O2 -XS -Sg [PATH]/source.pas', '[PATH]/source', 1, 1, 'uses\nUses\nuSes\nUSes\nusEs\nUsEs\nuSEs\nUSEs\nuseS\nUseS\nuSeS\nUSeS\nusES\nUsES\nuSES\nUSES')");
 		$this->db->query("INSERT INTO `" . $_ENV['DB_LANGUAGE_TABLE_NAME'] . "` (`id`, `name`, `extension`, `source_name`, `exe_name`, `compile_cmd`, `run_cmd`, `limit_memory`, `limit_syscall`, `forbidden_keywords`) VALUES (2, 'Java', 'java', 'Main.java', 'Main.class', '/usr/lib/jvm/jdk1.7.0_09/bin/javac [PATH]/Main.java', '/usr/lib/jvm/jdk1.7.0_09/bin/java -Xmx[MEMORY_LIMIT]M -cp [PATH] Main', 0, 0, 'java.applet\njava.awt\njava.beans\njava.lang.annotation\njava.lang.instrument\njava.lang.management\njava.lang.ref\njava.lang.net\njava.nio\njava.rmi\njava.security\njava.sql\njava.util.concurrent\njava.util.jar\njava.util.logging\njava.util.prefs\njava.util.spi\njava.util.zip\njavax\nCompiler\nInheritableThreadLocal\nPackage\nProcess\nProcessBuilder\nRuntime\nRuntimePermission\nSecurityManager\nThread\nThreadGroup\nThreadLocal\nFile\nFileDescriptor\nFileInputStream\nFileOutputStream\nFileReader\nFileWriter')");
