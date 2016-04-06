@@ -50,8 +50,8 @@ class Submission extends Contestant_Controller
 		$contest_id = $this->identity->get_current_contest_id();
 		$items_per_page = $this->setting->get('items_per_page');
 
-		$criteria['submission.contest_id'] = $contest_id;
-		$criteria['submission.user_id'] = $this->identity->get_user_id();
+		$criteria[$_ENV['DB_SUBMISSION_TABLE_NAME'] . '.contest_id'] = $contest_id;
+		$criteria[$_ENV['DB_SUBMISSION_TABLE_NAME'] . '.user_id'] = $this->identity->get_user_id();
 
 		$conditions['limit'] = $items_per_page;
 		$conditions['offset'] = ($page_offset-1) * $items_per_page;
