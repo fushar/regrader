@@ -1,5 +1,10 @@
 # Change Log
 
+## [2.2.2] - 2017-04-22
+
+### Fixed
+- #77 Add missing `.env.example` in publishing flow
+
 ## [2.2.1] - 2016-03-23
 
 ### Fixed

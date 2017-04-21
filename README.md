@@ -1,4 +1,4 @@
-Regrader 2.2.1
+Regrader 2.2.2
 ==============
 
 An ICPC-style programming contest system that works.
