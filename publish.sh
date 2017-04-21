@@ -3,7 +3,7 @@
 echo "Publishing Regrader..."
 rm -rf dist *.tar.gz
 mkdir dist
-cp -R application examples index.php moe LICENSE README.md run_grader.sh dist/
+cp -R application examples index.php moe LICENSE README.md run_grader.sh .env.example dist/
 
 # assets
 mkdir -p dist/assets
@@ -60,7 +60,7 @@ mkdir -p dist/$APP/dist
 cp -R $APP/dist/jquery.min.js dist/$APP/dist/
 
 pushd dist > /dev/null
-tar -zcf ../regrader.tar.gz *
+tar -zcf ../regrader.tar.gz .
 popd > /dev/null
 rm -r dist
 echo "Regrader has been successfully published as regrader.tar.gz"
