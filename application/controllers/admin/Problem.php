@@ -110,7 +110,7 @@ class Problem extends Admin_Controller
 				$this->ui['content']['problem'] = $this->problem_manager->get_row($problem_id);
 			}
 			$this->ui['header']['page'] = 'problem';
-			$this->ui['header']['custom_js'] = array('vendor/tinymce/tinymce.min.js');
+			$this->ui['header']['custom_js'] = array('vendor/ckeditor/ckeditor.js', 'vendor/MathJax/MathJax.js?config=TeX-AMS_HTML-full');
 			$this->ui['content']['page_offset'] = $page_offset;
 
 			$this->load->view('admin/header', $this->ui['header']);

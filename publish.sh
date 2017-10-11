@@ -47,10 +47,15 @@ cp -R $APP/COPYING dist/$APP/
 mkdir -p dist/$APP/bin
 cp -R $APP/bin/prettify.min.css $APP/bin/prettify.min.js dist/$APP/bin/
 
-# tinymce
-APP=assets/vendor/tinymce
+# ckeditor
+APP=assets/vendor/ckeditor
 mkdir -p dist/$APP
-cp -R $APP/license.txt $APP/plugins $APP/skins $APP/themes $APP/tinymce.min.js dist/$APP/
+cp -R $APP/LICENSE.md $APP/plugins $APP/skins $APP/lang $APP/adapters $APP/ckeditor.js $APP/config.js $APP/contents.css $APP/styles.js dist/$APP/
+
+# MathJax
+APP=assets/vendor/MathJax
+mkdir -p dist/$APP
+cp -R $APP/LICENSE $APP/config $APP/extensions $APP/fonts $APP/jax $APP/localization $APP/MathJax.js $APP/latest.js dist/$APP/
 
 # jquery
 APP=assets/vendor/jquery

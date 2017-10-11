@@ -112,6 +112,7 @@ class Problem extends Contestant_Controller
 			else
 			{
 				$this->ui['header']['title'] = $problem['alias'];
+				$this->ui['header']['custom_js'] = array('vendor/MathJax/MathJax.js?config=TeX-AMS_HTML-full');
 				$this->load->view('contestant/header', $this->ui['header']);
 				$this->load->view('contestant/problem/view', $this->ui['content']);
 			}

@@ -1,21 +1,3 @@
-<script type="text/javascript">
-tinyMCE.init({
-	selector: "textarea",
-	plugins: [
-        "code table link image preview textcolor"
-    ],
-    toolbar1: "styleselect | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
-    toolbar2: "table link image | code preview",
-    image_advtab: true,
-	width: "768",
-	height: "600",
-    menubar: false,
-	relative_urls: false, 
-    remove_script_host: false
-});
-</script>
-
-
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
@@ -70,7 +52,13 @@ tinyMCE.init({
 				<div class="form-group<?php echo form_error('form[statement]') == '' ? '' : ' has-error'; ?>">
 					<label class="col-sm-2 control-label"><?php echo $this->lang->line('statement'); ?></label>
 					<div class= "col-sm-8">
-						<textarea  name="form[statement]"><?php echo set_value('form[statement]', isset($problem) ? @$problem['statement'] : $this->lang->line('default_statement')); ?></textarea>
+						<textarea id="editor" name="form[statement]"><?php echo set_value('form[statement]', isset($problem) ? @$problem['statement'] : $this->lang->line('default_statement')); ?></textarea>
+						 <script>
+			                CKEDITOR.replace('editor', {
+							    extraPlugins: 'mathjax',
+							    mathJaxLib: '<?php echo base_url("assets/vendor/MathJax/MathJax.js?config=TeX-AMS_HTML"); ?>'
+							});
+			            </script>
 						<span class="help-block"><?php echo form_error('form[statement]'); ?></span>
 					<div>
 				</div>
