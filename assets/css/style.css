@@ -245,6 +245,10 @@ table.table-scoreboard tbody tr:hover td.scoreboard-not-accepted-td {
   background-color: #FF6666;
 }
 
+table.table-scoreboard tbody tr.highlight td:not(.scoreboard-problem-td) {
+	background-color: #FFFFCC;
+}
+
 table.table-scoreboard td {
 	vertical-align: middle;
 	padding: 3px;

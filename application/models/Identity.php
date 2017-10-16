@@ -130,6 +130,18 @@ class Identity extends CI_Model
 	}
 
 	/**
+	 * Retrieves the current user username
+	 *
+	 * This function returns the username of the current user.
+	 * 
+	 * @return string The username of the current user.
+	 */
+	public function get_user_username()
+	{
+		return $this->get_session_data('username');
+	}
+
+	/**
 	 * Retrieves the current user category ID
 	 *
 	 * This function returns the category ID of the current user.
