@@ -1,5 +1,18 @@
 # Change Log
 
+## [3.0.0] - 2018-11-30
+
+### Breaking
+- #83 Update PHP requirement from >=5.4 to >=5.6
+- #61 Different CSS for "first-to-solve"
+  - Requires new column `accepted_time datetime DEFAULT NULL` in `scoreboard_admin` and `scoreboard_contestant` tables.
+
+### Added
+- #86 Highlight current user in scoreboard
+
+### Fixed
+- #80 Fix now-invalid default MySQL datetime value: '0000-00-00 00:00:00'
+
 ## [2.2.2] - 2017-04-22
 
 ### Fixed
