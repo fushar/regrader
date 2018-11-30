@@ -1,11 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "hash": "4f21a5f6c563dc33d86877d6f4835f8c",
-    "content-hash": "c483cb8af9b356db49946d96aeaddc60",
+    "content-hash": "d0c5b257ab55377f2052f20b6f315da2",
     "packages": [
         {
             "name": "codeigniter/framework",
@@ -33,7 +32,7 @@
                 "MIT"
             ],
             "description": "The CodeIgniter framework",
-            "time": "2015-04-24 10:00:52"
+            "time": "2015-04-24T10:00:52+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -84,7 +83,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2015-12-29 15:10:30"
+            "time": "2015-12-29T15:10:30+00:00"
         }
     ],
     "packages-dev": [],
@@ -94,7 +93,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "~5.4"
+        "php": ">=5.6"
     },
     "platform-dev": []
 }
