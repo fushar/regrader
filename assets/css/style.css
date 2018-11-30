@@ -227,6 +227,10 @@ ul.problem-list li.active:hover{
 	background-color: #FF6666;
 }
 
+.table .scoreboard-first-accepted-td {
+	background-color: #008000;
+}
+
 .unread_clarifications {
 	color: red;
 	font-weight: bold;
@@ -243,6 +247,10 @@ table.table-scoreboard tbody tr:hover td.scoreboard-accepted-td {
 
 table.table-scoreboard tbody tr:hover td.scoreboard-not-accepted-td {
   background-color: #FF6666;
+}
+
+table.table-scoreboard tbody tr:hover td.scoreboard-first-accepted-td {
+  background-color: #008000;
 }
 
 table.table-scoreboard tbody tr.highlight td:not(.scoreboard-problem-td) {

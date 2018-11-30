@@ -47,6 +47,7 @@ class Scoreboard_manager extends CI_Model
 		$res['submission_cnt'] = 0;
 		$res['time_penalty'] = 0;
 		$res['is_accepted'] = 0;
+		$res['accepted_time'] = NULL;
 
 		// checks whether there has been an entry in the target scoreboard
 		$this->db->from('scoreboard_' . $target);
@@ -75,8 +76,10 @@ class Scoreboard_manager extends CI_Model
 		$res['time_penalty'] = ceil((strtotime($submission['submit_time']) - strtotime($contest['start_time'])) / 60);
 
 		// an AC submission
-		if ($submission['verdict'] == 2)
+		if ($submission['verdict'] == 2) {
 			$res['is_accepted'] = 1;
+			$res['accepted_time'] = $submission['submit_time'];
+		}
 
 		if ($is_present)
 		{
@@ -87,6 +90,7 @@ class Scoreboard_manager extends CI_Model
 			$this->db->set('submission_cnt', $res['submission_cnt']);
 			$this->db->set('time_penalty', $res['time_penalty']);
 			$this->db->set('is_accepted', $res['is_accepted']);
+			$this->db->set('accepted_time', $res['accepted_time']);
 			$this->db->update('scoreboard_' . $target);
 		}
 		else
@@ -178,6 +182,8 @@ class Scoreboard_manager extends CI_Model
 		$q = $this->db->get();
 		$scores = $q->result_array();
 
+		$first_accepted_scorer = array();
+
 		foreach ($users as $v) 
 		{
 			$res['scores'][$v['id']]['name'] = $v['name'];
@@ -193,6 +199,7 @@ class Scoreboard_manager extends CI_Model
 				$res['scores'][$v['id']]['score'][$w['id']]['submission_cnt'] = 0;
 				$res['scores'][$v['id']]['score'][$w['id']]['time_penalty'] = 0;
 				$res['scores'][$v['id']]['score'][$w['id']]['is_accepted'] = 0;
+				$res['scores'][$v['id']]['score'][$w['id']]['is_first_accepted'] = 0;
 			}
 		}
 
@@ -212,6 +219,20 @@ class Scoreboard_manager extends CI_Model
 				
 					if ($res['scores'][$v['user_id']]['last_submission'] < $v['time_penalty'])
 						$res['scores'][$v['user_id']]['last_submission'] = $v['time_penalty'];
+
+					if (isset( $first_accepted_scorer[$v['problem_id']] )) {
+						$last_scorer = $first_accepted_scorer[$v['problem_id']];
+						if ($v['accepted_time'] < $last_scorer['accepted_time']) {
+							$first_accepted_scorer[$v['problem_id']]['user_id'] = $v['user_id'];
+							$first_accepted_scorer[$v['problem_id']]['accepted_time'] = $v['accepted_time'];
+							$res['scores'][$last_scorer['user_id']]['score'][$v['problem_id']]['is_first_accepted'] = 0;
+							$res['scores'][$v['user_id']]['score'][$v['problem_id']]['is_first_accepted'] = 1;
+						}
+					} else {
+						$first_accepted_scorer[$v['problem_id']]['user_id'] = $v['user_id'];
+						$first_accepted_scorer[$v['problem_id']]['accepted_time'] = $v['accepted_time'];
+						$res['scores'][$v['user_id']]['score'][$v['problem_id']]['is_first_accepted'] = 1;
+					}
 				}
 			}
 		}
