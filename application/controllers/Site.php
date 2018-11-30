@@ -430,7 +430,7 @@ class Site extends MY_Controller
 	{
 		$this->db->query("INSERT INTO `category` (`id`, `name`) VALUES (1, 'Administrator')");
 		
-		$this->db->query("INSERT INTO `user` (`id`, `name`, `username`, `password`, `institution`, `category_id`, `last_activity`) VALUES (1, 'Administrator', 'admin', MD5('admin'), '-', 1, '0000-00-00 00:00:00')");
+		$this->db->query("INSERT INTO `user` (`id`, `name`, `username`, `password`, `institution`, `category_id`, `last_activity`) VALUES (1, 'Administrator', 'admin', MD5('admin'), '-', 1, '1000-01-01 00:00:00')");
 	
 		$this->db->query("INSERT INTO `language` (`id`, `name`, `extension`, `source_name`, `exe_name`, `compile_cmd`, `run_cmd`, `limit_memory`, `limit_syscall`, `forbidden_keywords`) VALUES (1, 'Pascal', 'pas', 'source.pas', 'source', '/usr/bin/fpc -O2 -XS -Sg [PATH]/source.pas', '[PATH]/source', 1, 1, 'uses\nUses\nuSes\nUSes\nusEs\nUsEs\nuSEs\nUSEs\nuseS\nUseS\nuSeS\nUSeS\nusES\nUsES\nuSES\nUSES')");
 		$this->db->query("INSERT INTO `language` (`id`, `name`, `extension`, `source_name`, `exe_name`, `compile_cmd`, `run_cmd`, `limit_memory`, `limit_syscall`, `forbidden_keywords`) VALUES (2, 'Java', 'java', 'Main.java', 'Main.class', '/usr/lib/jvm/jdk1.7.0_09/bin/javac [PATH]/Main.java', '/usr/lib/jvm/jdk1.7.0_09/bin/java -Xmx[MEMORY_LIMIT]M -cp [PATH] Main', 0, 0, 'java.applet\njava.awt\njava.beans\njava.lang.annotation\njava.lang.instrument\njava.lang.management\njava.lang.ref\njava.lang.net\njava.nio\njava.rmi\njava.security\njava.sql\njava.util.concurrent\njava.util.jar\njava.util.logging\njava.util.prefs\njava.util.spi\njava.util.zip\njavax\nCompiler\nInheritableThreadLocal\nPackage\nProcess\nProcessBuilder\nRuntime\nRuntimePermission\nSecurityManager\nThread\nThreadGroup\nThreadLocal\nFile\nFileDescriptor\nFileInputStream\nFileOutputStream\nFileReader\nFileWriter')");
@@ -449,7 +449,7 @@ class Site extends MY_Controller
 		$this->db->query("INSERT INTO `setting` (`key`, `value`) VALUES ('checker_path', '')");
 		$this->db->query("INSERT INTO `setting` (`key`, `value`) VALUES ('sess_id', '')");
 
-		$this->db->query("INSERT INTO `grader` (`id`, `hostname`, `last_activity`) VALUES (1, '" . php_uname('n') . "', '0000-00-00 00:00:00')");
+		$this->db->query("INSERT INTO `grader` (`id`, `hostname`, `last_activity`) VALUES (1, '" . php_uname('n') . "', '1000-01-01 00:00:00')");
 	}
 
 	private function create_secret_directory($name)

@@ -27,7 +27,7 @@ Installation Guide
 
 Regrader requires these packages. Please install them.
 
-- PHP >= 5.4
+- PHP >= 5.6
 - MySQL
 
 #### 2. Download Regrader
