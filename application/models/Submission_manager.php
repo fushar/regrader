@@ -109,8 +109,8 @@ class Submission_manager extends AR_Model
 		$this->db->set('problem_id', $args['problem_id']);
 		$this->db->set('language_id', $args['language_id']);
 		$this->db->set('submit_time', date('Y-m-d H:i:s'));
-		$this->db->set('start_judge_time', '0000-00-00 00:00:00');
-		$this->db->set('end_judge_time', '0000-00-00 00:00:00');
+		$this->db->set('start_judge_time', '1000-01-01 00:00:00');
+		$this->db->set('end_judge_time', '1000-01-01 00:00:00');
 
 		// temporarily sets the verdict to 99 so that the grader will not judge this submission yet
 		$this->db->set('verdict', 99);

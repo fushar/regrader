@@ -253,6 +253,10 @@ table.table-scoreboard tbody tr:hover td.scoreboard-first-accepted-td {
   background-color: #008000;
 }
 
+table.table-scoreboard tbody tr.highlight td:not(.scoreboard-problem-td) {
+	background-color: #FFFFCC;
+}
+
 table.table-scoreboard td {
 	vertical-align: middle;
 	padding: 3px;

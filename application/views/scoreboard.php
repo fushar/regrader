@@ -37,7 +37,7 @@
 							$prev_last_submission = $v['last_submission'];
 
 							?>
-							<tr>
+							<tr<?php if ($v['username'] == $username) echo ' class="highlight"'; ?>>
 							<td class="id-td"><?php echo $rank; ?></td>
 							<?php if ($show_institution_logo): ?>
 								<td>

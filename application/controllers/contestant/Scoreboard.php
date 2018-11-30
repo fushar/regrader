@@ -41,6 +41,7 @@ class Scoreboard extends Contestant_Controller
 		$this->ui['content']['show_institution_logo'] = $contest['show_institution_logo'];
 		$this->ui['content']['problems'] = $res['problems'];
 		$this->ui['content']['frozen'] = (time() > strtotime($contest['freeze_time'])) && (time() <= strtotime($contest['unfreeze_time']));
+		$this->ui['content']['username'] = $this->identity->get_user_username();
 		
 		$this->load->view('contestant/header', $this->ui['header']);
 		$this->load->view('contestant/scoreboard/index', $this->ui['content']);

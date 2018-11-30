@@ -1,13 +1,7 @@
 Regrader 2.2.2
 ==============
 
-An ICPC-style programming contest system that works.
-
-***
-
-> (Maintainer's note: in the previous version, Regrader's dependencies were committed to the repository. In this version, we start using dependency managers. To reduce the repository size, we removed the committed dependencies from git history. Therefore, unfortunately we had to **rewrite the entire git history**. If you are developing Regrader, please rebase your work accordingly. The previous version is still hosted on [https://github.com/fushar/regrader-v1](https://github.com/fushar/regrader-v1) as a backup.)
-
-***
+An ICPC-style programming contest system.
 
 Built on top of:
 
@@ -33,7 +27,7 @@ Installation Guide
 
 Regrader requires these packages. Please install them.
 
-- PHP >= 5.4
+- PHP >= 5.6
 - MySQL
 
 #### 2. Download Regrader
