@@ -1,6 +1,8 @@
 Regrader
 ========
 
+> NOTE: Regrader is not maintained anymore. See: [#88](https://github.com/fushar/regrader/issues/88)
+
 An ICPC-style programming contest system.
 
 Built on top of:
@@ -159,12 +161,3 @@ To produce a tar.gz that is ready to deploy, run
 ```
 ./publish.sh
 ```
-
-Mantainers
-----------
-
-Currently, Regrader is maintained by:
-
-- Ashar Fuadi ([@fushar](https://github.com/fushar))
-- Pusaka Kaleb Setyabudi ([@sokokaleb](https://github.com/sokokaleb))
-- Rakina Zata Amni ([@rakina](https://github.com/rakina))
