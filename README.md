@@ -1,7 +1,9 @@
 Regrader
 ========
 
-> NOTE: Regrader is not maintained anymore. See: [#88](https://github.com/fushar/regrader/issues/88)
+> Regrader is not maintained anymore in favor of [ia-toki/judgels](https://github.com/ia-toki/judgels). See [#88](https://github.com/fushar/regrader/issues/88) for details.
+
+-----
 
 An ICPC-style programming contest system.
 
